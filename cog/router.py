@@ -1,3 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0 OR LicenseRef-KOMPOSOS-IV-Commercial
+# Copyright (c) 2024-2026 James Ray Hawkins
+#
+# This file is dual-licensed. You may use it under either:
+# 1. Apache License 2.0 (see LICENSE file), OR
+# 2. KOMPOSOS-IV Commercial License (see LICENSE-COMMERCIAL file)
+
 """
 COG Router — Tiered computation routing.
 
@@ -17,6 +24,8 @@ from __future__ import annotations
 from enum import IntEnum
 from dataclasses import dataclass
 from typing import Optional
+
+from core.category import Category
 
 from .schema import CogClaim
 
@@ -61,8 +70,8 @@ class TierRouter:
       4. Energy-based escalation
     """
 
-    def __init__(self, store):
-        self.store = store
+    def __init__(self, category: Category):
+        self.category = category
 
     def route(self, claim: CogClaim, energy: float,
               explicit_tier: Optional[int] = None) -> TierDecision:
@@ -74,8 +83,8 @@ class TierRouter:
             return TierDecision(tier=tier, reason=f"Explicitly requested tier {tier.value}")
 
         # 2. Check if source/target exist
-        source_exists = self.store.get_object(claim.source) is not None
-        target_exists = self.store.get_object(claim.target) is not None
+        source_exists = self.category.get(claim.source) is not None
+        target_exists = self.category.get(claim.target) is not None
 
         if not source_exists or not target_exists:
             return TierDecision(
@@ -84,9 +93,9 @@ class TierRouter:
             )
 
         # 3. Check for direct edge
-        existing = self.store.get_morphisms_from(claim.source)
+        existing = self.category.morphisms_from(claim.source)
         for mor in existing:
-            if mor.target_name == claim.target and mor.name == claim.relation:
+            if mor.target == claim.target and mor.name == claim.relation:
                 return TierDecision(
                     tier=Tier.LOOKUP,
                     reason=f"Direct edge already exists (confidence={mor.confidence:.2f})",

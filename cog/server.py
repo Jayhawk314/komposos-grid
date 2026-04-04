@@ -1,5 +1,12 @@
+# SPDX-License-Identifier: Apache-2.0 OR LicenseRef-KOMPOSOS-IV-Commercial
+# Copyright (c) 2024-2026 James Ray Hawkins
+#
+# This file is dual-licensed. You may use it under either:
+# 1. Apache License 2.0 (see LICENSE file), OR
+# 2. KOMPOSOS-IV Commercial License (see LICENSE-COMMERCIAL file)
+
 """
-KOMPOSOS-III-COG MCP Server
+KOMPOSOS-IV-COG MCP Server
 
 Exposes the cognitive co-processor as MCP tools for AI agents.
 
@@ -13,13 +20,6 @@ Tools:
   cog_explain              — Detailed explanation of a check result
   cog_threat_model         — Bulk-assert a security threat model
   cog_scan                 — Scan for security vulnerabilities (16 rules)
-  cog_import_deps          — Import a dependency lockfile into the graph
-  cog_import_vulns         — Query OSV.dev for CVEs affecting imported packages
-  cog_import_sbom          — Import a CycloneDX or SPDX SBOM into the graph
-  cog_import_scorecard     — Import OpenSSF Scorecard for a GitHub repo
-  cog_import_scorecards_bulk — Auto-discover repos and import Scorecard for all packages
-  cog_import_vex           — Import a VEX document (OpenVEX or CycloneDX)
-  cog_bootstrap            — Auto-populate graph from project lockfiles/SBOMs
 
 Run:
   python -m cog.server
@@ -76,7 +76,7 @@ def _get_security() -> SecurityEngine:
 
 mcp = FastMCP(
     "komposos-cog",
-    instructions="KOMPOSOS-III Cognitive Co-processor: category-theoretic knowledge layer for AI agents",
+    instructions="KOMPOSOS-IV Cognitive Co-processor: category-theoretic knowledge layer for AI agents",
 )
 
 
@@ -398,114 +398,6 @@ def cog_scan(
     }, indent=2, default=cog_json_default)
 
 
-@mcp.tool()
-def cog_import_deps(content: str, format: str, app_name: str = "my_app") -> str:
-    """Import a dependency lockfile into the knowledge graph.
-
-    Parses the lockfile and creates concepts (packages) and relations
-    (dependency edges) automatically. Then run cog_scan to find vulnerabilities.
-
-    Supported formats: npm, pip, pipenv, go, cargo, composer
-
-    Args:
-        content: The lockfile content (paste or read from file)
-        format: Lockfile format (npm, pip, pipenv, go, cargo, composer)
-        app_name: Name of your application (default: my_app)
-    """
-    from .supply_chain import SupplyChainEngine
-
-    engine = _get_engine()
-    sc = SupplyChainEngine(engine)
-    result = sc.import_lockfile(content, format, app_name)
-    return json.dumps(result, indent=2, default=cog_json_default)
-
-
-@mcp.tool()
-def cog_import_vulns(ecosystem: str = "") -> str:
-    """Query OSV.dev for known vulnerabilities in imported packages.
-
-    Queries the Open Source Vulnerability database for all packages
-    currently in the knowledge graph. Adds CVE data and marks affected
-    packages. Then run cog_scan to trace exposure paths.
-
-    Args:
-        ecosystem: Filter by ecosystem (npm, pypi, cargo, go, maven, composer).
-                   Empty = all packages.
-    """
-    from .supply_chain import SupplyChainEngine
-
-    engine = _get_engine()
-    sc = SupplyChainEngine(engine)
-    result = sc.query_vulnerabilities(ecosystem)
-    return json.dumps(result, indent=2, default=cog_json_default)
-
-
-@mcp.tool()
-def cog_import_scorecard(repo: str, package_name: str = "") -> str:
-    """Import OpenSSF Scorecard data for a GitHub repository.
-
-    Fetches security health scores (Maintained, Code-Review, Signed-Releases,
-    Pinned-Dependencies, etc.) and attaches them to a package in the graph.
-    Low scores create evidence concepts with exposes relations.
-
-    Then run cog_scan with unmaintained_critical_path and provenance_gap
-    rules to detect cross-signal risks.
-
-    Args:
-        repo: GitHub repository (e.g., "expressjs/express" or "github.com/expressjs/express")
-        package_name: Optional package name in graph to attach scores to (e.g., "express@4.18.2").
-                      If empty, creates a standalone concept.
-    """
-    from .supply_chain import SupplyChainEngine
-
-    engine = _get_engine()
-    sc = SupplyChainEngine(engine)
-    result = sc.import_scorecard(repo, package_name or None)
-    return json.dumps(result, indent=2, default=cog_json_default)
-
-
-@mcp.tool()
-def cog_import_vex(content: str) -> str:
-    """Import a VEX (Vulnerability Exploitability eXchange) document.
-
-    Maps VEX status to graph relations to suppress false positives
-    or confirm exploitability:
-      - not_affected -> mitigates (suppresses CVE false positive)
-      - affected -> supports (confirms CVE is exploitable)
-      - fixed -> mitigates (with version note)
-      - under_investigation -> evidence (flagged for follow-up)
-
-    Supports OpenVEX and CycloneDX VEX formats (JSON).
-    Then run cog_scan with vex_contradiction to detect conflicting assessments.
-
-    Args:
-        content: VEX document JSON string
-    """
-    from .supply_chain import SupplyChainEngine
-
-    engine = _get_engine()
-    sc = SupplyChainEngine(engine)
-    result = sc.import_vex(content)
-    return json.dumps(result, indent=2, default=cog_json_default)
-
-
-@mcp.tool()
-def cog_import_sbom(content: str, app_name: str = "my_app") -> str:
-    """Import a CycloneDX or SPDX SBOM into the knowledge graph.
-
-    Auto-detects format from content. Creates package concepts and
-    dependency relations. Then run cog_scan to find vulnerabilities.
-
-    Args:
-        content: The SBOM JSON content
-        app_name: Name of your application (default: my_app)
-    """
-    from .supply_chain import SupplyChainEngine
-
-    engine = _get_engine()
-    sc = SupplyChainEngine(engine)
-    result = sc.import_sbom(content, app_name)
-    return json.dumps(result, indent=2, default=cog_json_default)
 
 
 @mcp.tool()
@@ -587,56 +479,9 @@ def cog_assert_batch(assertions: str) -> str:
     return json.dumps(stats, indent=2, default=cog_json_default)
 
 
-@mcp.tool()
-def cog_bootstrap(
-    directory: str = ".",
-    scan_vulns: bool = True,
-) -> str:
-    """Auto-populate the graph from project files in the working directory.
-
-    Scans for lockfiles (package-lock.json, requirements.txt, Pipfile.lock,
-    Cargo.lock, go.sum, composer.lock) and SBOMs (sbom.json, bom.json,
-    CycloneDX/SPDX files). Imports each discovered file, then optionally
-    queries OSV.dev for CVEs.
-
-    Call this once at the start of a conversation to get a populated graph
-    with zero manual input.
-
-    Args:
-        directory: Directory to scan (default: current working directory)
-        scan_vulns: If True, also query OSV.dev for CVEs (default: True)
-    """
-    from .supply_chain import SupplyChainEngine
-
-    engine = _get_engine()
-    sc = SupplyChainEngine(engine)
-    result = sc.bootstrap(directory, scan_vulns)
-    return json.dumps(result, indent=2, default=cog_json_default)
-
-
-@mcp.tool()
-def cog_import_scorecards_bulk() -> str:
-    """Import OpenSSF Scorecard for all packages in the graph.
-
-    Iterates all component concepts, discovers their GitHub repos via
-    registry APIs (npm registry, PyPI), and imports Scorecard data for each.
-
-    Skips packages where no GitHub repo can be found or where Scorecard
-    data has already been imported.
-
-    Returns summary: {checked, imported, skipped, errors}
-    """
-    from .supply_chain import SupplyChainEngine
-
-    engine = _get_engine()
-    sc = SupplyChainEngine(engine)
-    result = sc.import_scorecards_bulk()
-    return json.dumps(result, indent=2, default=cog_json_default)
-
-
 def main():
-    """Run the KOMPOSOS-III-COG MCP server via stdio."""
-    print("Starting KOMPOSOS-III-COG MCP Server...", file=sys.stderr)
+    """Run the KOMPOSOS-IV-COG MCP server via stdio."""
+    print("Starting KOMPOSOS-IV-COG MCP Server...", file=sys.stderr)
     mcp.run(transport="stdio")
 
 

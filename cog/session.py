@@ -1,7 +1,14 @@
+# SPDX-License-Identifier: Apache-2.0 OR LicenseRef-KOMPOSOS-IV-Commercial
+# Copyright (c) 2024-2026 James Ray Hawkins
+#
+# This file is dual-licensed. You may use it under either:
+# 1. Apache License 2.0 (see LICENSE file), OR
+# 2. KOMPOSOS-IV Commercial License (see LICENSE-COMMERCIAL file)
+
 """
 COG Session — Per-conversation cognitive state management.
 
-Wraps a KomposOSStore (in-memory by default) that accumulates
+Wraps a Category (in-memory by default) that accumulates
 knowledge across tool calls in a single conversation.
 """
 
@@ -12,11 +19,8 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Any, Dict, List, Optional
 
-import sys
-import os
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-from data.store import KomposOSStore, StoredObject, StoredMorphism
+from core.category import Category
+from core.types import Object, Morphism
 
 from .schema import CogConcept, CogRelation, ConceptType, RelationType
 
@@ -44,14 +48,15 @@ class CogSession:
     def __init__(self, session_id: Optional[str] = None,
                  db_path: str = ":memory:"):
         self.session_id = session_id or str(uuid.uuid4())[:8]
-        self.store = KomposOSStore(db_path)
+        self.category = Category(db_path=db_path)
         self.stats = SessionStats()
         self.created_at = datetime.now()
         self._claim_history: List[Dict[str, Any]] = []
 
     def add_concept(self, concept: CogConcept) -> bool:
         """Add a concept to the session graph."""
-        obj = StoredObject(
+        # Use add() with name and kwargs instead of creating Object manually
+        result = self.category.add(
             name=concept.name,
             type_name=concept.concept_type.value,
             metadata={
@@ -60,30 +65,28 @@ class CogSession:
             },
             provenance=concept.provenance,
         )
-        result = self.store.add_object(obj)
         if result:
             self.stats.concepts_added += 1
         return result
 
     def add_relation(self, relation: CogRelation) -> bool:
         """Add a relation to the session graph. Auto-creates endpoints if missing."""
-        if not self.store.get_object(relation.source):
+        if not self.category.get(relation.source):
             self.add_concept(CogConcept(name=relation.source))
-        if not self.store.get_object(relation.target):
+        if not self.category.get(relation.target):
             self.add_concept(CogConcept(name=relation.target))
 
-        mor = StoredMorphism(
+        # Use connect() which is simpler for creating morphisms
+        result = self.category.connect(
+            source=relation.source,
+            target=relation.target,
             name=relation.relation_type.value,
-            source_name=relation.source,
-            target_name=relation.target,
             confidence=relation.confidence,
             metadata={
                 "evidence": relation.evidence,
                 **relation.metadata,
             },
-            provenance=relation.provenance,
         )
-        result = self.store.add_morphism(mor)
         if result:
             self.stats.relations_added += 1
         return result
@@ -104,11 +107,14 @@ class CogSession:
 
     def get_summary(self) -> Dict[str, Any]:
         """Get session summary for agent inspection."""
-        store_stats = self.store.get_statistics()
+        category_stats = {
+            "num_objects": len(self.category.objects()),
+            "num_morphisms": len(self.category.morphisms()),
+        }
         return {
             "session_id": self.session_id,
             "created_at": self.created_at.isoformat(),
-            "store": store_stats,
+            "category": category_stats,
             "activity": {
                 "concepts_added": self.stats.concepts_added,
                 "relations_added": self.stats.relations_added,

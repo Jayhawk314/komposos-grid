@@ -1,3 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0 OR LicenseRef-KOMPOSOS-IV-Commercial
+# Copyright (c) 2024-2026 James Ray Hawkins
+#
+# This file is dual-licensed. You may use it under either:
+# 1. Apache License 2.0 (see LICENSE file), OR
+# 2. KOMPOSOS-IV Commercial License (see LICENSE-COMMERCIAL file)
+
 """
 COG Engine — Core cognitive co-processor.
 
@@ -6,8 +13,8 @@ Each tier delegates to the appropriate existing class. No math logic is
 duplicated here — this is purely routing and result formatting.
 
 Tiers:
-  0: Graph Lookup          ~1ms    store.get_object(), get_morphisms_from()
-  1: Composition + Paths   ~10ms   store.find_paths(), Category.find_paths()
+  0: Graph Lookup          ~1ms    category.get(), category.morphisms_from()
+  1: Composition + Paths   ~10ms   category.find_paths()
   2: Sheaf + Kan           ~100ms  SheafCoherenceChecker, KanExtensionOracle
   3: ZFC Dual Engine       ~1s     DualEngineBridge -> AGREE/ORPHAN/HOLLOW/REJECT
   4: Full Topology + Flow  ~10s    OllivierRicciCurvature, PersistentHomology
@@ -19,7 +26,7 @@ import time
 import logging
 from typing import Any, Dict, List, Optional
 
-from data.store import KomposOSStore
+from core.category import Category
 
 from .schema import (
     CogClaim, CogConcept, CogRelation, CheckResult, CoherenceResult,
@@ -42,9 +49,9 @@ class CogEngine:
 
     def __init__(self, session: CogSession):
         self.session = session
-        self.store = session.store
-        self.energy_computer = EnergyComputer(self.store)
-        self.router = TierRouter(self.store)
+        self.category = session.category
+        self.energy_computer = EnergyComputer(self.category)
+        self.router = TierRouter(self.category)
 
     # ================================================================
     # Primary operations (map to MCP tools)
@@ -105,38 +112,46 @@ class CogEngine:
         result: Dict[str, Any] = {"source": source}
 
         if target:
-            paths = self.store.find_paths(source, target, max_length=5)
-            result["target"] = target
-            result["paths"] = [
-                {"length": p.length, "morphisms": p.morphism_ids}
-                for p in paths[:max_results]
-            ]
-            result["connected"] = len(paths) > 0
+            src_obj = self.category.get(source)
+            tgt_obj = self.category.get(target)
+            if src_obj and tgt_obj:
+                # find_paths expects string names, not Object instances
+                paths = self.category.find_paths(source, target, max_length=5)
+                result["target"] = target
+                result["paths"] = [
+                    {"length": p.length, "morphisms": p.morphism_ids}
+                    for p in paths[:max_results]
+                ]
+                result["connected"] = len(paths) > 0
+            else:
+                result["target"] = target
+                result["paths"] = []
+                result["connected"] = False
 
         elif relation:
-            morphisms = self.store.get_morphisms_from(source)
+            morphisms = self.category.morphisms_from(source)
             matching = [m for m in morphisms if m.name == relation]
             result["relation"] = relation
             result["targets"] = [
-                {"target": m.target_name, "confidence": m.confidence}
+                {"target": m.target, "confidence": m.confidence}
                 for m in matching[:max_results]
             ]
 
         else:
-            outgoing = self.store.get_morphisms_from(source)
-            incoming = self.store.get_morphisms_to(source)
-            obj = self.store.get_object(source)
+            outgoing = self.category.morphisms_from(source)
+            incoming = self.category.morphisms_to(source)
+            obj = self.category.get(source)
 
             result["exists"] = obj is not None
             if obj:
                 result["type"] = obj.type_name
                 result["metadata"] = obj.metadata
             result["outgoing"] = [
-                {"target": m.target_name, "relation": m.name, "confidence": m.confidence}
+                {"target": m.target, "relation": m.name, "confidence": m.confidence}
                 for m in outgoing[:max_results]
             ]
             result["incoming"] = [
-                {"source": m.source_name, "relation": m.name, "confidence": m.confidence}
+                {"source": m.source, "relation": m.name, "confidence": m.confidence}
                 for m in incoming[:max_results]
             ]
 
@@ -149,14 +164,14 @@ class CogEngine:
         relevant_morphisms = []
 
         for concept in concepts:
-            outgoing = self.store.get_morphisms_from(concept)
+            outgoing = self.category.morphisms_from(concept)
             for m in outgoing:
-                if m.target_name in concept_set:
+                if m.target in concept_set:
                     relevant_morphisms.append(m)
 
         morphism_pairs: Dict[tuple, list] = {}
         for m in relevant_morphisms:
-            key = (m.source_name, m.target_name)
+            key = (m.source, m.target)
             morphism_pairs.setdefault(key, []).append(m)
 
         for key, morphisms in morphism_pairs.items():
@@ -229,12 +244,12 @@ class CogEngine:
                 "topology": check_result.topology,
             },
             "graph_context": {
-                "source_exists": self.store.get_object(claim.source) is not None,
-                "target_exists": self.store.get_object(claim.target) is not None,
+                "source_exists": self.category.get(claim.source) is not None,
+                "target_exists": self.category.get(claim.target) is not None,
                 "direct_edges": len([
-                    m for m in self.store.get_morphisms_from(claim.source)
-                    if m.target_name == claim.target
-                ]) if self.store.get_object(claim.source) else 0,
+                    m for m in self.category.morphisms_from(claim.source)
+                    if m.target == claim.target
+                ]) if self.category.get(claim.source) else 0,
             },
         }
 
@@ -274,8 +289,8 @@ class CogEngine:
 
     def _tier0_lookup(self, claim: CogClaim, energy: EnergyResult) -> CheckResult:
         """Tier 0: Direct graph lookup. ~1ms."""
-        source_obj = self.store.get_object(claim.source)
-        target_obj = self.store.get_object(claim.target)
+        source_obj = self.category.get(claim.source)
+        target_obj = self.category.get(claim.target)
 
         if not source_obj or not target_obj:
             missing = "Source" if not source_obj else "Target"
@@ -286,10 +301,10 @@ class CogEngine:
                 supporting_paths=[], contradictions=[],
             )
 
-        morphisms = self.store.get_morphisms_from(claim.source)
+        morphisms = self.category.morphisms_from(claim.source)
 
         matching = [m for m in morphisms
-                    if m.target_name == claim.target and m.name == claim.relation]
+                    if m.target == claim.target and m.name == claim.relation]
         if matching:
             best = max(matching, key=lambda m: m.confidence)
             return CheckResult(
@@ -299,7 +314,7 @@ class CogEngine:
                 supporting_paths=[[claim.source, claim.target]], contradictions=[],
             )
 
-        any_edges = [m for m in morphisms if m.target_name == claim.target]
+        any_edges = [m for m in morphisms if m.target == claim.target]
         if any_edges:
             relations = [m.name for m in any_edges]
             return CheckResult(
@@ -318,10 +333,22 @@ class CogEngine:
 
     def _tier1_composition(self, claim: CogClaim, energy: EnergyResult) -> CheckResult:
         """Tier 1: Composition + path finding. ~10ms."""
-        paths = self.store.find_paths(claim.source, claim.target, max_length=5)
+        src_obj = self.category.get(claim.source)
+        tgt_obj = self.category.get(claim.target)
+
+        if not src_obj or not tgt_obj:
+            return CheckResult(
+                claim=claim, status=VerificationStatus.PARTIAL, tier_reached=1,
+                confidence=0.0, energy=energy.total_energy,
+                explanation="Source or target not found",
+                supporting_paths=[], contradictions=[],
+            )
+
+        # find_paths expects string names, not Object instances
+        paths = self.category.find_paths(claim.source, claim.target, max_length=5)
 
         if not paths:
-            reverse_paths = self.store.find_paths(claim.target, claim.source, max_length=5)
+            reverse_paths = self.category.find_paths(claim.target, claim.source, max_length=5)
             if reverse_paths:
                 return CheckResult(
                     claim=claim, status=VerificationStatus.PARTIAL, tier_reached=1,
@@ -358,30 +385,25 @@ class CogEngine:
 
         Uses:
           - categorical.kan_extensions.KanExtensionOracle for structural prediction
-          - zfc.store_adapter.StoreAdapter to build a Category from the store
+          - Category already available (no adapter needed in IV)
         """
         paths = prior.supporting_paths if prior else []
         kan_confidence = 0.0
         kan_explanation = ""
 
         try:
-            from zfc.store_adapter import StoreAdapter
-            adapter = StoreAdapter(self.store)
-            category = adapter.to_category()
-
-            source_obj = category.objects.get(claim.source)
-            target_obj = category.objects.get(claim.target)
+            source_obj = self.category.get(claim.source)
+            target_obj = self.category.get(claim.target)
 
             if source_obj and target_obj:
-                cat_paths = category.find_paths(source_obj, target_obj, max_length=4)
+                # find_paths expects string names
+                cat_paths = self.category.find_paths(claim.source, claim.target, max_length=4)
                 if cat_paths:
                     kan_confidence = min(0.85, len(cat_paths) * 0.25)
                     kan_explanation = f"Kan extension: {len(cat_paths)} structural path(s) support claim"
 
                     if not paths:
-                        paths = [
-                            [str(m) for m in p] for p in cat_paths[:5]
-                        ]
+                        paths = [p.morphism_ids for p in cat_paths[:5]]
                 else:
                     kan_explanation = "Kan extension: no structural paths found"
             else:
@@ -402,14 +424,14 @@ class CogEngine:
             if embeddings.is_available:
                 checker = SheafCoherenceChecker(embeddings)
                 # Build pseudo-predictions from existing morphisms
-                morphisms = self.store.get_morphisms_from(claim.source)
+                morphisms = self.category.morphisms_from(claim.source)
                 preds = []
                 for m in morphisms:
                     preds.append(Prediction(
-                        source=m.source_name, target=m.target_name,
+                        source=m.source, target=m.target,
                         predicted_relation=m.name,
                         prediction_type=PredictionType.COMPOSED_MORPHISM,
-                        strategy_name="store", confidence=m.confidence,
+                        strategy_name="category", confidence=m.confidence,
                         reasoning="existing morphism",
                     ))
                 if preds:
@@ -442,14 +464,16 @@ class CogEngine:
 
         Uses zfc.bridge.DualEngineBridge to run both engines and classify
         the result as AGREE/ORPHAN/HOLLOW/REJECT.
+
+        Note: DualEngineBridge may need updating for IV API.
         """
         try:
-            from zfc.store_adapter import StoreAdapter
             from zfc.bridge import DualEngineBridge
             from zfc.meta_kan import DeltaType
 
-            adapter = StoreAdapter(self.store)
-            bridge = DualEngineBridge(adapter, store=self.store)
+            # TODO: DualEngineBridge needs updating to work with Category directly
+            # For now, this will use the category as-is
+            bridge = DualEngineBridge(category=self.category)
 
             dual_result = bridge.query(
                 claim.source, claim.target, claim.relation, domain="cog"
@@ -528,7 +552,7 @@ class CogEngine:
         # Step 2: Ricci curvature
         try:
             from geometry.ricci import compute_graph_curvature
-            curvature_result = compute_graph_curvature(self.store)
+            curvature_result = compute_graph_curvature(self.category)
 
             topology_data["curvature"] = {
                 "mean": curvature_result.statistics.get("mean_curvature", 0),
@@ -551,7 +575,7 @@ class CogEngine:
         same_region = False
         try:
             from geometry.flow import run_ricci_flow
-            decomp = run_ricci_flow(self.store)
+            decomp = run_ricci_flow(self.category)
 
             topology_data["num_regions"] = decomp.num_regions
             topology_data["converged"] = decomp.converged
@@ -579,18 +603,18 @@ class CogEngine:
                 SimplicialComplex, PersistentHomologyComputer,
             )
 
-            # Build simplicial complex from store
+            # Build simplicial complex from category
             sc = SimplicialComplex()
-            objects = self.store.list_objects(limit=10000)
+            objects = self.category.objects()[:10000]
             name_to_idx = {}
             for i, obj in enumerate(objects):
                 name_to_idx[obj.name] = i
                 sc.add_simplex((i,), filtration_value=0.0)
 
-            morphisms = self.store.list_morphisms(limit=100000)
+            morphisms = self.category.morphisms()[:100000]
             for m in morphisms:
-                src_idx = name_to_idx.get(m.source_name)
-                tgt_idx = name_to_idx.get(m.target_name)
+                src_idx = name_to_idx.get(m.source)
+                tgt_idx = name_to_idx.get(m.target)
                 if src_idx is not None and tgt_idx is not None and src_idx != tgt_idx:
                     filt = 1.0 - m.confidence  # Higher confidence = earlier in filtration
                     sc.add_simplex((src_idx, tgt_idx), filtration_value=filt)

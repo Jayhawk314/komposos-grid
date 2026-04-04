@@ -1,3 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0 OR LicenseRef-KOMPOSOS-IV-Commercial
+# Copyright (c) 2024-2026 James Ray Hawkins
+#
+# This file is dual-licensed. You may use it under either:
+# 1. Apache License 2.0 (see LICENSE file), OR
+# 2. KOMPOSOS-IV Commercial License (see LICENSE-COMMERCIAL file)
+
 """
 COG Energy — Quantifies how much the knowledge graph resists a claim.
 
@@ -16,7 +23,7 @@ from __future__ import annotations
 
 from typing import Dict
 
-from data.store import KomposOSStore
+from core.category import Category
 
 from .schema import CogClaim, EnergyResult
 
@@ -67,15 +74,17 @@ WEIGHTS: Dict[str, float] = {
 class EnergyComputer:
     """Compute the energy (resistance) of a claim relative to the knowledge graph."""
 
-    def __init__(self, store: KomposOSStore):
-        self.store = store
+    def __init__(self, category: Category):
+        self.category = category
 
     def compute(self, claim: CogClaim) -> EnergyResult:
         """Compute total energy of a claim."""
         components: Dict[str, float] = {}
 
-        source_exists = self.store.get_object(claim.source) is not None
-        target_exists = self.store.get_object(claim.target) is not None
+        source_obj = self.category.get(claim.source)
+        target_obj = self.category.get(claim.target)
+        source_exists = source_obj is not None
+        target_exists = target_obj is not None
 
         # 1. Novelty
         novelty = 0.0
@@ -87,9 +96,9 @@ class EnergyComputer:
 
         # 2. Path resistance
         if source_exists and target_exists:
-            paths = self.store.find_paths(claim.source, claim.target, max_length=5)
+            paths = self.category.find_paths(source_obj, target_obj, max_length=5)
             if paths:
-                shortest = min(p.length for p in paths)
+                shortest = min(len(p) for p in paths)
                 components["path_resistance"] = min(1.0, (shortest - 1) * 0.25)
             else:
                 components["path_resistance"] = 1.0
@@ -115,35 +124,35 @@ class EnergyComputer:
 
     def _check_contradiction(self, claim: CogClaim) -> float:
         """Check if existing morphisms contradict this claim."""
-        existing = self.store.get_morphisms_from(claim.source)
+        existing = self.category.morphisms_from(claim.source)
         antonym = ANTONYM_RELATIONS.get(claim.relation)
 
         for mor in existing:
-            if mor.target_name == claim.target:
+            if mor.target == claim.target:
                 if antonym and mor.name == antonym:
                     return 1.0
                 if mor.name == claim.relation:
                     return 0.0
 
-        reverse = self.store.get_morphisms_from(claim.target)
+        reverse = self.category.morphisms_from(claim.target)
         for mor in reverse:
-            if mor.target_name == claim.source:
+            if mor.target == claim.source:
                 if antonym and mor.name == antonym:
                     return 0.8
         return 0.0
 
     def _check_confidence_gap(self, claim: CogClaim) -> float:
         """Check confidence difference from existing evidence."""
-        existing = self.store.get_morphisms_from(claim.source)
+        existing = self.category.morphisms_from(claim.source)
         for mor in existing:
-            if mor.target_name == claim.target and mor.name == claim.relation:
+            if mor.target == claim.target and mor.name == claim.relation:
                 return abs(mor.confidence - claim.confidence)
         return 0.0
 
     def _check_type_mismatch(self, claim: CogClaim) -> float:
         """Check if relation type is valid for these object types."""
-        source_obj = self.store.get_object(claim.source)
-        target_obj = self.store.get_object(claim.target)
+        source_obj = self.category.get(claim.source)
+        target_obj = self.category.get(claim.target)
         if source_obj and target_obj:
             key = (source_obj.type_name, target_obj.type_name, claim.relation)
             if key in INVALID_TYPE_RELATIONS:
