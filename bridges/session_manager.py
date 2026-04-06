@@ -15,6 +15,7 @@ This is a KOMPOSOS-IV plugin that integrates with Orion Core (MIT licensed).
 
 from __future__ import annotations
 
+import logging
 import sys
 import os
 
@@ -22,6 +23,8 @@ import os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'orion-main', 'src'))
 
 from typing import Any, Dict, List, Optional
+
+logger = logging.getLogger(__name__)
 
 # Import from Orion (MIT licensed by Borkwork)
 from orion_core import Plugin
@@ -78,7 +81,7 @@ class SessionManagerPlugin(Plugin):
 
     async def on_start(self):
         """Plugin startup."""
-        await self._core.logger.info(
+        logger.info(
             f"Session Manager started. Sessions dir: {self.sessions_dir}"
         )
 
@@ -87,7 +90,7 @@ class SessionManagerPlugin(Plugin):
         for user_id in list(self.active_sessions.keys()):
             await self.save_session(user_id)
 
-        await self._core.logger.info(
+        logger.info(
             f"Session Manager stopped. Saved {len(self.active_sessions)} sessions."
         )
 

@@ -6,22 +6,25 @@
 # 2. KOMPOSOS-IV Commercial License (see LICENSE-COMMERCIAL file)
 
 """
-Orion-KOMPOSOS-COG Bridge Plugins
+Orion-KOMPOSOS-COG-OPTIMUS Bridge Plugins
 
-Integrates the three-layer architecture:
+Integrates the four-layer architecture:
 - Orion (application framework)
 - KOMPOSOS-IV (mathematical runtime)
 - COG (cognitive co-processor)
+- OPTIMUS (categorical gradient descent / self-refinement)
 """
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 from .cog_reasoning import CogReasoningPlugin
 from .knowledge_manager import KnowledgeManagerPlugin
 from .session_manager import SessionManagerPlugin
+from .optimus_plugin import OptimusPlugin
 
 __all__ = [
     "CogReasoningPlugin",
     "KnowledgeManagerPlugin",
     "SessionManagerPlugin",
+    "OptimusPlugin",
 ]

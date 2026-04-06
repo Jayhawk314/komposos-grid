@@ -9,7 +9,7 @@ from typing import Optional
 
 @dataclass
 class AgentConfig:
-    """Configuration for the three-layer agent."""
+    """Configuration for the four-layer agent."""
 
     # Orion configuration
     tick_rate: int = 60
@@ -21,6 +21,10 @@ class AgentConfig:
     # COG configuration
     cog_db_path: str = ":memory:"
     max_verification_tier: int = 4
+
+    # OPTIMUS configuration
+    optimus_enabled: bool = True
+    optimus_max_depth: int = 3
 
     # Session management
     sessions_enabled: bool = True

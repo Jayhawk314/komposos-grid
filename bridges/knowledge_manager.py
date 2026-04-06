@@ -15,6 +15,7 @@ This is a KOMPOSOS-IV plugin that integrates with Orion Core (MIT licensed).
 
 from __future__ import annotations
 
+import logging
 import sys
 import os
 
@@ -22,6 +23,8 @@ import os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'orion-main', 'src'))
 
 from typing import Any, Dict, List, Optional
+
+logger = logging.getLogger(__name__)
 
 # Import from Orion (MIT licensed by Borkwork)
 from orion_core import Plugin
@@ -81,7 +84,7 @@ class KnowledgeManagerPlugin(Plugin):
             "objects": len(self.category.objects()),
             "morphisms": len(self.category.morphisms()),
         }
-        await self._core.logger.info(
+        logger.info(
             f"Knowledge Manager started. "
             f"Graph: {stats['objects']} objects, {stats['morphisms']} morphisms"
         )
@@ -92,7 +95,7 @@ class KnowledgeManagerPlugin(Plugin):
             "objects": len(self.category.objects()),
             "morphisms": len(self.category.morphisms()),
         }
-        await self._core.logger.info(
+        logger.info(
             f"Knowledge Manager stopping. "
             f"Final graph: {stats['objects']} objects, {stats['morphisms']} morphisms"
         )

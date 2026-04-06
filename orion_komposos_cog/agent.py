@@ -6,7 +6,7 @@
 # Orion Core © Borkwork (https://github.com/borkwork/orion-framework)
 
 """
-The Agent class - unified interface for the three-layer architecture.
+The Agent class - unified interface for the four-layer architecture.
 """
 
 from __future__ import annotations
@@ -32,7 +32,7 @@ from cog.engine import CogEngine
 from cog.schema import CogClaim, CheckResult
 
 # Import bridge plugins
-from bridges import CogReasoningPlugin, KnowledgeManagerPlugin, SessionManagerPlugin
+from bridges import CogReasoningPlugin, KnowledgeManagerPlugin, SessionManagerPlugin, OptimusPlugin
 
 # Import config
 from .config import AgentConfig
@@ -43,12 +43,13 @@ logger = logging.getLogger(__name__)
 
 class Agent:
     """
-    The complete three-layer AI agent.
+    The complete four-layer AI agent.
 
     Combines:
     - Orion Core: Plugin framework with hot-loading
     - KOMPOSOS-IV: Categorical knowledge foundation
     - COG: Tiered verification and reasoning
+    - OPTIMUS: Categorical gradient descent and self-refinement
 
     Example:
         agent = Agent()
@@ -63,10 +64,13 @@ class Agent:
             target="ML",
             relation="supports"
         )
+
+        # Self-refine the knowledge graph
+        refinement = await agent.refine()
     """
 
     def __init__(self, config: Optional[AgentConfig] = None):
-        """Initialize the three-layer agent.
+        """Initialize the four-layer agent.
 
         Args:
             config: Optional agent configuration
@@ -94,6 +98,7 @@ class Agent:
         self._cog_plugin: Optional[CogReasoningPlugin] = None
         self._knowledge_plugin: Optional[KnowledgeManagerPlugin] = None
         self._session_plugin: Optional[SessionManagerPlugin] = None
+        self._optimus_plugin: Optional[OptimusPlugin] = None
 
         # Started state
         self._started = False
@@ -104,7 +109,7 @@ class Agent:
             logger.warning("Agent already started")
             return
 
-        logger.info("Starting three-layer agent...")
+        logger.info("Starting four-layer agent...")
 
         # Register bridge plugins
         logger.info("Registering COG reasoning plugin...")
@@ -129,8 +134,19 @@ class Agent:
             )
             await self.orion.register_plugin(self._session_plugin)
 
-        # Start Orion core
-        await self.orion.start()
+        # Layer 4: OPTIMUS (categorical gradient descent)
+        if self.config.optimus_enabled:
+            logger.info("Registering OPTIMUS refinement plugin...")
+            self._optimus_plugin = OptimusPlugin(
+                self.orion,
+                category=self.category,
+                max_depth=self.config.optimus_max_depth,
+            )
+            await self.orion.register_plugin(self._optimus_plugin)
+
+        # Start Orion core (if not already auto-started by plugin registration)
+        if self.orion.state.value != "running":
+            await self.orion.start()
 
         self._started = True
         logger.info("Agent started successfully!")
@@ -329,6 +345,95 @@ class Agent:
             return self.cog_engine.explain(claim)
 
     # ========================================================================
+    # Self-Refinement (OPTIMUS Layer)
+    # ========================================================================
+
+    async def refine(
+        self, max_steps: int = 20, depth: int = 2
+    ) -> Dict[str, Any]:
+        """Run categorical gradient descent on the knowledge graph.
+
+        Discovers better factorizations of morphisms and materializes
+        shortcuts in the Category.
+
+        Args:
+            max_steps: Maximum refinement iterations.
+            depth: Maximum factorization depth.
+
+        Returns:
+            Summary with steps, improved morphisms, synced morphisms.
+        """
+        if not self._optimus_plugin:
+            raise RuntimeError("OPTIMUS not enabled. Set optimus_enabled=True in config.")
+
+        return await self._optimus_plugin.refine_knowledge(
+            max_steps=max_steps, depth=depth
+        )
+
+    async def discover_intermediates(
+        self, source: str, target: str, depth: int = 3
+    ) -> List[str]:
+        """Find intermediate objects between source and target.
+
+        Args:
+            source: Source object name.
+            target: Target object name.
+            depth: Maximum factorization depth.
+
+        Returns:
+            List of intermediate object names.
+        """
+        if not self._optimus_plugin:
+            raise RuntimeError("OPTIMUS not enabled. Set optimus_enabled=True in config.")
+
+        return await self._optimus_plugin.discover_intermediates(source, target, depth)
+
+    async def absorb_structure(
+        self, source_obj: str, target_obj: str, threshold: float = 0.8
+    ) -> List[Dict[str, Any]]:
+        """Yoneda-guided structural transfer.
+
+        Transfer morphisms from source_obj to target_obj if they
+        are structurally similar.
+
+        Args:
+            source_obj: Object to transfer FROM.
+            target_obj: Object to transfer TO.
+            threshold: Minimum Yoneda similarity.
+
+        Returns:
+            List of transferred morphism info dicts.
+        """
+        if not self._optimus_plugin:
+            raise RuntimeError("OPTIMUS not enabled. Set optimus_enabled=True in config.")
+
+        return await self._optimus_plugin.absorb_structure(
+            source_obj, target_obj, threshold
+        )
+
+    async def yoneda_similarity(self, a: str, b: str) -> float:
+        """Compute structural similarity between two objects.
+
+        Returns:
+            float in [0, 1].
+        """
+        if not self._optimus_plugin:
+            raise RuntimeError("OPTIMUS not enabled. Set optimus_enabled=True in config.")
+
+        return await self._optimus_plugin.yoneda_similarity(a, b)
+
+    async def find_capability_gaps(self) -> List[Dict[str, Any]]:
+        """Detect structural holes in the knowledge graph.
+
+        Returns:
+            List of gaps sorted by path confidence (descending).
+        """
+        if not self._optimus_plugin:
+            raise RuntimeError("OPTIMUS not enabled. Set optimus_enabled=True in config.")
+
+        return await self._optimus_plugin.find_capability_gaps()
+
+    # ========================================================================
     # Session Management
     # ========================================================================
 
@@ -380,6 +485,12 @@ class Agent:
         if self._session_plugin:
             stats["sessions"] = {
                 "active": len(await self._session_plugin.list_active_sessions()),
+            }
+
+        if self._optimus_plugin:
+            stats["optimus"] = {
+                "enabled": True,
+                "rewrites": len(self._optimus_plugin.engine.rewrites),
             }
 
         return stats

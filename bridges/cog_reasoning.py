@@ -15,6 +15,7 @@ This is a KOMPOSOS-IV plugin that integrates with Orion Core (MIT licensed).
 
 from __future__ import annotations
 
+import logging
 import sys
 import os
 
@@ -22,6 +23,8 @@ import os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'orion-main', 'src'))
 
 from typing import Any, Dict, Optional
+
+logger = logging.getLogger(__name__)
 
 # Import from Orion (MIT licensed by Borkwork)
 from orion_core import Plugin
@@ -88,14 +91,14 @@ class CogReasoningPlugin(Plugin):
     async def on_start(self):
         """Plugin startup - log COG initialization."""
         summary = self.session.get_summary()
-        await self._core.logger.info(
+        logger.info(
             f"COG Reasoning Plugin started. Session: {summary['session_id']}"
         )
 
     async def on_stop(self):
         """Plugin shutdown - save session summary."""
         summary = self.session.get_summary()
-        await self._core.logger.info(
+        logger.info(
             f"COG Reasoning Plugin stopping. "
             f"Processed {summary['activity']['checks_performed']} claims."
         )

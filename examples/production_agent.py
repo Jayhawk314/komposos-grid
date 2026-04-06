@@ -4,10 +4,11 @@
 """
 Production AI Agent Example
 
-Demonstrates the complete three-layer architecture:
+Demonstrates the complete four-layer architecture:
 - Orion: Plugin-based tools
 - KOMPOSOS-IV: Categorical knowledge
 - COG: Tiered verification
+- OPTIMUS: Categorical gradient descent (self-refinement)
 
 This example shows:
 1. Creating an agent
@@ -15,6 +16,7 @@ This example shows:
 3. Learning facts
 4. Verifying claims
 5. Session management
+6. Self-refinement via OPTIMUS
 """
 
 import asyncio
@@ -81,7 +83,7 @@ async def main():
     """Main example demonstrating all three layers."""
 
     print("=" * 70)
-    print("Three-Layer AI Agent Example")
+    print("Four-Layer AI Agent Example")
     print("=" * 70)
     print()
 
@@ -99,7 +101,7 @@ async def main():
 
     print("Starting agent...")
     await agent.start()
-    print("✓ Agent started!\n")
+    print("[OK] Agent started!\n")
 
     # ========================================================================
     # Step 2: Add custom plugin (Orion layer)
@@ -108,7 +110,7 @@ async def main():
     print("Step 2: Adding web search plugin (Orion layer)...")
     search_plugin = WebSearchPlugin(agent.orion)
     await agent.add_plugin(search_plugin)
-    print("✓ Plugin added!\n")
+    print("[OK] Plugin added!\n")
 
     # ========================================================================
     # Step 3: Use plugin to gather facts
@@ -160,7 +162,7 @@ async def main():
         evidence="Python 3.5+ has typing module"
     )
 
-    print("✓ Facts stored in knowledge graph!\n")
+    print("[OK] Facts stored in knowledge graph!\n")
 
     # ========================================================================
     # Step 5: Query knowledge graph
@@ -173,14 +175,14 @@ async def main():
     print(f"Found {len(paths)} path(s) from Python to TensorFlow:")
     for i, path in enumerate(paths, 1):
         print(f"  Path {i}: length={path['length']}, weight={path['weight']:.3f}")
-        print(f"    {' → '.join(path['morphisms'])}")
+        print(f"    {' -> '.join(path['morphisms'])}")
     print()
 
     # Get neighbors
     result = await agent.query_knowledge("Python")
     print(f"Python neighbors: {len(result['outgoing'])} outgoing")
     for neighbor in result['outgoing']:
-        print(f"  → {neighbor['target']} ({neighbor['relation']})")
+        print(f"  -> {neighbor['target']} ({neighbor['relation']})")
     print()
 
     # ========================================================================
@@ -236,7 +238,7 @@ async def main():
 
     # Load user session
     user_session = await agent.load_session("alice")
-    print("✓ Loaded session for user 'alice'")
+    print("[OK] Loaded session for user 'alice'")
 
     # User-specific knowledge
     user_cog = user_session["cog_engine"]
@@ -248,17 +250,35 @@ async def main():
             confidence=1.0,
         )
     )
-    print("✓ Added user-specific knowledge")
+    print("[OK] Added user-specific knowledge")
 
     # Save session
     await agent.save_session("alice")
-    print("✓ Session saved\n")
+    print("[OK] Session saved\n")
 
     # ========================================================================
-    # Step 8: Statistics
+    # Step 8: Self-refinement (OPTIMUS layer)
     # ========================================================================
 
-    print("Step 8: Agent statistics...")
+    print("Step 8: Self-refinement via OPTIMUS (categorical gradient descent)...")
+
+    # OPTIMUS finds better factorizations and materializes shortcuts
+    refinement = await agent.refine(max_steps=10, depth=2)
+    print(f"  Refinement steps: {refinement['steps']}")
+    print(f"  Synced morphisms: {refinement['synced_morphisms']}")
+
+    # Detect structural gaps
+    gaps = await agent.find_capability_gaps()
+    print(f"  Structural gaps found: {len(gaps)}")
+    for gap in gaps[:3]:
+        print(f"    {gap['source']} -> {gap['target']} (via {gap['via']}, conf={gap['path_confidence']:.3f})")
+    print()
+
+    # ========================================================================
+    # Step 9: Statistics
+    # ========================================================================
+
+    print("Step 9: Agent statistics...")
     stats = await agent.get_statistics()
 
     print(f"\nOrion (Application Layer):")
@@ -277,6 +297,10 @@ async def main():
         print(f"\nSessions:")
         print(f"  Active: {stats['sessions']['active']}")
 
+    if 'optimus' in stats:
+        print(f"\nOPTIMUS (Refinement Layer):")
+        print(f"  Rewrites: {stats['optimus']['rewrites']}")
+
     print()
 
     # ========================================================================
@@ -285,7 +309,7 @@ async def main():
 
     print("Stopping agent...")
     await agent.stop()
-    print("✓ Agent stopped cleanly!\n")
+    print("[OK] Agent stopped cleanly!\n")
 
     print("=" * 70)
     print("Example complete!")
