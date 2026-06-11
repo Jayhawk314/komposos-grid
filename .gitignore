@@ -57,3 +57,5 @@ htmlcov/
 
 # External dependencies (keep local, don't commit)
 orion-main/
+
+domains/grid/data/
