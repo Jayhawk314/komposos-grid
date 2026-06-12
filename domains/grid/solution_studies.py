@@ -1,0 +1,614 @@
+# SPDX-License-Identifier: Apache-2.0
+# SPDX-FileCopyrightText: 2026 James Hawkins / Komposos-Labs
+
+"""Corridor solution studies for energy interventions.
+
+Solution cards rank corridors. This module turns the top corridors into
+audience-ready memos with:
+
+* current seam value and year-over-year trend;
+* top active/withdrawn queue projects, revalued at the current spread;
+* named constraint evidence;
+* project-cost break-even envelopes.
+
+The break-even envelopes intentionally avoid fake precision. They answer:
+"What annual cost or capital budget can this corridor support before the
+solution stops clearing on congestion value alone?"
+"""
+
+from __future__ import annotations
+
+import csv
+import json
+import math
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Any, Dict, Iterable, List, Mapping, Sequence
+
+
+HOURS_PER_YEAR = 8760.0
+DEFAULT_FIXED_CHARGE_RATE = 0.10
+
+
+@dataclass(frozen=True)
+class InterventionTemplate:
+    intervention_id: str
+    label: str
+    capacity_mw: float
+    effective_mwh_per_mw_year: float
+    solution_type: str
+    source: str
+    notes: str = ""
+
+
+DEFAULT_INTERVENTIONS = [
+    InterventionTemplate(
+        intervention_id="transfer_upgrade_50mw",
+        label="50 MW targeted transfer upgrade",
+        capacity_mw=50.0,
+        effective_mwh_per_mw_year=HOURS_PER_YEAR,
+        solution_type="transmission_or_grid_enhancing_transfer",
+        source="cost-gate envelope; compare against developer/utility estimate",
+        notes="Use for reconductoring, ratings, phase-angle control, or small transfer upgrades.",
+    ),
+    InterventionTemplate(
+        intervention_id="transfer_upgrade_100mw",
+        label="100 MW targeted transfer upgrade",
+        capacity_mw=100.0,
+        effective_mwh_per_mw_year=HOURS_PER_YEAR,
+        solution_type="transmission_or_grid_enhancing_transfer",
+        source="cost-gate envelope; compare against developer/utility estimate",
+        notes="Firm-transfer case; assumes relief is usable across the year.",
+    ),
+    InterventionTemplate(
+        intervention_id="transfer_upgrade_250mw",
+        label="250 MW targeted transfer upgrade",
+        capacity_mw=250.0,
+        effective_mwh_per_mw_year=HOURS_PER_YEAR,
+        solution_type="transmission_or_grid_enhancing_transfer",
+        source="cost-gate envelope; compare against developer/utility estimate",
+        notes="Larger transfer case; capped by the current annual seam value.",
+    ),
+    InterventionTemplate(
+        intervention_id="storage_4h_100mw",
+        label="100 MW / 4-hour storage siting screen",
+        capacity_mw=100.0,
+        effective_mwh_per_mw_year=1200.0,
+        solution_type="storage",
+        source=(
+            "NREL ATB utility-scale battery storage methodology "
+            "(https://atb.nrel.gov/electricity/2024/utility-scale_battery_storage); "
+            "cost-gate envelope here is derived from local seam value"
+        ),
+        notes="Throughput proxy matches queue matching: 4h duration and about 300 cycles/year.",
+    ),
+    InterventionTemplate(
+        intervention_id="flex_load_100mw",
+        label="100 MW flexible-load program",
+        capacity_mw=100.0,
+        effective_mwh_per_mw_year=600.0,
+        solution_type="flexible_load",
+        source="cost-gate envelope; compare against program bids",
+        notes="Critical-window dispatch proxy, not firm transfer capability.",
+    ),
+]
+
+
+@dataclass(frozen=True)
+class QueueCandidate:
+    q_id: str
+    status: str
+    fuel: str
+    state: str
+    region: str
+    mw: float
+    role: str
+    side: str
+    relief_mwh: float
+    relief_value_usd: float
+
+    def to_row(self) -> Dict[str, Any]:
+        return {
+            "q_id": self.q_id,
+            "status": self.status,
+            "fuel": self.fuel,
+            "state": self.state,
+            "region": self.region,
+            "mw": self.mw,
+            "role": self.role,
+            "side": self.side,
+            "relief_mwh": self.relief_mwh,
+            "relief_value_usd": self.relief_value_usd,
+        }
+
+
+@dataclass(frozen=True)
+class InterventionCase:
+    intervention_id: str
+    label: str
+    solution_type: str
+    capacity_mw: float
+    relief_mwh: float
+    relief_value_usd: float
+    break_even_annual_cost_usd: float
+    break_even_capex_usd: float
+    break_even_capex_usd_per_kw: float
+    fixed_charge_rate: float
+    source: str
+    notes: str = ""
+
+    def to_row(self) -> Dict[str, Any]:
+        return {
+            "intervention_id": self.intervention_id,
+            "label": self.label,
+            "solution_type": self.solution_type,
+            "capacity_mw": self.capacity_mw,
+            "relief_mwh": self.relief_mwh,
+            "relief_value_usd": self.relief_value_usd,
+            "break_even_annual_cost_usd": self.break_even_annual_cost_usd,
+            "break_even_capex_usd": self.break_even_capex_usd,
+            "break_even_capex_usd_per_kw": self.break_even_capex_usd_per_kw,
+            "fixed_charge_rate": self.fixed_charge_rate,
+            "source": self.source,
+            "notes": self.notes,
+        }
+
+
+@dataclass(frozen=True)
+class CorridorStudy:
+    study_id: str
+    title: str
+    geography: str
+    current_year: int
+    current_spread_usd_mwh: float
+    annual_value_usd: float
+    trend_summary: str
+    evidence_basis: str
+    constraints: List[str]
+    active_queue_gw: float
+    withdrawn_queue_gw: float
+    top_active: List[QueueCandidate]
+    top_withdrawn: List[QueueCandidate]
+    interventions: List[InterventionCase]
+    recommended_path: str
+    next_action: str
+    caveat: str
+
+    @property
+    def best_intervention(self) -> InterventionCase | None:
+        if not self.interventions:
+            return None
+        return max(self.interventions, key=lambda item: item.relief_value_usd)
+
+    def to_row(self) -> Dict[str, Any]:
+        best = self.best_intervention
+        return {
+            "study_id": self.study_id,
+            "title": self.title,
+            "geography": self.geography,
+            "current_year": self.current_year,
+            "current_spread_usd_mwh": self.current_spread_usd_mwh,
+            "annual_value_usd": self.annual_value_usd,
+            "active_queue_gw": self.active_queue_gw,
+            "withdrawn_queue_gw": self.withdrawn_queue_gw,
+            "best_intervention": best.label if best else "",
+            "best_relief_value_usd": best.relief_value_usd if best else 0.0,
+            "best_break_even_capex_usd": best.break_even_capex_usd if best else 0.0,
+            "best_break_even_capex_usd_per_kw": (
+                best.break_even_capex_usd_per_kw if best else 0.0
+            ),
+            "recommended_path": self.recommended_path,
+            "next_action": self.next_action,
+            "caveat": self.caveat,
+        }
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            **self.to_row(),
+            "trend_summary": self.trend_summary,
+            "evidence_basis": self.evidence_basis,
+            "constraints": self.constraints,
+            "top_active": [item.to_row() for item in self.top_active],
+            "top_withdrawn": [item.to_row() for item in self.top_withdrawn],
+            "interventions": [item.to_row() for item in self.interventions],
+        }
+
+    def to_markdown(self) -> str:
+        lines = [
+            f"# {self.title}",
+            "",
+            "## Decision Frame",
+            "",
+            f"- Corridor: **{self.geography}**",
+            f"- Current evidence year: **{self.current_year}**",
+            f"- Current congestion spread: **${self.current_spread_usd_mwh:.2f}/MWh**",
+            f"- Annual value at current spread: **${self.annual_value_usd:,.0f}/yr**",
+            f"- Trend: {self.trend_summary}",
+            f"- Recommended path: {self.recommended_path}",
+            f"- Next action: {self.next_action}",
+            f"- Caveat: {self.caveat}",
+            "",
+            "## Constraints",
+            "",
+        ]
+        if self.constraints:
+            lines.extend(f"- {constraint}" for constraint in self.constraints)
+        else:
+            lines.append("- Not attached yet.")
+
+        lines.extend([
+            "",
+            "## Project-Cost Gates",
+            "",
+            "A project clears on congestion value alone only if its real annual "
+            "cost is below the break-even annual cost below. Capital envelopes "
+            f"use a {self.interventions[0].fixed_charge_rate:.0%} fixed-charge rate.",
+            "",
+            "| Intervention | Capacity | Relief Value | Break-Even Annual Cost | Break-Even Capex | Capex $/kW |",
+            "|---|---:|---:|---:|---:|---:|",
+        ])
+        for case in self.interventions:
+            lines.append(
+                f"| {case.label} | {case.capacity_mw:,.0f} MW | "
+                f"${case.relief_value_usd:,.0f}/yr | "
+                f"${case.break_even_annual_cost_usd:,.0f}/yr | "
+                f"${case.break_even_capex_usd:,.0f} | "
+                f"${case.break_even_capex_usd_per_kw:,.0f}/kW |"
+            )
+
+        lines.extend([
+            "",
+            "## Active Queue Candidates",
+            "",
+            "| Queue ID | Fuel | MW | State | Role | Side | Relief Value |",
+            "|---|---|---:|---|---|---|---:|",
+        ])
+        for item in self.top_active:
+            lines.append(
+                f"| {item.q_id} | {item.fuel} | {item.mw:,.0f} | {item.state} | "
+                f"{item.role} | {item.side} | ${item.relief_value_usd:,.0f}/yr |"
+            )
+        if not self.top_active:
+            lines.append("| None |  |  |  |  |  |  |")
+
+        lines.extend([
+            "",
+            "## Withdrawn Opportunity",
+            "",
+            "| Queue ID | Fuel | MW | State | Role | Side | Lost Relief Value |",
+            "|---|---|---:|---|---|---|---:|",
+        ])
+        for item in self.top_withdrawn:
+            lines.append(
+                f"| {item.q_id} | {item.fuel} | {item.mw:,.0f} | {item.state} | "
+                f"{item.role} | {item.side} | ${item.relief_value_usd:,.0f}/yr |"
+            )
+        if not self.top_withdrawn:
+            lines.append("| None |  |  |  |  |  |  |")
+        return "\n".join(lines) + "\n"
+
+
+@dataclass
+class SolutionStudyReport:
+    studies: List[CorridorStudy]
+
+    def ranked(self) -> List[CorridorStudy]:
+        return sorted(self.studies, key=lambda item: item.annual_value_usd, reverse=True)
+
+    def summary(self) -> str:
+        lines = [f"Solution studies: {len(self.studies)}"]
+        for study in self.ranked():
+            best = study.best_intervention
+            lines.append(
+                f"  {study.geography}: ${study.annual_value_usd:,.0f}/yr, "
+                f"best gate {best.label if best else 'none'} "
+                f"${best.break_even_capex_usd:,.0f} capex"
+            )
+        return "\n".join(lines)
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "n_studies": len(self.studies),
+            "studies": [study.to_dict() for study in self.ranked()],
+        }
+
+    def to_rows(self) -> List[Dict[str, Any]]:
+        return [study.to_row() for study in self.ranked()]
+
+    def to_intervention_rows(self) -> List[Dict[str, Any]]:
+        rows: List[Dict[str, Any]] = []
+        for study in self.ranked():
+            for case in study.interventions:
+                rows.append({
+                    "study_id": study.study_id,
+                    "geography": study.geography,
+                    **case.to_row(),
+                })
+        return rows
+
+    def to_markdown(self) -> str:
+        lines = [
+            "# Energy Solution Studies",
+            "",
+            "## Summary",
+            "",
+            "| Corridor | Value | Current Spread | Active Queue | Best Cost Gate | Next Action |",
+            "|---|---:|---:|---:|---:|---|",
+        ]
+        for study in self.ranked():
+            best = study.best_intervention
+            lines.append(
+                f"| {study.geography} | ${study.annual_value_usd:,.0f}/yr | "
+                f"${study.current_spread_usd_mwh:.2f}/MWh | "
+                f"{study.active_queue_gw:,.1f} GW | "
+                f"${best.break_even_capex_usd:,.0f} | {study.next_action} |"
+            )
+        lines.append("")
+        for study in self.ranked():
+            lines.append(study.to_markdown())
+        return "\n".join(lines)
+
+    def export_json(self, path: str | Path) -> None:
+        path = Path(path)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(self.to_dict(), indent=2), encoding="utf-8")
+
+    def export_csv(self, path: str | Path) -> None:
+        _write_csv(path, self.to_rows())
+
+    def export_interventions_csv(self, path: str | Path) -> None:
+        _write_csv(path, self.to_intervention_rows())
+
+    def export_markdown(self, path: str | Path) -> None:
+        path = Path(path)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(self.to_markdown(), encoding="utf-8")
+
+    def export_individual_memos(self, directory: str | Path) -> List[Path]:
+        directory = Path(directory)
+        directory.mkdir(parents=True, exist_ok=True)
+        paths: List[Path] = []
+        for study in self.ranked():
+            path = directory / f"{study.study_id}.md"
+            path.write_text(study.to_markdown(), encoding="utf-8")
+            paths.append(path)
+        return paths
+
+
+def build_solution_study_report(
+    solution_cards_path: str | Path,
+    queue_match_path: str | Path,
+    interventions: Sequence[InterventionTemplate] | None = None,
+    fixed_charge_rate: float = DEFAULT_FIXED_CHARGE_RATE,
+    top_projects: int = 5,
+) -> SolutionStudyReport:
+    cards = _load_solution_cards(solution_cards_path)
+    queue = _load_queue(queue_match_path)
+    interventions = list(interventions or DEFAULT_INTERVENTIONS)
+    target_geographies = {"NYIS-PJM", "MISO-SWPP"}
+    studies: List[CorridorStudy] = []
+    for card in cards:
+        geography = str(card.get("geography", ""))
+        if geography not in target_geographies:
+            continue
+        key = _key_from_geography(geography)
+        queue_row = queue.get(key, {})
+        studies.append(
+            _build_study(card, queue_row, interventions, fixed_charge_rate, top_projects)
+        )
+    return SolutionStudyReport(studies=studies)
+
+
+def _build_study(
+    card: Mapping[str, Any],
+    queue_row: Mapping[str, Any],
+    interventions: Sequence[InterventionTemplate],
+    fixed_charge_rate: float,
+    top_projects: int,
+) -> CorridorStudy:
+    geography = str(card.get("geography", ""))
+    spread = _float(card.get("spread_usd_mwh"))
+    annual_value = _float(card.get("annual_value_usd"))
+    gross_mwh = annual_value / spread if spread > 0 else 0.0
+    constraints = _split_semicolon(card.get("constraints"))
+    top_active = _project_candidates(
+        queue_row.get("top_active", []),
+        spread,
+        top=top_projects,
+    )
+    top_withdrawn = _project_candidates(
+        queue_row.get("top_withdrawn", []),
+        spread,
+        top=top_projects,
+    )
+    cases = [
+        _intervention_case(template, spread, gross_mwh, fixed_charge_rate)
+        for template in interventions
+    ]
+    study_id = geography.lower().replace("-", "_")
+    recommended_path, next_action, caveat = _study_guidance(geography)
+    return CorridorStudy(
+        study_id=study_id,
+        title=_study_title(geography),
+        geography=geography,
+        current_year=int(_float(card.get("current_year"))),
+        current_spread_usd_mwh=spread,
+        annual_value_usd=annual_value,
+        trend_summary=str(card.get("trend_summary", "")),
+        evidence_basis=str(card.get("evidence_basis", "")),
+        constraints=constraints,
+        active_queue_gw=_float(card.get("active_queue_gw")),
+        withdrawn_queue_gw=_float(card.get("withdrawn_queue_gw")),
+        top_active=top_active,
+        top_withdrawn=top_withdrawn,
+        interventions=cases,
+        recommended_path=recommended_path,
+        next_action=next_action,
+        caveat=caveat,
+    )
+
+
+def _intervention_case(
+    template: InterventionTemplate,
+    spread_usd_mwh: float,
+    gross_mwh: float,
+    fixed_charge_rate: float,
+) -> InterventionCase:
+    relief_mwh = min(template.capacity_mw * template.effective_mwh_per_mw_year, gross_mwh)
+    relief_value = relief_mwh * spread_usd_mwh
+    capex = relief_value / fixed_charge_rate if fixed_charge_rate > 0 else 0.0
+    capex_per_kw = capex / (template.capacity_mw * 1000.0) if template.capacity_mw > 0 else 0.0
+    return InterventionCase(
+        intervention_id=template.intervention_id,
+        label=template.label,
+        solution_type=template.solution_type,
+        capacity_mw=template.capacity_mw,
+        relief_mwh=relief_mwh,
+        relief_value_usd=relief_value,
+        break_even_annual_cost_usd=relief_value,
+        break_even_capex_usd=capex,
+        break_even_capex_usd_per_kw=capex_per_kw,
+        fixed_charge_rate=fixed_charge_rate,
+        source=template.source,
+        notes=template.notes,
+    )
+
+
+def _project_candidates(
+    rows: Any,
+    spread_usd_mwh: float,
+    top: int,
+) -> List[QueueCandidate]:
+    candidates: List[QueueCandidate] = []
+    for row in rows if isinstance(rows, list) else []:
+        relief_mwh = _float(row.get("relief_mwh"))
+        candidates.append(
+            QueueCandidate(
+                q_id=str(row.get("q_id", "")),
+                status=str(row.get("status", "")),
+                fuel=str(row.get("fuel", "")),
+                state=str(row.get("state", "")),
+                region=str(row.get("region", "")),
+                mw=_float(row.get("mw")),
+                role=str(row.get("role", "")),
+                side=str(row.get("side", "")),
+                relief_mwh=relief_mwh,
+                relief_value_usd=relief_mwh * spread_usd_mwh,
+            )
+        )
+    return sorted(candidates, key=lambda item: item.relief_value_usd, reverse=True)[:top]
+
+
+def _study_guidance(geography: str) -> tuple[str, str, str]:
+    if geography == "NYIS-PJM":
+        return (
+            "Start with a 50-100 MW transfer-relief or queue-rescue package; storage clears only if it is paid for by more than seam congestion.",
+            "Price the top PJM-side active projects and a small transfer upgrade against the break-even capex envelope.",
+            "The 2025 value is strong, but the current gross-flow baseline still needs a 2025 evidence rerun before a final investment case.",
+        )
+    if geography == "MISO-SWPP":
+        return (
+            "Start with targeted transfer relief around the wind-belt constraints, then test storage only where it also captures local energy or capacity value.",
+            "Map CHAWATCHAPAT and Charlie Creek-Watford to upgrade candidates and price a 50-100 MW relief package.",
+            "MISO-side and SPP-side seam evidence corroborate the problem; do not double-count them as separate benefits.",
+        )
+    return (
+        "Build project-specific cost evidence before scoping.",
+        "Attach named projects and quotes.",
+        "Screening only.",
+    )
+
+
+def _study_title(geography: str) -> str:
+    if geography == "NYIS-PJM":
+        return "PJM-NYIS 2025 Solution Memo"
+    if geography == "MISO-SWPP":
+        return "MISO-SWPP Wind-Belt Solution Memo"
+    return f"{geography} Solution Memo"
+
+
+def _load_solution_cards(path: str | Path) -> List[Dict[str, Any]]:
+    payload = json.loads(Path(path).read_text(encoding="utf-8"))
+    return list(payload.get("cards", []))
+
+
+def _load_queue(path: str | Path) -> Dict[tuple[str, str], Dict[str, Any]]:
+    payload = json.loads(Path(path).read_text(encoding="utf-8"))
+    return {
+        _tie_key(row.get("ba_a", ""), row.get("ba_b", "")): row
+        for row in payload.get("ties", [])
+    }
+
+
+def _key_from_geography(geography: str) -> tuple[str, str]:
+    if "-" not in geography:
+        return ("", "")
+    left, right = geography.split("-", 1)
+    return _tie_key(left, right)
+
+
+def _tie_key(ba_a: Any, ba_b: Any) -> tuple[str, str]:
+    return tuple(sorted((str(ba_a).strip(), str(ba_b).strip())))
+
+
+def _split_semicolon(value: Any) -> List[str]:
+    return [part.strip() for part in str(value or "").split(";") if part.strip()]
+
+
+def _float(value: Any) -> float:
+    if value in (None, ""):
+        return 0.0
+    text = str(value).strip().replace(",", "").replace("$", "")
+    if not text:
+        return 0.0
+    try:
+        out = float(text)
+    except ValueError:
+        return 0.0
+    return 0.0 if math.isnan(out) else out
+
+
+def _write_csv(path: str | Path, rows: List[Dict[str, Any]]) -> None:
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fieldnames = _fieldnames(rows)
+    with path.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(rows)
+
+
+def _fieldnames(rows: List[Dict[str, Any]]) -> List[str]:
+    if not rows:
+        return ["status"]
+    seen = {field for row in rows for field in row}
+    preferred = [
+        "study_id",
+        "title",
+        "geography",
+        "current_year",
+        "current_spread_usd_mwh",
+        "annual_value_usd",
+        "active_queue_gw",
+        "withdrawn_queue_gw",
+        "best_intervention",
+        "best_relief_value_usd",
+        "best_break_even_capex_usd",
+        "best_break_even_capex_usd_per_kw",
+        "recommended_path",
+        "next_action",
+        "caveat",
+        "intervention_id",
+        "label",
+        "solution_type",
+        "capacity_mw",
+        "relief_mwh",
+        "relief_value_usd",
+        "break_even_annual_cost_usd",
+        "break_even_capex_usd",
+        "break_even_capex_usd_per_kw",
+        "fixed_charge_rate",
+        "source",
+        "notes",
+    ]
+    return [field for field in preferred if field in seen] + sorted(seen - set(preferred))

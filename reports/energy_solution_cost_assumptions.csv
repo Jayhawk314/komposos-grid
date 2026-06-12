@@ -1,0 +1,6 @@
+intervention_id,label,capacity_mw,effective_mwh_per_mw_year,solution_type,source,notes
+transfer_upgrade_50mw,50 MW targeted transfer upgrade,50.0,8760.0,transmission_or_grid_enhancing_transfer,cost-gate envelope; compare against developer/utility estimate,"Use for reconductoring, ratings, phase-angle control, or small transfer upgrades."
+transfer_upgrade_100mw,100 MW targeted transfer upgrade,100.0,8760.0,transmission_or_grid_enhancing_transfer,cost-gate envelope; compare against developer/utility estimate,Firm-transfer case; assumes relief is usable across the year.
+transfer_upgrade_250mw,250 MW targeted transfer upgrade,250.0,8760.0,transmission_or_grid_enhancing_transfer,cost-gate envelope; compare against developer/utility estimate,Larger transfer case; capped by the current annual seam value.
+storage_4h_100mw,100 MW / 4-hour storage siting screen,100.0,1200.0,storage,NREL ATB utility-scale battery storage methodology (https://atb.nrel.gov/electricity/2024/utility-scale_battery_storage); cost-gate envelope here is derived from local seam value,Throughput proxy matches queue matching: 4h duration and about 300 cycles/year.
+flex_load_100mw,100 MW flexible-load program,100.0,600.0,flexible_load,cost-gate envelope; compare against program bids,"Critical-window dispatch proxy, not firm transfer capability."

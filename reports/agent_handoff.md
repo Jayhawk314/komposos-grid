@@ -223,3 +223,57 @@ repair/review layers).
   - Solution-card focused tests: `3 passed`.
   - Nearby grid tests: `15 passed`.
   - Full local suite: `288 passed`.
+
+## State as of 2026-06-12 (project-specific solution studies)
+
+- User asked to do all four next steps: PJM-NYIS 2025 study,
+  MISO-SWPP wind-belt study, replacement of generic costs, and
+  audience-ready memos.
+- Added:
+  - `domains/grid/solution_studies.py`
+  - `domains/grid/run_solution_studies.py`
+  - `tests/test_grid_solution_studies.py`
+- Generated:
+  - `reports/energy_solution_studies.md`
+  - `reports/energy_solution_studies.json`
+  - `reports/energy_solution_studies.csv`
+  - `reports/energy_solution_interventions.csv`
+  - `reports/energy_solution_cost_assumptions.csv`
+  - `reports/solution_studies/nyis_pjm.md`
+  - `reports/solution_studies/miso_swpp.md`
+- What changed methodologically:
+  - Replaced generic B/C framing with project-cost break-even gates.
+    The reports now answer: "what real annual cost / capex can this
+    corridor support before congestion value alone stops clearing?"
+  - Uses a 10% fixed-charge-rate default for break-even capex envelopes.
+  - Storage assumption is tied to the NREL ATB utility-scale battery
+    storage methodology URL in the assumptions CSV, but the memo does
+    not claim storage clears on seam value alone.
+- PJM-NYIS 2025 memo:
+  - Current spread: 7.38 $/MWh.
+  - Annual value: about $142.4M/yr.
+  - 50 MW targeted transfer gate: $3.23M/yr annual cost,
+    $32.3M capex at 10% FCR, $646/kW.
+  - 250 MW targeted transfer gate: $16.2M/yr annual cost,
+    $161.6M capex, $646/kW.
+  - 100 MW 4-hour storage gate: only $8.9M capex, $89/kW, so storage
+    does not clear from seam congestion value alone unless stacked with
+    other value streams.
+  - Next action: price top PJM-side active projects and a small
+    transfer upgrade; rerun gross-flow/evidence on 2025 before final
+    investment case.
+- MISO-SWPP wind-belt memo:
+  - Current spread: 6.31 $/MWh.
+  - Annual value: about $25.2M/yr.
+  - 50 MW targeted transfer gate: $2.76M/yr annual cost,
+    $27.6M capex at 10% FCR, $553/kW.
+  - 250 MW targeted transfer gate: $13.8M/yr annual cost,
+    $138.2M capex, $553/kW.
+  - 100 MW 4-hour storage gate: only $7.6M capex, $76/kW, so storage
+    needs local energy/capacity stacking.
+  - Next action: map CHAWATCHAPAT and Charlie Creek-Watford to specific
+    upgrade candidates and price a 50-100 MW relief package.
+- Validation:
+  - Solution-study focused tests: `2 passed`.
+  - Focused nearby tests: `8 passed`.
+  - Full local suite: `290 passed`.
