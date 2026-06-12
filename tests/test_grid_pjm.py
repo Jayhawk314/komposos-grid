@@ -17,8 +17,17 @@ def test_resolve_api_key_explicit_and_env(monkeypatch):
     assert resolve_api_key("abc123") == "abc123"
     monkeypatch.setenv("PJM_API_KEY", "envkey")
     assert resolve_api_key() == "envkey"
-    monkeypatch.delenv("PJM_API_KEY")
-    with pytest.raises(PJMError, match="apiportal"):
+
+
+def test_resolve_api_key_fallback_error(monkeypatch):
+    import domains.grid.sources.pjm_dataminer as mod
+
+    monkeypatch.delenv("PJM_API_KEY", raising=False)
+    monkeypatch.setattr(
+        mod, "fetch_public_key",
+        lambda: (_ for _ in ()).throw(RuntimeError("offline")),
+    )
+    with pytest.raises(PJMError, match="public-key fallback failed"):
         resolve_api_key()
 
 

@@ -1,0 +1,5148 @@
+{
+ "year": 2023,
+ "total_severity": 3808473.689999998,
+ "constraints": [
+  {
+   "constraint_name": "NOTTINGH230 KV  2-3",
+   "binding_hours": 6025,
+   "severity": 353556.75999999954,
+   "max_abs_sp": 473.87
+  },
+  {
+   "constraint_name": "LENOX-NMESHOPP NML 1090     B  115 KV",
+   "binding_hours": 1847,
+   "severity": 227803.80000000025,
+   "max_abs_sp": 1041.82
+  },
+  {
+   "constraint_name": "GRACETON230 KV  GRA-SAF",
+   "binding_hours": 3339,
+   "severity": 130754.40000000001,
+   "max_abs_sp": 227.9
+  },
+  {
+   "constraint_name": "Chicago-Praxair3 138 kV l/o Wilton Center-Dumont 765 kV",
+   "binding_hours": 661,
+   "severity": 120695.23000000007,
+   "max_abs_sp": 701.83
+  },
+  {
+   "constraint_name": "Turkey Hill-Hilgard 138 kV l/o Prairie State-Mt Vernon 345 kV",
+   "binding_hours": 1065,
+   "severity": 118168.63999999985,
+   "max_abs_sp": 987.93
+  },
+  {
+   "constraint_name": "Weedman_Mahomet_138_flo_Clinton_Orean",
+   "binding_hours": 481,
+   "severity": 107896.10000000008,
+   "max_abs_sp": 1294.21
+  },
+  {
+   "constraint_name": "GARDNERS115 KV  GAR-TEX",
+   "binding_hours": 1479,
+   "severity": 101268.00000000007,
+   "max_abs_sp": 818.01
+  },
+  {
+   "constraint_name": "Mahomet - OCB 1303 l/o Dumont - WiltonCenter 765kV",
+   "binding_hours": 458,
+   "severity": 100277.45000000003,
+   "max_abs_sp": 1310.65
+  },
+  {
+   "constraint_name": "CONASTON230 KV  CNS-NOR2",
+   "binding_hours": 1027,
+   "severity": 99943.86000000004,
+   "max_abs_sp": 481.69
+  },
+  {
+   "constraint_name": "BIGPINET138 KV  BIG-KIS",
+   "binding_hours": 943,
+   "severity": 93932.16999999997,
+   "max_abs_sp": 646.74
+  },
+  {
+   "constraint_name": "Prest Tibb 138 kV l/o Prairie State Mt Vernon 345 kV",
+   "binding_hours": 429,
+   "severity": 89694.94999999994,
+   "max_abs_sp": 924.5
+  },
+  {
+   "constraint_name": "MARDELA 69 KV   MAR-VIE",
+   "binding_hours": 177,
+   "severity": 89349.55000000003,
+   "max_abs_sp": 1216.56
+  },
+  {
+   "constraint_name": "COOLSPRI230 KV  COL-MIL",
+   "binding_hours": 422,
+   "severity": 81023.04000000005,
+   "max_abs_sp": 984.06
+  },
+  {
+   "constraint_name": "12 DRESD345 KV  TR81CT-P",
+   "binding_hours": 344,
+   "severity": 59341.419999999984,
+   "max_abs_sp": 1949.08
+  },
+  {
+   "constraint_name": "1808    138 KV  1808 3",
+   "binding_hours": 204,
+   "severity": 47272.51,
+   "max_abs_sp": 1322.3
+  },
+  {
+   "constraint_name": "Turkey Hill-Mascouta 138 kV l/o Prairie State-Mt Vernon 345 kV",
+   "binding_hours": 272,
+   "severity": 44070.920000000006,
+   "max_abs_sp": 762.87
+  },
+  {
+   "constraint_name": "PRESTON 69 KV   PRE-TAN",
+   "binding_hours": 557,
+   "severity": 41893.39999999997,
+   "max_abs_sp": 1999.46
+  },
+  {
+   "constraint_name": "DESOTO  138 KV  DES-SEL",
+   "binding_hours": 525,
+   "severity": 38951.78000000001,
+   "max_abs_sp": 438.13
+  },
+  {
+   "constraint_name": "Map-Chryslr 13811 l\\o Greentown-Delco 13810",
+   "binding_hours": 307,
+   "severity": 36285.05000000001,
+   "max_abs_sp": 696.85
+  },
+  {
+   "constraint_name": "PINEYGRO AT20 XFORMER       H  230 KV",
+   "binding_hours": 134,
+   "severity": 33557.86000000001,
+   "max_abs_sp": 693.42
+  },
+  {
+   "constraint_name": "BUTL APS138 KV  BUT-KAR",
+   "binding_hours": 260,
+   "severity": 30458.870000000006,
+   "max_abs_sp": 2000.0
+  },
+  {
+   "constraint_name": "POSSUMP4500 KV  TX1",
+   "binding_hours": 270,
+   "severity": 28848.430000000004,
+   "max_abs_sp": 626.62
+  },
+  {
+   "constraint_name": "FREMNT  138 KV  FRE-WFR1",
+   "binding_hours": 719,
+   "severity": 28826.270000000004,
+   "max_abs_sp": 385.26
+  },
+  {
+   "constraint_name": "MAHANS LANE-TIDD            B  138 KV",
+   "binding_hours": 173,
+   "severity": 27940.840000000004,
+   "max_abs_sp": 863.22
+  },
+  {
+   "constraint_name": "HIGHLAOE138 KV  HIG-COM1",
+   "binding_hours": 194,
+   "severity": 26529.949999999997,
+   "max_abs_sp": 1110.25
+  },
+  {
+   "constraint_name": "ELIMA   138 KV  ELI-HAV1",
+   "binding_hours": 275,
+   "severity": 26186.139999999996,
+   "max_abs_sp": 310.71
+  },
+  {
+   "constraint_name": "PIPECREE138 KV  MUL-PIP1",
+   "binding_hours": 525,
+   "severity": 24854.18999999999,
+   "max_abs_sp": 575.25
+  },
+  {
+   "constraint_name": "CEDARCRE230 KV  CED-SIL",
+   "binding_hours": 562,
+   "severity": 24416.28000000001,
+   "max_abs_sp": 641.06
+  },
+  {
+   "constraint_name": "CHARGER 138 KV  CHA-COU",
+   "binding_hours": 262,
+   "severity": 23975.479999999996,
+   "max_abs_sp": 440.52
+  },
+  {
+   "constraint_name": "FARMVILL230 KV  TX5",
+   "binding_hours": 211,
+   "severity": 22218.829999999994,
+   "max_abs_sp": 561.29
+  },
+  {
+   "constraint_name": "HARWGATE115 KV  100J",
+   "binding_hours": 111,
+   "severity": 21833.34999999999,
+   "max_abs_sp": 1354.34
+  },
+  {
+   "constraint_name": "LORETTO 138 KV  LOR-VIE",
+   "binding_hours": 406,
+   "severity": 21475.149999999998,
+   "max_abs_sp": 387.26
+  },
+  {
+   "constraint_name": "BRAMBLET-EVRGREEN 2172B",
+   "binding_hours": 42,
+   "severity": 21267.129999999997,
+   "max_abs_sp": 2000.0
+  },
+  {
+   "constraint_name": "ALLENIM 345 KV  ALL-RPM",
+   "binding_hours": 1507,
+   "severity": 19079.419999999987,
+   "max_abs_sp": 103.25
+  },
+  {
+   "constraint_name": "NOTTINGHM 2-3 SER DEV       A  230 KV",
+   "binding_hours": 144,
+   "severity": 18478.67000000001,
+   "max_abs_sp": 684.8
+  },
+  {
+   "constraint_name": "23 COLLI345 KV  TR92CT-S",
+   "binding_hours": 1205,
+   "severity": 18210.26999999997,
+   "max_abs_sp": 210.25
+  },
+  {
+   "constraint_name": "Stillwell-Dumont 345 l/o Wilton Center-Dumont 765",
+   "binding_hours": 666,
+   "severity": 17387.15999999999,
+   "max_abs_sp": 241.6
+  },
+  {
+   "constraint_name": "MIDDLJCT115 KV  MID-YOR7",
+   "binding_hours": 96,
+   "severity": 17213.00999999999,
+   "max_abs_sp": 1151.58
+  },
+  {
+   "constraint_name": "GEORGEWA138 KV  GEO-KAM",
+   "binding_hours": 199,
+   "severity": 17193.00999999999,
+   "max_abs_sp": 364.65
+  },
+  {
+   "constraint_name": "CHARLTSV230 KV  2054B1",
+   "binding_hours": 314,
+   "severity": 15964.720000000001,
+   "max_abs_sp": 867.51
+  },
+  {
+   "constraint_name": "Sub_71 - Sub_88 161kV l/o Cordova - Sub_39 345kV",
+   "binding_hours": 96,
+   "severity": 15857.900000000003,
+   "max_abs_sp": 559.88
+  },
+  {
+   "constraint_name": "Duneacre - Michigan City 13843 138 kv l/o Wilton Center - Dumont 765 kv",
+   "binding_hours": 95,
+   "severity": 15547.729999999998,
+   "max_abs_sp": 572.75
+  },
+  {
+   "constraint_name": "HOWARD2 138 KV  HOW-MEL1",
+   "binding_hours": 234,
+   "severity": 15143.740000000007,
+   "max_abs_sp": 491.43
+  },
+  {
+   "constraint_name": "SALTSPRG138 KV  SAL-MAS1",
+   "binding_hours": 357,
+   "severity": 14891.88,
+   "max_abs_sp": 526.32
+  },
+  {
+   "constraint_name": "PLEASNTV-ASHBURN 274D",
+   "binding_hours": 54,
+   "severity": 14756.99,
+   "max_abs_sp": 2000.0
+  },
+  {
+   "constraint_name": "ETOWANDA-HILLSIDE 2002 TIE  A    230 KV",
+   "binding_hours": 334,
+   "severity": 14559.469999999992,
+   "max_abs_sp": 257.24
+  },
+  {
+   "constraint_name": "NELSON  138 KV  NEL-VIE",
+   "binding_hours": 34,
+   "severity": 14557.57,
+   "max_abs_sp": 1393.1
+  },
+  {
+   "constraint_name": "Shadeland-Lafayette South 13808 l/o Westwood-NW Tap 13806",
+   "binding_hours": 92,
+   "severity": 14463.85,
+   "max_abs_sp": 640.48
+  },
+  {
+   "constraint_name": "COLLIER  T1       XFORMER   L  345 KV",
+   "binding_hours": 72,
+   "severity": 14380.609999999997,
+   "max_abs_sp": 1371.6
+  },
+  {
+   "constraint_name": "BERYL   138 KV  BER-MTZ",
+   "binding_hours": 92,
+   "severity": 14145.740000000005,
+   "max_abs_sp": 2000.0
+  },
+  {
+   "constraint_name": "DAUPHIN 230 KV  DAU-JUN",
+   "binding_hours": 132,
+   "severity": 13627.780000000002,
+   "max_abs_sp": 592.21
+  },
+  {
+   "constraint_name": "CHAPRLTP230 KV  249B",
+   "binding_hours": 180,
+   "severity": 13518.240000000007,
+   "max_abs_sp": 558.44
+  },
+  {
+   "constraint_name": "MAHANSLA138 KV  MAH-TID",
+   "binding_hours": 96,
+   "severity": 13390.340000000006,
+   "max_abs_sp": 973.78
+  },
+  {
+   "constraint_name": "CRESCENT-NORTH Z-21         A  138 KV",
+   "binding_hours": 93,
+   "severity": 13287.199999999999,
+   "max_abs_sp": 440.43
+  },
+  {
+   "constraint_name": "EASTON  69 KV   EAS-EMU",
+   "binding_hours": 2504,
+   "severity": 13145.77000000001,
+   "max_abs_sp": 350.5
+  },
+  {
+   "constraint_name": "ALLDAM6 138 KV  ALL-KIT",
+   "binding_hours": 414,
+   "severity": 12898.479999999989,
+   "max_abs_sp": 655.81
+  },
+  {
+   "constraint_name": "MTNEBO  69 KV   FAC-MTNB",
+   "binding_hours": 189,
+   "severity": 12844.25,
+   "max_abs_sp": 299.31
+  },
+  {
+   "constraint_name": "BRAMBLET-EVRGREEN 2172B     A   230 KV",
+   "binding_hours": 47,
+   "severity": 12818.370000000003,
+   "max_abs_sp": 798.63
+  },
+  {
+   "constraint_name": "DUPSEAFD69 KV   DUP-LAU",
+   "binding_hours": 102,
+   "severity": 12809.170000000004,
+   "max_abs_sp": 949.32
+  },
+  {
+   "constraint_name": "Powerton-Towerline 138 kV l/o Fargo-Sandburg 345 kV",
+   "binding_hours": 270,
+   "severity": 12644.69,
+   "max_abs_sp": 131.24
+  },
+  {
+   "constraint_name": "CARL PN 115 KV  CAR-GAR",
+   "binding_hours": 174,
+   "severity": 12639.710000000001,
+   "max_abs_sp": 323.11
+  },
+  {
+   "constraint_name": "18 WILL 138 KV  1808 1",
+   "binding_hours": 267,
+   "severity": 11437.280000000002,
+   "max_abs_sp": 1118.14
+  },
+  {
+   "constraint_name": "Greentown 765/138 kV xfmr 3 l/o Dumont-Sorenson765 kV",
+   "binding_hours": 216,
+   "severity": 11388.069999999992,
+   "max_abs_sp": 401.12
+  },
+  {
+   "constraint_name": "CHERRYRN138 KV  CHE-MOR",
+   "binding_hours": 94,
+   "severity": 10991.540000000005,
+   "max_abs_sp": 716.33
+  },
+  {
+   "constraint_name": "GROTTOES115 KV  119C",
+   "binding_hours": 12,
+   "severity": 10875.83,
+   "max_abs_sp": 2000.0
+  },
+  {
+   "constraint_name": "CHARLTSV-PROFITDP 2054B1    A  230 KV",
+   "binding_hours": 99,
+   "severity": 10619.589999999997,
+   "max_abs_sp": 442.43
+  },
+  {
+   "constraint_name": "NorthWest Tap - West Lafayette 138kV l/o Springboro - Monticello 138kV",
+   "binding_hours": 42,
+   "severity": 10358.499999999998,
+   "max_abs_sp": 666.26
+  },
+  {
+   "constraint_name": "Weedman - Mahomet 138kV flo Pontiac - Mclean 345kV",
+   "binding_hours": 119,
+   "severity": 10046.460000000001,
+   "max_abs_sp": 816.35
+  },
+  {
+   "constraint_name": "JUNIATA 500 KV  2",
+   "binding_hours": 175,
+   "severity": 9936.280000000006,
+   "max_abs_sp": 227.28
+  },
+  {
+   "constraint_name": "COLLEGEC138 KV  COL-COL6",
+   "binding_hours": 313,
+   "severity": 9901.510000000002,
+   "max_abs_sp": 292.58
+  },
+  {
+   "constraint_name": "HAVILAND138 KV  HAV-TIM",
+   "binding_hours": 210,
+   "severity": 9725.990000000002,
+   "max_abs_sp": 365.3
+  },
+  {
+   "constraint_name": "COLLIER 345 KV  T1",
+   "binding_hours": 100,
+   "severity": 9028.68,
+   "max_abs_sp": 772.1
+  },
+  {
+   "constraint_name": "CONASTON500 KV  500-2",
+   "binding_hours": 108,
+   "severity": 9026.240000000003,
+   "max_abs_sp": 189.03
+  },
+  {
+   "constraint_name": "BEAVER   TR1      XFORMER   H  345 KV",
+   "binding_hours": 60,
+   "severity": 8799.89,
+   "max_abs_sp": 439.82
+  },
+  {
+   "constraint_name": "BOONETWN230 KV  BOO-SRE",
+   "binding_hours": 496,
+   "severity": 8770.740000000009,
+   "max_abs_sp": 143.32
+  },
+  {
+   "constraint_name": "3 POWERT-TWRL POW-TWRL      A  138 KV",
+   "binding_hours": 178,
+   "severity": 8569.679999999997,
+   "max_abs_sp": 507.01
+  },
+  {
+   "constraint_name": "GORE APS138 KV  GOR-STO",
+   "binding_hours": 50,
+   "severity": 8467.529999999999,
+   "max_abs_sp": 807.63
+  },
+  {
+   "constraint_name": "ETOWANDA-HILLSIDE 2002 TIE  B  230  KV",
+   "binding_hours": 163,
+   "severity": 8446.650000000001,
+   "max_abs_sp": 189.56
+  },
+  {
+   "constraint_name": "Sheffield - Amoco 138 kV l/o Dumont - WiltonCenter 765 kV",
+   "binding_hours": 68,
+   "severity": 8375.85,
+   "max_abs_sp": 494.64
+  },
+  {
+   "constraint_name": "GARRETAP115 KV  GAR-GAR",
+   "binding_hours": 873,
+   "severity": 8181.7800000000025,
+   "max_abs_sp": 82.83
+  },
+  {
+   "constraint_name": "TRENTON2138 KV  TRE-COL1",
+   "binding_hours": 209,
+   "severity": 8126.979999999999,
+   "max_abs_sp": 217.56
+  },
+  {
+   "constraint_name": "CLBHOUSE230 KV  TX1",
+   "binding_hours": 459,
+   "severity": 7995.820000000005,
+   "max_abs_sp": 82.46
+  },
+  {
+   "constraint_name": "GREYSPT-RAPPAHAN 1021A1     A  115 KV",
+   "binding_hours": 16,
+   "severity": 7845.620000000001,
+   "max_abs_sp": 2000.0
+  },
+  {
+   "constraint_name": "HOPEWEL4230 KV  228A",
+   "binding_hours": 229,
+   "severity": 7490.199999999994,
+   "max_abs_sp": 166.81
+  },
+  {
+   "constraint_name": "FREMNT  138 KV  FRE-FRE1",
+   "binding_hours": 161,
+   "severity": 7446.760000000001,
+   "max_abs_sp": 229.85
+  },
+  {
+   "constraint_name": "15518-Garden Plain 138kV l/o QuadCity-RockCreek 345kV",
+   "binding_hours": 35,
+   "severity": 7402.850000000001,
+   "max_abs_sp": 560.3
+  },
+  {
+   "constraint_name": "EDGEWDPL69 KV   EDG-NEL",
+   "binding_hours": 24,
+   "severity": 7270.06,
+   "max_abs_sp": 481.46
+  },
+  {
+   "constraint_name": "GUARDIAN138 KV  GUA-TWI1",
+   "binding_hours": 64,
+   "severity": 7261.499999999999,
+   "max_abs_sp": 611.12
+  },
+  {
+   "constraint_name": "08LAPLJT138 KV  08L-SAN1",
+   "binding_hours": 454,
+   "severity": 7199.440000000001,
+   "max_abs_sp": 73.93
+  },
+  {
+   "constraint_name": "SUTTON  138 KV  SUT-SUT",
+   "binding_hours": 16,
+   "severity": 7115.47,
+   "max_abs_sp": 1363.77
+  },
+  {
+   "constraint_name": "KAMMER2 138 KV  KAM-NAT",
+   "binding_hours": 73,
+   "severity": 7113.850000000001,
+   "max_abs_sp": 875.06
+  },
+  {
+   "constraint_name": "BayShore TR1 345/138 kV l/o FostoriaCentral-Lallendorf 345 kV",
+   "binding_hours": 94,
+   "severity": 6835.85,
+   "max_abs_sp": 248.03
+  },
+  {
+   "constraint_name": "LENOX-NMESHOPP NML 1090    B  115 KV",
+   "binding_hours": 65,
+   "severity": 6764.3300000000045,
+   "max_abs_sp": 863.65
+  },
+  {
+   "constraint_name": "REMNTNCT230 KV  299A",
+   "binding_hours": 81,
+   "severity": 6747.98,
+   "max_abs_sp": 330.31
+  },
+  {
+   "constraint_name": "MONR AE 69 KV   MON-VINE",
+   "binding_hours": 844,
+   "severity": 6559.4199999999955,
+   "max_abs_sp": 71.32
+  },
+  {
+   "constraint_name": "CONASTON500 KV  CNS-PEA",
+   "binding_hours": 472,
+   "severity": 6516.570000000002,
+   "max_abs_sp": 100.14
+  },
+  {
+   "constraint_name": "TILTONS2138 KV  TIL-WIN",
+   "binding_hours": 49,
+   "severity": 6450.48,
+   "max_abs_sp": 558.93
+  },
+  {
+   "constraint_name": "Cayuga-HilsdaleN 230 kV l/o Dresser-SugarCreek 345 kV",
+   "binding_hours": 84,
+   "severity": 6430.590000000003,
+   "max_abs_sp": 356.37
+  },
+  {
+   "constraint_name": "SHAWVILL115 KV  BNK 1A-S",
+   "binding_hours": 286,
+   "severity": 6421.780000000003,
+   "max_abs_sp": 253.09
+  },
+  {
+   "constraint_name": "NOTTINGHM 1-3 SER DEV       A  230 KV",
+   "binding_hours": 48,
+   "severity": 6416.209999999998,
+   "max_abs_sp": 328.83
+  },
+  {
+   "constraint_name": "BETHEL  138 KV  BET-RIVU",
+   "binding_hours": 28,
+   "severity": 6393.9800000000005,
+   "max_abs_sp": 742.52
+  },
+  {
+   "constraint_name": "COLLIER 345 KV  T2",
+   "binding_hours": 48,
+   "severity": 6352.730000000001,
+   "max_abs_sp": 387.31
+  },
+  {
+   "constraint_name": "MORSE   138 KV  MOR-STE1",
+   "binding_hours": 33,
+   "severity": 6285.150000000001,
+   "max_abs_sp": 481.84
+  },
+  {
+   "constraint_name": "ASHTABUL138 KV  ASH-04S2",
+   "binding_hours": 120,
+   "severity": 6246.52,
+   "max_abs_sp": 470.8
+  },
+  {
+   "constraint_name": "CEDARSUB230 KV  CED-WILF",
+   "binding_hours": 230,
+   "severity": 6237.800000000004,
+   "max_abs_sp": 285.69
+  },
+  {
+   "constraint_name": "3ROCKY  115 KV  123A",
+   "binding_hours": 162,
+   "severity": 6158.309999999996,
+   "max_abs_sp": 385.72
+  },
+  {
+   "constraint_name": "HAYES   115 KV  89C",
+   "binding_hours": 107,
+   "severity": 6133.740000000001,
+   "max_abs_sp": 743.12
+  },
+  {
+   "constraint_name": "MOUN UGI230 KV  2",
+   "binding_hours": 1837,
+   "severity": 6125.730000000011,
+   "max_abs_sp": 31.37
+  },
+  {
+   "constraint_name": "ERIEW   115 KV  ERI-FAI",
+   "binding_hours": 66,
+   "severity": 6010.039999999999,
+   "max_abs_sp": 516.53
+  },
+  {
+   "constraint_name": "HENKEL  138 KV  HEN-TER",
+   "binding_hours": 74,
+   "severity": 5952.5099999999975,
+   "max_abs_sp": 440.94
+  },
+  {
+   "constraint_name": "VALERO  69 KV   VAL-VAPK",
+   "binding_hours": 240,
+   "severity": 5857.549999999998,
+   "max_abs_sp": 207.18
+  },
+  {
+   "constraint_name": "ABINGDON-SABINGDN ABI-SAB   A  138 KV",
+   "binding_hours": 123,
+   "severity": 5796.34,
+   "max_abs_sp": 74.55
+  },
+  {
+   "constraint_name": "LEROYCEN138 KV  SPR-04L1",
+   "binding_hours": 61,
+   "severity": 5706.0300000000025,
+   "max_abs_sp": 250.55
+  },
+  {
+   "constraint_name": "KINGSTON69 KV   KST-WOR",
+   "binding_hours": 144,
+   "severity": 5617.3200000000015,
+   "max_abs_sp": 178.04
+  },
+  {
+   "constraint_name": "Powerton-Towerline 138 kV l/o Kewanee East-Bureau 138 kV",
+   "binding_hours": 105,
+   "severity": 5475.180000000002,
+   "max_abs_sp": 159.11
+  },
+  {
+   "constraint_name": "94 HAURD-11323    11323     A  138 KV",
+   "binding_hours": 403,
+   "severity": 5279.409999999999,
+   "max_abs_sp": 101.38
+  },
+  {
+   "constraint_name": "QuadCities - RockCreek 345 kV l/o QuadCities - Sub91",
+   "binding_hours": 27,
+   "severity": 5210.419999999999,
+   "max_abs_sp": 605.55
+  },
+  {
+   "constraint_name": "OAKGREEN115 KV  11D",
+   "binding_hours": 34,
+   "severity": 5156.3,
+   "max_abs_sp": 342.65
+  },
+  {
+   "constraint_name": "DICKERSH230 KV  DIC-DIC4",
+   "binding_hours": 155,
+   "severity": 5120.170000000001,
+   "max_abs_sp": 163.42
+  },
+  {
+   "constraint_name": "SAYRECON230 KV  SAY-SAY",
+   "binding_hours": 2233,
+   "severity": 5118.790000000016,
+   "max_abs_sp": 52.53
+  },
+  {
+   "constraint_name": "RAMAPO  138 KV  RAM-SMA",
+   "binding_hours": 1107,
+   "severity": 5055.609999999995,
+   "max_abs_sp": 88.03
+  },
+  {
+   "constraint_name": "DARLEYRD69 KV   DAR-NAA",
+   "binding_hours": 109,
+   "severity": 4982.610000000001,
+   "max_abs_sp": 193.33
+  },
+  {
+   "constraint_name": "MAYWOOD 230 KV  MAY-SAD",
+   "binding_hours": 270,
+   "severity": 4951.899999999999,
+   "max_abs_sp": 157.71
+  },
+  {
+   "constraint_name": "BRAMBLET-POLANDRD 2183A     B  230 KV",
+   "binding_hours": 6,
+   "severity": 4887.88,
+   "max_abs_sp": 2000.0
+  },
+  {
+   "constraint_name": "Monroe-Lallendorf 345 kV l/o Lemoyne-Majestic 345 kV",
+   "binding_hours": 55,
+   "severity": 4867.5,
+   "max_abs_sp": 315.69
+  },
+  {
+   "constraint_name": "NEWBERRY115 KV  NEW-ROU",
+   "binding_hours": 118,
+   "severity": 4859.540000000001,
+   "max_abs_sp": 194.2
+  },
+  {
+   "constraint_name": "LINCOLN 115 KV  LIN-STR",
+   "binding_hours": 126,
+   "severity": 4858.730000000001,
+   "max_abs_sp": 125.97
+  },
+  {
+   "constraint_name": "HAVILAND J            CB       138 KV",
+   "binding_hours": 91,
+   "severity": 4769.82,
+   "max_abs_sp": 411.05
+  },
+  {
+   "constraint_name": "LOUISACT230 KV  2074A",
+   "binding_hours": 156,
+   "severity": 4670.239999999999,
+   "max_abs_sp": 126.57
+  },
+  {
+   "constraint_name": "116 GOOD345 KV  11620",
+   "binding_hours": 60,
+   "severity": 4520.890000000001,
+   "max_abs_sp": 553.96
+  },
+  {
+   "constraint_name": "LINCOJCT115 KV  LNJ-LIN",
+   "binding_hours": 107,
+   "severity": 4510.199999999998,
+   "max_abs_sp": 166.49
+  },
+  {
+   "constraint_name": "COLONIAL115 KV  COL-ROC2",
+   "binding_hours": 51,
+   "severity": 4445.469999999999,
+   "max_abs_sp": 308.9
+  },
+  {
+   "constraint_name": "CHESTNUT115 KV  CHE-FRE8",
+   "binding_hours": 25,
+   "severity": 4417.98,
+   "max_abs_sp": 503.86
+  },
+  {
+   "constraint_name": "Powerton - Towerline 138 kV l/o Kewanee - Putnam 138 kV",
+   "binding_hours": 112,
+   "severity": 4276.42,
+   "max_abs_sp": 78.02
+  },
+  {
+   "constraint_name": "MEHOOPAN115 KV  MEH-NME1",
+   "binding_hours": 629,
+   "severity": 4205.429999999998,
+   "max_abs_sp": 168.65
+  },
+  {
+   "constraint_name": "BED-BLA contingency 28",
+   "binding_hours": 33,
+   "severity": 4182.33,
+   "max_abs_sp": 501.43
+  },
+  {
+   "constraint_name": "CRES DUQ138 KV  CRE-MTN",
+   "binding_hours": 74,
+   "severity": 4105.370000000001,
+   "max_abs_sp": 354.1
+  },
+  {
+   "constraint_name": "Belleau - HusterA 138kV l/o Labadie - Montgomery 345kV",
+   "binding_hours": 31,
+   "severity": 4051.8400000000006,
+   "max_abs_sp": 371.41
+  },
+  {
+   "constraint_name": "DOUBS   500 KV  DOU-GOO",
+   "binding_hours": 507,
+   "severity": 3978.009999999997,
+   "max_abs_sp": 108.42
+  },
+  {
+   "constraint_name": "BRAMBLET-EVRGREEN 2172B     A    230 KV",
+   "binding_hours": 15,
+   "severity": 3941.4599999999996,
+   "max_abs_sp": 437.5
+  },
+  {
+   "constraint_name": "ALLLUD4J138 KV  ALJ-ALL",
+   "binding_hours": 62,
+   "severity": 3924.020000000001,
+   "max_abs_sp": 483.56
+  },
+  {
+   "constraint_name": "Pres - Tibbs 138kV l/o NewBourbon - SMNY 138kV",
+   "binding_hours": 14,
+   "severity": 3871.36,
+   "max_abs_sp": 601.44
+  },
+  {
+   "constraint_name": "DOEX530 345 KV  DOE-PIE2",
+   "binding_hours": 171,
+   "severity": 3847.980000000002,
+   "max_abs_sp": 185.63
+  },
+  {
+   "constraint_name": "4 QUAD C345 KV  TR2 18",
+   "binding_hours": 376,
+   "severity": 3844.5500000000015,
+   "max_abs_sp": 160.71
+  },
+  {
+   "constraint_name": "FRDRKSBG115 KV  FRE-TRIA",
+   "binding_hours": 57,
+   "severity": 3812.8399999999997,
+   "max_abs_sp": 335.47
+  },
+  {
+   "constraint_name": "Weedman - Mahomet 138 kV l/o Pontiac - Dresden 345 kV",
+   "binding_hours": 24,
+   "severity": 3782.1499999999996,
+   "max_abs_sp": 522.84
+  },
+  {
+   "constraint_name": "KEYSTONE230 KV  KEY-SHE",
+   "binding_hours": 37,
+   "severity": 3765.3399999999997,
+   "max_abs_sp": 270.39
+  },
+  {
+   "constraint_name": "DICKERSH230 KV  DIC-DIC3",
+   "binding_hours": 118,
+   "severity": 3704.6000000000013,
+   "max_abs_sp": 98.34
+  },
+  {
+   "constraint_name": "EVERETTS230 KV  218",
+   "binding_hours": 82,
+   "severity": 3701.0699999999983,
+   "max_abs_sp": 271.5
+  },
+  {
+   "constraint_name": "SCOTTSVI138 KV  SCO-BRE1",
+   "binding_hours": 63,
+   "severity": 3691.0699999999993,
+   "max_abs_sp": 179.11
+  },
+  {
+   "constraint_name": "CORNER  138 KV  COR-LAY",
+   "binding_hours": 10,
+   "severity": 3660.76,
+   "max_abs_sp": 722.92
+  },
+  {
+   "constraint_name": "Chicago - Praxair3 138 kV l/o Burnham - Munster 345 kV",
+   "binding_hours": 35,
+   "severity": 3658.1099999999997,
+   "max_abs_sp": 275.87
+  },
+  {
+   "constraint_name": "Labadie - Gray - Summit 2 345 kV l/o Labadie - Wildwood -Mason 345 kV",
+   "binding_hours": 38,
+   "severity": 3649.000000000001,
+   "max_abs_sp": 501.75
+  },
+  {
+   "constraint_name": "RORAPIDS115 KV  77A",
+   "binding_hours": 119,
+   "severity": 3629.490000000002,
+   "max_abs_sp": 174.89
+  },
+  {
+   "constraint_name": "BOXWOOD 138 KV  BOX-REU1",
+   "binding_hours": 38,
+   "severity": 3550.5700000000006,
+   "max_abs_sp": 696.93
+  },
+  {
+   "constraint_name": "HAYES_FE138 KV  AVE-HAYE",
+   "binding_hours": 44,
+   "severity": 3509.69,
+   "max_abs_sp": 488.71
+  },
+  {
+   "constraint_name": "DOEX530 345 KV  DOE-PIE1",
+   "binding_hours": 198,
+   "severity": 3488.629999999999,
+   "max_abs_sp": 222.7
+  },
+  {
+   "constraint_name": "CANYON  230 KV  CAN-EAS",
+   "binding_hours": 210,
+   "severity": 3433.5799999999995,
+   "max_abs_sp": 104.57
+  },
+  {
+   "constraint_name": "AHOSKIE 115 KV  136B",
+   "binding_hours": 42,
+   "severity": 3425.4099999999994,
+   "max_abs_sp": 229.72
+  },
+  {
+   "constraint_name": "VIENNA 13710 SER DEV",
+   "binding_hours": 33,
+   "severity": 3350.1399999999994,
+   "max_abs_sp": 427.99
+  },
+  {
+   "constraint_name": "FLSCHURC-GLCARLYN 251B      B  230 KV",
+   "binding_hours": 9,
+   "severity": 3318.0200000000004,
+   "max_abs_sp": 1035.2
+  },
+  {
+   "constraint_name": "BEAVER  138 KV  BEA-JOH1",
+   "binding_hours": 51,
+   "severity": 3286.47,
+   "max_abs_sp": 158.18
+  },
+  {
+   "constraint_name": "EDDINGTO230 KV  EDD-HOLT",
+   "binding_hours": 411,
+   "severity": 3240.0399999999995,
+   "max_abs_sp": 52.64
+  },
+  {
+   "constraint_name": "ECLIPSE 115 KV  ECL-PIN",
+   "binding_hours": 36,
+   "severity": 3238.72,
+   "max_abs_sp": 556.89
+  },
+  {
+   "constraint_name": "BARTONVI138 KV  BAR-MEA",
+   "binding_hours": 33,
+   "severity": 3162.93,
+   "max_abs_sp": 479.87
+  },
+  {
+   "constraint_name": "Electric Junction TR81 345/138kV l/o Electric Jct 345 kV-Lombard 11124 345kV",
+   "binding_hours": 38,
+   "severity": 3141.43,
+   "max_abs_sp": 235.24
+  },
+  {
+   "constraint_name": "LAKVEW  138 KV  LAK-OTT1",
+   "binding_hours": 32,
+   "severity": 3123.9999999999995,
+   "max_abs_sp": 244.14
+  },
+  {
+   "constraint_name": "BEAVER  138 KV  BEA-NAS1",
+   "binding_hours": 45,
+   "severity": 3051.7299999999996,
+   "max_abs_sp": 230.59
+  },
+  {
+   "constraint_name": "20 BRAID-66 E FRN 2001      A  345 KV",
+   "binding_hours": 32,
+   "severity": 2988.5899999999992,
+   "max_abs_sp": 225.92
+  },
+  {
+   "constraint_name": "BEAVER-JOHNSOFE             A  138 KV",
+   "binding_hours": 16,
+   "severity": 2977.1900000000005,
+   "max_abs_sp": 372.99
+  },
+  {
+   "constraint_name": "MIAMIFOR345 KV  10",
+   "binding_hours": 286,
+   "severity": 2963.960000000002,
+   "max_abs_sp": 66.13
+  },
+  {
+   "constraint_name": "OST     138 KV  002-5R",
+   "binding_hours": 17,
+   "severity": 2951.2699999999995,
+   "max_abs_sp": 1797.35
+  },
+  {
+   "constraint_name": "Crescent Ridge - 7713 138 l/o Kewanee East - Bureau",
+   "binding_hours": 108,
+   "severity": 2949.9399999999996,
+   "max_abs_sp": 86.88
+  },
+  {
+   "constraint_name": "CONCORD 138 KV  CON-COU",
+   "binding_hours": 184,
+   "severity": 2942.880000000001,
+   "max_abs_sp": 92.78
+  },
+  {
+   "constraint_name": "LINWOOD2138 KV  LIN-MAK",
+   "binding_hours": 156,
+   "severity": 2941.83,
+   "max_abs_sp": 74.9
+  },
+  {
+   "constraint_name": "4 QUAD C345 KV  TR1 18",
+   "binding_hours": 442,
+   "severity": 2918.760000000002,
+   "max_abs_sp": 47.95
+  },
+  {
+   "constraint_name": "CUMB PL 230 KV  CUM-JUN",
+   "binding_hours": 82,
+   "severity": 2874.23,
+   "max_abs_sp": 273.64
+  },
+  {
+   "constraint_name": "POSSUMP4230 KV  2078Z",
+   "binding_hours": 56,
+   "severity": 2868.51,
+   "max_abs_sp": 152.74
+  },
+  {
+   "constraint_name": "DEERCREE138 KV  DEE-MIS",
+   "binding_hours": 116,
+   "severity": 2802.029999999998,
+   "max_abs_sp": 128.94
+  },
+  {
+   "constraint_name": "FACEROCK69 KV   FAC-MAN",
+   "binding_hours": 124,
+   "severity": 2789.0599999999995,
+   "max_abs_sp": 104.21
+  },
+  {
+   "constraint_name": "KRENDALE138 KV  KRE-SHA",
+   "binding_hours": 98,
+   "severity": 2768.4999999999995,
+   "max_abs_sp": 160.99
+  },
+  {
+   "constraint_name": "OAKGREEN115 KV  2A",
+   "binding_hours": 53,
+   "severity": 2766.27,
+   "max_abs_sp": 207.1
+  },
+  {
+   "constraint_name": "FACEROCK69 KV   FAROZBR",
+   "binding_hours": 132,
+   "severity": 2754.1000000000004,
+   "max_abs_sp": 110.95
+  },
+  {
+   "constraint_name": "BUREAU - LTVSTEEL 1552 138 kV",
+   "binding_hours": 30,
+   "severity": 2750.7799999999997,
+   "max_abs_sp": 274.47
+  },
+  {
+   "constraint_name": "BRIDGEVI69 KV   BRD-TAT",
+   "binding_hours": 11,
+   "severity": 2734.73,
+   "max_abs_sp": 350.59
+  },
+  {
+   "constraint_name": "REMNTNCT-MARSHRUN 299A B 230 KV",
+   "binding_hours": 40,
+   "severity": 2731.070000000001,
+   "max_abs_sp": 212.49
+  },
+  {
+   "constraint_name": "74 KEWAN138 KV  L74B1Z1",
+   "binding_hours": 245,
+   "severity": 2699.149999999999,
+   "max_abs_sp": 65.99
+  },
+  {
+   "constraint_name": "REDHILL 115 KV  39C",
+   "binding_hours": 14,
+   "severity": 2688.48,
+   "max_abs_sp": 574.29
+  },
+  {
+   "constraint_name": "Labadie - Graysum 1 345 kV l/o Mason - Wildwood - Labadie 345 kV",
+   "binding_hours": 43,
+   "severity": 2685.2899999999995,
+   "max_abs_sp": 401.58
+  },
+  {
+   "constraint_name": "MIAMIFOR138 KV  MIA-08W1",
+   "binding_hours": 57,
+   "severity": 2670.5199999999995,
+   "max_abs_sp": 337.79
+  },
+  {
+   "constraint_name": "CARL PN-GARDNERS 1049       A  115 KV",
+   "binding_hours": 11,
+   "severity": 2663.06,
+   "max_abs_sp": 257.46
+  },
+  {
+   "constraint_name": "BUCKSKIN69 KV   BUC-GRE1",
+   "binding_hours": 60,
+   "severity": 2619.72,
+   "max_abs_sp": 173.84
+  },
+  {
+   "constraint_name": "CRANBERY138 KV  CRA-JAC",
+   "binding_hours": 38,
+   "severity": 2558.37,
+   "max_abs_sp": 347.47
+  },
+  {
+   "constraint_name": "APSOUTH",
+   "binding_hours": 158,
+   "severity": 2535.5299999999993,
+   "max_abs_sp": 135.9
+  },
+  {
+   "constraint_name": "CRES DUQ345 KV  T1",
+   "binding_hours": 45,
+   "severity": 2528.32,
+   "max_abs_sp": 302.8
+  },
+  {
+   "constraint_name": "BATERYHT230 KV  2011A",
+   "binding_hours": 83,
+   "severity": 2517.5099999999993,
+   "max_abs_sp": 256.1
+  },
+  {
+   "constraint_name": "HALFWAY 138 KV  HAL-MAR",
+   "binding_hours": 18,
+   "severity": 2505.5299999999997,
+   "max_abs_sp": 241.64
+  },
+  {
+   "constraint_name": "BURMA   115 KV  BUR-PIN",
+   "binding_hours": 66,
+   "severity": 2465.7400000000002,
+   "max_abs_sp": 295.07
+  },
+  {
+   "constraint_name": "Kokomops - Tiptowest 230kV l/o Dumont - Soreson 765 kV",
+   "binding_hours": 58,
+   "severity": 2442.18,
+   "max_abs_sp": 100.02
+  },
+  {
+   "constraint_name": "BEAUMEAD 274T2130     CB       230 KV",
+   "binding_hours": 65,
+   "severity": 2440.5299999999993,
+   "max_abs_sp": 254.61
+  },
+  {
+   "constraint_name": "MILLWDPL230 KV  MIL-SAK",
+   "binding_hours": 51,
+   "severity": 2369.25,
+   "max_abs_sp": 87.73
+  },
+  {
+   "constraint_name": "SEWARD  230 KV  9 TX",
+   "binding_hours": 49,
+   "severity": 2367.98,
+   "max_abs_sp": 278.79
+  },
+  {
+   "constraint_name": "HEBRON1 138 KV  EKH-HEB",
+   "binding_hours": 96,
+   "severity": 2351.5399999999995,
+   "max_abs_sp": 177.56
+  },
+  {
+   "constraint_name": "HARWOOD 230 KV  4",
+   "binding_hours": 133,
+   "severity": 2349.650000000002,
+   "max_abs_sp": 35.47
+  },
+  {
+   "constraint_name": "HAYES_FE345 KV  TR1",
+   "binding_hours": 25,
+   "severity": 2337.43,
+   "max_abs_sp": 341.48
+  },
+  {
+   "constraint_name": "Tanners Creek - Dearborn 345kV l/o L345.TannersCreek-Miami Fort 345kV",
+   "binding_hours": 117,
+   "severity": 2332.0900000000006,
+   "max_abs_sp": 119.19
+  },
+  {
+   "constraint_name": "SAWMILL 138 KV  SAW-DUB1",
+   "binding_hours": 14,
+   "severity": 2329.8400000000006,
+   "max_abs_sp": 613.12
+  },
+  {
+   "constraint_name": "BLACKOAK500 KV  TRAN  3",
+   "binding_hours": 86,
+   "severity": 2328.320000000001,
+   "max_abs_sp": 173.94
+  },
+  {
+   "constraint_name": "AQUAHAR 230 KV  2119",
+   "binding_hours": 289,
+   "severity": 2325.44,
+   "max_abs_sp": 27.42
+  },
+  {
+   "constraint_name": "Pierce 345/138 kV BK18 l/o Tanners Creek - Miami Fort 138 kV",
+   "binding_hours": 33,
+   "severity": 2289.0500000000006,
+   "max_abs_sp": 153.61
+  },
+  {
+   "constraint_name": "BAIR    115 KV  BAI-JAC",
+   "binding_hours": 45,
+   "severity": 2285.24,
+   "max_abs_sp": 197.57
+  },
+  {
+   "constraint_name": "Stateline TR82 XF 345/138kV l/o Burnham-Calumet-Taylor 345kV",
+   "binding_hours": 21,
+   "severity": 2268.68,
+   "max_abs_sp": 304.16
+  },
+  {
+   "constraint_name": "81 TOULO138 KV  0321X",
+   "binding_hours": 102,
+   "severity": 2257.3199999999993,
+   "max_abs_sp": 57.37
+  },
+  {
+   "constraint_name": "NW Tap - West Lafayette 138 kV l/o Reynolds TR 765/345 kV",
+   "binding_hours": 22,
+   "severity": 2254.1,
+   "max_abs_sp": 230.24
+  },
+  {
+   "constraint_name": "Crete-StJohns 345 kV l/o Dumont-Wilton Ctr 765 kV",
+   "binding_hours": 224,
+   "severity": 2229.3400000000006,
+   "max_abs_sp": 51.33
+  },
+  {
+   "constraint_name": "51 MC CO345 KV  TR84CT-P",
+   "binding_hours": 15,
+   "severity": 2192.3300000000004,
+   "max_abs_sp": 360.62
+  },
+  {
+   "constraint_name": "LANCASTR115 KV  65C",
+   "binding_hours": 229,
+   "severity": 2177.0800000000004,
+   "max_abs_sp": 108.43
+  },
+  {
+   "constraint_name": "BIGPINET138 KV  BIG-GAR",
+   "binding_hours": 49,
+   "severity": 2172.7000000000003,
+   "max_abs_sp": 294.64
+  },
+  {
+   "constraint_name": "ETOWANDA-HILLSIDE 2002 TIE  B 230 KV",
+   "binding_hours": 86,
+   "severity": 2148.9500000000003,
+   "max_abs_sp": 92.66
+  },
+  {
+   "constraint_name": "CONASTON230 KV  CNS-NOR1",
+   "binding_hours": 70,
+   "severity": 2113.939999999999,
+   "max_abs_sp": 114.73
+  },
+  {
+   "constraint_name": "Tanner - Jasper 138 kV l/o W Frankfort - Mt Vernon 345 kV",
+   "binding_hours": 13,
+   "severity": 2084.54,
+   "max_abs_sp": 322.99
+  },
+  {
+   "constraint_name": "1206    138 KV  1206 4",
+   "binding_hours": 305,
+   "severity": 2078.2599999999993,
+   "max_abs_sp": 45.54
+  },
+  {
+   "constraint_name": "TODDSTVN115 KV  198C",
+   "binding_hours": 24,
+   "severity": 2073.04,
+   "max_abs_sp": 269.27
+  },
+  {
+   "constraint_name": "MILLBROO138 KV  MIL-SPO1",
+   "binding_hours": 10,
+   "severity": 2063.71,
+   "max_abs_sp": 473.06
+  },
+  {
+   "constraint_name": "ELKRUNDP230 KV  2114A",
+   "binding_hours": 73,
+   "severity": 2050.4399999999996,
+   "max_abs_sp": 108.86
+  },
+  {
+   "constraint_name": "SAPONY  115 KV  69B",
+   "binding_hours": 161,
+   "severity": 2046.9499999999998,
+   "max_abs_sp": 37.38
+  },
+  {
+   "constraint_name": "NRTHALEX230 KV  NRT-POTO",
+   "binding_hours": 16,
+   "severity": 2044.95,
+   "max_abs_sp": 252.05
+  },
+  {
+   "constraint_name": "RICHMOND138 KV  RIC-SEL1",
+   "binding_hours": 37,
+   "severity": 2028.1799999999998,
+   "max_abs_sp": 154.32
+  },
+  {
+   "constraint_name": "ALTAVSTA138 KV  TX3",
+   "binding_hours": 27,
+   "severity": 1995.81,
+   "max_abs_sp": 278.56
+  },
+  {
+   "constraint_name": "New London-Kokomo 230kV l/o Cayuga-Nucor 345kV",
+   "binding_hours": 34,
+   "severity": 1898.7899999999995,
+   "max_abs_sp": 187.92
+  },
+  {
+   "constraint_name": "MILLBROO138 KV  MIL-SIN1",
+   "binding_hours": 23,
+   "severity": 1896.68,
+   "max_abs_sp": 173.9
+  },
+  {
+   "constraint_name": "CUMB APS138 KV  CUM-RID",
+   "binding_hours": 47,
+   "severity": 1892.989999999999,
+   "max_abs_sp": 143.97
+  },
+  {
+   "constraint_name": "APSOUTH contingency",
+   "binding_hours": 74,
+   "severity": 1874.5899999999992,
+   "max_abs_sp": 118.79
+  },
+  {
+   "constraint_name": "Mohomet - ChampTP 138 kV l/o Clinton-Oreana-GooseCrk 345 kV",
+   "binding_hours": 7,
+   "severity": 1839.4699999999998,
+   "max_abs_sp": 375.02
+  },
+  {
+   "constraint_name": "SPOTSLV 115 KV  GOL-SPOT",
+   "binding_hours": 21,
+   "severity": 1839.39,
+   "max_abs_sp": 309.52
+  },
+  {
+   "constraint_name": "WAREROAD138 KV  WAR-WAV",
+   "binding_hours": 17,
+   "severity": 1829.98,
+   "max_abs_sp": 278.93
+  },
+  {
+   "constraint_name": "BED-BLA contingency 24",
+   "binding_hours": 69,
+   "severity": 1826.0999999999995,
+   "max_abs_sp": 149.42
+  },
+  {
+   "constraint_name": "Twin Branch - Meridian 345kV l/o Dumont - Sorenson 765 kV",
+   "binding_hours": 44,
+   "severity": 1824.6299999999997,
+   "max_abs_sp": 102.12
+  },
+  {
+   "constraint_name": "GREYSPT 115 KV  GRE-RAP1",
+   "binding_hours": 30,
+   "severity": 1814.7199999999998,
+   "max_abs_sp": 170.26
+  },
+  {
+   "constraint_name": "981 CRES138 KV  7413",
+   "binding_hours": 251,
+   "severity": 1812.1899999999996,
+   "max_abs_sp": 27.03
+  },
+  {
+   "constraint_name": "CARROLTO138 KV  CAR-CLI1",
+   "binding_hours": 118,
+   "severity": 1788.5499999999995,
+   "max_abs_sp": 75.78
+  },
+  {
+   "constraint_name": "DELVINTA161 KV  GRN-DELV",
+   "binding_hours": 165,
+   "severity": 1785.64,
+   "max_abs_sp": 50.43
+  },
+  {
+   "constraint_name": "BLMNTDOM230 KV  BEL-COCH",
+   "binding_hours": 61,
+   "severity": 1779.3199999999997,
+   "max_abs_sp": 173.21
+  },
+  {
+   "constraint_name": "CRESCENT-MTNEBO Z-20        A  138 KV",
+   "binding_hours": 12,
+   "severity": 1778.6899999999998,
+   "max_abs_sp": 288.58
+  },
+  {
+   "constraint_name": "STJOHNS4230 KV  TX2",
+   "binding_hours": 30,
+   "severity": 1751.1599999999999,
+   "max_abs_sp": 173.05
+  },
+  {
+   "constraint_name": "CHURCH  69 KV   CHU-MAS",
+   "binding_hours": 2,
+   "severity": 1748.31,
+   "max_abs_sp": 1049.68
+  },
+  {
+   "constraint_name": "GILBERT 115 KV  GIL-GLEN",
+   "binding_hours": 26,
+   "severity": 1746.8099999999993,
+   "max_abs_sp": 214.55
+  },
+  {
+   "constraint_name": "Westwood-NW Tap 13806 138 kV l/o Dequine-Eugene 345kV",
+   "binding_hours": 8,
+   "severity": 1746.64,
+   "max_abs_sp": 261.34
+  },
+  {
+   "constraint_name": "IDYLWOO4-CLARK4 202A l/o 2035",
+   "binding_hours": 14,
+   "severity": 1724.91,
+   "max_abs_sp": 271.79
+  },
+  {
+   "constraint_name": "SHERWOOD115 KV  91C",
+   "binding_hours": 51,
+   "severity": 1716.22,
+   "max_abs_sp": 137.23
+  },
+  {
+   "constraint_name": "Batesville - Hubble 138 kV l/o Sorenson - Marysville 765 kV",
+   "binding_hours": 43,
+   "severity": 1655.7199999999998,
+   "max_abs_sp": 104.3
+  },
+  {
+   "constraint_name": "42 ROUND138 KV  1607 2",
+   "binding_hours": 48,
+   "severity": 1652.8400000000001,
+   "max_abs_sp": 115.38
+  },
+  {
+   "constraint_name": "DILLSBUR115 KV  DIL-GAR",
+   "binding_hours": 37,
+   "severity": 1645.97,
+   "max_abs_sp": 121.48
+  },
+  {
+   "constraint_name": "BELVOIR 230 KV  220B",
+   "binding_hours": 11,
+   "severity": 1645.07,
+   "max_abs_sp": 240.94
+  },
+  {
+   "constraint_name": "BENTONHA138 KV  BEN-WES1",
+   "binding_hours": 126,
+   "severity": 1601.26,
+   "max_abs_sp": 93.33
+  },
+  {
+   "constraint_name": "Butler-Bluemound 138kV 5061 l/o Arcadian-Granvil 345kV",
+   "binding_hours": 6,
+   "severity": 1561.5800000000002,
+   "max_abs_sp": 703.83
+  },
+  {
+   "constraint_name": "CONCRDDP69 KV   CON-PEP",
+   "binding_hours": 25,
+   "severity": 1556.78,
+   "max_abs_sp": 513.57
+  },
+  {
+   "constraint_name": "Tanners Creek - Dearborn 345kV l/o L765.Marysville-Sorenson",
+   "binding_hours": 105,
+   "severity": 1556.16,
+   "max_abs_sp": 90.0
+  },
+  {
+   "constraint_name": "HINCHMAN230 KV  HIN-JAC",
+   "binding_hours": 115,
+   "severity": 1554.7999999999995,
+   "max_abs_sp": 45.98
+  },
+  {
+   "constraint_name": "BIGSANDY138 KV  BIG-BUS1",
+   "binding_hours": 139,
+   "severity": 1553.9699999999993,
+   "max_abs_sp": 55.73
+  },
+  {
+   "constraint_name": "CRESCNT 138 KV  08C-WEN1",
+   "binding_hours": 92,
+   "severity": 1550.46,
+   "max_abs_sp": 62.06
+  },
+  {
+   "constraint_name": "GREYSPT 115 KV  GRE-RAP2",
+   "binding_hours": 24,
+   "severity": 1524.44,
+   "max_abs_sp": 298.82
+  },
+  {
+   "constraint_name": "Paradise-BR Tap 161kV l/o Phipps Bend - Volunteer 500kV",
+   "binding_hours": 26,
+   "severity": 1519.5800000000002,
+   "max_abs_sp": 213.72
+  },
+  {
+   "constraint_name": "CENTRVIL138 KV  CEN-REU1",
+   "binding_hours": 28,
+   "severity": 1517.9599999999998,
+   "max_abs_sp": 273.15
+  },
+  {
+   "constraint_name": "Monroe-Lallendorf 345kV l/o Morrocco-AllenJct 345kV",
+   "binding_hours": 56,
+   "severity": 1513.4200000000003,
+   "max_abs_sp": 191.81
+  },
+  {
+   "constraint_name": "CROZET  230 KV  291A",
+   "binding_hours": 39,
+   "severity": 1500.5000000000005,
+   "max_abs_sp": 210.41
+  },
+  {
+   "constraint_name": "ASHBURN-COCHRANM 227A       B  230 KV",
+   "binding_hours": 20,
+   "severity": 1496.9800000000002,
+   "max_abs_sp": 115.52
+  },
+  {
+   "constraint_name": "CONASTON230 KV  CNS-OTT",
+   "binding_hours": 85,
+   "severity": 1489.3899999999994,
+   "max_abs_sp": 65.46
+  },
+  {
+   "constraint_name": "ELKRUNDP230 KV  ELK-ROLN",
+   "binding_hours": 19,
+   "severity": 1486.89,
+   "max_abs_sp": 208.24
+  },
+  {
+   "constraint_name": "TRENTON2138 KV  HUS-TRE",
+   "binding_hours": 11,
+   "severity": 1482.3000000000002,
+   "max_abs_sp": 306.06
+  },
+  {
+   "constraint_name": "Kokomo - Tipton W. 230kV l/o Nucor - Cayuga 345kV",
+   "binding_hours": 24,
+   "severity": 1477.4299999999998,
+   "max_abs_sp": 176.84
+  },
+  {
+   "constraint_name": "LAYMAN  138 KV  LAY-WOL",
+   "binding_hours": 14,
+   "severity": 1460.71,
+   "max_abs_sp": 268.7
+  },
+  {
+   "constraint_name": "BRIGHTON230 KV  BRI-MTZ3",
+   "binding_hours": 33,
+   "severity": 1456.3900000000003,
+   "max_abs_sp": 123.15
+  },
+  {
+   "constraint_name": "ROXBURY 115 KV  ROX-SHA",
+   "binding_hours": 6,
+   "severity": 1440.48,
+   "max_abs_sp": 972.74
+  },
+  {
+   "constraint_name": "NSALISBU69 KV   NSA-PEM",
+   "binding_hours": 9,
+   "severity": 1435.1200000000001,
+   "max_abs_sp": 225.86
+  },
+  {
+   "constraint_name": "CROZET  230 KV  291B",
+   "binding_hours": 26,
+   "severity": 1424.3999999999999,
+   "max_abs_sp": 158.28
+  },
+  {
+   "constraint_name": "ALCOAFE 138 KV  ALC-BAR",
+   "binding_hours": 4,
+   "severity": 1410.17,
+   "max_abs_sp": 458.76
+  },
+  {
+   "constraint_name": "Batesville-Hubble138 flo Tannerscreek-Dearborn 345",
+   "binding_hours": 34,
+   "severity": 1393.9499999999998,
+   "max_abs_sp": 161.19
+  },
+  {
+   "constraint_name": "66 E FRN345 KV  TR83CT-P",
+   "binding_hours": 43,
+   "severity": 1379.8300000000004,
+   "max_abs_sp": 87.67
+  },
+  {
+   "constraint_name": "HOMERCIT345 KV  S.AUTO-P",
+   "binding_hours": 62,
+   "severity": 1377.8700000000003,
+   "max_abs_sp": 62.59
+  },
+  {
+   "constraint_name": "FIELDSCR115 KV  FIE-JARR",
+   "binding_hours": 45,
+   "severity": 1352.6100000000001,
+   "max_abs_sp": 88.46
+  },
+  {
+   "constraint_name": "State Line-Roxana 138 kV l/o Gary Ave-Sheffield 345 kV",
+   "binding_hours": 65,
+   "severity": 1350.2700000000004,
+   "max_abs_sp": 107.33
+  },
+  {
+   "constraint_name": "HAYNIE  115 KV  HAY-PIN",
+   "binding_hours": 27,
+   "severity": 1348.02,
+   "max_abs_sp": 115.53
+  },
+  {
+   "constraint_name": "ASHBURN 230 KV  227A",
+   "binding_hours": 46,
+   "severity": 1337.9199999999998,
+   "max_abs_sp": 101.13
+  },
+  {
+   "constraint_name": "CARS DUQ138 KV  CAR-OAK1",
+   "binding_hours": 51,
+   "severity": 1330.32,
+   "max_abs_sp": 232.75
+  },
+  {
+   "constraint_name": "KYGERCRE345 KV  KYG-DOE3",
+   "binding_hours": 41,
+   "severity": 1317.7399999999998,
+   "max_abs_sp": 126.91
+  },
+  {
+   "constraint_name": "BATTLEBO115 KV  1001A",
+   "binding_hours": 22,
+   "severity": 1311.1100000000001,
+   "max_abs_sp": 243.22
+  },
+  {
+   "constraint_name": "NORTHWOO230 KV  NOR-QUA",
+   "binding_hours": 107,
+   "severity": 1309.9800000000002,
+   "max_abs_sp": 43.3
+  },
+  {
+   "constraint_name": "HILLSBOR138 KV  HIL-SIN1",
+   "binding_hours": 21,
+   "severity": 1293.77,
+   "max_abs_sp": 125.5
+  },
+  {
+   "constraint_name": "DOOMS4  500 KV  TX7",
+   "binding_hours": 22,
+   "severity": 1291.6499999999996,
+   "max_abs_sp": 211.0
+  },
+  {
+   "constraint_name": "ETOWANDA-HILLSIDE 2002 TIE  B    230 KV",
+   "binding_hours": 54,
+   "severity": 1281.1599999999999,
+   "max_abs_sp": 91.93
+  },
+  {
+   "constraint_name": "127 MATT138 KV  6604 2",
+   "binding_hours": 13,
+   "severity": 1275.9100000000003,
+   "max_abs_sp": 208.67
+  },
+  {
+   "constraint_name": "BATTLEBO115 KV  1014A",
+   "binding_hours": 95,
+   "severity": 1256.8899999999996,
+   "max_abs_sp": 46.82
+  },
+  {
+   "constraint_name": "BRAMBLET-EVRGREEN 2172B     A  230 KV",
+   "binding_hours": 42,
+   "severity": 1246.2700000000002,
+   "max_abs_sp": 91.94
+  },
+  {
+   "constraint_name": "ELIMSPOR230 KV  ELI-SUN",
+   "binding_hours": 137,
+   "severity": 1234.7699999999993,
+   "max_abs_sp": 120.27
+  },
+  {
+   "constraint_name": "BERGEN  230 KV  BER-HUD",
+   "binding_hours": 1070,
+   "severity": 1198.7399999999989,
+   "max_abs_sp": 26.83
+  },
+  {
+   "constraint_name": "NEWCARLI138 KV  NEW-PIN1",
+   "binding_hours": 4,
+   "severity": 1195.6100000000001,
+   "max_abs_sp": 405.36
+  },
+  {
+   "constraint_name": "IDYLWOO4-CLARK4   202A      A  230 KV",
+   "binding_hours": 4,
+   "severity": 1188.6999999999998,
+   "max_abs_sp": 346.71
+  },
+  {
+   "constraint_name": "138 SILV345 KV  TR82CT-P",
+   "binding_hours": 18,
+   "severity": 1182.5299999999997,
+   "max_abs_sp": 188.94
+  },
+  {
+   "constraint_name": "EBEND   345 KV  EBE-TER1",
+   "binding_hours": 46,
+   "severity": 1164.1199999999997,
+   "max_abs_sp": 149.98
+  },
+  {
+   "constraint_name": "LEESVILL138 KV  LEE-SMI1",
+   "binding_hours": 14,
+   "severity": 1160.2299999999998,
+   "max_abs_sp": 186.51
+  },
+  {
+   "constraint_name": "HOYTDAL2138 KV  HOY-MAP1",
+   "binding_hours": 25,
+   "severity": 1153.59,
+   "max_abs_sp": 155.66
+  },
+  {
+   "constraint_name": "GLENDON 115 KV  GLE-NOR",
+   "binding_hours": 11,
+   "severity": 1148.6799999999998,
+   "max_abs_sp": 310.52
+  },
+  {
+   "constraint_name": "CEDARGRO230 KV  CED-JAC",
+   "binding_hours": 115,
+   "severity": 1143.8899999999996,
+   "max_abs_sp": 70.48
+  },
+  {
+   "constraint_name": "COLUMBIA138 KV  COL-NOR1",
+   "binding_hours": 20,
+   "severity": 1134.1299999999999,
+   "max_abs_sp": 151.71
+  },
+  {
+   "constraint_name": "LEMOYNE2138 KV  LEM-WFR",
+   "binding_hours": 10,
+   "severity": 1131.53,
+   "max_abs_sp": 161.66
+  },
+  {
+   "constraint_name": "HOOPERDP115 KV  1007A",
+   "binding_hours": 86,
+   "severity": 1124.1400000000003,
+   "max_abs_sp": 44.42
+  },
+  {
+   "constraint_name": "Burnham-Sheffield 345 l/o Dumont-Wilton Center 765 kV",
+   "binding_hours": 67,
+   "severity": 1122.2600000000004,
+   "max_abs_sp": 169.28
+  },
+  {
+   "constraint_name": "94 HAURD138 KV  96101",
+   "binding_hours": 192,
+   "severity": 1118.18,
+   "max_abs_sp": 18.95
+  },
+  {
+   "constraint_name": "Westwood - NWTap 138 kV l/o Cayuga - Cayuga 345 kV",
+   "binding_hours": 5,
+   "severity": 1115.2399999999998,
+   "max_abs_sp": 486.15
+  },
+  {
+   "constraint_name": "BRUNNERI230 KV  BRU-YOR",
+   "binding_hours": 51,
+   "severity": 1113.7,
+   "max_abs_sp": 67.54
+  },
+  {
+   "constraint_name": "COLONIAL115 KV  COL-ROC1",
+   "binding_hours": 12,
+   "severity": 1101.5400000000002,
+   "max_abs_sp": 240.99
+  },
+  {
+   "constraint_name": "BED-BLA contingency 11",
+   "binding_hours": 19,
+   "severity": 1098.58,
+   "max_abs_sp": 188.06
+  },
+  {
+   "constraint_name": "INDIANRI138 KV  IND-NEL",
+   "binding_hours": 25,
+   "severity": 1084.34,
+   "max_abs_sp": 141.02
+  },
+  {
+   "constraint_name": "CEDARGRO230 KV  CED-CLIB",
+   "binding_hours": 111,
+   "severity": 1075.5900000000001,
+   "max_abs_sp": 60.77
+  },
+  {
+   "constraint_name": "IDYLWOO4-CLARK4 202A",
+   "binding_hours": 5,
+   "severity": 1063.14,
+   "max_abs_sp": 239.46
+  },
+  {
+   "constraint_name": "SPRUCE  138 KV  SPR-04L2",
+   "binding_hours": 20,
+   "severity": 1054.0000000000002,
+   "max_abs_sp": 355.17
+  },
+  {
+   "constraint_name": "NMUSKING138 KV  NMU-PHI",
+   "binding_hours": 6,
+   "severity": 1052.47,
+   "max_abs_sp": 366.97
+  },
+  {
+   "constraint_name": "ASHBURN 230 KV  227B",
+   "binding_hours": 72,
+   "severity": 1039.8000000000004,
+   "max_abs_sp": 39.53
+  },
+  {
+   "constraint_name": "SPOTSLV 500 KV  TX1",
+   "binding_hours": 12,
+   "severity": 1031.65,
+   "max_abs_sp": 297.24
+  },
+  {
+   "constraint_name": "SAXTON  115 KV  SAX-THR",
+   "binding_hours": 20,
+   "severity": 1031.22,
+   "max_abs_sp": 249.99
+  },
+  {
+   "constraint_name": "HAMI APS138 KV  HAM-WEI",
+   "binding_hours": 8,
+   "severity": 1016.1,
+   "max_abs_sp": 417.17
+  },
+  {
+   "constraint_name": "Miami Fort 9 345/138 kV l/o Miami Fort - Terminal 345 kV",
+   "binding_hours": 17,
+   "severity": 1009.9099999999999,
+   "max_abs_sp": 104.16
+  },
+  {
+   "constraint_name": "OHIOCENT138 KV  OHI-SCO1",
+   "binding_hours": 4,
+   "severity": 999.31,
+   "max_abs_sp": 615.56
+  },
+  {
+   "constraint_name": "BUREAU-LTVSTEEL BUR-LTVS    A  138 KV",
+   "binding_hours": 8,
+   "severity": 995.4099999999999,
+   "max_abs_sp": 271.21
+  },
+  {
+   "constraint_name": "ROXBURY-SHADEGAP KR 1075   B  115 KV",
+   "binding_hours": 4,
+   "severity": 992.9300000000001,
+   "max_abs_sp": 249.97
+  },
+  {
+   "constraint_name": "3 POWERT138 KV  POW-TWRL",
+   "binding_hours": 42,
+   "severity": 992.6999999999999,
+   "max_abs_sp": 85.79
+  },
+  {
+   "constraint_name": "66 E FRN TR83CT-P XFORMER    H  345 KV",
+   "binding_hours": 17,
+   "severity": 983.5300000000001,
+   "max_abs_sp": 136.2
+  },
+  {
+   "constraint_name": "PUMPHREY115 KV  PUM-VIA8",
+   "binding_hours": 7,
+   "severity": 956.51,
+   "max_abs_sp": 265.02
+  },
+  {
+   "constraint_name": "02RDGVL 138 KV  02R-STRY",
+   "binding_hours": 16,
+   "severity": 955.67,
+   "max_abs_sp": 232.62
+  },
+  {
+   "constraint_name": "BUFFINGT345 KV  45",
+   "binding_hours": 15,
+   "severity": 952.4799999999999,
+   "max_abs_sp": 133.09
+  },
+  {
+   "constraint_name": "CRANBERY138 KV  CRA-HOY",
+   "binding_hours": 43,
+   "severity": 949.8500000000001,
+   "max_abs_sp": 98.6
+  },
+  {
+   "constraint_name": "HAZELWOO115 KV  HAZ-WIN6",
+   "binding_hours": 10,
+   "severity": 947.04,
+   "max_abs_sp": 198.28
+  },
+  {
+   "constraint_name": "PLANEBRO230 KV  PLA-TRE4",
+   "binding_hours": 8,
+   "severity": 934.84,
+   "max_abs_sp": 209.63
+  },
+  {
+   "constraint_name": "DEQUINE 345 KV  DEQ-FOWJ",
+   "binding_hours": 181,
+   "severity": 930.0400000000001,
+   "max_abs_sp": 42.67
+  },
+  {
+   "constraint_name": "Labadie-Graysum 345 kV (GRA-LABA) l/o Labadie-Graysum 345 kV (30648308)",
+   "binding_hours": 28,
+   "severity": 918.6000000000001,
+   "max_abs_sp": 158.71
+  },
+  {
+   "constraint_name": "ETOWANDA-HILLSIDE 2002 TIE  B 230  KV",
+   "binding_hours": 24,
+   "severity": 916.27,
+   "max_abs_sp": 63.04
+  },
+  {
+   "constraint_name": "WESCOSVI500 KV  3",
+   "binding_hours": 22,
+   "severity": 908.9200000000001,
+   "max_abs_sp": 114.98
+  },
+  {
+   "constraint_name": "SHADEGAP115 KV  SHA-THR",
+   "binding_hours": 42,
+   "severity": 902.9999999999999,
+   "max_abs_sp": 64.18
+  },
+  {
+   "constraint_name": "ARMCO_1C138 KV  ARM-TP5",
+   "binding_hours": 64,
+   "severity": 895.8399999999999,
+   "max_abs_sp": 71.83
+  },
+  {
+   "constraint_name": "EBERSOLE-FOSTORIA  EBE-FOS2  B  138 KV",
+   "binding_hours": 18,
+   "severity": 886.3199999999997,
+   "max_abs_sp": 144.73
+  },
+  {
+   "constraint_name": "FIVEFORK115 KV  FIV-ROC2",
+   "binding_hours": 16,
+   "severity": 884.4200000000002,
+   "max_abs_sp": 188.45
+  },
+  {
+   "constraint_name": "111 ELEC138 KV  11103",
+   "binding_hours": 64,
+   "severity": 880.0299999999997,
+   "max_abs_sp": 42.67
+  },
+  {
+   "constraint_name": "CECIL   138 KV  CEC-GLA",
+   "binding_hours": 28,
+   "severity": 879.12,
+   "max_abs_sp": 72.31
+  },
+  {
+   "constraint_name": "STAFFORD230 KV  2104B",
+   "binding_hours": 59,
+   "severity": 878.55,
+   "max_abs_sp": 77.68
+  },
+  {
+   "constraint_name": "FOX_HOLL161 KV  TR1",
+   "binding_hours": 49,
+   "severity": 877.5199999999999,
+   "max_abs_sp": 56.4
+  },
+  {
+   "constraint_name": "St John - Greenacre 138 kV l/o St John - Schahfer 345 kV",
+   "binding_hours": 8,
+   "severity": 876.52,
+   "max_abs_sp": 322.02
+  },
+  {
+   "constraint_name": "BAYLY   69 KV   BAY-WES",
+   "binding_hours": 11,
+   "severity": 875.7299999999999,
+   "max_abs_sp": 593.81
+  },
+  {
+   "constraint_name": "BRUNOTIS138 KV  BRU-FOR",
+   "binding_hours": 27,
+   "severity": 872.7700000000003,
+   "max_abs_sp": 164.99
+  },
+  {
+   "constraint_name": "122 BELV138 KV  15623 2",
+   "binding_hours": 24,
+   "severity": 870.65,
+   "max_abs_sp": 124.06
+  },
+  {
+   "constraint_name": "BREMO4  115 KV  BRE-FRKU",
+   "binding_hours": 33,
+   "severity": 870.5100000000001,
+   "max_abs_sp": 63.64
+  },
+  {
+   "constraint_name": "TANGY   138 KV  TAN-BEL1",
+   "binding_hours": 8,
+   "severity": 861.5,
+   "max_abs_sp": 162.75
+  },
+  {
+   "constraint_name": "EDENSRID138 KV  EDE-IND1",
+   "binding_hours": 45,
+   "severity": 845.6500000000001,
+   "max_abs_sp": 69.21
+  },
+  {
+   "constraint_name": "CHESWICK138 KV  CHE-SPR",
+   "binding_hours": 112,
+   "severity": 844.14,
+   "max_abs_sp": 28.65
+  },
+  {
+   "constraint_name": "103 LISL138 KV  10319 1",
+   "binding_hours": 19,
+   "severity": 833.26,
+   "max_abs_sp": 100.3
+  },
+  {
+   "constraint_name": "TODDHUNT345 KV  15",
+   "binding_hours": 21,
+   "severity": 828.64,
+   "max_abs_sp": 111.88
+  },
+  {
+   "constraint_name": "WEFOSTOR138 KV  WEF-02W1",
+   "binding_hours": 33,
+   "severity": 827.7500000000001,
+   "max_abs_sp": 141.49
+  },
+  {
+   "constraint_name": "CARNEGIE138 KV  CAR-TID",
+   "binding_hours": 7,
+   "severity": 823.1300000000001,
+   "max_abs_sp": 284.92
+  },
+  {
+   "constraint_name": "Sub_74 - Sub_58 161kV l/o Sub_56 - Sub_91 345kV",
+   "binding_hours": 6,
+   "severity": 819.5,
+   "max_abs_sp": 234.59
+  },
+  {
+   "constraint_name": "CEDARSUB230 KV  CED-ROSY",
+   "binding_hours": 31,
+   "severity": 817.4899999999999,
+   "max_abs_sp": 70.43
+  },
+  {
+   "constraint_name": "BED-BLA contingency 33",
+   "binding_hours": 9,
+   "severity": 815.28,
+   "max_abs_sp": 229.0
+  },
+  {
+   "constraint_name": "ELIMA   345 KV  ELI-SWL1",
+   "binding_hours": 26,
+   "severity": 808.75,
+   "max_abs_sp": 158.12
+  },
+  {
+   "constraint_name": "Mahomet - OCB 1303 138 kV l/o Paxton - Gifford 138 kV",
+   "binding_hours": 5,
+   "severity": 804.7900000000001,
+   "max_abs_sp": 221.56
+  },
+  {
+   "constraint_name": "MITCHELL138 KV  MIT-WIL",
+   "binding_hours": 27,
+   "severity": 785.0400000000001,
+   "max_abs_sp": 69.75
+  },
+  {
+   "constraint_name": "CLIFTON 500 KV  TX2",
+   "binding_hours": 34,
+   "severity": 767.0500000000001,
+   "max_abs_sp": 98.41
+  },
+  {
+   "constraint_name": "GLENDON 115 KV  GLE-HOS",
+   "binding_hours": 7,
+   "severity": 753.42,
+   "max_abs_sp": 236.04
+  },
+  {
+   "constraint_name": "BETHESDA138 KV  BET-HAR6",
+   "binding_hours": 7,
+   "severity": 751.56,
+   "max_abs_sp": 204.65
+  },
+  {
+   "constraint_name": "COLLEGEC138 KV  COL-RIC1",
+   "binding_hours": 16,
+   "severity": 750.37,
+   "max_abs_sp": 104.31
+  },
+  {
+   "constraint_name": "REID    138 KV  REI-RIN",
+   "binding_hours": 13,
+   "severity": 746.6800000000001,
+   "max_abs_sp": 196.84
+  },
+  {
+   "constraint_name": "63 SAWYE138 KV  1324 1",
+   "binding_hours": 36,
+   "severity": 743.5500000000001,
+   "max_abs_sp": 139.43
+  },
+  {
+   "constraint_name": "PIERC_DK345 KV  BK17",
+   "binding_hours": 17,
+   "severity": 732.8200000000002,
+   "max_abs_sp": 72.47
+  },
+  {
+   "constraint_name": "BEAUMEAD230 KV  274C",
+   "binding_hours": 13,
+   "severity": 721.6999999999999,
+   "max_abs_sp": 99.48
+  },
+  {
+   "constraint_name": "GREENBUS69 KV   GRN-TAS",
+   "binding_hours": 41,
+   "severity": 713.51,
+   "max_abs_sp": 88.44
+  },
+  {
+   "constraint_name": "BRIGHTON230 KV  BRI-MTZ2",
+   "binding_hours": 55,
+   "severity": 712.1999999999999,
+   "max_abs_sp": 43.86
+  },
+  {
+   "constraint_name": "PINEYGRO230 KV  AT20",
+   "binding_hours": 6,
+   "severity": 706.25,
+   "max_abs_sp": 222.43
+  },
+  {
+   "constraint_name": "AEP-DOM contingency 52",
+   "binding_hours": 16,
+   "severity": 703.6299999999999,
+   "max_abs_sp": 93.32
+  },
+  {
+   "constraint_name": "ALBRIGHT138 KV  ALB-KIN",
+   "binding_hours": 3,
+   "severity": 697.06,
+   "max_abs_sp": 665.18
+  },
+  {
+   "constraint_name": "ASYLUM  230 KV  ASY-ETOW",
+   "binding_hours": 98,
+   "severity": 694.4300000000002,
+   "max_abs_sp": 49.98
+  },
+  {
+   "constraint_name": "16901   138 KV  16901 Z1",
+   "binding_hours": 66,
+   "severity": 689.0600000000001,
+   "max_abs_sp": 28.56
+  },
+  {
+   "constraint_name": "WEST contingency 5",
+   "binding_hours": 7,
+   "severity": 688.21,
+   "max_abs_sp": 164.86
+  },
+  {
+   "constraint_name": "GLENBROO69 KV   GLE-KOON",
+   "binding_hours": 90,
+   "severity": 683.7400000000002,
+   "max_abs_sp": 26.81
+  },
+  {
+   "constraint_name": "Burnham Munster l/o Dumont Wilton Center",
+   "binding_hours": 27,
+   "severity": 681.2499999999998,
+   "max_abs_sp": 99.07
+  },
+  {
+   "constraint_name": "KENZIECR345 KV  TR1",
+   "binding_hours": 79,
+   "severity": 676.35,
+   "max_abs_sp": 44.91
+  },
+  {
+   "constraint_name": "DOEX530 345 KV  208T",
+   "binding_hours": 714,
+   "severity": 675.72,
+   "max_abs_sp": 13.65
+  },
+  {
+   "constraint_name": "BUFFINGT138 KV  BUF-08F1",
+   "binding_hours": 22,
+   "severity": 671.77,
+   "max_abs_sp": 222.94
+  },
+  {
+   "constraint_name": "BERYL   138 KV  BER-CRS",
+   "binding_hours": 2,
+   "severity": 669.63,
+   "max_abs_sp": 664.81
+  },
+  {
+   "constraint_name": "SHELOCTA230 KV  NO2",
+   "binding_hours": 18,
+   "severity": 667.83,
+   "max_abs_sp": 121.25
+  },
+  {
+   "constraint_name": "OHIOCENT-SCOSHOCT OHI-SCO1  A  138 KV",
+   "binding_hours": 11,
+   "severity": 656.32,
+   "max_abs_sp": 123.58
+  },
+  {
+   "constraint_name": "BED-BLA contingency 20",
+   "binding_hours": 9,
+   "severity": 652.7,
+   "max_abs_sp": 350.55
+  },
+  {
+   "constraint_name": "PLEASNTV 203T274      CB        230 KV",
+   "binding_hours": 67,
+   "severity": 648.1499999999997,
+   "max_abs_sp": 17.59
+  },
+  {
+   "constraint_name": "LAUSCHTO500 KV  T3",
+   "binding_hours": 27,
+   "severity": 646.5099999999998,
+   "max_abs_sp": 94.63
+  },
+  {
+   "constraint_name": "167 PLAN765 KV  TR93CT-P",
+   "binding_hours": 21,
+   "severity": 646.1599999999999,
+   "max_abs_sp": 62.98
+  },
+  {
+   "constraint_name": "KYGERCRE345 KV  KYG-DOE4",
+   "binding_hours": 40,
+   "severity": 642.8699999999999,
+   "max_abs_sp": 72.98
+  },
+  {
+   "constraint_name": "ALBIONIM138 KV  ALB-NOR1",
+   "binding_hours": 17,
+   "severity": 634.9499999999999,
+   "max_abs_sp": 107.26
+  },
+  {
+   "constraint_name": "DOEX530 345 KV  203T",
+   "binding_hours": 535,
+   "severity": 631.3499999999998,
+   "max_abs_sp": 14.58
+  },
+  {
+   "constraint_name": "EASTGATE138 KV  EAS-LUX",
+   "binding_hours": 13,
+   "severity": 624.2099999999999,
+   "max_abs_sp": 140.54
+  },
+  {
+   "constraint_name": "BRISTERS230 KV  2101A",
+   "binding_hours": 7,
+   "severity": 613.51,
+   "max_abs_sp": 121.54
+  },
+  {
+   "constraint_name": "Guion 345/138kV l/o Hortonvill-Whitestown 345kV",
+   "binding_hours": 3,
+   "severity": 611.7,
+   "max_abs_sp": 215.23
+  },
+  {
+   "constraint_name": "FEAGANSM138 KV  FEA-STO",
+   "binding_hours": 5,
+   "severity": 607.0500000000001,
+   "max_abs_sp": 139.75
+  },
+  {
+   "constraint_name": "KERRDAM 115 KV  193D",
+   "binding_hours": 17,
+   "severity": 600.69,
+   "max_abs_sp": 96.64
+  },
+  {
+   "constraint_name": "HOPKINS 138 KV  HOPKINS",
+   "binding_hours": 27,
+   "severity": 585.1800000000001,
+   "max_abs_sp": 108.73
+  },
+  {
+   "constraint_name": "Turkey Hill Mascouta 138 kV l/o Coffeen Roxford 345 kV",
+   "binding_hours": 9,
+   "severity": 583.8100000000001,
+   "max_abs_sp": 124.93
+  },
+  {
+   "constraint_name": "VANDORN 230 KV  243B",
+   "binding_hours": 9,
+   "severity": 581.86,
+   "max_abs_sp": 127.98
+  },
+  {
+   "constraint_name": "BRAMBLET230 KV  BRA-STON",
+   "binding_hours": 15,
+   "severity": 579.6299999999999,
+   "max_abs_sp": 64.85
+  },
+  {
+   "constraint_name": "MOREHEAD69 KV   MOR-KUM1",
+   "binding_hours": 14,
+   "severity": 577.9100000000001,
+   "max_abs_sp": 85.33
+  },
+  {
+   "constraint_name": "LACKAWAN230 KV  LAC-OXB",
+   "binding_hours": 72,
+   "severity": 575.7900000000002,
+   "max_abs_sp": 53.46
+  },
+  {
+   "constraint_name": "111 ELEC345 KV  11124",
+   "binding_hours": 9,
+   "severity": 570.1999999999999,
+   "max_abs_sp": 140.44
+  },
+  {
+   "constraint_name": "SCHUYLKI230 KV  SCH 7TR",
+   "binding_hours": 4,
+   "severity": 568.52,
+   "max_abs_sp": 214.62
+  },
+  {
+   "constraint_name": "74 KEWAN138 KV  7405 2",
+   "binding_hours": 30,
+   "severity": 567.23,
+   "max_abs_sp": 41.19
+  },
+  {
+   "constraint_name": "PIERC_DK345 KV  BK18",
+   "binding_hours": 49,
+   "severity": 554.3,
+   "max_abs_sp": 73.59
+  },
+  {
+   "constraint_name": "SWLIMA  138 KV  SWL-WMO1",
+   "binding_hours": 33,
+   "severity": 551.7599999999999,
+   "max_abs_sp": 40.31
+  },
+  {
+   "constraint_name": "BURKE   230 KV  270A",
+   "binding_hours": 13,
+   "severity": 549.33,
+   "max_abs_sp": 93.24
+  },
+  {
+   "constraint_name": "PLYWOOD 115 KV  151A",
+   "binding_hours": 16,
+   "severity": 548.16,
+   "max_abs_sp": 120.61
+  },
+  {
+   "constraint_name": "CONESVIL138 KV  CVD",
+   "binding_hours": 35,
+   "severity": 546.9300000000002,
+   "max_abs_sp": 30.78
+  },
+  {
+   "constraint_name": "PLEASNT 138 KV  STM-PLE",
+   "binding_hours": 16,
+   "severity": 544.9800000000001,
+   "max_abs_sp": 65.73
+  },
+  {
+   "constraint_name": "MIAMIFOR345 KV  9",
+   "binding_hours": 32,
+   "severity": 540.4300000000001,
+   "max_abs_sp": 71.17
+  },
+  {
+   "constraint_name": "DEEPCRK 115 KV  DEE-GAR",
+   "binding_hours": 46,
+   "severity": 531.7600000000001,
+   "max_abs_sp": 38.01
+  },
+  {
+   "constraint_name": "HARWGATE230 KV  205C",
+   "binding_hours": 11,
+   "severity": 529.97,
+   "max_abs_sp": 84.78
+  },
+  {
+   "constraint_name": "HOOPERDP115 KV  HOO-JET",
+   "binding_hours": 50,
+   "severity": 528.64,
+   "max_abs_sp": 48.23
+  },
+  {
+   "constraint_name": "OX4     230 KV  2097B",
+   "binding_hours": 20,
+   "severity": 526.95,
+   "max_abs_sp": 69.36
+  },
+  {
+   "constraint_name": "KENT    69 KV   KEN-VAU",
+   "binding_hours": 7,
+   "severity": 522.78,
+   "max_abs_sp": 176.12
+  },
+  {
+   "constraint_name": "TERMINAL345 KV  11",
+   "binding_hours": 17,
+   "severity": 521.76,
+   "max_abs_sp": 119.2
+  },
+  {
+   "constraint_name": "ALLENJUN138 KV  ALL-ALLE",
+   "binding_hours": 16,
+   "severity": 518.3399999999999,
+   "max_abs_sp": 76.23
+  },
+  {
+   "constraint_name": "PLEASNTV 203T274      CB    230 KV",
+   "binding_hours": 72,
+   "severity": 516.6699999999998,
+   "max_abs_sp": 21.32
+  },
+  {
+   "constraint_name": "HOYTDAL2345 KV  1",
+   "binding_hours": 40,
+   "severity": 516.3199999999999,
+   "max_abs_sp": 29.32
+  },
+  {
+   "constraint_name": "DESPER  230 KV  DES-SANN",
+   "binding_hours": 38,
+   "severity": 511.77,
+   "max_abs_sp": 35.25
+  },
+  {
+   "constraint_name": "TANNERSC345 KV  TAN-EBE1",
+   "binding_hours": 77,
+   "severity": 509.86999999999995,
+   "max_abs_sp": 24.86
+  },
+  {
+   "constraint_name": "ETOWANDA115 KV  ETO-NME",
+   "binding_hours": 25,
+   "severity": 497.73999999999995,
+   "max_abs_sp": 52.87
+  },
+  {
+   "constraint_name": "EDGEWATE138 KV  EDG-VAS",
+   "binding_hours": 18,
+   "severity": 495.45000000000005,
+   "max_abs_sp": 93.28
+  },
+  {
+   "constraint_name": "WHITAKER115 KV  1001B",
+   "binding_hours": 26,
+   "severity": 494.96999999999997,
+   "max_abs_sp": 44.08
+  },
+  {
+   "constraint_name": "MapleSt - Chrysler 138 kV l/o HighlandPark - NewLondon 230 kV",
+   "binding_hours": 18,
+   "severity": 493.34000000000003,
+   "max_abs_sp": 67.23
+  },
+  {
+   "constraint_name": "BOSSERMN138 KV  BOS-BNI2",
+   "binding_hours": 7,
+   "severity": 491.78999999999996,
+   "max_abs_sp": 192.47
+  },
+  {
+   "constraint_name": "CROMBY  69 KV   CRO-LIM",
+   "binding_hours": 16,
+   "severity": 491.0799999999999,
+   "max_abs_sp": 67.76
+  },
+  {
+   "constraint_name": "HARWOOD 230 KV  HAR-SUS2",
+   "binding_hours": 3,
+   "severity": 484.12,
+   "max_abs_sp": 221.01
+  },
+  {
+   "constraint_name": "REDLION 230 KV  RED-SIL1",
+   "binding_hours": 4,
+   "severity": 480.97,
+   "max_abs_sp": 188.3
+  },
+  {
+   "constraint_name": "MOUN UGI230 KV  3",
+   "binding_hours": 251,
+   "severity": 480.6600000000001,
+   "max_abs_sp": 19.24
+  },
+  {
+   "constraint_name": "Rising TR1 345/138kV l/o Faraday - Arland 345kV",
+   "binding_hours": 6,
+   "severity": 478.96999999999997,
+   "max_abs_sp": 166.36
+  },
+  {
+   "constraint_name": "HEBRON  69 KV   HEB-MAR",
+   "binding_hours": 5,
+   "severity": 474.91999999999996,
+   "max_abs_sp": 303.75
+  },
+  {
+   "constraint_name": "LEXINGTN500 KV  TX3",
+   "binding_hours": 39,
+   "severity": 467.54,
+   "max_abs_sp": 37.44
+  },
+  {
+   "constraint_name": "CONASTON500 KV  500-4",
+   "binding_hours": 8,
+   "severity": 467.52000000000004,
+   "max_abs_sp": 168.57
+  },
+  {
+   "constraint_name": "GRISTMIL345 KV  GRI-SHLB",
+   "binding_hours": 92,
+   "severity": 465.0900000000001,
+   "max_abs_sp": 18.2
+  },
+  {
+   "constraint_name": "111 ELEC138 KV  11105",
+   "binding_hours": 42,
+   "severity": 464.58,
+   "max_abs_sp": 25.07
+  },
+  {
+   "constraint_name": "ATHENIA 138 KV  ATH-FAI",
+   "binding_hours": 23,
+   "severity": 462.19,
+   "max_abs_sp": 79.51
+  },
+  {
+   "constraint_name": "REED    138 KV  REE-TRI1",
+   "binding_hours": 5,
+   "severity": 459.65,
+   "max_abs_sp": 131.9
+  },
+  {
+   "constraint_name": "JEFFERSO345 KV  JEF-CLI1",
+   "binding_hours": 46,
+   "severity": 456.81,
+   "max_abs_sp": 32.12
+  },
+  {
+   "constraint_name": "KEENEY  138 KV  13822",
+   "binding_hours": 10,
+   "severity": 453.27,
+   "max_abs_sp": 75.81
+  },
+  {
+   "constraint_name": "KEENMILL230 KV  266D",
+   "binding_hours": 3,
+   "severity": 452.33000000000004,
+   "max_abs_sp": 270.69
+  },
+  {
+   "constraint_name": "SPORNAEP345 KV  SPO-KYG1",
+   "binding_hours": 145,
+   "severity": 440.6900000000002,
+   "max_abs_sp": 15.61
+  },
+  {
+   "constraint_name": "ELIMA   138 KV  ELI-NWL1",
+   "binding_hours": 5,
+   "severity": 436.46000000000004,
+   "max_abs_sp": 140.97
+  },
+  {
+   "constraint_name": "HILLCRES138 KV  HIL-WAY2",
+   "binding_hours": 7,
+   "severity": 434.74,
+   "max_abs_sp": 168.05
+  },
+  {
+   "constraint_name": "BAKER_L2138 KV  BAK-BAKE",
+   "binding_hours": 20,
+   "severity": 434.29,
+   "max_abs_sp": 42.98
+  },
+  {
+   "constraint_name": "12 DRESD345 KV  TR83CT-P",
+   "binding_hours": 5,
+   "severity": 433.03,
+   "max_abs_sp": 171.26
+  },
+  {
+   "constraint_name": "AUGTINE 138 KV  08A-WEN1",
+   "binding_hours": 27,
+   "severity": 425.6400000000001,
+   "max_abs_sp": 34.7
+  },
+  {
+   "constraint_name": "FALLS   138 KV  FAL-STE",
+   "binding_hours": 26,
+   "severity": 424.97999999999996,
+   "max_abs_sp": 67.04
+  },
+  {
+   "constraint_name": "1 LASALL345 KV  TR81CT-P",
+   "binding_hours": 20,
+   "severity": 412.53,
+   "max_abs_sp": 59.29
+  },
+  {
+   "constraint_name": "CONCRDDP69 KV   CON-LAU",
+   "binding_hours": 12,
+   "severity": 411.89,
+   "max_abs_sp": 81.46
+  },
+  {
+   "constraint_name": "CHESTNT 115 KV  1024A",
+   "binding_hours": 10,
+   "severity": 408.06000000000006,
+   "max_abs_sp": 182.1
+  },
+  {
+   "constraint_name": "CARLOJCT138 KV  CAR-RID",
+   "binding_hours": 8,
+   "severity": 407.7300000000001,
+   "max_abs_sp": 139.98
+  },
+  {
+   "constraint_name": "ISLCRKDP115 KV  193B",
+   "binding_hours": 8,
+   "severity": 406.51000000000005,
+   "max_abs_sp": 122.49
+  },
+  {
+   "constraint_name": "116 GOOD345 KV  11614 1",
+   "binding_hours": 46,
+   "severity": 396.19999999999993,
+   "max_abs_sp": 41.95
+  },
+  {
+   "constraint_name": "DOOMS4  500 KV  TX9",
+   "binding_hours": 12,
+   "severity": 392.90000000000003,
+   "max_abs_sp": 97.7
+  },
+  {
+   "constraint_name": "AEP-DOM contingency 4",
+   "binding_hours": 23,
+   "severity": 386.62999999999994,
+   "max_abs_sp": 68.63
+  },
+  {
+   "constraint_name": "Maroa -E GooseCreek 345 kV l/o Wilton Center-Dumont 765 kV",
+   "binding_hours": 10,
+   "severity": 384.11,
+   "max_abs_sp": 155.62
+  },
+  {
+   "constraint_name": "LALLENDO345 KV  LAL-ORE",
+   "binding_hours": 63,
+   "severity": 382.09999999999997,
+   "max_abs_sp": 28.47
+  },
+  {
+   "constraint_name": "DUBOIS  115 KV  DUB-ROC",
+   "binding_hours": 9,
+   "severity": 381.52,
+   "max_abs_sp": 90.21
+  },
+  {
+   "constraint_name": "SCHUYLKI69 KV   SCH 5TR",
+   "binding_hours": 8,
+   "severity": 376.70000000000005,
+   "max_abs_sp": 54.06
+  },
+  {
+   "constraint_name": "ABINGDON138 KV  ABI-CLI1",
+   "binding_hours": 8,
+   "severity": 372.84999999999997,
+   "max_abs_sp": 59.24
+  },
+  {
+   "constraint_name": "EAKRON  138 KV  EAK-HAY",
+   "binding_hours": 2,
+   "severity": 371.6,
+   "max_abs_sp": 235.91
+  },
+  {
+   "constraint_name": "MULLENSV138 KV  MUL-PIN1",
+   "binding_hours": 5,
+   "severity": 365.40999999999997,
+   "max_abs_sp": 107.91
+  },
+  {
+   "constraint_name": "EDINBUR4138 KV  TX3",
+   "binding_hours": 5,
+   "severity": 364.51,
+   "max_abs_sp": 143.89
+  },
+  {
+   "constraint_name": "ASHTABUL138 KV  ASH-04S1",
+   "binding_hours": 5,
+   "severity": 362.80999999999995,
+   "max_abs_sp": 284.24
+  },
+  {
+   "constraint_name": "EDWSFERY230 KV  23111",
+   "binding_hours": 83,
+   "severity": 357.29,
+   "max_abs_sp": 10.96
+  },
+  {
+   "constraint_name": "112 WILT765 KV  TR93CT-P",
+   "binding_hours": 24,
+   "severity": 352.06,
+   "max_abs_sp": 43.58
+  },
+  {
+   "constraint_name": "BECO-PARAGNPK 2207A         A  230 KV",
+   "binding_hours": 7,
+   "severity": 348.47,
+   "max_abs_sp": 92.48
+  },
+  {
+   "constraint_name": "HUNTINGT138 KV  HUN-SOR1",
+   "binding_hours": 12,
+   "severity": 342.2099999999999,
+   "max_abs_sp": 79.65
+  },
+  {
+   "constraint_name": "GRAYSFER230 KV  GRA-SCH7",
+   "binding_hours": 4,
+   "severity": 341.71,
+   "max_abs_sp": 182.6
+  },
+  {
+   "constraint_name": "RICHLND 138 KV  RIC-02R1",
+   "binding_hours": 5,
+   "severity": 341.52,
+   "max_abs_sp": 127.46
+  },
+  {
+   "constraint_name": "HUNTERST230 KV  TR2",
+   "binding_hours": 7,
+   "severity": 339.97,
+   "max_abs_sp": 86.35
+  },
+  {
+   "constraint_name": "LOCKWOOD138 KV  LOC-RIC1",
+   "binding_hours": 22,
+   "severity": 338.31,
+   "max_abs_sp": 86.26
+  },
+  {
+   "constraint_name": "HOYTDAL2345 KV  2",
+   "binding_hours": 14,
+   "severity": 337.21999999999997,
+   "max_abs_sp": 50.01
+  },
+  {
+   "constraint_name": "THELMA  138 KV  THE-BUS1",
+   "binding_hours": 56,
+   "severity": 336.61000000000007,
+   "max_abs_sp": 41.55
+  },
+  {
+   "constraint_name": "Batesville-Hubble 138 l/o Tanners Crk-Miami Fort 345",
+   "binding_hours": 4,
+   "severity": 332.2,
+   "max_abs_sp": 100.57
+  },
+  {
+   "constraint_name": "Sugar Creek Dresser 345 l/o Nucor Cayuga 345",
+   "binding_hours": 17,
+   "severity": 331.73,
+   "max_abs_sp": 52.98
+  },
+  {
+   "constraint_name": "HAMPSHIR138 KV  HAM-RID",
+   "binding_hours": 9,
+   "severity": 328.51,
+   "max_abs_sp": 75.5
+  },
+  {
+   "constraint_name": "SHENANGO 36 CB",
+   "binding_hours": 12,
+   "severity": 327.66,
+   "max_abs_sp": 53.6
+  },
+  {
+   "constraint_name": "CHARLERO138 KV  CHA-YUK",
+   "binding_hours": 2,
+   "severity": 322.43,
+   "max_abs_sp": 254.98
+  },
+  {
+   "constraint_name": "FLINT   230 KV  FLI-PLY",
+   "binding_hours": 12,
+   "severity": 320.07000000000005,
+   "max_abs_sp": 103.98
+  },
+  {
+   "constraint_name": "CEDARCRE138 KV  CED-CLA",
+   "binding_hours": 5,
+   "severity": 319.1700000000001,
+   "max_abs_sp": 80.9
+  },
+  {
+   "constraint_name": "12THST  69 KV   12T-FTS",
+   "binding_hours": 13,
+   "severity": 317.27,
+   "max_abs_sp": 90.84
+  },
+  {
+   "constraint_name": "AEP-DOM contingency Bed-Bla",
+   "binding_hours": 31,
+   "severity": 312.71,
+   "max_abs_sp": 88.4
+  },
+  {
+   "constraint_name": "MANOR   69 KV   MAN-SAF3",
+   "binding_hours": 9,
+   "severity": 312.56,
+   "max_abs_sp": 92.75
+  },
+  {
+   "constraint_name": "LINVFT  230 KV  LIN-VFT1",
+   "binding_hours": 373,
+   "severity": 311.87000000000006,
+   "max_abs_sp": 22.21
+  },
+  {
+   "constraint_name": "SIEGFRIE230 KV  5",
+   "binding_hours": 39,
+   "severity": 308.73,
+   "max_abs_sp": 18.92
+  },
+  {
+   "constraint_name": "GORDONSV230 KV  2088A",
+   "binding_hours": 14,
+   "severity": 305.83,
+   "max_abs_sp": 66.81
+  },
+  {
+   "constraint_name": "MINUEST 230 KV  MIN-SEW",
+   "binding_hours": 73,
+   "severity": 298.15999999999997,
+   "max_abs_sp": 12.91
+  },
+  {
+   "constraint_name": "Stillwell 1 345/138 kV l/o Stillwell - Dumont 345 kV",
+   "binding_hours": 16,
+   "severity": 297.67999999999995,
+   "max_abs_sp": 32.74
+  },
+  {
+   "constraint_name": "ETOWANDA-HILLSIDE 2002 TIE  A   230 KV",
+   "binding_hours": 36,
+   "severity": 297.35999999999996,
+   "max_abs_sp": 22.57
+  },
+  {
+   "constraint_name": "COLLIER 138 KV  COL-ELW",
+   "binding_hours": 7,
+   "severity": 296.58000000000004,
+   "max_abs_sp": 106.65
+  },
+  {
+   "constraint_name": "CHESTNUT115 KV  CHE-FRE7",
+   "binding_hours": 5,
+   "severity": 293.69,
+   "max_abs_sp": 172.69
+  },
+  {
+   "constraint_name": "WMOULTON138 KV  WMO-CIT1",
+   "binding_hours": 66,
+   "severity": 293.21999999999997,
+   "max_abs_sp": 14.95
+  },
+  {
+   "constraint_name": "CHARLERO138 KV  CHA-MIT",
+   "binding_hours": 18,
+   "severity": 292.34000000000003,
+   "max_abs_sp": 31.73
+  },
+  {
+   "constraint_name": "HARRTN  69 KV   HAR-SHA",
+   "binding_hours": 17,
+   "severity": 291.59000000000003,
+   "max_abs_sp": 68.5
+  },
+  {
+   "constraint_name": "BUTLER  69 KV   BUT-SHE",
+   "binding_hours": 102,
+   "severity": 289.3099999999999,
+   "max_abs_sp": 14.44
+  },
+  {
+   "constraint_name": "FOURRIVR230 KV  256A",
+   "binding_hours": 26,
+   "severity": 287.84000000000003,
+   "max_abs_sp": 22.95
+  },
+  {
+   "constraint_name": "Todd Hunter 345/138 17 l/o Todd Hunter 345/138 15",
+   "binding_hours": 14,
+   "severity": 287.8,
+   "max_abs_sp": 62.63
+  },
+  {
+   "constraint_name": "MASURY  138 KV  MAS-CRO1",
+   "binding_hours": 8,
+   "severity": 286.11,
+   "max_abs_sp": 53.03
+  },
+  {
+   "constraint_name": "EAST",
+   "binding_hours": 5,
+   "severity": 279.81,
+   "max_abs_sp": 72.42
+  },
+  {
+   "constraint_name": "CLINCHRI138 KV  CLI-LEB1",
+   "binding_hours": 6,
+   "severity": 279.14,
+   "max_abs_sp": 80.4
+  },
+  {
+   "constraint_name": "SANDERSO138 KV  SAN-08C",
+   "binding_hours": 36,
+   "severity": 278.3999999999999,
+   "max_abs_sp": 23.07
+  },
+  {
+   "constraint_name": "CEDARGRO230 KV  CED-CLIK",
+   "binding_hours": 9,
+   "severity": 278.38,
+   "max_abs_sp": 54.27
+  },
+  {
+   "constraint_name": "PLEASNTV 203T274      CB       230 KV",
+   "binding_hours": 7,
+   "severity": 272.95,
+   "max_abs_sp": 53.71
+  },
+  {
+   "constraint_name": "CLIFFORD138 KV  CLI-COL1",
+   "binding_hours": 16,
+   "severity": 269.97999999999996,
+   "max_abs_sp": 76.97
+  },
+  {
+   "constraint_name": "MTAIRYTP69 KV   MTA-REN1",
+   "binding_hours": 60,
+   "severity": 266.5900000000001,
+   "max_abs_sp": 13.95
+  },
+  {
+   "constraint_name": "SEDGEHIL230 KV  TX1",
+   "binding_hours": 4,
+   "severity": 265.65999999999997,
+   "max_abs_sp": 137.89
+  },
+  {
+   "constraint_name": "LINWOOD2138 KV  LIN-ROS1",
+   "binding_hours": 17,
+   "severity": 263.2,
+   "max_abs_sp": 29.54
+  },
+  {
+   "constraint_name": "Northwest Tap - Purdue 138 kV l/o Westwood - W Lafayette 138 kV",
+   "binding_hours": 4,
+   "severity": 258.93,
+   "max_abs_sp": 84.73
+  },
+  {
+   "constraint_name": "08ASHLD7138 KV  ASH-OAK1",
+   "binding_hours": 6,
+   "severity": 258.69999999999993,
+   "max_abs_sp": 111.77
+  },
+  {
+   "constraint_name": "HAYES_FE TR1      XFORMER   H  345 KV",
+   "binding_hours": 7,
+   "severity": 253.95000000000002,
+   "max_abs_sp": 66.83
+  },
+  {
+   "constraint_name": "MANOR   69 KV   MAN-SAF4",
+   "binding_hours": 18,
+   "severity": 249.42000000000002,
+   "max_abs_sp": 35.43
+  },
+  {
+   "constraint_name": "MARTINSC230 KV  MAR-QUA",
+   "binding_hours": 12,
+   "severity": 241.88000000000005,
+   "max_abs_sp": 42.74
+  },
+  {
+   "constraint_name": "RICHLND 138 KV  TR-6",
+   "binding_hours": 10,
+   "severity": 240.28999999999996,
+   "max_abs_sp": 83.95
+  },
+  {
+   "constraint_name": "DESPER  230 KV  DES-LOUI",
+   "binding_hours": 5,
+   "severity": 236.33000000000004,
+   "max_abs_sp": 85.87
+  },
+  {
+   "constraint_name": "FOSTER2 345 KV  11",
+   "binding_hours": 16,
+   "severity": 236.25,
+   "max_abs_sp": 34.18
+  },
+  {
+   "constraint_name": "CHURCH  69 KV   CHU-NME",
+   "binding_hours": 7,
+   "severity": 235.64,
+   "max_abs_sp": 62.13
+  },
+  {
+   "constraint_name": "ASHTABUL138 KV  ASH-04S4",
+   "binding_hours": 13,
+   "severity": 233.81000000000003,
+   "max_abs_sp": 80.37
+  },
+  {
+   "constraint_name": "DEERCREE138 KV  DEE-DOO",
+   "binding_hours": 11,
+   "severity": 233.58,
+   "max_abs_sp": 43.41
+  },
+  {
+   "constraint_name": "BULLRUN 230 KV  TX3",
+   "binding_hours": 1,
+   "severity": 232.03,
+   "max_abs_sp": 232.03
+  },
+  {
+   "constraint_name": "COLORA  230 KV  COL-CON2",
+   "binding_hours": 51,
+   "severity": 229.10999999999999,
+   "max_abs_sp": 16.37
+  },
+  {
+   "constraint_name": "COLONIAL115 KV  COL-GLE1",
+   "binding_hours": 3,
+   "severity": 226.83999999999997,
+   "max_abs_sp": 128.64
+  },
+  {
+   "constraint_name": "BEXLEY  138 KV  BEX-YEA1",
+   "binding_hours": 6,
+   "severity": 225.78,
+   "max_abs_sp": 54.61
+  },
+  {
+   "constraint_name": "NBRISTOL138 KV  NBR-WOL1",
+   "binding_hours": 12,
+   "severity": 225.57,
+   "max_abs_sp": 31.63
+  },
+  {
+   "constraint_name": "OTTCRKPL230 KV  OTT-SAF",
+   "binding_hours": 6,
+   "severity": 218.79000000000002,
+   "max_abs_sp": 54.31
+  },
+  {
+   "constraint_name": "911INDUS138 KV  911-NEWC",
+   "binding_hours": 11,
+   "severity": 218.08,
+   "max_abs_sp": 47.61
+  },
+  {
+   "constraint_name": "MTZION  230 KV  MTZ-QUI4",
+   "binding_hours": 31,
+   "severity": 218.0,
+   "max_abs_sp": 17.49
+  },
+  {
+   "constraint_name": "Nelson - Electric Junction (15502) 345 kV l/o Byron - Wayne 345 kV",
+   "binding_hours": 18,
+   "severity": 216.63000000000002,
+   "max_abs_sp": 24.45
+  },
+  {
+   "constraint_name": "LIMERTAP69 KV   LIM-MOS",
+   "binding_hours": 11,
+   "severity": 214.6,
+   "max_abs_sp": 68.38
+  },
+  {
+   "constraint_name": "HOOVERSV115 KV  HOO-TOW",
+   "binding_hours": 22,
+   "severity": 210.73,
+   "max_abs_sp": 23.77
+  },
+  {
+   "constraint_name": "127 MATT-6604     6604 2    B  138 KV",
+   "binding_hours": 3,
+   "severity": 207.14999999999998,
+   "max_abs_sp": 107.92
+  },
+  {
+   "constraint_name": "Quad Cities-Cordova 0402 345 l/o Quad Cities-Cordova 0403 345",
+   "binding_hours": 9,
+   "severity": 206.65,
+   "max_abs_sp": 43.52
+  },
+  {
+   "constraint_name": "12 DRESD138 KV  TR83CT-S",
+   "binding_hours": 2,
+   "severity": 205.53,
+   "max_abs_sp": 110.02
+  },
+  {
+   "constraint_name": "BENSONDP115 KV  BEN-COOL",
+   "binding_hours": 32,
+   "severity": 204.60999999999999,
+   "max_abs_sp": 12.96
+  },
+  {
+   "constraint_name": "Tanners Creek-Miami Fort 345kV l/o East Bend-Terminal 345kV",
+   "binding_hours": 15,
+   "severity": 204.5,
+   "max_abs_sp": 25.53
+  },
+  {
+   "constraint_name": "TODDSTVN115 KV  198D",
+   "binding_hours": 5,
+   "severity": 198.57,
+   "max_abs_sp": 64.16
+  },
+  {
+   "constraint_name": "CHESWICK138 KV  CHE-LF53",
+   "binding_hours": 13,
+   "severity": 195.50999999999996,
+   "max_abs_sp": 33.44
+  },
+  {
+   "constraint_name": "BRAMBLET230 KV  2045A",
+   "binding_hours": 20,
+   "severity": 195.09999999999997,
+   "max_abs_sp": 22.65
+  },
+  {
+   "constraint_name": "MASTER  230 KV  MAS-NPH",
+   "binding_hours": 14,
+   "severity": 191.79999999999998,
+   "max_abs_sp": 32.76
+  },
+  {
+   "constraint_name": "FARMERSV115 KV  FAR-RID",
+   "binding_hours": 4,
+   "severity": 188.57000000000002,
+   "max_abs_sp": 73.08
+  },
+  {
+   "constraint_name": "CANYON  -ETOWANDA CAN-EAS   B  230 KV",
+   "binding_hours": 23,
+   "severity": 188.01,
+   "max_abs_sp": 39.94
+  },
+  {
+   "constraint_name": "CAMBRIDG69 KV   CAM-JAC",
+   "binding_hours": 1,
+   "severity": 184.61,
+   "max_abs_sp": 184.61
+  },
+  {
+   "constraint_name": "BEATTYVL69 KV   BTT-BEAT",
+   "binding_hours": 9,
+   "severity": 182.56,
+   "max_abs_sp": 53.91
+  },
+  {
+   "constraint_name": "MOSELEY 138 KV  MOS-ROA1",
+   "binding_hours": 1,
+   "severity": 181.61,
+   "max_abs_sp": 181.61
+  },
+  {
+   "constraint_name": "ALLENIM-RPMONE ALL-RPM      A  345 KV",
+   "binding_hours": 17,
+   "severity": 180.24,
+   "max_abs_sp": 27.78
+  },
+  {
+   "constraint_name": "OX4     500 KV  571A",
+   "binding_hours": 45,
+   "severity": 177.69,
+   "max_abs_sp": 13.42
+  },
+  {
+   "constraint_name": "66 E FRN TR83CT-P XFORMER   H  345 KV",
+   "binding_hours": 7,
+   "severity": 177.59,
+   "max_abs_sp": 59.68
+  },
+  {
+   "constraint_name": "HARMONY 230 KV  HAR-KEE3",
+   "binding_hours": 7,
+   "severity": 174.73000000000002,
+   "max_abs_sp": 36.56
+  },
+  {
+   "constraint_name": "HUBBARDS138 KV  HUB-BIG1",
+   "binding_hours": 30,
+   "severity": 173.67999999999998,
+   "max_abs_sp": 15.3
+  },
+  {
+   "constraint_name": "Kewanee - Hennepin 1552 138 kV l/o Hennepin - Woodhall 1512 138 kV",
+   "binding_hours": 5,
+   "severity": 170.71000000000004,
+   "max_abs_sp": 128.11
+  },
+  {
+   "constraint_name": "OX4     500 KV  TX2",
+   "binding_hours": 16,
+   "severity": 167.65,
+   "max_abs_sp": 48.48
+  },
+  {
+   "constraint_name": "BRIDGEWA230 KV  BRI-MID",
+   "binding_hours": 5,
+   "severity": 165.27999999999997,
+   "max_abs_sp": 48.37
+  },
+  {
+   "constraint_name": "BRUNOTIS138 KV  BRU-COL0",
+   "binding_hours": 16,
+   "severity": 164.24999999999997,
+   "max_abs_sp": 21.87
+  },
+  {
+   "constraint_name": "MADISON 138 KV  MAD-MEA1",
+   "binding_hours": 5,
+   "severity": 161.58,
+   "max_abs_sp": 46.68
+  },
+  {
+   "constraint_name": "TYLER   230 KV  2003B1",
+   "binding_hours": 3,
+   "severity": 161.29,
+   "max_abs_sp": 81.89
+  },
+  {
+   "constraint_name": "DICKERSH-DICKERSO 23103     A  230 KV",
+   "binding_hours": 11,
+   "severity": 158.88000000000002,
+   "max_abs_sp": 23.79
+  },
+  {
+   "constraint_name": "LOCKHART138 KV  CLI-LOC",
+   "binding_hours": 9,
+   "severity": 158.43,
+   "max_abs_sp": 39.62
+  },
+  {
+   "constraint_name": "BRUNSWIC230 KV  BRU-MEA",
+   "binding_hours": 17,
+   "severity": 156.01999999999998,
+   "max_abs_sp": 23.99
+  },
+  {
+   "constraint_name": "AXTONAEP138 KV  AXT-DAN1",
+   "binding_hours": 2,
+   "severity": 155.97,
+   "max_abs_sp": 144.51
+  },
+  {
+   "constraint_name": "COLLINSV138 KV  HUS-COL",
+   "binding_hours": 6,
+   "severity": 155.73000000000002,
+   "max_abs_sp": 47.27
+  },
+  {
+   "constraint_name": "APSOUTH contingency 22",
+   "binding_hours": 19,
+   "severity": 155.48999999999998,
+   "max_abs_sp": 25.23
+  },
+  {
+   "constraint_name": "NSEAFORD138 KV  NSE-SHA",
+   "binding_hours": 5,
+   "severity": 154.35999999999999,
+   "max_abs_sp": 36.57
+  },
+  {
+   "constraint_name": "TITUSVIL115 KV  TIT-UNI",
+   "binding_hours": 4,
+   "severity": 152.89000000000001,
+   "max_abs_sp": 58.93
+  },
+  {
+   "constraint_name": "JUNIATA 230 KV  JUN-LEW",
+   "binding_hours": 17,
+   "severity": 149.38,
+   "max_abs_sp": 23.27
+  },
+  {
+   "constraint_name": "77 MAZON138 KV  0108 2",
+   "binding_hours": 1,
+   "severity": 148.92,
+   "max_abs_sp": 148.92
+  },
+  {
+   "constraint_name": "PORTUNIO345 KV  20",
+   "binding_hours": 19,
+   "severity": 147.76,
+   "max_abs_sp": 54.53
+  },
+  {
+   "constraint_name": "15002   138 KV  15002 B",
+   "binding_hours": 23,
+   "severity": 146.93000000000004,
+   "max_abs_sp": 13.32
+  },
+  {
+   "constraint_name": "167 PLAN765 KV  TR94CT-P",
+   "binding_hours": 6,
+   "severity": 144.29,
+   "max_abs_sp": 59.19
+  },
+  {
+   "constraint_name": "IRONBRI4230 KV  208A",
+   "binding_hours": 6,
+   "severity": 141.16000000000003,
+   "max_abs_sp": 27.68
+  },
+  {
+   "constraint_name": "MANOR   230 KV  MAN-SAF1",
+   "binding_hours": 4,
+   "severity": 140.9,
+   "max_abs_sp": 40.25
+  },
+  {
+   "constraint_name": "FRANKTAP115 KV  FRN-MOR",
+   "binding_hours": 5,
+   "severity": 138.42999999999998,
+   "max_abs_sp": 84.59
+  },
+  {
+   "constraint_name": "MEHOOPAN115 KV  MEH-NME2",
+   "binding_hours": 16,
+   "severity": 137.64999999999998,
+   "max_abs_sp": 20.54
+  },
+  {
+   "constraint_name": "ARSENAL 345 KV  ARS-BRU1",
+   "binding_hours": 9,
+   "severity": 137.38000000000002,
+   "max_abs_sp": 23.93
+  },
+  {
+   "constraint_name": "BETHESDA138 KV  BET-HAR5",
+   "binding_hours": 2,
+   "severity": 136.51,
+   "max_abs_sp": 110.64
+  },
+  {
+   "constraint_name": "HOPECREE230 KV  HOP-SIL",
+   "binding_hours": 11,
+   "severity": 135.57,
+   "max_abs_sp": 33.87
+  },
+  {
+   "constraint_name": "OTTCRKPL230 KV  OTT-YOR",
+   "binding_hours": 5,
+   "severity": 133.99,
+   "max_abs_sp": 45.6
+  },
+  {
+   "constraint_name": "110 DEVO138 KV  11415 2",
+   "binding_hours": 1,
+   "severity": 133.26,
+   "max_abs_sp": 133.26
+  },
+  {
+   "constraint_name": "TERMINAL345 KV  12",
+   "binding_hours": 17,
+   "severity": 132.84,
+   "max_abs_sp": 15.78
+  },
+  {
+   "constraint_name": "HINTON  138 KV  HIN-RON1",
+   "binding_hours": 5,
+   "severity": 132.25,
+   "max_abs_sp": 96.64
+  },
+  {
+   "constraint_name": "Stillwell-Dumont 345kV lo Green Acres-Olive 345",
+   "binding_hours": 5,
+   "severity": 131.26,
+   "max_abs_sp": 32.17
+  },
+  {
+   "constraint_name": "Cayuga 345-230 kV XFMR 9 l/o Dresser-SugarCreek 345 kV",
+   "binding_hours": 11,
+   "severity": 130.60000000000002,
+   "max_abs_sp": 33.49
+  },
+  {
+   "constraint_name": "FRANKLI2-THORNTON           B  138 KV",
+   "binding_hours": 4,
+   "severity": 129.38,
+   "max_abs_sp": 74.46
+  },
+  {
+   "constraint_name": "16 WAUKE345 KV  TR83CT-P",
+   "binding_hours": 20,
+   "severity": 129.03,
+   "max_abs_sp": 16.7
+  },
+  {
+   "constraint_name": "Byron-Cherry Valley 0622 345 l/o Byron-Cherry Valley 0621 345",
+   "binding_hours": 11,
+   "severity": 128.76999999999998,
+   "max_abs_sp": 29.64
+  },
+  {
+   "constraint_name": "MILLIRON138 KV  MIL-LES1",
+   "binding_hours": 9,
+   "severity": 127.78999999999999,
+   "max_abs_sp": 32.4
+  },
+  {
+   "constraint_name": "HILLSDAL230 KV  HIL-NEW",
+   "binding_hours": 18,
+   "severity": 127.70999999999997,
+   "max_abs_sp": 14.12
+  },
+  {
+   "constraint_name": "EDISON2 138 KV  EDI-OLI1",
+   "binding_hours": 7,
+   "severity": 127.63999999999997,
+   "max_abs_sp": 47.69
+  },
+  {
+   "constraint_name": "EDGEWATE138 KV  EDG-LOY",
+   "binding_hours": 5,
+   "severity": 124.80000000000001,
+   "max_abs_sp": 52.35
+  },
+  {
+   "constraint_name": "BAYSHOR2138 KV  TR01",
+   "binding_hours": 19,
+   "severity": 123.27,
+   "max_abs_sp": 15.13
+  },
+  {
+   "constraint_name": "EBERSOLE138 KV  EBE-FOS2",
+   "binding_hours": 4,
+   "severity": 123.09,
+   "max_abs_sp": 103.03
+  },
+  {
+   "constraint_name": "GLASGOW 138 KV  GLA-KEE",
+   "binding_hours": 6,
+   "severity": 122.11,
+   "max_abs_sp": 55.13
+  },
+  {
+   "constraint_name": "SAMSHEAD115 KV  126B",
+   "binding_hours": 1,
+   "severity": 117.3,
+   "max_abs_sp": 117.3
+  },
+  {
+   "constraint_name": "WNEWPHIL138 KV  WNE-HIL1",
+   "binding_hours": 8,
+   "severity": 116.95,
+   "max_abs_sp": 27.19
+  },
+  {
+   "constraint_name": "BRUNNERI230 KV  BRU-WHE",
+   "binding_hours": 5,
+   "severity": 115.77,
+   "max_abs_sp": 46.76
+  },
+  {
+   "constraint_name": "ENTRPRIS230 KV  2186A",
+   "binding_hours": 7,
+   "severity": 114.11,
+   "max_abs_sp": 28.9
+  },
+  {
+   "constraint_name": "BEDINGTO138 KV  BED-SHE",
+   "binding_hours": 1,
+   "severity": 110.7,
+   "max_abs_sp": 110.7
+  },
+  {
+   "constraint_name": "ASHBURN-COCHRANM 227A",
+   "binding_hours": 7,
+   "severity": 109.55,
+   "max_abs_sp": 22.14
+  },
+  {
+   "constraint_name": "LADYSMTH500 KV  574A",
+   "binding_hours": 30,
+   "severity": 109.36,
+   "max_abs_sp": 13.15
+  },
+  {
+   "constraint_name": "MIDDLJCT230 KV  MID-SLE",
+   "binding_hours": 9,
+   "severity": 109.07000000000001,
+   "max_abs_sp": 14.48
+  },
+  {
+   "constraint_name": "FLORENCE115 KV  FLO-SEW",
+   "binding_hours": 6,
+   "severity": 108.92,
+   "max_abs_sp": 42.13
+  },
+  {
+   "constraint_name": "OAKL DUQ138 KV  OAK-RIAZ",
+   "binding_hours": 10,
+   "severity": 108.78999999999999,
+   "max_abs_sp": 32.52
+  },
+  {
+   "constraint_name": "HENRIETA138 KV  BEA-HEN1",
+   "binding_hours": 1,
+   "severity": 108.53,
+   "max_abs_sp": 108.53
+  },
+  {
+   "constraint_name": "SHAMPTON115 KV  93A",
+   "binding_hours": 13,
+   "severity": 107.61,
+   "max_abs_sp": 38.05
+  },
+  {
+   "constraint_name": "94 HAURD138 KV  11323",
+   "binding_hours": 22,
+   "severity": 106.56000000000002,
+   "max_abs_sp": 12.98
+  },
+  {
+   "constraint_name": "CUSHAW  115 KV  28A",
+   "binding_hours": 25,
+   "severity": 105.97000000000003,
+   "max_abs_sp": 24.37
+  },
+  {
+   "constraint_name": "MAPLTNDP115 KV  108B",
+   "binding_hours": 4,
+   "severity": 105.23,
+   "max_abs_sp": 32.01
+  },
+  {
+   "constraint_name": "AEP-DOM contingency 61",
+   "binding_hours": 7,
+   "severity": 104.20000000000002,
+   "max_abs_sp": 17.71
+  },
+  {
+   "constraint_name": "EWAYNESB138 KV  EWA-RIN",
+   "binding_hours": 6,
+   "severity": 103.56,
+   "max_abs_sp": 23.07
+  },
+  {
+   "constraint_name": "BOARDMAN138 KV  BOA-SHE1",
+   "binding_hours": 9,
+   "severity": 102.74,
+   "max_abs_sp": 21.89
+  },
+  {
+   "constraint_name": "115 BEDF345 KV  TR82CT-P",
+   "binding_hours": 3,
+   "severity": 102.71000000000001,
+   "max_abs_sp": 66.58
+  },
+  {
+   "constraint_name": "BRIGHTON230 KV  BRI-MTZ4",
+   "binding_hours": 4,
+   "severity": 100.73,
+   "max_abs_sp": 30.18
+  },
+  {
+   "constraint_name": "SNOWYCRE138 KV  SNO-SNOW",
+   "binding_hours": 3,
+   "severity": 99.24000000000001,
+   "max_abs_sp": 35.06
+  },
+  {
+   "constraint_name": "REDBANK 138 KV  RED-OAK",
+   "binding_hours": 4,
+   "severity": 99.04,
+   "max_abs_sp": 40.88
+  },
+  {
+   "constraint_name": "114 NORT138 KV  11412 Z1",
+   "binding_hours": 8,
+   "severity": 98.96,
+   "max_abs_sp": 43.85
+  },
+  {
+   "constraint_name": "FALLCREE138 KV  FAL-NEW1",
+   "binding_hours": 7,
+   "severity": 96.69,
+   "max_abs_sp": 30.83
+  },
+  {
+   "constraint_name": "Nucor-Whitestown 345 kV l/o Rockport-Jefferson 765 kV",
+   "binding_hours": 3,
+   "severity": 96.53999999999999,
+   "max_abs_sp": 50.37
+  },
+  {
+   "constraint_name": "NMESHOPP230 KV  NME-OXB",
+   "binding_hours": 17,
+   "severity": 94.78,
+   "max_abs_sp": 23.58
+  },
+  {
+   "constraint_name": "EMILIE  138 KV  EMI-ROL",
+   "binding_hours": 3,
+   "severity": 94.37,
+   "max_abs_sp": 72.41
+  },
+  {
+   "constraint_name": "ROCKTONM115 KV  ROC-SHA",
+   "binding_hours": 1,
+   "severity": 93.64,
+   "max_abs_sp": 93.64
+  },
+  {
+   "constraint_name": "RICHLND 138 KV  RIC-WAUS",
+   "binding_hours": 8,
+   "severity": 92.91000000000001,
+   "max_abs_sp": 32.72
+  },
+  {
+   "constraint_name": "AMOS    345 KV  7-P",
+   "binding_hours": 3,
+   "severity": 91.78,
+   "max_abs_sp": 49.99
+  },
+  {
+   "constraint_name": "FARMVIEW138 KV  FRM-MIL",
+   "binding_hours": 7,
+   "severity": 91.27999999999999,
+   "max_abs_sp": 34.88
+  },
+  {
+   "constraint_name": "PLEASNTV500 KV  TX3",
+   "binding_hours": 2,
+   "severity": 90.06,
+   "max_abs_sp": 50.27
+  },
+  {
+   "constraint_name": "COOP_EK 161 KV  COO-ELIH",
+   "binding_hours": 12,
+   "severity": 88.59,
+   "max_abs_sp": 24.77
+  },
+  {
+   "constraint_name": "BULLRUN 230 KV  BUL-CLIF",
+   "binding_hours": 6,
+   "severity": 88.16999999999999,
+   "max_abs_sp": 28.36
+  },
+  {
+   "constraint_name": "SHERMAN 69 KV   SHE-VIN",
+   "binding_hours": 26,
+   "severity": 86.79999999999998,
+   "max_abs_sp": 8.97
+  },
+  {
+   "constraint_name": "CHESTER4115 KV  92A",
+   "binding_hours": 13,
+   "severity": 86.6,
+   "max_abs_sp": 13.76
+  },
+  {
+   "constraint_name": "KELFORD 115 KV  126A",
+   "binding_hours": 1,
+   "severity": 85.03,
+   "max_abs_sp": 85.03
+  },
+  {
+   "constraint_name": "PROFITDP230 KV  2054AC",
+   "binding_hours": 6,
+   "severity": 84.59,
+   "max_abs_sp": 18.62
+  },
+  {
+   "constraint_name": "SANDERSO138 KV  GSU1",
+   "binding_hours": 13,
+   "severity": 83.30999999999999,
+   "max_abs_sp": 11.24
+  },
+  {
+   "constraint_name": "50045005 59",
+   "binding_hours": 3,
+   "severity": 82.72,
+   "max_abs_sp": 49.76
+  },
+  {
+   "constraint_name": "BED-BLA contingency 30",
+   "binding_hours": 7,
+   "severity": 80.84,
+   "max_abs_sp": 21.1
+  },
+  {
+   "constraint_name": "185 TOLL138 KV  7902-2",
+   "binding_hours": 11,
+   "severity": 80.78,
+   "max_abs_sp": 11.33
+  },
+  {
+   "constraint_name": "CHARLERO138 KV  CHA-DRY",
+   "binding_hours": 6,
+   "severity": 80.17000000000002,
+   "max_abs_sp": 41.49
+  },
+  {
+   "constraint_name": "CARRCROF138 KV  CAR-EDG",
+   "binding_hours": 2,
+   "severity": 76.99,
+   "max_abs_sp": 47.36
+  },
+  {
+   "constraint_name": "BUFFINGT345 KV  46",
+   "binding_hours": 7,
+   "severity": 76.5,
+   "max_abs_sp": 24.75
+  },
+  {
+   "constraint_name": "SugarCrk-Dresser 345 flo Cayuga-Eugene_345",
+   "binding_hours": 4,
+   "severity": 75.39,
+   "max_abs_sp": 20.78
+  },
+  {
+   "constraint_name": "CEDARCR2138 KV  1-P",
+   "binding_hours": 9,
+   "severity": 74.94,
+   "max_abs_sp": 28.77
+  },
+  {
+   "constraint_name": "LOUDOUN4500 KV  TX2",
+   "binding_hours": 5,
+   "severity": 74.10000000000001,
+   "max_abs_sp": 25.01
+  },
+  {
+   "constraint_name": "SHAWVILL4.1 KV  BNK 14-T",
+   "binding_hours": 10,
+   "severity": 74.08,
+   "max_abs_sp": 11.99
+  },
+  {
+   "constraint_name": "BARRCKRD230 KV  233B1",
+   "binding_hours": 5,
+   "severity": 73.93,
+   "max_abs_sp": 35.97
+  },
+  {
+   "constraint_name": "RIVERSID115 KV  115011",
+   "binding_hours": 2,
+   "severity": 72.82000000000001,
+   "max_abs_sp": 67.29
+  },
+  {
+   "constraint_name": "CEDARCRE230 KV  AT20",
+   "binding_hours": 4,
+   "severity": 72.71000000000001,
+   "max_abs_sp": 42.75
+  },
+  {
+   "constraint_name": "HAZARD  161 KV  3",
+   "binding_hours": 27,
+   "severity": 72.31000000000002,
+   "max_abs_sp": 9.91
+  },
+  {
+   "constraint_name": "LIMERICK500 KV  LIM 4B-P",
+   "binding_hours": 2,
+   "severity": 72.14,
+   "max_abs_sp": 39.8
+  },
+  {
+   "constraint_name": "08OAKLEY138 KV  CEN-OAK",
+   "binding_hours": 5,
+   "severity": 70.08,
+   "max_abs_sp": 49.29
+  },
+  {
+   "constraint_name": "BED-BLA",
+   "binding_hours": 14,
+   "severity": 69.75999999999999,
+   "max_abs_sp": 15.18
+  },
+  {
+   "constraint_name": "BEAVER  138 KV  BEA-BLA1",
+   "binding_hours": 2,
+   "severity": 68.31,
+   "max_abs_sp": 66.15
+  },
+  {
+   "constraint_name": "CONCORD 138 KV  CON-TWI",
+   "binding_hours": 9,
+   "severity": 68.25,
+   "max_abs_sp": 31.3
+  },
+  {
+   "constraint_name": "CECI APS138 KV  CEC-HOU",
+   "binding_hours": 2,
+   "severity": 65.57,
+   "max_abs_sp": 35.75
+  },
+  {
+   "constraint_name": "APSOUTH contingency 18",
+   "binding_hours": 6,
+   "severity": 63.08,
+   "max_abs_sp": 23.26
+  },
+  {
+   "constraint_name": "ARMSTRON138 KV  ARM-BUR",
+   "binding_hours": 4,
+   "severity": 61.46,
+   "max_abs_sp": 36.92
+  },
+  {
+   "constraint_name": "SIEGFRIE230 KV  4",
+   "binding_hours": 4,
+   "severity": 61.41,
+   "max_abs_sp": 33.47
+  },
+  {
+   "constraint_name": "144 WAYN345 KV  TR84CT-P",
+   "binding_hours": 7,
+   "severity": 61.230000000000004,
+   "max_abs_sp": 26.48
+  },
+  {
+   "constraint_name": "MAPLTNDP115 KV  108C",
+   "binding_hours": 2,
+   "severity": 60.230000000000004,
+   "max_abs_sp": 31.38
+  },
+  {
+   "constraint_name": "CARL PN 115 KV  CAR-ROX",
+   "binding_hours": 8,
+   "severity": 60.05,
+   "max_abs_sp": 10.94
+  },
+  {
+   "constraint_name": "GARNERDP115 KV  65D",
+   "binding_hours": 7,
+   "severity": 59.15,
+   "max_abs_sp": 19.51
+  },
+  {
+   "constraint_name": "REPUBSM 138 KV  REP-BLU",
+   "binding_hours": 2,
+   "severity": 59.04,
+   "max_abs_sp": 37.94
+  },
+  {
+   "constraint_name": "MTSTORM4500 KV  MTS-PRU",
+   "binding_hours": 15,
+   "severity": 59.019999999999996,
+   "max_abs_sp": 11.78
+  },
+  {
+   "constraint_name": "ALBRIGHT138 KV  ALB-SNO",
+   "binding_hours": 2,
+   "severity": 58.58,
+   "max_abs_sp": 49.23
+  },
+  {
+   "constraint_name": "VIENNA  138 KV  13710",
+   "binding_hours": 4,
+   "severity": 58.19,
+   "max_abs_sp": 20.08
+  },
+  {
+   "constraint_name": "HALLWOOD69 KV   HAL-OAK",
+   "binding_hours": 2,
+   "severity": 56.08,
+   "max_abs_sp": 50.17
+  },
+  {
+   "constraint_name": "BOONETWN230 KV  BOO-NBO",
+   "binding_hours": 4,
+   "severity": 55.51,
+   "max_abs_sp": 33.06
+  },
+  {
+   "constraint_name": "14403   138 KV  14403 1",
+   "binding_hours": 9,
+   "severity": 55.25,
+   "max_abs_sp": 13.19
+  },
+  {
+   "constraint_name": "DANVILLE138 KV  DAN-EDA1",
+   "binding_hours": 1,
+   "severity": 55.17,
+   "max_abs_sp": 55.17
+  },
+  {
+   "constraint_name": "AUGTINE 138 KV  08A-08W2",
+   "binding_hours": 10,
+   "severity": 54.63,
+   "max_abs_sp": 12.26
+  },
+  {
+   "constraint_name": "DEQUINE 345 KV  DEQ-EUG1",
+   "binding_hours": 11,
+   "severity": 54.230000000000004,
+   "max_abs_sp": 9.53
+  },
+  {
+   "constraint_name": "DELAWARE138 KV  DEL-WAT",
+   "binding_hours": 8,
+   "severity": 54.18000000000001,
+   "max_abs_sp": 15.82
+  },
+  {
+   "constraint_name": "TILTONS2138 KV  TIL-WBE1",
+   "binding_hours": 3,
+   "severity": 53.510000000000005,
+   "max_abs_sp": 42.45
+  },
+  {
+   "constraint_name": "IRONWOOD230 KV  IRO-SLE",
+   "binding_hours": 11,
+   "severity": 53.26,
+   "max_abs_sp": 10.64
+  },
+  {
+   "constraint_name": "SMITHJCT115 KV  SMI-SMI",
+   "binding_hours": 1,
+   "severity": 52.77,
+   "max_abs_sp": 52.77
+  },
+  {
+   "constraint_name": "CLAYMONT69 KV   CLA-NAA",
+   "binding_hours": 4,
+   "severity": 51.81999999999999,
+   "max_abs_sp": 28.68
+  },
+  {
+   "constraint_name": "CHALKPT 500 KV  CHA-CHE",
+   "binding_hours": 15,
+   "severity": 51.279999999999994,
+   "max_abs_sp": 6.97
+  },
+  {
+   "constraint_name": "HARRISN 138 KV  HAR-OST",
+   "binding_hours": 2,
+   "severity": 51.24,
+   "max_abs_sp": 28.85
+  },
+  {
+   "constraint_name": "HIGHRIDG230 KV  HIG-SAN1",
+   "binding_hours": 12,
+   "severity": 50.720000000000006,
+   "max_abs_sp": 10.86
+  },
+  {
+   "constraint_name": "1607    138 KV  1607 5",
+   "binding_hours": 1,
+   "severity": 48.85,
+   "max_abs_sp": 48.85
+  },
+  {
+   "constraint_name": "HANOVER 69 KV   HAN-PLY",
+   "binding_hours": 18,
+   "severity": 48.50000000000001,
+   "max_abs_sp": 5.65
+  },
+  {
+   "constraint_name": "NRTHNECK115 KV  TX2A",
+   "binding_hours": 14,
+   "severity": 48.39999999999999,
+   "max_abs_sp": 7.17
+  },
+  {
+   "constraint_name": "74 KEWAN138 KV  L74B1Z3",
+   "binding_hours": 11,
+   "severity": 48.209999999999994,
+   "max_abs_sp": 9.12
+  },
+  {
+   "constraint_name": "HARWOOD 230 KV  5",
+   "binding_hours": 10,
+   "severity": 48.059999999999995,
+   "max_abs_sp": 8.73
+  },
+  {
+   "constraint_name": "PLYMOUTH230 KV  PLY-WHI4",
+   "binding_hours": 3,
+   "severity": 47.41,
+   "max_abs_sp": 45.9
+  },
+  {
+   "constraint_name": "SHAWVILL230 KV  BNK 1A-P",
+   "binding_hours": 3,
+   "severity": 46.63,
+   "max_abs_sp": 17.09
+  },
+  {
+   "constraint_name": "ATHENIA 138 KV  ATH-KUL",
+   "binding_hours": 3,
+   "severity": 46.14,
+   "max_abs_sp": 24.64
+  },
+  {
+   "constraint_name": "BEKAERT 69 KV   BEK-WSHE",
+   "binding_hours": 8,
+   "severity": 45.040000000000006,
+   "max_abs_sp": 15.24
+  },
+  {
+   "constraint_name": "LADYSMTH500 KV  568A",
+   "binding_hours": 7,
+   "severity": 44.93,
+   "max_abs_sp": 12.54
+  },
+  {
+   "constraint_name": "167 PLAN345 KV  TR94CT-S",
+   "binding_hours": 5,
+   "severity": 44.300000000000004,
+   "max_abs_sp": 19.1
+  },
+  {
+   "constraint_name": "CLIN DUQ138 KV  CLI-FIN",
+   "binding_hours": 4,
+   "severity": 43.089999999999996,
+   "max_abs_sp": 23.4
+  },
+  {
+   "constraint_name": "BEAV DUQ138 KV  BEA-RAC",
+   "binding_hours": 3,
+   "severity": 42.870000000000005,
+   "max_abs_sp": 23.09
+  },
+  {
+   "constraint_name": "ALBRIGHT138 KV  ALB-GAR",
+   "binding_hours": 3,
+   "severity": 41.239999999999995,
+   "max_abs_sp": 26.49
+  },
+  {
+   "constraint_name": "UNIONCMP115 KV  93C",
+   "binding_hours": 1,
+   "severity": 41.1,
+   "max_abs_sp": 41.1
+  },
+  {
+   "constraint_name": "37 NATOM138 KV  11412",
+   "binding_hours": 2,
+   "severity": 41.089999999999996,
+   "max_abs_sp": 37.65
+  },
+  {
+   "constraint_name": "TANNERSC345 KV  TAN-DEA1",
+   "binding_hours": 3,
+   "severity": 40.49,
+   "max_abs_sp": 19.96
+  },
+  {
+   "constraint_name": "MICKLETO69 KV   MIC-VAL",
+   "binding_hours": 19,
+   "severity": 40.160000000000004,
+   "max_abs_sp": 7.82
+  },
+  {
+   "constraint_name": "BUZZARD 138 KV  BUZ-SOU1",
+   "binding_hours": 1,
+   "severity": 40.1,
+   "max_abs_sp": 40.1
+  },
+  {
+   "constraint_name": "1 LASALL138 KV  TR81CT-S",
+   "binding_hours": 4,
+   "severity": 40.08,
+   "max_abs_sp": 13.66
+  },
+  {
+   "constraint_name": "OCRAN   115 KV  65A1",
+   "binding_hours": 4,
+   "severity": 39.940000000000005,
+   "max_abs_sp": 33.49
+  },
+  {
+   "constraint_name": "112 WILT765 KV  TR94CT-P",
+   "binding_hours": 8,
+   "severity": 39.35,
+   "max_abs_sp": 9.94
+  },
+  {
+   "constraint_name": "VINELAND69 KV   0712",
+   "binding_hours": 10,
+   "severity": 38.769999999999996,
+   "max_abs_sp": 5.3
+  },
+  {
+   "constraint_name": "State Line-Roxanna 138 kV l/o Wilton Center-Dumont 765 kV",
+   "binding_hours": 2,
+   "severity": 37.09,
+   "max_abs_sp": 19.26
+  },
+  {
+   "constraint_name": "CHESTNT 115 KV  1001E",
+   "binding_hours": 2,
+   "severity": 36.95,
+   "max_abs_sp": 36.82
+  },
+  {
+   "constraint_name": "CONEMAUG115 KV  CNM-SEW",
+   "binding_hours": 4,
+   "severity": 36.800000000000004,
+   "max_abs_sp": 15.2
+  },
+  {
+   "constraint_name": "APSOUTH contingency 66",
+   "binding_hours": 9,
+   "severity": 35.919999999999995,
+   "max_abs_sp": 8.61
+  },
+  {
+   "constraint_name": "156 CHER345 KV  TR82CT-P",
+   "binding_hours": 1,
+   "severity": 35.48,
+   "max_abs_sp": 35.48
+  },
+  {
+   "constraint_name": "PLEASNTV230 KV  274D",
+   "binding_hours": 8,
+   "severity": 35.39,
+   "max_abs_sp": 14.08
+  },
+  {
+   "constraint_name": "HARMONYV230 KV  TX2",
+   "binding_hours": 3,
+   "severity": 34.0,
+   "max_abs_sp": 13.91
+  },
+  {
+   "constraint_name": "CHALKPT 230 KV  T2",
+   "binding_hours": 3,
+   "severity": 33.519999999999996,
+   "max_abs_sp": 15.02
+  },
+  {
+   "constraint_name": "BELLEFON138 KV  T3",
+   "binding_hours": 4,
+   "severity": 33.04,
+   "max_abs_sp": 12.74
+  },
+  {
+   "constraint_name": "HIGHRIDG230 KV  HIG-SAN3",
+   "binding_hours": 2,
+   "severity": 33.02,
+   "max_abs_sp": 18.89
+  },
+  {
+   "constraint_name": "SCOTLAND115 KV  126C",
+   "binding_hours": 1,
+   "severity": 32.86,
+   "max_abs_sp": 32.86
+  },
+  {
+   "constraint_name": "APSOUTH contingency 9",
+   "binding_hours": 19,
+   "severity": 32.730000000000004,
+   "max_abs_sp": 6.16
+  },
+  {
+   "constraint_name": "ARMSTRON138 KV  ARM-KIT",
+   "binding_hours": 2,
+   "severity": 31.52,
+   "max_abs_sp": 28.61
+  },
+  {
+   "constraint_name": "IRONWOOD230 KV  IRO-NLE",
+   "binding_hours": 6,
+   "severity": 31.37,
+   "max_abs_sp": 7.64
+  },
+  {
+   "constraint_name": "CHARLTSV230 KV  233A1",
+   "binding_hours": 8,
+   "severity": 31.32,
+   "max_abs_sp": 7.29
+  },
+  {
+   "constraint_name": "PLYMOUTH230 KV  PLY-WHI3",
+   "binding_hours": 2,
+   "severity": 31.17,
+   "max_abs_sp": 25.21
+  },
+  {
+   "constraint_name": "WEST",
+   "binding_hours": 8,
+   "severity": 30.959999999999997,
+   "max_abs_sp": 16.84
+  },
+  {
+   "constraint_name": "ELMONT4 500 KV  TX1",
+   "binding_hours": 3,
+   "severity": 30.620000000000005,
+   "max_abs_sp": 14.49
+  },
+  {
+   "constraint_name": "Paddock T21 345/138 kV l/o Byron - Wayne 345 kV",
+   "binding_hours": 4,
+   "severity": 30.549999999999997,
+   "max_abs_sp": 22.79
+  },
+  {
+   "constraint_name": "AEP-DOM contingency 55",
+   "binding_hours": 4,
+   "severity": 29.619999999999997,
+   "max_abs_sp": 24.45
+  },
+  {
+   "constraint_name": "SAPONY  230 KV  TX2",
+   "binding_hours": 13,
+   "severity": 29.130000000000003,
+   "max_abs_sp": 5.17
+  },
+  {
+   "constraint_name": "ELMONT4 230 KV  283A",
+   "binding_hours": 1,
+   "severity": 28.51,
+   "max_abs_sp": 28.51
+  },
+  {
+   "constraint_name": "UTICAJCT115 KV  UTI-WAY",
+   "binding_hours": 3,
+   "severity": 28.23,
+   "max_abs_sp": 18.72
+  },
+  {
+   "constraint_name": "HUNTER  230 KV  2005A",
+   "binding_hours": 1,
+   "severity": 27.43,
+   "max_abs_sp": 27.43
+  },
+  {
+   "constraint_name": "BULLITCO161 KV  BUL-CEDL",
+   "binding_hours": 3,
+   "severity": 27.360000000000003,
+   "max_abs_sp": 24.42
+  },
+  {
+   "constraint_name": "MOUN UGI230 KV  1",
+   "binding_hours": 29,
+   "severity": 27.019999999999996,
+   "max_abs_sp": 4.54
+  },
+  {
+   "constraint_name": "CHARLTSV230 KV  291C",
+   "binding_hours": 8,
+   "severity": 26.65,
+   "max_abs_sp": 6.98
+  },
+  {
+   "constraint_name": "OST     138 KV  OST-SOU",
+   "binding_hours": 3,
+   "severity": 26.47,
+   "max_abs_sp": 11.07
+  },
+  {
+   "constraint_name": "088MIRDJ138 KV  088-BECK",
+   "binding_hours": 1,
+   "severity": 26.14,
+   "max_abs_sp": 26.14
+  },
+  {
+   "constraint_name": "FACEROCK69 KV   FAC-MIL1",
+   "binding_hours": 4,
+   "severity": 25.759999999999998,
+   "max_abs_sp": 9.51
+  },
+  {
+   "constraint_name": "WHITAKER115 KV  TX1",
+   "binding_hours": 3,
+   "severity": 25.63,
+   "max_abs_sp": 11.83
+  },
+  {
+   "constraint_name": "7 STATE 345 KV  TR82CT",
+   "binding_hours": 7,
+   "severity": 25.33,
+   "max_abs_sp": 7.98
+  },
+  {
+   "constraint_name": "COLONIAL115 KV  COL-GLE2",
+   "binding_hours": 1,
+   "severity": 25.17,
+   "max_abs_sp": 25.17
+  },
+  {
+   "constraint_name": "BLACKOAK138 KV  BLA-CRS",
+   "binding_hours": 1,
+   "severity": 24.68,
+   "max_abs_sp": 24.68
+  },
+  {
+   "constraint_name": "MARQUIS2345 KV  MAR-STUA",
+   "binding_hours": 6,
+   "severity": 24.35,
+   "max_abs_sp": 6.47
+  },
+  {
+   "constraint_name": "BURTONSV230 KV  BUR-OAK5",
+   "binding_hours": 3,
+   "severity": 23.78,
+   "max_abs_sp": 11.05
+  },
+  {
+   "constraint_name": "PURDY   115 KV  148A",
+   "binding_hours": 2,
+   "severity": 23.66,
+   "max_abs_sp": 13.23
+  },
+  {
+   "constraint_name": "HOSENSME230 KV  HOS-NBO",
+   "binding_hours": 6,
+   "severity": 23.64,
+   "max_abs_sp": 9.96
+  },
+  {
+   "constraint_name": "71 HIGGI138 KV  4607",
+   "binding_hours": 2,
+   "severity": 23.43,
+   "max_abs_sp": 17.04
+  },
+  {
+   "constraint_name": "945 CRET345 KV  CRE-CRET",
+   "binding_hours": 1,
+   "severity": 23.38,
+   "max_abs_sp": 23.38
+  },
+  {
+   "constraint_name": "BEVERLY2345 KV  BEV-MUS1",
+   "binding_hours": 5,
+   "severity": 23.130000000000003,
+   "max_abs_sp": 11.45
+  },
+  {
+   "constraint_name": "BERLNLK 138 KV  BER-BLUE",
+   "binding_hours": 6,
+   "severity": 23.099999999999998,
+   "max_abs_sp": 10.42
+  },
+  {
+   "constraint_name": "RICHLND 138 KV  TR-5",
+   "binding_hours": 2,
+   "severity": 22.880000000000003,
+   "max_abs_sp": 19.35
+  },
+  {
+   "constraint_name": "CLAYTNAE69 KV   CLA-WOO",
+   "binding_hours": 2,
+   "severity": 22.849999999999998,
+   "max_abs_sp": 20.97
+  },
+  {
+   "constraint_name": "GOETHALS230 KV  GOE-LINA",
+   "binding_hours": 2,
+   "severity": 22.78,
+   "max_abs_sp": 17.42
+  },
+  {
+   "constraint_name": "PHILIPSB115 KV  PHI-SHA",
+   "binding_hours": 2,
+   "severity": 22.740000000000002,
+   "max_abs_sp": 12.3
+  },
+  {
+   "constraint_name": "LICKRUN 115 KV  LIC-ROC",
+   "binding_hours": 6,
+   "severity": 22.35,
+   "max_abs_sp": 6.76
+  },
+  {
+   "constraint_name": "BOYKINS 115 KV  108A",
+   "binding_hours": 3,
+   "severity": 22.310000000000002,
+   "max_abs_sp": 15.05
+  },
+  {
+   "constraint_name": "APSOUTH contingency 56",
+   "binding_hours": 4,
+   "severity": 21.56,
+   "max_abs_sp": 8.48
+  },
+  {
+   "constraint_name": "ATHENIA 230 KV  ATH-SADF",
+   "binding_hours": 2,
+   "severity": 21.25,
+   "max_abs_sp": 12.07
+  },
+  {
+   "constraint_name": "ETOWANDA230 KV  ETO-SCO",
+   "binding_hours": 9,
+   "severity": 20.96,
+   "max_abs_sp": 5.61
+  },
+  {
+   "constraint_name": "MAKAHOY 138 KV  MAK-STR",
+   "binding_hours": 2,
+   "severity": 20.91,
+   "max_abs_sp": 10.81
+  },
+  {
+   "constraint_name": "HOPEWEL4230 KV  211A",
+   "binding_hours": 2,
+   "severity": 20.81,
+   "max_abs_sp": 15.28
+  },
+  {
+   "constraint_name": "FLMINSBG138 KV  FLM-SPU",
+   "binding_hours": 1,
+   "severity": 20.57,
+   "max_abs_sp": 20.57
+  },
+  {
+   "constraint_name": "BED-BLA contingency 42",
+   "binding_hours": 5,
+   "severity": 20.470000000000002,
+   "max_abs_sp": 7.11
+  },
+  {
+   "constraint_name": "LEWESREA69 KV   LEW-MID",
+   "binding_hours": 4,
+   "severity": 19.48,
+   "max_abs_sp": 7.52
+  },
+  {
+   "constraint_name": "MIAMI   345 KV  BK-E",
+   "binding_hours": 6,
+   "severity": 19.189999999999998,
+   "max_abs_sp": 4.84
+  },
+  {
+   "constraint_name": "11 FISK 138 KV  1111",
+   "binding_hours": 7,
+   "severity": 19.169999999999998,
+   "max_abs_sp": 5.38
+  },
+  {
+   "constraint_name": "MORANDP 115 KV  158A",
+   "binding_hours": 2,
+   "severity": 19.13,
+   "max_abs_sp": 15.69
+  },
+  {
+   "constraint_name": "127 MATT138 KV  6603 2",
+   "binding_hours": 2,
+   "severity": 18.91,
+   "max_abs_sp": 12.29
+  },
+  {
+   "constraint_name": "BRIGHTON230 KV  BRI-MTZ5",
+   "binding_hours": 3,
+   "severity": 18.82,
+   "max_abs_sp": 8.9
+  },
+  {
+   "constraint_name": "11 FISK 138 KV  TR71 12",
+   "binding_hours": 2,
+   "severity": 18.080000000000002,
+   "max_abs_sp": 15.72
+  },
+  {
+   "constraint_name": "CUSHAW  115 KV  TX1",
+   "binding_hours": 10,
+   "severity": 17.18,
+   "max_abs_sp": 3.66
+  },
+  {
+   "constraint_name": "ECLIPSE 115 KV  ECL-SCR",
+   "binding_hours": 4,
+   "severity": 16.669999999999998,
+   "max_abs_sp": 8.94
+  },
+  {
+   "constraint_name": "CEDAR_IT161 KV  CED-CEDL",
+   "binding_hours": 2,
+   "severity": 16.07,
+   "max_abs_sp": 15.83
+  },
+  {
+   "constraint_name": "CARS DUQ138 KV  CAR-FOR",
+   "binding_hours": 2,
+   "severity": 15.8,
+   "max_abs_sp": 9.42
+  },
+  {
+   "constraint_name": "FTSLOCUM69 KV   190-6R",
+   "binding_hours": 2,
+   "severity": 15.45,
+   "max_abs_sp": 9.83
+  },
+  {
+   "constraint_name": "AQUEDUCT230 KV  AQU-DOU",
+   "binding_hours": 1,
+   "severity": 15.04,
+   "max_abs_sp": 15.04
+  },
+  {
+   "constraint_name": "20 BRAID345 KV  2001",
+   "binding_hours": 2,
+   "severity": 15.02,
+   "max_abs_sp": 8.13
+  },
+  {
+   "constraint_name": "RUSSELJC161 KV  20R-5WO1",
+   "binding_hours": 1,
+   "severity": 14.33,
+   "max_abs_sp": 14.33
+  },
+  {
+   "constraint_name": "APSOUTH contingency 11",
+   "binding_hours": 5,
+   "severity": 14.01,
+   "max_abs_sp": 5.32
+  },
+  {
+   "constraint_name": "BUTLER  69 KV   BUT-VIN",
+   "binding_hours": 8,
+   "severity": 13.83,
+   "max_abs_sp": 5.58
+  },
+  {
+   "constraint_name": "MICKLETO230 KV  MICK #4",
+   "binding_hours": 2,
+   "severity": 13.42,
+   "max_abs_sp": 13.28
+  },
+  {
+   "constraint_name": "LOCKS   230 KV  TX6_",
+   "binding_hours": 2,
+   "severity": 13.31,
+   "max_abs_sp": 10.22
+  },
+  {
+   "constraint_name": "HUBBARDS138 KV  HUB-TRI1",
+   "binding_hours": 3,
+   "severity": 12.94,
+   "max_abs_sp": 10.28
+  },
+  {
+   "constraint_name": "MIAMIFOR138 KV  MIA-08G1",
+   "binding_hours": 3,
+   "severity": 12.71,
+   "max_abs_sp": 5.15
+  },
+  {
+   "constraint_name": "BENSONDP115 KV  BEN-HATH",
+   "binding_hours": 3,
+   "severity": 12.19,
+   "max_abs_sp": 5.47
+  },
+  {
+   "constraint_name": "CANALAEP138 KV  CAN-MOU1",
+   "binding_hours": 1,
+   "severity": 11.87,
+   "max_abs_sp": 11.87
+  },
+  {
+   "constraint_name": "SHAWVILL230 KV  BNK 2A-P",
+   "binding_hours": 1,
+   "severity": 11.65,
+   "max_abs_sp": 11.65
+  },
+  {
+   "constraint_name": "BLMNTDOM 201T2180     CB       230 KV",
+   "binding_hours": 1,
+   "severity": 11.61,
+   "max_abs_sp": 11.61
+  },
+  {
+   "constraint_name": "HAYES_FE345 KV  DAV-HAY",
+   "binding_hours": 1,
+   "severity": 11.55,
+   "max_abs_sp": 11.55
+  },
+  {
+   "constraint_name": "KELLAM  69 KV   KEL-WEI",
+   "binding_hours": 2,
+   "severity": 10.82,
+   "max_abs_sp": 7.1
+  },
+  {
+   "constraint_name": "APSOUTH contingency 62",
+   "binding_hours": 1,
+   "severity": 10.34,
+   "max_abs_sp": 10.34
+  },
+  {
+   "constraint_name": "SPURLOCK345 KV  XFT12",
+   "binding_hours": 7,
+   "severity": 10.3,
+   "max_abs_sp": 3.2
+  },
+  {
+   "constraint_name": "REAMSDP 115 KV  69C",
+   "binding_hours": 2,
+   "severity": 9.649999999999999,
+   "max_abs_sp": 5.22
+  },
+  {
+   "constraint_name": "MTZION  230 KV  MTZ-QUI5",
+   "binding_hours": 2,
+   "severity": 9.55,
+   "max_abs_sp": 9.34
+  },
+  {
+   "constraint_name": "BCPEP",
+   "binding_hours": 5,
+   "severity": 9.07,
+   "max_abs_sp": 2.46
+  },
+  {
+   "constraint_name": "HANTHORN138 KV  HAN-THA",
+   "binding_hours": 2,
+   "severity": 8.98,
+   "max_abs_sp": 8.38
+  },
+  {
+   "constraint_name": "ANTRIM  138 KV  ANT-REI",
+   "binding_hours": 1,
+   "severity": 8.73,
+   "max_abs_sp": 8.73
+  },
+  {
+   "constraint_name": "19906   138 KV  199-KEN6",
+   "binding_hours": 4,
+   "severity": 8.690000000000001,
+   "max_abs_sp": 4.46
+  },
+  {
+   "constraint_name": "MIDLOTH 500 KV  TX6",
+   "binding_hours": 1,
+   "severity": 8.54,
+   "max_abs_sp": 8.54
+  },
+  {
+   "constraint_name": "LORETTO 138 KV  LOR-PIN",
+   "binding_hours": 1,
+   "severity": 8.36,
+   "max_abs_sp": 8.36
+  },
+  {
+   "constraint_name": "CASHCNDP230 KV  2135A",
+   "binding_hours": 1,
+   "severity": 8.21,
+   "max_abs_sp": 8.21
+  },
+  {
+   "constraint_name": "BURLINGT230 KV  BUR-CRO",
+   "binding_hours": 4,
+   "severity": 7.9,
+   "max_abs_sp": 2.84
+  },
+  {
+   "constraint_name": "LAURELDP69 KV   LAU-SHA",
+   "binding_hours": 1,
+   "severity": 7.83,
+   "max_abs_sp": 7.83
+  },
+  {
+   "constraint_name": "BEAUMEAD230 KV  BEA-PARA",
+   "binding_hours": 2,
+   "severity": 7.47,
+   "max_abs_sp": 4.13
+  },
+  {
+   "constraint_name": "ARSENAL 345 KV  ARS-BRU2",
+   "binding_hours": 3,
+   "severity": 6.870000000000001,
+   "max_abs_sp": 2.74
+  },
+  {
+   "constraint_name": "SAMMISFE138 KV  SAM-TOR2",
+   "binding_hours": 2,
+   "severity": 6.87,
+   "max_abs_sp": 3.5
+  },
+  {
+   "constraint_name": "MONTVALE69 KV   MON-PEA",
+   "binding_hours": 5,
+   "severity": 6.45,
+   "max_abs_sp": 2.34
+  },
+  {
+   "constraint_name": "DICKERSH230 KV  DIC-QUI2",
+   "binding_hours": 2,
+   "severity": 6.3,
+   "max_abs_sp": 4.66
+  },
+  {
+   "constraint_name": "GOMER   138 KV  GOM-NDEL",
+   "binding_hours": 1,
+   "severity": 5.87,
+   "max_abs_sp": 5.87
+  },
+  {
+   "constraint_name": "AEP-DOM contingency 47",
+   "binding_hours": 1,
+   "severity": 5.86,
+   "max_abs_sp": 5.86
+  },
+  {
+   "constraint_name": "CHALKPT 230 KV  T3",
+   "binding_hours": 1,
+   "severity": 5.19,
+   "max_abs_sp": 5.19
+  },
+  {
+   "constraint_name": "ROCKWOOD115 KV  ROC-SOM",
+   "binding_hours": 1,
+   "severity": 4.96,
+   "max_abs_sp": 4.96
+  },
+  {
+   "constraint_name": "MAPLTNDP-MURPHY   108B      B   115 KV",
+   "binding_hours": 1,
+   "severity": 4.56,
+   "max_abs_sp": 4.56
+  },
+  {
+   "constraint_name": "RICH PE 230 KV  RIC-WAN",
+   "binding_hours": 1,
+   "severity": 4.55,
+   "max_abs_sp": 4.55
+  },
+  {
+   "constraint_name": "RESTON  230 KV  2015A",
+   "binding_hours": 1,
+   "severity": 4.53,
+   "max_abs_sp": 4.53
+  },
+  {
+   "constraint_name": "EUGENE  345 KV  EUG-CAY1",
+   "binding_hours": 2,
+   "severity": 4.42,
+   "max_abs_sp": 3.72
+  },
+  {
+   "constraint_name": "CAROLINA115 KV  CAR-SOCK",
+   "binding_hours": 1,
+   "severity": 4.36,
+   "max_abs_sp": 4.36
+  },
+  {
+   "constraint_name": "63 SAWYE138 KV  1324 2",
+   "binding_hours": 1,
+   "severity": 3.97,
+   "max_abs_sp": 3.97
+  },
+  {
+   "constraint_name": "66 E FRN345 KV  6608",
+   "binding_hours": 2,
+   "severity": 3.74,
+   "max_abs_sp": 2.27
+  },
+  {
+   "constraint_name": "GARDNERS115 KV  GAR-MOU",
+   "binding_hours": 2,
+   "severity": 3.6399999999999997,
+   "max_abs_sp": 2.84
+  },
+  {
+   "constraint_name": "MARQUIS2345 KV  MAR-DOE2",
+   "binding_hours": 1,
+   "severity": 3.58,
+   "max_abs_sp": 3.58
+  },
+  {
+   "constraint_name": "37 NATOM138 KV  3706",
+   "binding_hours": 1,
+   "severity": 3.5,
+   "max_abs_sp": 3.5
+  },
+  {
+   "constraint_name": "TRMBL_LG345 KV  TRI-CLI1",
+   "binding_hours": 2,
+   "severity": 3.3,
+   "max_abs_sp": 2.46
+  },
+  {
+   "constraint_name": "APSOUTH contingency 35",
+   "binding_hours": 1,
+   "severity": 3.23,
+   "max_abs_sp": 3.23
+  },
+  {
+   "constraint_name": "ESAYRE  115 KV  ESA-ETO",
+   "binding_hours": 1,
+   "severity": 3.06,
+   "max_abs_sp": 3.06
+  },
+  {
+   "constraint_name": "LACKAWAN230 KV  2",
+   "binding_hours": 1,
+   "severity": 3.05,
+   "max_abs_sp": 3.05
+  },
+  {
+   "constraint_name": "CUMB PL 230 KV  CUM-WIGR",
+   "binding_hours": 1,
+   "severity": 2.97,
+   "max_abs_sp": 2.97
+  },
+  {
+   "constraint_name": "AEP-DOM contingency 20",
+   "binding_hours": 3,
+   "severity": 2.84,
+   "max_abs_sp": 1.43
+  },
+  {
+   "constraint_name": "COOLSPRI69 KV   COL-HAR",
+   "binding_hours": 1,
+   "severity": 2.71,
+   "max_abs_sp": 2.71
+  },
+  {
+   "constraint_name": "HOWARD  230 KV  HOW-PUM",
+   "binding_hours": 1,
+   "severity": 2.44,
+   "max_abs_sp": 2.44
+  },
+  {
+   "constraint_name": "945 CRET345 KV  TR1-2 13",
+   "binding_hours": 1,
+   "severity": 2.4,
+   "max_abs_sp": 2.4
+  },
+  {
+   "constraint_name": "CODOVER 138 KV  COD-WNE1",
+   "binding_hours": 2,
+   "severity": 2.36,
+   "max_abs_sp": 2.04
+  },
+  {
+   "constraint_name": "APSOUTH contingency 38",
+   "binding_hours": 1,
+   "severity": 2.21,
+   "max_abs_sp": 2.21
+  },
+  {
+   "constraint_name": "HARRISN 138 KV  HAR-VAN",
+   "binding_hours": 1,
+   "severity": 2.19,
+   "max_abs_sp": 2.19
+  },
+  {
+   "constraint_name": "PENDER  230 KV  2051A",
+   "binding_hours": 1,
+   "severity": 1.96,
+   "max_abs_sp": 1.96
+  },
+  {
+   "constraint_name": "CASHCNDP230 KV  2135B",
+   "binding_hours": 2,
+   "severity": 1.94,
+   "max_abs_sp": 1.55
+  },
+  {
+   "constraint_name": "15001   138 KV  15001 B",
+   "binding_hours": 2,
+   "severity": 1.74,
+   "max_abs_sp": 1.02
+  },
+  {
+   "constraint_name": "955 RIVE138 KV  0704 5",
+   "binding_hours": 1,
+   "severity": 1.7,
+   "max_abs_sp": 1.7
+  },
+  {
+   "constraint_name": "BASIN   230 KV  259A",
+   "binding_hours": 1,
+   "severity": 1.43,
+   "max_abs_sp": 1.43
+  },
+  {
+   "constraint_name": "LAKVEW  138 KV  LAK-GRE1",
+   "binding_hours": 1,
+   "severity": 1.37,
+   "max_abs_sp": 1.37
+  },
+  {
+   "constraint_name": "DESOTO  345 KV  DES-KEY1",
+   "binding_hours": 1,
+   "severity": 1.31,
+   "max_abs_sp": 1.31
+  },
+  {
+   "constraint_name": "LOWMOOR 138 KV  TX1A",
+   "binding_hours": 2,
+   "severity": 1.29,
+   "max_abs_sp": 1.28
+  },
+  {
+   "constraint_name": "BUSHKILL230 KV  BUS-KIT",
+   "binding_hours": 1,
+   "severity": 1.16,
+   "max_abs_sp": 1.16
+  },
+  {
+   "constraint_name": "66 E FRN138 KV  6606 1",
+   "binding_hours": 1,
+   "severity": 1.14,
+   "max_abs_sp": 1.14
+  },
+  {
+   "constraint_name": "BRIGHTON230 KV  BRI-BUR3",
+   "binding_hours": 1,
+   "severity": 1.12,
+   "max_abs_sp": 1.12
+  },
+  {
+   "constraint_name": "FTSLOCUM69 KV   FTS-TAK4",
+   "binding_hours": 1,
+   "severity": 1.08,
+   "max_abs_sp": 1.08
+  },
+  {
+   "constraint_name": "CRANESCR230 KV  2157A",
+   "binding_hours": 1,
+   "severity": 1.08,
+   "max_abs_sp": 1.08
+  },
+  {
+   "constraint_name": "BRUNOTIS138 KV  BRU-COL1",
+   "binding_hours": 1,
+   "severity": 0.84,
+   "max_abs_sp": 0.84
+  },
+  {
+   "constraint_name": "PERDUE  69 KV   PER-TAS",
+   "binding_hours": 1,
+   "severity": 0.7,
+   "max_abs_sp": 0.7
+  },
+  {
+   "constraint_name": "CONSTELL13.8 KV 1-S",
+   "binding_hours": 1,
+   "severity": 0.7,
+   "max_abs_sp": 0.7
+  },
+  {
+   "constraint_name": "NRTHNECK230 KV  TX4",
+   "binding_hours": 1,
+   "severity": 0.61,
+   "max_abs_sp": 0.61
+  },
+  {
+   "constraint_name": "HANOVER 69 KV   HAN-PAR",
+   "binding_hours": 1,
+   "severity": 0.56,
+   "max_abs_sp": 0.56
+  },
+  {
+   "constraint_name": "66 E FRN345 KV  11602",
+   "binding_hours": 1,
+   "severity": 0.47,
+   "max_abs_sp": 0.47
+  },
+  {
+   "constraint_name": "CASEYCO 161 KV  MAR-CASE",
+   "binding_hours": 1,
+   "severity": 0.37,
+   "max_abs_sp": 0.37
+  },
+  {
+   "constraint_name": "AEP-DOM contingency 43",
+   "binding_hours": 1,
+   "severity": 0.35,
+   "max_abs_sp": 0.35
+  },
+  {
+   "constraint_name": "BRIGHTON500 KV  BRI-DOU",
+   "binding_hours": 1,
+   "severity": 0.34,
+   "max_abs_sp": 0.34
+  },
+  {
+   "constraint_name": "ERDMAN  115 KV  ERD-PHI5",
+   "binding_hours": 1,
+   "severity": 0.23,
+   "max_abs_sp": 0.23
+  },
+  {
+   "constraint_name": "CARS DUQ345 KV  T1",
+   "binding_hours": 1,
+   "severity": 0.16,
+   "max_abs_sp": 0.16
+  },
+  {
+   "constraint_name": "CENTER  115 KV  CEN-ERD5",
+   "binding_hours": 1,
+   "severity": 0.1,
+   "max_abs_sp": 0.1
+  },
+  {
+   "constraint_name": "CONEMAUG500 KV  TX3",
+   "binding_hours": 1,
+   "severity": 0.01,
+   "max_abs_sp": 0.01
+  }
+ ]
+}
