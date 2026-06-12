@@ -277,3 +277,64 @@ repair/review layers).
   - Solution-study focused tests: `2 passed`.
   - Focused nearby tests: `8 passed`.
   - Full local suite: `290 passed`.
+
+## State as of 2026-06-12 (solution-study intake gates, commit 54c38f2)
+
+- Latest commit: `54c38f2 Add solution study intake gates`.
+- Worktree was clean immediately after the commit.
+- Added same-year flow and quoted project-cost intake to the solution-study
+  path:
+  - `domains/grid/solution_studies.py`
+  - `domains/grid/run_solution_studies.py`
+  - `tests/test_grid_solution_studies.py`
+- New CLI inputs:
+  - `--same-year-flow <csv>`: replaces the older gross-flow baseline for a
+    corridor/year when a same-year EIA-930/ISO flow row is available.
+  - `--project-costs <csv>`: evaluates actual quoted capex/O&M or explicit
+    annual cost against the corridor's congestion-relief value.
+- New generated artifacts:
+  - `reports/energy_solution_flow_status.csv`
+  - `reports/same_year_flow_template.csv`
+  - `reports/project_cost_template.csv`
+  - `reports/project_cost_results.csv`
+- Current evidence status:
+  - Only 2023 bulk EIA-930 BALANCE/INTERCHANGE files were found locally.
+  - NYIS-PJM 2025 is therefore flagged `needs_same_year_flow`; current value
+    remains `$142.4M/yr` from 7.38 $/MWh applied to the 2023 gross-flow
+    baseline of 19,294,263 MWh.
+  - MISO-SWPP 2024 is also flagged `needs_same_year_flow`; current value
+    remains `$25.2M/yr` from 6.31 $/MWh applied to the 2023 gross-flow
+    baseline of 3,989,884 MWh.
+  - This is intentional: the reports now show when price year and flow year
+    do not match, rather than silently treating the baseline as final.
+- Project-cost intake behavior:
+  - Blank template rows are ignored.
+  - If `annual_cost_usd` is provided, B/C uses that explicit annual cost.
+  - Otherwise annual cost is `capex_usd * fixed_charge_rate + annual_om_usd`.
+  - Relief MWh is capped by corridor gross flow, so a project cannot claim
+    more relieved congestion than the tie's observed gross-flow envelope.
+  - `reports/project_cost_results.csv` currently has only headers because no
+    real quoted costs were supplied yet.
+- To rerun after filling templates:
+
+```powershell
+python -m domains.grid.run_solution_studies `
+  --same-year-flow reports\same_year_flow_template.csv `
+  --project-costs reports\project_cost_template.csv
+```
+
+- Validation:
+  - Focused solution-study tests: `4 passed`.
+  - Full local suite: `432 passed, 2 skipped`.
+
+## Best next handoff target
+
+- If the next agent has network/data access, get same-year gross-flow evidence
+  for NYIS-PJM 2025 and MISO-SWPP 2024, populate
+  `reports/same_year_flow_template.csv`, and rerun the solution studies.
+- If the next agent has project quote/cost information, populate
+  `reports/project_cost_template.csv` and rerun to emit real B/C in
+  `reports/project_cost_results.csv` and the individual memos.
+- If neither data source is available, the next useful no-network task is to
+  map CHAWATCHAPAT and Charlie Creek-Watford to candidate MISO/SPP upgrade
+  names and owners, keeping the benefit side unchanged until costs arrive.
