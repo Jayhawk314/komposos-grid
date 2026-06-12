@@ -5,12 +5,12 @@
 - Corridor: **NYIS-PJM**
 - Current evidence year: **2025**
 - Current congestion spread: **$7.38/MWh**
-- Annual value at current spread: **$142,391,661/yr**
-- Gross flow basis: **19,294,263 MWh** (2023; needs_same_year_flow)
+- Annual value at current spread: **$159,672,256/yr**
+- Gross flow basis: **21,635,807 MWh** (2025; same_year_flow)
 - Trend: 2023 $1.53/MWh -> 2024 $2.02/MWh -> 2025 $7.38/MWh (4.8x over observed window).
 - Recommended path: Start with a 50-100 MW transfer-relief or queue-rescue package; storage clears only if it is paid for by more than seam congestion.
 - Next action: Price the top PJM-side active projects and a small transfer upgrade against the break-even capex envelope.
-- Caveat: The 2025 value is strong, but the current gross-flow baseline still needs a 2025 evidence rerun before a final investment case.
+- Caveat: Value uses same-year gross flow; remaining gap before a final investment case is project-specific costing, not flow evidence.
 
 ## Constraints
 

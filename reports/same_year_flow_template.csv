@@ -1,3 +1,3 @@
 geography,ba_a,ba_b,year,gross_mwh,net_mwh,source,notes,current_fallback_flow_year,current_fallback_gross_mwh,current_status
-NYIS-PJM,NYIS,PJM,2025,,,,Fill from same-year EIA-930 INTERCHANGE or ISO flow evidence.,2023,19294263.0,needs_same_year_flow
-MISO-SWPP,MISO,SWPP,2024,,,,Fill from same-year EIA-930 INTERCHANGE or ISO flow evidence.,2023,3989884.0,needs_same_year_flow
+NYIS-PJM,NYIS,PJM,2025,,,,Fill from same-year EIA-930 INTERCHANGE or ISO flow evidence.,2025,21635807.0,same_year_flow
+MISO-SWPP,MISO,SWPP,2024,,,,Fill from same-year EIA-930 INTERCHANGE or ISO flow evidence.,2024,4663093.0,same_year_flow

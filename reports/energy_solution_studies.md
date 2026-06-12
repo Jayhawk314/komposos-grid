@@ -4,15 +4,15 @@
 
 | Corridor | Value | Current Spread | Active Queue | Best Cost Gate | Next Action |
 |---|---:|---:|---:|---:|---|
-| NYIS-PJM | $142,391,661/yr | $7.38/MWh | 85.5 GW | $161,622,000 | Price the top PJM-side active projects and a small transfer upgrade against the break-even capex envelope. |
-| MISO-SWPP | $25,176,168/yr | $6.31/MWh | 156.5 GW | $138,189,000 | Map CHAWATCHAPAT and Charlie Creek-Watford to upgrade candidates and price a 50-100 MW relief package. |
+| NYIS-PJM | $159,672,256/yr | $7.38/MWh | 85.5 GW | $161,622,000 | Price the top PJM-side active projects and a small transfer upgrade against the break-even capex envelope. |
+| MISO-SWPP | $29,424,117/yr | $6.31/MWh | 156.5 GW | $138,189,000 | Map CHAWATCHAPAT and Charlie Creek-Watford to upgrade candidates and price a 50-100 MW relief package. |
 
 ## Flow Evidence Status
 
 | Corridor | Price Year | Flow Year | Status | Gross Flow | Annual Value |
 |---|---:|---:|---|---:|---:|
-| NYIS-PJM | 2025 | 2023 | needs_same_year_flow | 19,294,263 MWh | $142,391,661/yr |
-| MISO-SWPP | 2024 | 2023 | needs_same_year_flow | 3,989,884 MWh | $25,176,168/yr |
+| NYIS-PJM | 2025 | 2025 | same_year_flow | 21,635,807 MWh | $159,672,256/yr |
+| MISO-SWPP | 2024 | 2024 | same_year_flow | 4,663,093 MWh | $29,424,117/yr |
 
 # PJM-NYIS 2025 Solution Memo
 
@@ -21,12 +21,12 @@
 - Corridor: **NYIS-PJM**
 - Current evidence year: **2025**
 - Current congestion spread: **$7.38/MWh**
-- Annual value at current spread: **$142,391,661/yr**
-- Gross flow basis: **19,294,263 MWh** (2023; needs_same_year_flow)
+- Annual value at current spread: **$159,672,256/yr**
+- Gross flow basis: **21,635,807 MWh** (2025; same_year_flow)
 - Trend: 2023 $1.53/MWh -> 2024 $2.02/MWh -> 2025 $7.38/MWh (4.8x over observed window).
 - Recommended path: Start with a 50-100 MW transfer-relief or queue-rescue package; storage clears only if it is paid for by more than seam congestion.
 - Next action: Price the top PJM-side active projects and a small transfer upgrade against the break-even capex envelope.
-- Caveat: The 2025 value is strong, but the current gross-flow baseline still needs a 2025 evidence rerun before a final investment case.
+- Caveat: Value uses same-year gross flow; remaining gap before a final investment case is project-specific costing, not flow evidence.
 
 ## Constraints
 
@@ -79,8 +79,8 @@ A project clears on congestion value alone only if its real annual cost is below
 - Corridor: **MISO-SWPP**
 - Current evidence year: **2024**
 - Current congestion spread: **$6.31/MWh**
-- Annual value at current spread: **$25,176,168/yr**
-- Gross flow basis: **3,989,884 MWh** (2023; needs_same_year_flow)
+- Annual value at current spread: **$29,424,117/yr**
+- Gross flow basis: **4,663,093 MWh** (2024; same_year_flow)
 - Trend: 2023 $4.74/MWh -> 2024 $6.31/MWh (1.3x over observed window).
 - Recommended path: Start with targeted transfer relief around the wind-belt constraints, then test storage only where it also captures local energy or capacity value.
 - Next action: Map CHAWATCHAPAT and Charlie Creek-Watford to upgrade candidates and price a 50-100 MW relief package.

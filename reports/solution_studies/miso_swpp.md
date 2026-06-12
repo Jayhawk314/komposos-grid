@@ -5,8 +5,8 @@
 - Corridor: **MISO-SWPP**
 - Current evidence year: **2024**
 - Current congestion spread: **$6.31/MWh**
-- Annual value at current spread: **$25,176,168/yr**
-- Gross flow basis: **3,989,884 MWh** (2023; needs_same_year_flow)
+- Annual value at current spread: **$29,424,117/yr**
+- Gross flow basis: **4,663,093 MWh** (2024; same_year_flow)
 - Trend: 2023 $4.74/MWh -> 2024 $6.31/MWh (1.3x over observed window).
 - Recommended path: Start with targeted transfer relief around the wind-belt constraints, then test storage only where it also captures local energy or capacity value.
 - Next action: Map CHAWATCHAPAT and Charlie Creek-Watford to upgrade candidates and price a 50-100 MW relief package.

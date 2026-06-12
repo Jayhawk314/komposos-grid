@@ -327,14 +327,55 @@ python -m domains.grid.run_solution_studies `
   - Focused solution-study tests: `4 passed`.
   - Full local suite: `432 passed, 2 skipped`.
 
+## State as of 2026-06-12 (same-year flow gates CLOSED)
+
+- Downloaded keyless EIA-930 INTERCHANGE six-month files for 2024 and
+  2025 (eia.gov/electricity/gridmonitor/sixMonthFiles/, ~100MB each,
+  curl -C - resume; now in gitignored domains/grid/data/).
+- Added `domains/grid/same_year_flows.py` + `run_same_year_flows.py` +
+  `tests/test_grid_same_year_flows.py` (3 tests). Extraction reuses
+  `flow_geometry.load_interchange` (sum |hourly flow|, one reporter per
+  pair) so cross-year numbers stay comparable with the 2023 baseline.
+- Evidence file: `reports/same_year_flows.csv` (committed; both pairs,
+  both years):
+  - NYIS-PJM 2025: gross 21,635,807 MWh (+12% vs 2023 baseline 19.29M),
+    net -21,635,807 — tie ran PJM->NY literally every hour, matching
+    the "NY above PJM 97.9% of hours" price finding.
+  - NYIS-PJM 2024: gross 19,797,357 MWh, also fully one-directional.
+  - MISO-SWPP 2024: gross 4,663,093 MWh (+17% vs 2023 baseline 3.99M).
+  - MISO-SWPP 2025: gross 4,249,335 MWh (down from 2024; net collapsed
+    2.44M -> 0.73M — direction churns more in 2025, worth a look when
+    a 2025 MISO seam rerun lands).
+- Reran solution studies with `--same-year-flow reports/same_year_flows.csv`:
+  - Both corridors now `same_year_flow` status (gate cleared, no more
+    price-year/flow-year mismatch).
+  - NYIS-PJM 2025: $142.4M -> **$159.7M/yr** on same-year flow.
+  - MISO-SWPP 2024: $25.2M -> **$29.4M/yr** on same-year flow.
+- `_study_guidance` now switches the NYIS-PJM caveat on flow status:
+  with same-year flow the memo says the remaining gap is project
+  costing, not flow evidence.
+- Rerun command (after any future flow/price update):
+
+```powershell
+python -m domains.grid.run_solution_studies `
+  --same-year-flow reports\same_year_flows.csv `
+  --project-costs reports\project_cost_template.csv
+```
+
+- Validation: full suite `435 passed, 2 skipped`.
+
 ## Best next handoff target
 
-- If the next agent has network/data access, get same-year gross-flow evidence
-  for NYIS-PJM 2025 and MISO-SWPP 2024, populate
-  `reports/same_year_flow_template.csv`, and rerun the solution studies.
-- If the next agent has project quote/cost information, populate
-  `reports/project_cost_template.csv` and rerun to emit real B/C in
-  `reports/project_cost_results.csv` and the individual memos.
-- If neither data source is available, the next useful no-network task is to
-  map CHAWATCHAPAT and Charlie Creek-Watford to candidate MISO/SPP upgrade
-  names and owners, keeping the benefit side unchanged until costs arrive.
+- The benefit side of both priority studies is now same-year and
+  defensible. The ONLY remaining gap is real costs:
+  populate `reports/project_cost_template.csv` with quoted capex/O&M
+  (or explicit annual cost) and rerun to emit real B/C in
+  `reports/project_cost_results.csv` and the memos.
+- Best no-quote task: map CHAWATCHAPAT and Charlie Creek-Watford to
+  candidate MISO/SPP upgrade names and owners (MTEP/SPP ITP project
+  lists are public), so the cost template can be filled from published
+  project estimates rather than waiting on private quotes.
+- Cheap follow-on: 2025 MISO seam rerun (loaders are date-parameterized)
+  to pair with the MISO-SWPP 2025 flow row already in
+  `reports/same_year_flows.csv` — the net-flow collapse there hints the
+  seam economics moved again in 2025.

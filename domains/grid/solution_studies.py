@@ -733,7 +733,9 @@ def _build_study(
         for template in interventions
     ]
     study_id = geography.lower().replace("-", "_")
-    recommended_path, next_action, caveat = _study_guidance(geography)
+    recommended_path, next_action, caveat = _study_guidance(
+        geography, same_year_flow_status
+    )
     return CorridorStudy(
         study_id=study_id,
         title=_study_title(geography),
@@ -979,12 +981,26 @@ def _effective_mwh_per_mw_year(solution_type: str) -> float:
     ]
 
 
-def _study_guidance(geography: str) -> tuple[str, str, str]:
+def _study_guidance(
+    geography: str, same_year_flow_status: str = "needs_same_year_flow"
+) -> tuple[str, str, str]:
     if geography == "NYIS-PJM":
+        if same_year_flow_status == "same_year_flow":
+            caveat = (
+                "Value uses same-year gross flow; remaining gap before a "
+                "final investment case is project-specific costing, not "
+                "flow evidence."
+            )
+        else:
+            caveat = (
+                "The 2025 value is strong, but the current gross-flow "
+                "baseline still needs a 2025 evidence rerun before a final "
+                "investment case."
+            )
         return (
             "Start with a 50-100 MW transfer-relief or queue-rescue package; storage clears only if it is paid for by more than seam congestion.",
             "Price the top PJM-side active projects and a small transfer upgrade against the break-even capex envelope.",
-            "The 2025 value is strong, but the current gross-flow baseline still needs a 2025 evidence rerun before a final investment case.",
+            caveat,
         )
     if geography == "MISO-SWPP":
         return (

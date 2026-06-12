@@ -1,0 +1,5 @@
+geography,ba_a,ba_b,year,gross_mwh,net_mwh,source,notes
+MISO-SWPP,MISO,SWPP,2024,4663093.0,2441071.0,EIA-930 INTERCHANGE six-month files,sum |hourly Interchange (MW)| over 2024 files; same aggregation as 2023 baseline
+NYIS-PJM,NYIS,PJM,2024,19797357.0,-19797079.0,EIA-930 INTERCHANGE six-month files,sum |hourly Interchange (MW)| over 2024 files; same aggregation as 2023 baseline
+MISO-SWPP,MISO,SWPP,2025,4249335.0,733389.0,EIA-930 INTERCHANGE six-month files,sum |hourly Interchange (MW)| over 2025 files; same aggregation as 2023 baseline
+NYIS-PJM,NYIS,PJM,2025,21635807.0,-21635807.0,EIA-930 INTERCHANGE six-month files,sum |hourly Interchange (MW)| over 2025 files; same aggregation as 2023 baseline
