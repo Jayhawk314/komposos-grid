@@ -278,13 +278,37 @@ upgrade them into measured waste claims.
   at 100%; ERCOT completes at 2.1x. The queue bottleneck is the IA
   pipeline itself.
 
+## Phase 3: Proxy Validation via CAISO OASIS (implemented)
+
+`sources/caiso_oasis.py` + `run_caiso_oasis_evidence.py` pull CAISO's
+own DAM settlement prices (PRC_LMP v12, keyless, cached; ~39-month
+retention so Apr 2023+ of the ledger year is available) at seam nodes:
+
+- `PALOVRDE_ASR-APND` (Arizona border / CISO-SRP corridor)
+- `MALIN_5_N101` (COI / BPAT-CISO corridor)
+
+Result (Apr-Dec 2023, 6,600 hours each): the true hourly settlement
+spread is **$1.55/MWh** for SP15-Palo Verde (89% congestion component)
+and **$1.37/MWh** for NP15-Malin (81%) - the annual ICE hub level
+differences had overstated these seams by 7-9x. After correction the
+congestion proxy total fell from $234.9M to **$52.4M**, the unified
+ledger from $398.2M to **$224.9M**, and the action portfolio now leads
+with CAISO curtailment reduction ($172.5M upper bound) rather than the
+deflated proxies. Caveat carried in the evidence rows: the OASIS window
+misses Q1 2023 (western gas crisis) due to retention.
+
+This is the system working as designed: structural candidates ->
+proxy screening -> settlement-grade validation, with each stage
+allowed to shrink the previous one.
+
 ## Roadmap
 
 1. **Reviewed dashboard pass** - after a domain reviewer edits the review
    template, generate `ba_reviewed_dashboard.html` as the approved-only
    audience artifact.
-2. **Nodal LMP pull** - extend congestion evidence beyond the 5 measured
-   ties using gridstatus nodal data (MISO-SOCO and BPAT spokes next).
+2. **Remaining seam validation** - PJM-NYIS is component-measured
+   (NYISO); BPAT-NEVP and PACW-CISO still carry ICE level proxies;
+   eastern seams (MISO-SOCO, TVA spokes) have no evidence yet.
 4. **Congestion horns** - use LMP price separations as 2-cells and fill the
    inner horn `plant -> ? -> congestion-cost` to attribute congestion.
 5. **Gray coherence** - wire carefully into

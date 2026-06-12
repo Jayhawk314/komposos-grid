@@ -9,9 +9,9 @@
   },
   "totals": {
     "measured_value_usd": 0.0,
-    "proxy_value_usd": 225692598.85870674,
+    "proxy_value_usd": 52421825.40140593,
     "upper_bound_value_usd": 172470247.8925022,
-    "reported_value_usd": 398162846.7512089
+    "reported_value_usd": 224892073.29390812
   },
   "actions": [
     {
@@ -69,42 +69,6 @@
       "caveat": "Mediators are descriptive, not causal proof."
     },
     {
-      "action_id": "validate_congestion_ciso_srp",
-      "title": "Validate proxy congestion value for CISO-SRP",
-      "decision_status": "validate_proxy",
-      "problem": "td_losses_congestion",
-      "geography": "CISO-SRP",
-      "evidence_level": "measured_proxy",
-      "claim_ids": "congestion_ciso_srp",
-      "measured_value_usd": 0.0,
-      "proxy_value_usd": 141660273.0449014,
-      "upper_bound_value_usd": 0.0,
-      "reported_value_usd": 141660273.0449014,
-      "quantity_summary": "10,099,478 MWh gross interchange",
-      "priority_score": 403.5167797466431,
-      "next_step": "Replace hub/price-spread proxy with nodal LMP or direct congestion-cost evidence.",
-      "rationale": "The corridor has measured price-spread evidence attached to a structural bottleneck.",
-      "caveat": "Hub proxy has weak flow/price alignment; Proxy value depends on hub-to-BA mapping and should not be treated as direct settlement cost."
-    },
-    {
-      "action_id": "validate_congestion_bpat_ciso",
-      "title": "Validate proxy congestion value for BPAT-CISO",
-      "decision_status": "validate_proxy",
-      "problem": "td_losses_congestion",
-      "geography": "BPAT-CISO",
-      "evidence_level": "measured_proxy",
-      "claim_ids": "congestion_bpat_ciso",
-      "measured_value_usd": 0.0,
-      "proxy_value_usd": 51709376.61872638,
-      "upper_bound_value_usd": 0.0,
-      "reported_value_usd": 51709376.61872638,
-      "quantity_summary": "5,458,963 MWh gross interchange",
-      "priority_score": 398.8728033360382,
-      "next_step": "Replace hub/price-spread proxy with nodal LMP or direct congestion-cost evidence.",
-      "rationale": "The corridor has measured price-spread evidence attached to a structural bottleneck.",
-      "caveat": "Hub proxy has mixed flow/price alignment; Proxy value depends on hub-to-BA mapping and should not be treated as direct settlement cost."
-    },
-    {
       "action_id": "validate_congestion_pjm_nyis",
       "title": "Validate proxy congestion value for PJM-NYIS",
       "decision_status": "validate_proxy",
@@ -123,6 +87,42 @@
       "caveat": "Component spread is stronger than hub price evidence, but still not direct settlement cost."
     },
     {
+      "action_id": "validate_congestion_ciso_srp",
+      "title": "Validate proxy congestion value for CISO-SRP",
+      "decision_status": "validate_proxy",
+      "problem": "td_losses_congestion",
+      "geography": "CISO-SRP",
+      "evidence_level": "measured_proxy",
+      "claim_ids": "congestion_ciso_srp",
+      "measured_value_usd": 0.0,
+      "proxy_value_usd": 14038274.42,
+      "upper_bound_value_usd": 0.0,
+      "reported_value_usd": 14038274.42,
+      "quantity_summary": "10,099,478 MWh gross interchange",
+      "priority_score": 393.47743655727277,
+      "next_step": "Replace component-spread proxy with direct congestion-cost or flow-attribution evidence.",
+      "rationale": "The corridor has settlement congestion-component evidence attached to a structural bottleneck.",
+      "caveat": "Component spread is stronger than hub price evidence, but still not direct settlement cost."
+    },
+    {
+      "action_id": "validate_congestion_bpat_ciso",
+      "title": "Validate proxy congestion value for BPAT-CISO",
+      "decision_status": "validate_proxy",
+      "problem": "td_losses_congestion",
+      "geography": "BPAT-CISO",
+      "evidence_level": "measured_proxy",
+      "claim_ids": "congestion_bpat_ciso",
+      "measured_value_usd": 0.0,
+      "proxy_value_usd": 6059448.930000001,
+      "upper_bound_value_usd": 0.0,
+      "reported_value_usd": 6059448.930000001,
+      "quantity_summary": "5,458,963 MWh gross interchange",
+      "priority_score": 389.5614422422377,
+      "next_step": "Replace component-spread proxy with direct congestion-cost or flow-attribution evidence.",
+      "rationale": "The corridor has settlement congestion-component evidence attached to a structural bottleneck.",
+      "caveat": "Component spread is stronger than hub price evidence, but still not direct settlement cost."
+    },
+    {
       "action_id": "validate_congestion_bpat_nevp",
       "title": "Validate proxy congestion value for BPAT-NEVP",
       "decision_status": "validate_proxy",
@@ -131,14 +131,14 @@
       "evidence_level": "measured_proxy",
       "claim_ids": "congestion_bpat_nevp",
       "measured_value_usd": 0.0,
-      "proxy_value_usd": 2155331.1984259244,
+      "proxy_value_usd": 2156661.6,
       "upper_bound_value_usd": 0.0,
-      "reported_value_usd": 2155331.1984259244,
+      "reported_value_usd": 2156661.6,
       "quantity_summary": "569,040 MWh gross interchange",
-      "priority_score": 384.09028572764163,
+      "priority_score": 384.09296562920775,
       "next_step": "Replace hub/price-spread proxy with nodal LMP or direct congestion-cost evidence.",
       "rationale": "The corridor has measured price-spread evidence attached to a structural bottleneck.",
-      "caveat": "Hub proxy has mixed flow/price alignment; Proxy value depends on hub-to-BA mapping and should not be treated as direct settlement cost."
+      "caveat": "Proxy value depends on hub-to-BA mapping and should not be treated as direct settlement cost."
     },
     {
       "action_id": "validate_congestion_pacw_ciso",
@@ -149,14 +149,14 @@
       "evidence_level": "measured_proxy",
       "claim_ids": "congestion_pacw_ciso",
       "measured_value_usd": 0.0,
-      "proxy_value_usd": 706374.3852470998,
+      "proxy_value_usd": 706196.8400000001,
       "upper_bound_value_usd": 0.0,
-      "reported_value_usd": 706374.3852470998,
+      "reported_value_usd": 706196.8400000001,
       "quantity_summary": "74,572 MWh gross interchange",
-      "priority_score": 378.3629371863316,
+      "priority_score": 378.36184546350785,
       "next_step": "Replace hub/price-spread proxy with nodal LMP or direct congestion-cost evidence.",
       "rationale": "The corridor has measured price-spread evidence attached to a structural bottleneck.",
-      "caveat": "Hub proxy is directionally supportive, but proxy value depends on hub-to-BA mapping and should not be treated as direct settlement cost."
+      "caveat": "Proxy value depends on hub-to-BA mapping and should not be treated as direct settlement cost."
     },
     {
       "action_id": "review_ba_footprint_corrections",

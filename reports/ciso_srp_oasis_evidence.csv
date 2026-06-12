@@ -1,0 +1,2 @@
+ba_a,ba_b,evidence_source,evidence_method,mean_price_spread_usd_mwh,max_price_spread_usd_mwh,mean_congestion_component_spread_usd_mwh,hours_observed,notes
+CISO,SRP,"CAISO OASIS PRC_LMP DAM v12 (TH_SP15_GEN-APND vs PALOVRDE_ASR-APND, 2023-04-01..2024-01-01)",oasis_settlement_spread,1.55,42.64,1.39,6600,Hourly DAM settlement spread; congestion component is 89.4% of mean |LMP spread|; TH_SP15_GEN-APND above 63.8% of hours. Window limited by OASIS ~39-month retention.

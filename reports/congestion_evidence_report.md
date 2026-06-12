@@ -5,17 +5,17 @@
 - Structural bottlenecks: **25**
 - Evidence matched: **5**
 - Measured/proxy claims: **5**
-- Estimated measured/proxy value: **$225,692,599**
+- Estimated measured/proxy value: **$52,421,825**
 
 ## Ranked Claims
 
 | Tie | Evidence | Curvature | Gross MWh | Estimated Value | Source | Notes |
 |---|---|---:|---:|---:|---|---|
-| CISO - SRP | price_spread_proxy | -0.036 | 10,099,478 | $141,660,273 | EIA ICE daily wholesale prices 2023 + EIA-930 interchange | SP15 EZ Gen DA LMP Peak $64.85 vs Palo Verde Peak $78.87; daily overlap mean |spread| $15.58/MWh; flow-weighted alignment 39.0%; flow/price alignment is weak. |
-| BPAT - CISO | price_spread_proxy | -0.085 | 5,458,963 | $51,709,377 | EIA ICE daily wholesale prices 2023 + EIA-930 interchange | Mid C Peak $82.66 vs NP15 EZ Gen DA LMP Peak $73.19; daily overlap mean |spread| $32.90/MWh; flow-weighted alignment 58.9%; flow/price alignment is mixed. NP15 volume is thin, so keep this as a hub-screening proxy. |
-| PJM - NYIS | lmp_component_proxy | -0.107 | 19,294,263 | $29,461,244 | NYISO DAM zonal LBMP 2023 settlement components (mis.nyiso.com; NYCA internal-zone mean vs PJM proxy bus) | Uses NYISO hourly settlement congestion component, not only annual hub price level. Congestion component is 75.8% of mean absolute LBMP spread; NYCA LBMP above PJM proxy 94.3% of hours. |
-| BPAT - NEVP | price_spread_proxy | -0.034 | 569,040 | $2,155,331 | EIA ICE daily wholesale prices 2023 + EIA-930 interchange | Mid C Peak $82.66 vs Palo Verde Peak $78.87; daily overlap mean |spread| $24.02/MWh; flow-weighted alignment 45.3%; flow/price alignment is mixed. NEVP is approximated by Palo Verde. |
-| PACW - CISO | price_spread_proxy | -0.157 | 74,572 | $706,374 | EIA ICE daily wholesale prices 2023 + EIA-930 interchange | Mid C Peak $82.66 vs NP15 EZ Gen DA LMP Peak $73.19; daily overlap mean |spread| $32.90/MWh; flow-weighted alignment 82.5%; flow/price alignment is directionally supportive. PACW and CISO are approximated by Mid C and NP15. |
+| PJM - NYIS | lmp_component_proxy | -0.107 | 19,294,263 | $29,461,244 | NYISO DAM zonal LBMP 2023 (mis.nyiso.com; hourly NYCA internal-zone mean vs NYISO PJM proxy bus); NYISO DAM zonal LBMP 2023 settlement components (mis.nyiso.com; NYCA internal-zone mean vs PJM proxy bus) | Mean absolute hourly spread; NYCA above PJM proxy 94.3% of hours (persistent west-to-east direction); Uses NYISO hourly settlement congestion component, not only annual hub price level. Congestion component is 75.8% of mean absolute LBMP spread; NYCA LBMP above PJM proxy 94.3% of hours. |
+| CISO - SRP | lmp_component_proxy | -0.036 | 10,099,478 | $14,038,274 | CAISO OASIS PRC_LMP DAM v12 (TH_SP15_GEN-APND vs PALOVRDE_ASR-APND, 2023-04-01..2024-01-01) | Hourly DAM settlement spread; congestion component is 89.4% of mean |LMP spread|; TH_SP15_GEN-APND above 63.8% of hours. Window limited by OASIS ~39-month retention. |
+| BPAT - CISO | lmp_component_proxy | -0.085 | 5,458,963 | $6,059,449 | CAISO OASIS PRC_LMP DAM v12 (TH_NP15_GEN-APND vs MALIN_5_N101, 2023-04-01..2024-01-01) | Hourly DAM settlement spread; congestion component is 81.4% of mean |LMP spread|; TH_NP15_GEN-APND above 63.1% of hours. Window limited by OASIS ~39-month retention. |
+| BPAT - NEVP | price_spread_proxy | -0.034 | 569,040 | $2,156,662 | EIA ICE daily wholesale prices 2023 (volume-weighted peak) | Mid C Peak $82.66 vs Palo Verde Peak $78.87; NEVP approximated by Palo Verde; mapping approximate |
+| PACW - CISO | price_spread_proxy | -0.157 | 74,572 | $706,197 | EIA ICE daily wholesale prices 2023 (volume-weighted peak) | PACW approximated by Mid C Peak $82.66 vs NP15 $73.19; hub-to-BA mapping approximate |
 | BPAT - NWMT | structural_only | -0.122 | 7,221,314 | $0 |  |  |
 | MISO - SOCO | structural_only | -0.151 | 5,355,783 | $0 |  |  |
 | SOCO - FPL | structural_only | -0.208 | 3,527,415 | $0 |  |  |
