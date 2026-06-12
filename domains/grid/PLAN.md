@@ -4,6 +4,9 @@ Written 2026-06-12. Tracks the four weaknesses identified after Phase 3
 and the path to a product. Work items are mirrored in the session task
 list; status updates live in `reports/agent_handoff.md`.
 
+**Status 2026-06-12: A-D are complete.** The E milestones are now
+expanded into a full phased roadmap: `domains/grid/ROADMAP.md`.
+
 ## A. Coverage: from $251M to national scale
 
 1. **Reliability monetization** (largest single jump, in progress).
