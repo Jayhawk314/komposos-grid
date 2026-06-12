@@ -44,6 +44,17 @@ TENSION = "TENSION"
 CONTRADICT = "CONTRADICT"
 
 
+def is_valid_ba_code(value) -> bool:
+    """Return True for BA-code-like labels, false for aggregate row labels."""
+    code = str(value).strip()
+    if not code or code.lower() == "nan":
+        return False
+    if len(code) > 12:
+        return False
+    allowed = set("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -")
+    return all(ch in allowed for ch in code) and any(ch.isalpha() for ch in code)
+
+
 @dataclass
 class Section:
     """A data source viewed as a presheaf section over its coverage."""
@@ -106,7 +117,7 @@ class CoherenceReport:
             )
             for v in sorted(contradictions, key=lambda v: -v.discrepancy)[:10]:
                 lines.append(
-                    f"    CONTRADICT plant {v.plant_id}: "
+                    f"    CONTRADICT {v.plant_id}: "
                     f"{v.source_a}={v.value_a:,.0f} MWh vs "
                     f"{v.source_b}={v.value_b:,.0f} MWh "
                     f"(discrepancy {v.discrepancy:.1%})"
@@ -134,9 +145,13 @@ class GridCoherenceChecker:
     TENSION concentrated in CHP/station-use adjusted plants.
     """
 
-    def __init__(self, category=None, tolerance: float = 0.01):
+    def __init__(self, category=None, tolerance: float = 0.01, key_namer=None):
         self.category = category
         self.tolerance = tolerance
+        # Maps section keys to Category object names in write-back;
+        # plant-keyed by default, pass e.g. lambda c: f"ba:{c}" for
+        # BA-keyed sections.
+        self.key_namer = key_namer or plant_obj
 
     def check(self, sections: List[Section]) -> CoherenceReport:
         pairs: List[PairResult] = []
@@ -201,13 +216,42 @@ class GridCoherenceChecker:
             for v in pair.by_verdict(CONTRADICT):
                 self.category.connect(
                     src_a,
-                    plant_obj(v.plant_id),
+                    self.key_namer(v.plant_id),
                     name="disputes",
                     confidence=min(v.discrepancy, 1.0),
                     other_source=pair.source_b,
                     value_a=v.value_a,
                     value_b=v.value_b,
                 )
+
+
+def pushforward(
+    section: Section,
+    mapping: Dict[str, str],
+    source: Optional[str] = None,
+) -> Section:
+    """Push a section forward along a key map (left Kan extension along
+    the projection; on a discrete site this is fiberwise summation).
+
+    Keys absent from ``mapping`` have no image and are dropped -- e.g.
+    plants with no balancing-authority assignment.
+    """
+    out: Dict[str, float] = {}
+    for key, value in section.values.items():
+        image = mapping.get(key)
+        if image is None:
+            continue
+        out[image] = out.get(image, 0.0) + value
+    return Section(source=source or section.source, values=out)
+
+
+def ba_mapping_from_records(records: list) -> Dict[str, str]:
+    """plant_id -> balancing authority code, from PlantRecords."""
+    return {
+        r.plant_id: str(r.balancing_authority).strip()
+        for r in records
+        if is_valid_ba_code(r.balancing_authority)
+    }
 
 
 def sections_from_sources(sources) -> List[Section]:

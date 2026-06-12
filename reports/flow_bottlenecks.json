@@ -1,0 +1,371 @@
+{
+  "n_bas": 63,
+  "n_ties": 144,
+  "total_gross_mwh": 499719924.0,
+  "curvature": {
+    "mean": 0.14038290084552335,
+    "std": 0.15570947713876213,
+    "min": -0.22794117647058787,
+    "max": 0.6,
+    "median": 0.14285714285714263,
+    "num_edges": 144,
+    "num_nodes": 63,
+    "n_hyperbolic": 25.0,
+    "hyperbolic_edges": 25,
+    "hyperbolic_rate": 0.1736111111111111
+  },
+  "spectral": {
+    "algebraic_connectivity": 0.0033439410881190737,
+    "coupling": "very weak",
+    "fiedler_partition": {
+      "small": [
+        "AECI",
+        "CPLE",
+        "CPLW",
+        "DUK",
+        "ERCO",
+        "FMPP",
+        "FPC",
+        "FPL",
+        "GVL",
+        "HST",
+        "ISNE",
+        "JEA",
+        "LGEE",
+        "MISO",
+        "NBSO",
+        "NYIS",
+        "PJM",
+        "SC",
+        "SCEG",
+        "SEC",
+        "SEPA",
+        "SOCO",
+        "SPA",
+        "SWPP",
+        "TAL",
+        "TEC",
+        "TVA",
+        "YAD"
+      ],
+      "large": [
+        "AVA",
+        "AVRN",
+        "AZPS",
+        "BANC",
+        "BPAT",
+        "CHPD",
+        "CISO",
+        "DEAA",
+        "DOPD",
+        "EPE",
+        "GCPD",
+        "GRID",
+        "GRIF",
+        "GWA",
+        "HGMA",
+        "IID",
+        "IPCO",
+        "LDWP",
+        "NEVP",
+        "NWMT",
+        "PACE",
+        "PACW",
+        "PGE",
+        "PNM",
+        "PSCO",
+        "PSEI",
+        "SCL",
+        "SRP",
+        "TEPC",
+        "TIDC",
+        "TPWR",
+        "WACM",
+        "WALC",
+        "WAUW",
+        "WWA"
+      ]
+    }
+  },
+  "top_bottleneck_gross_mwh": 62835492.0,
+  "top_bottleneck_gross_share": 0.12574141830694746,
+  "bottlenecks": [
+    {
+      "ba_a": "PJM",
+      "ba_b": "NYIS",
+      "curvature": -0.10714285714285765,
+      "gross_mwh": 19294263.0,
+      "net_mwh": -19294263.0,
+      "net_direction": "NYIS -> PJM",
+      "gross_share": 0.03861015355473399,
+      "priority_score": 2067242.464285724
+    },
+    {
+      "ba_a": "BPAT",
+      "ba_b": "NWMT",
+      "curvature": -0.12184873949579811,
+      "gross_mwh": 7221314.0,
+      "net_mwh": -6997762.0,
+      "net_direction": "NWMT -> BPAT",
+      "gross_share": 0.014450722601166489,
+      "priority_score": 879908.0084033598
+    },
+    {
+      "ba_a": "MISO",
+      "ba_b": "SOCO",
+      "curvature": -0.15079365079365048,
+      "gross_mwh": 5355783.0,
+      "net_mwh": -5239233.0,
+      "net_direction": "SOCO -> MISO",
+      "gross_share": 0.010717569467972624,
+      "priority_score": 807618.0714285697
+    },
+    {
+      "ba_a": "SOCO",
+      "ba_b": "FPL",
+      "curvature": -0.20833333333333326,
+      "gross_mwh": 3527415.0,
+      "net_mwh": -2810915.0,
+      "net_direction": "FPL -> SOCO",
+      "gross_share": 0.00705878399197067,
+      "priority_score": 734878.1249999998
+    },
+    {
+      "ba_a": "BPAT",
+      "ba_b": "LDWP",
+      "curvature": -0.0980392156862746,
+      "gross_mwh": 6773556.0,
+      "net_mwh": 6138562.0,
+      "net_direction": "BPAT -> LDWP",
+      "gross_share": 0.013554704694944282,
+      "priority_score": 664074.1176470595
+    },
+    {
+      "ba_a": "BPAT",
+      "ba_b": "BANC",
+      "curvature": -0.12745098039215708,
+      "gross_mwh": 3927078.0,
+      "net_mwh": -1156038.0,
+      "net_direction": "BANC -> BPAT",
+      "gross_share": 0.007858557986973519,
+      "priority_score": 500509.9411764714
+    },
+    {
+      "ba_a": "BPAT",
+      "ba_b": "CISO",
+      "curvature": -0.08529411764705852,
+      "gross_mwh": 5458963.0,
+      "net_mwh": 1141151.0,
+      "net_direction": "BPAT -> CISO",
+      "gross_share": 0.010924045125725266,
+      "priority_score": 465617.4323529395
+    },
+    {
+      "ba_a": "TVA",
+      "ba_b": "SOCO",
+      "curvature": -0.07936507936507908,
+      "gross_mwh": 5660484.0,
+      "net_mwh": -3456874.0,
+      "net_direction": "SOCO -> TVA",
+      "gross_share": 0.011327313017041122,
+      "priority_score": 449244.7619047603
+    },
+    {
+      "ba_a": "MISO",
+      "ba_b": "SWPP",
+      "curvature": -0.09523809523809534,
+      "gross_mwh": 3989884.0,
+      "net_mwh": 849274.0,
+      "net_direction": "MISO -> SWPP",
+      "gross_share": 0.007984240388221943,
+      "priority_score": 379988.9523809528
+    },
+    {
+      "ba_a": "BPAT",
+      "ba_b": "GRID",
+      "curvature": -0.22794117647058787,
+      "gross_mwh": 1626752.0,
+      "net_mwh": -1617598.0,
+      "net_direction": "GRID -> BPAT",
+      "gross_share": 0.003255327478197567,
+      "priority_score": 370803.76470588177
+    },
+    {
+      "ba_a": "CPLE",
+      "ba_b": "PJM",
+      "curvature": -0.08571428571428563,
+      "gross_mwh": 4242136.0,
+      "net_mwh": 3029290.0,
+      "net_direction": "CPLE -> PJM",
+      "gross_share": 0.008489027145533625,
+      "priority_score": 363611.6571428568
+    },
+    {
+      "ba_a": "CISO",
+      "ba_b": "SRP",
+      "curvature": -0.03571428571428603,
+      "gross_mwh": 10099478.0,
+      "net_mwh": -9717954.0,
+      "net_direction": "SRP -> CISO",
+      "gross_share": 0.020210276826985188,
+      "priority_score": 360695.64285714604
+    },
+    {
+      "ba_a": "BPAT",
+      "ba_b": "SCL",
+      "curvature": -0.044117647058823595,
+      "gross_mwh": 7798197.0,
+      "net_mwh": 7798197.0,
+      "net_direction": "BPAT -> SCL",
+      "gross_share": 0.01560513524771928,
+      "priority_score": 344038.10294117697
+    },
+    {
+      "ba_a": "BPAT",
+      "ba_b": "PSEI",
+      "curvature": -0.01764705882352935,
+      "gross_mwh": 16049993.0,
+      "net_mwh": 16049993.0,
+      "net_direction": "BPAT -> PSEI",
+      "gross_share": 0.03211797694902395,
+      "priority_score": 283235.17058823426
+    },
+    {
+      "ba_a": "BPAT",
+      "ba_b": "DOPD",
+      "curvature": -0.07352941176470607,
+      "gross_mwh": 2370212.0,
+      "net_mwh": -2052144.0,
+      "net_direction": "DOPD -> BPAT",
+      "gross_share": 0.004743080846222173,
+      "priority_score": 174280.29411764749
+    },
+    {
+      "ba_a": "BPAT",
+      "ba_b": "TPWR",
+      "curvature": -0.044117647058823595,
+      "gross_mwh": 3599272.0,
+      "net_mwh": 3599272.0,
+      "net_direction": "BPAT -> TPWR",
+      "gross_share": 0.007202578538773651,
+      "priority_score": 158791.4117647061
+    },
+    {
+      "ba_a": "WACM",
+      "ba_b": "WALC",
+      "curvature": -0.0642857142857145,
+      "gross_mwh": 2222314.0,
+      "net_mwh": 2207738.0,
+      "net_direction": "WACM -> WALC",
+      "gross_share": 0.004447119062637174,
+      "priority_score": 142863.04285714333
+    },
+    {
+      "ba_a": "AECI",
+      "ba_b": "SWPP",
+      "curvature": -0.04166666666666674,
+      "gross_mwh": 2800533.0,
+      "net_mwh": -2095465.0,
+      "net_direction": "SWPP -> AECI",
+      "gross_share": 0.005604205206754974,
+      "priority_score": 116688.8750000002
+    },
+    {
+      "ba_a": "NWMT",
+      "ba_b": "WAUW",
+      "curvature": -0.11904761904761929,
+      "gross_mwh": 494475.0,
+      "net_mwh": -92659.0,
+      "net_direction": "WAUW -> NWMT",
+      "gross_share": 0.000989504272797416,
+      "priority_score": 58866.07142857155
+    },
+    {
+      "ba_a": "AECI",
+      "ba_b": "TVA",
+      "curvature": -0.03571428571428581,
+      "gross_mwh": 1198856.0,
+      "net_mwh": 1198716.0,
+      "net_direction": "AECI -> TVA",
+      "gross_share": 0.002399055835924605,
+      "priority_score": 42816.28571428583
+    },
+    {
+      "ba_a": "SOCO",
+      "ba_b": "FPC",
+      "curvature": -0.0952380952380949,
+      "gross_mwh": 419575.0,
+      "net_mwh": -81651.0,
+      "net_direction": "FPC -> SOCO",
+      "gross_share": 0.0008396203149986872,
+      "priority_score": 39959.52380952367
+    },
+    {
+      "ba_a": "PNM",
+      "ba_b": "GRID",
+      "curvature": -0.017857142857143016,
+      "gross_mwh": 2078483.0,
+      "net_mwh": 2073871.0,
+      "net_direction": "PNM -> GRID",
+      "gross_share": 0.0041592958378821815,
+      "priority_score": 37115.76785714319
+    },
+    {
+      "ba_a": "BPAT",
+      "ba_b": "NEVP",
+      "curvature": -0.03431372549019618,
+      "gross_mwh": 569040.0,
+      "net_mwh": 248586.0,
+      "net_direction": "BPAT -> NEVP",
+      "gross_share": 0.001138717855083961,
+      "priority_score": 19525.882352941233
+    },
+    {
+      "ba_a": "PACW",
+      "ba_b": "CISO",
+      "curvature": -0.15714285714285747,
+      "gross_mwh": 74572.0,
+      "net_mwh": 8458.0,
+      "net_direction": "PACW -> CISO",
+      "gross_share": 0.0001492275901330682,
+      "priority_score": 11718.457142857167
+    },
+    {
+      "ba_a": "SPA",
+      "ba_b": "SWPP",
+      "curvature": -2.220446049250313e-16,
+      "gross_mwh": 1512521.0,
+      "net_mwh": 595421.0,
+      "net_direction": "SPA -> SWPP",
+      "gross_share": 0.003026737433026585,
+      "priority_score": 3.358471278858133e-10
+    }
+  ],
+  "meshed_edges": [
+    {
+      "ba_a": "SC",
+      "ba_b": "SCEG",
+      "curvature": 0.6
+    },
+    {
+      "ba_a": "BANC",
+      "ba_b": "TIDC",
+      "curvature": 0.5
+    },
+    {
+      "ba_a": "FMPP",
+      "ba_b": "TEC",
+      "curvature": 0.5
+    },
+    {
+      "ba_a": "TEC",
+      "ba_b": "SEC",
+      "curvature": 0.5
+    },
+    {
+      "ba_a": "NBSO",
+      "ba_b": "ISNE",
+      "curvature": 0.5
+    }
+  ]
+}

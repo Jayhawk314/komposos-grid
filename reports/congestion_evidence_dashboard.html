@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Congestion Evidence Dashboard</title>
+  <style>
+:root {
+  color-scheme: light;
+  --ink: #17202a;
+  --muted: #5b6673;
+  --line: #d8dee6;
+  --surface: #ffffff;
+  --page: #f5f7fa;
+  --blue: #1f6feb;
+  --green: #1f8f5f;
+  --amber: #b7791f;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font: 14px/1.5 Arial, Helvetica, sans-serif;
+}
+.shell {
+  width: min(1180px, calc(100vw - 32px));
+  margin: 0 auto;
+  padding: 28px 0 40px;
+}
+header {
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 18px;
+  padding-bottom: 16px;
+}
+h1 {
+  font-size: clamp(26px, 4vw, 38px);
+  line-height: 1.1;
+  margin: 0 0 8px;
+  letter-spacing: 0;
+}
+h2 {
+  font-size: 18px;
+  line-height: 1.25;
+  margin: 0 0 14px;
+  letter-spacing: 0;
+}
+p { margin: 0; color: var(--muted); }
+.band {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  margin: 16px 0;
+  padding: 18px;
+}
+.summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.summary h2 { margin: 0; }
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.chip {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fbfcfe;
+  padding: 6px 10px;
+}
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+.metric {
+  min-height: 128px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--blue);
+  border-radius: 8px;
+  padding: 14px;
+  display: grid;
+  gap: 6px;
+  align-content: start;
+}
+.metric:nth-child(2n) { border-top-color: var(--green); }
+.metric:nth-child(3n) { border-top-color: var(--amber); }
+.metric span {
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+}
+.metric strong {
+  font-size: 25px;
+  line-height: 1.05;
+  letter-spacing: 0;
+}
+.metric small {
+  color: var(--muted);
+}
+.table-wrap { overflow-x: auto; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 760px;
+}
+th, td {
+  border-bottom: 1px solid var(--line);
+  padding: 9px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+th {
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+  background: #fbfcfe;
+}
+tr:hover td { background: #f9fbfd; }
+.empty {
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  padding: 14px;
+}
+@media (max-width: 640px) {
+  .shell { width: min(100vw - 20px, 1180px); padding-top: 18px; }
+  .band { padding: 14px; }
+  .metric { min-height: 116px; }
+  .metric strong { font-size: 22px; }
+}
+</style>
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <h1>Congestion Evidence Dashboard</h1>
+      <p>Flow bottlenecks joined to LMP spread or congestion-cost evidence</p>
+    </header>
+    <section class="band summary"><h2>Structural bottlenecks plus measured evidence</h2><div class="chips"><span class="chip">4 evidence matches</span><span class="chip">$196,153,920 estimated</span></div></section><section class="metrics"><article class="metric"><span>Bottlenecks</span><strong>25</strong><small>structural candidates</small></article><article class="metric"><span>Evidence matched</span><strong>4</strong><small>rows joined by BA tie</small></article><article class="metric"><span>Measured/proxy claims</span><strong>4</strong><small>cost or LMP spread</small></article><article class="metric"><span>Estimated value</span><strong>$196,153,920</strong><small>sum of measured/proxy claims</small></article></section><section class="band"><h2>Ranked Claims</h2><div class="table-wrap"><table><thead><tr><th>Tie</th><th>Evidence</th><th>Curvature</th><th>Gross MWh</th><th>Value</th><th>Source</th><th>Notes</th></tr></thead><tbody><tr><td>CISO - SRP</td><td>price_spread_proxy</td><td>-0.036</td><td>10,099,478</td><td>$141,594,682</td><td>EIA ICE daily wholesale prices 2023 (volume-weighted peak)</td><td>SP15 EZ Gen DA LMP Peak $64.85 vs Palo Verde Peak $78.87</td></tr><tr><td>BPAT - CISO</td><td>price_spread_proxy</td><td>-0.085</td><td>5,458,963</td><td>$51,696,380</td><td>EIA ICE daily wholesale prices 2023 (volume-weighted peak)</td><td>Mid C Peak $82.66 vs NP15 EZ Gen DA LMP Peak $73.19; COI corridor; NP15 volume thin (99 trade days)</td></tr><tr><td>BPAT - NEVP</td><td>price_spread_proxy</td><td>-0.034</td><td>569,040</td><td>$2,156,662</td><td>EIA ICE daily wholesale prices 2023 (volume-weighted peak)</td><td>Mid C Peak $82.66 vs Palo Verde Peak $78.87; NEVP approximated by Palo Verde; mapping approximate</td></tr><tr><td>PACW - CISO</td><td>price_spread_proxy</td><td>-0.157</td><td>74,572</td><td>$706,197</td><td>EIA ICE daily wholesale prices 2023 (volume-weighted peak)</td><td>PACW approximated by Mid C Peak $82.66 vs NP15 $73.19; hub-to-BA mapping approximate</td></tr><tr><td>PJM - NYIS</td><td>structural_only</td><td>-0.107</td><td>19,294,263</td><td>$0</td><td></td><td></td></tr><tr><td>BPAT - NWMT</td><td>structural_only</td><td>-0.122</td><td>7,221,314</td><td>$0</td><td></td><td></td></tr><tr><td>MISO - SOCO</td><td>structural_only</td><td>-0.151</td><td>5,355,783</td><td>$0</td><td></td><td></td></tr><tr><td>SOCO - FPL</td><td>structural_only</td><td>-0.208</td><td>3,527,415</td><td>$0</td><td></td><td></td></tr><tr><td>BPAT - LDWP</td><td>structural_only</td><td>-0.098</td><td>6,773,556</td><td>$0</td><td></td><td></td></tr><tr><td>BPAT - BANC</td><td>structural_only</td><td>-0.127</td><td>3,927,078</td><td>$0</td><td></td><td></td></tr><tr><td>TVA - SOCO</td><td>structural_only</td><td>-0.079</td><td>5,660,484</td><td>$0</td><td></td><td></td></tr><tr><td>MISO - SWPP</td><td>structural_only</td><td>-0.095</td><td>3,989,884</td><td>$0</td><td></td><td></td></tr><tr><td>BPAT - GRID</td><td>structural_only</td><td>-0.228</td><td>1,626,752</td><td>$0</td><td></td><td></td></tr><tr><td>CPLE - PJM</td><td>structural_only</td><td>-0.086</td><td>4,242,136</td><td>$0</td><td></td><td></td></tr><tr><td>BPAT - SCL</td><td>structural_only</td><td>-0.044</td><td>7,798,197</td><td>$0</td><td></td><td></td></tr><tr><td>BPAT - PSEI</td><td>structural_only</td><td>-0.018</td><td>16,049,993</td><td>$0</td><td></td><td></td></tr><tr><td>BPAT - DOPD</td><td>structural_only</td><td>-0.074</td><td>2,370,212</td><td>$0</td><td></td><td></td></tr><tr><td>BPAT - TPWR</td><td>structural_only</td><td>-0.044</td><td>3,599,272</td><td>$0</td><td></td><td></td></tr><tr><td>WACM - WALC</td><td>structural_only</td><td>-0.064</td><td>2,222,314</td><td>$0</td><td></td><td></td></tr><tr><td>AECI - SWPP</td><td>structural_only</td><td>-0.042</td><td>2,800,533</td><td>$0</td><td></td><td></td></tr><tr><td>NWMT - WAUW</td><td>structural_only</td><td>-0.119</td><td>494,475</td><td>$0</td><td></td><td></td></tr><tr><td>AECI - TVA</td><td>structural_only</td><td>-0.036</td><td>1,198,856</td><td>$0</td><td></td><td></td></tr><tr><td>SOCO - FPC</td><td>structural_only</td><td>-0.095</td><td>419,575</td><td>$0</td><td></td><td></td></tr><tr><td>PNM - GRID</td><td>structural_only</td><td>-0.018</td><td>2,078,483</td><td>$0</td><td></td><td></td></tr><tr><td>SPA - SWPP</td><td>structural_only</td><td>-0.000</td><td>1,512,521</td><td>$0</td><td></td><td></td></tr></tbody></table></div></section>
+  </main>
+</body>
+</html>

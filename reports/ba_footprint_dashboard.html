@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BA Footprint Correction Dashboard</title>
+  <style>
+:root {
+  color-scheme: light;
+  --ink: #17202a;
+  --muted: #5b6673;
+  --line: #d8dee6;
+  --surface: #ffffff;
+  --page: #f5f7fa;
+  --blue: #1f6feb;
+  --green: #1f8f5f;
+  --amber: #b7791f;
+  --red: #c2413a;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font: 14px/1.5 Arial, Helvetica, sans-serif;
+}
+.shell {
+  width: min(1180px, calc(100vw - 32px));
+  margin: 0 auto;
+  padding: 28px 0 40px;
+}
+.topbar {
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 18px;
+  padding-bottom: 16px;
+}
+h1 {
+  font-size: clamp(26px, 4vw, 38px);
+  line-height: 1.1;
+  margin: 0 0 8px;
+  letter-spacing: 0;
+}
+h2 {
+  font-size: 18px;
+  line-height: 1.25;
+  margin: 0 0 14px;
+  letter-spacing: 0;
+}
+p { margin: 0; color: var(--muted); }
+.band {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  margin: 16px 0;
+  padding: 18px;
+}
+.summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.summary h2 { margin: 0; }
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.chip {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fbfcfe;
+  color: var(--ink);
+  padding: 6px 10px;
+  white-space: nowrap;
+}
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+.metric {
+  min-height: 148px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--blue);
+  border-radius: 8px;
+  padding: 14px;
+  display: grid;
+  gap: 6px;
+  align-content: start;
+}
+.metric:nth-child(2n) { border-top-color: var(--green); }
+.metric:nth-child(3n) { border-top-color: var(--amber); }
+.metric:nth-child(5n) { border-top-color: var(--red); }
+.metric span {
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+}
+.metric strong {
+  font-size: 26px;
+  line-height: 1.05;
+  letter-spacing: 0;
+}
+.metric small, .metric em {
+  color: var(--muted);
+  font-style: normal;
+}
+.table-wrap { overflow-x: auto; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 760px;
+}
+th, td {
+  border-bottom: 1px solid var(--line);
+  padding: 9px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+th {
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+  background: #fbfcfe;
+}
+tr:hover td { background: #f9fbfd; }
+.empty {
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  padding: 14px;
+}
+@media (max-width: 640px) {
+  .shell { width: min(100vw - 20px, 1180px); padding-top: 18px; }
+  .band { padding: 14px; }
+  .metric { min-height: 126px; }
+  .metric strong { font-size: 22px; }
+}
+</style>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <h1>BA Footprint Correction Dashboard</h1>
+      <p>Before/after proof for BA footprint corrections</p>
+    </header>
+    <section class="band summary"><h2>Validated footprint corrections</h2><div class="chips"><span class="chip">10 accepted</span><span class="chip">3 rejected</span><span class="chip">30 BAs still outside tolerance</span></div></section><section class="metrics"><article class="metric"><span>BA agreement</span><strong>62.9%</strong><small>Before: 45.2%</small><em>telemetry vs corrected accounting</em></article><article class="metric"><span>Contradictions</span><strong>7</strong><small>Before: 11</small><em>4 resolved</em></article><article class="metric"><span>Absolute BA error</span><strong>231.2 TWh</strong><small>Before: 290.5 TWh</small><em>+59.4 TWh improvement</em></article><article class="metric"><span>Sheaf H1 leak</span><strong>8.185e-01</strong><small>Before: 1.899e+00</small><em>global obstruction after correction</em></article></section><section class="band"><h2>Accepted Corrections</h2><div class="table-wrap"><table><thead><tr><th>Entity</th><th>State</th><th>From BA</th><th>To BA</th><th>MWh</th><th>Improvement</th><th>Confidence</th></tr></thead><tbody><tr><td>3082</td><td>OR</td><td>BPAT</td><td>GRID</td><td>6,793,297</td><td>13,586,594</td><td>1.00</td></tr><tr><td>3895</td><td>OR</td><td>BPAT</td><td>GRID</td><td>5,406,985</td><td>10,813,970</td><td>1.00</td></tr><tr><td>2721</td><td>NC</td><td>DUK</td><td>CPLW</td><td>5,244,807</td><td>8,325,182</td><td>0.79</td></tr><tr><td>55306</td><td>AZ</td><td>SRP</td><td>AZPS</td><td>7,390,743</td><td>7,810,272</td><td>0.53</td></tr><tr><td>55821</td><td>FL</td><td>FPC</td><td>FMPP</td><td>3,546,362</td><td>7,092,724</td><td>1.00</td></tr><tr><td>55482</td><td>WA</td><td>PSEI</td><td>GCPD</td><td>2,172,002</td><td>4,344,004</td><td>1.00</td></tr><tr><td>55700</td><td>WA</td><td>PSEI</td><td>GCPD</td><td>1,989,583</td><td>3,401,670</td><td>0.85</td></tr><tr><td>117</td><td>AZ</td><td>AZPS</td><td>TEPC</td><td>3,053,387</td><td>2,075,763</td><td>0.34</td></tr><tr><td>10202</td><td>FL</td><td>JEA</td><td>SEC</td><td>557,724</td><td>1,115,448</td><td>1.00</td></tr><tr><td>447</td><td>CA</td><td>WALC</td><td>IID</td><td>392,219</td><td>784,438</td><td>1.00</td></tr></tbody></table></div></section><section class="band"><h2>Rejected Candidates</h2><div class="table-wrap"><table><thead><tr><th>Entity</th><th>From BA</th><th>To BA</th><th>Reason</th></tr></thead><tbody><tr><td>55112</td><td>WALC</td><td>BANC</td><td>source and target BAs lack observed interchange tie</td></tr><tr><td>65577</td><td>PSEI</td><td>NWMT</td><td>source and target BAs lack observed interchange tie</td></tr><tr><td>50188</td><td>CPLE</td><td>SEPA</td><td>source and target BAs lack observed interchange tie</td></tr></tbody></table></div></section><section class="band"><h2>Remaining Largest BA Deltas</h2><div class="table-wrap"><table><thead><tr><th>BA</th><th>Delta MWh</th><th>Interpretation</th></tr></thead><tbody><tr><td>MISO</td><td>-39,569,125</td><td>accounting higher</td></tr><tr><td>ERCO</td><td>-31,761,206</td><td>accounting higher</td></tr><tr><td>NA - PR</td><td>-17,501,153</td><td>accounting higher</td></tr><tr><td>SOCO</td><td>-11,333,276</td><td>accounting higher</td></tr><tr><td>TVA</td><td>-10,059,476</td><td>accounting higher</td></tr><tr><td>CPLE</td><td>-9,370,872</td><td>accounting higher</td></tr><tr><td>WALC</td><td>-7,842,254</td><td>accounting higher</td></tr><tr><td>PSCO</td><td>7,761,660</td><td>telemetry higher</td></tr><tr><td>PGE</td><td>-6,903,039</td><td>accounting higher</td></tr><tr><td>FPL</td><td>6,665,650</td><td>telemetry higher</td></tr><tr><td>HECO</td><td>-6,504,894</td><td>accounting higher</td></tr><tr><td>NYIS</td><td>-6,122,817</td><td>accounting higher</td></tr><tr><td>ISNE</td><td>-5,286,453</td><td>accounting higher</td></tr><tr><td>SWPP</td><td>4,950,158</td><td>telemetry higher</td></tr><tr><td>NA - AK</td><td>-4,495,345</td><td>accounting higher</td></tr></tbody></table></div></section>
+  </main>
+</body>
+</html>

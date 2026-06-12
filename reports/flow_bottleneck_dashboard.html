@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BA Interchange Bottleneck Dashboard</title>
+  <style>
+:root {
+  color-scheme: light;
+  --ink: #17202a;
+  --muted: #5b6673;
+  --line: #d8dee6;
+  --surface: #ffffff;
+  --page: #f5f7fa;
+  --blue: #1f6feb;
+  --green: #1f8f5f;
+  --amber: #b7791f;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font: 14px/1.5 Arial, Helvetica, sans-serif;
+}
+.shell {
+  width: min(1180px, calc(100vw - 32px));
+  margin: 0 auto;
+  padding: 28px 0 40px;
+}
+header {
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 18px;
+  padding-bottom: 16px;
+}
+h1 {
+  font-size: clamp(26px, 4vw, 38px);
+  line-height: 1.1;
+  margin: 0 0 8px;
+  letter-spacing: 0;
+}
+h2 {
+  font-size: 18px;
+  line-height: 1.25;
+  margin: 0 0 14px;
+  letter-spacing: 0;
+}
+p { margin: 0; color: var(--muted); }
+.band {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  margin: 16px 0;
+  padding: 18px;
+}
+.summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.summary h2 { margin: 0; }
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.chip {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fbfcfe;
+  padding: 6px 10px;
+}
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+.metric {
+  min-height: 128px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--blue);
+  border-radius: 8px;
+  padding: 14px;
+  display: grid;
+  gap: 6px;
+  align-content: start;
+}
+.metric:nth-child(2n) { border-top-color: var(--green); }
+.metric:nth-child(3n) { border-top-color: var(--amber); }
+.metric span {
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+}
+.metric strong {
+  font-size: 25px;
+  line-height: 1.05;
+  letter-spacing: 0;
+}
+.metric small {
+  color: var(--muted);
+}
+.table-wrap { overflow-x: auto; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 760px;
+}
+th, td {
+  border-bottom: 1px solid var(--line);
+  padding: 9px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+th {
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+  background: #fbfcfe;
+}
+tr:hover td { background: #f9fbfd; }
+.empty {
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  padding: 14px;
+}
+@media (max-width: 640px) {
+  .shell { width: min(100vw - 20px, 1180px); padding-top: 18px; }
+  .band { padding: 14px; }
+  .metric { min-height: 116px; }
+  .metric strong { font-size: 22px; }
+}
+</style>
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <h1>BA Interchange Bottleneck Dashboard</h1>
+      <p>Ricci bottlenecks and spectral seams from EIA-930 interchange</p>
+    </header>
+    <section class="band summary"><h2>Flow geometry proof</h2><div class="chips"><span class="chip">very weak coupling</span><span class="chip">25 hyperbolic ties</span><span class="chip">499.7 TWh gross interchange</span></div></section><section class="metrics"><article class="metric"><span>BAs</span><strong>63</strong><small>nodes in interchange graph</small></article><article class="metric"><span>Interchange ties</span><strong>144</strong><small>weighted EIA-930 edges</small></article><article class="metric"><span>Gross interchange</span><strong>499.7 TWh</strong><small>annual tie usage</small></article><article class="metric"><span>Hyperbolic ties</span><strong>25</strong><small>17.4% of ties</small></article><article class="metric"><span>Spectral coupling</span><strong>very weak</strong><small>Fiedler 0.0033</small></article><article class="metric"><span>Top 10 flow share</span><strong>12.6%</strong><small>62.8 TWh</small></article></section><section class="band"><h2>Priority Bottlenecks</h2><div class="table-wrap"><table><thead><tr><th>Tie</th><th>Curvature</th><th>Gross MWh</th><th>Share</th><th>Net Direction</th><th>Net MWh</th></tr></thead><tbody><tr><td>PJM - NYIS</td><td>-0.107</td><td>19,294,263</td><td>3.9%</td><td>NYIS -&gt; PJM</td><td>19,294,263</td></tr><tr><td>BPAT - NWMT</td><td>-0.122</td><td>7,221,314</td><td>1.4%</td><td>NWMT -&gt; BPAT</td><td>6,997,762</td></tr><tr><td>MISO - SOCO</td><td>-0.151</td><td>5,355,783</td><td>1.1%</td><td>SOCO -&gt; MISO</td><td>5,239,233</td></tr><tr><td>SOCO - FPL</td><td>-0.208</td><td>3,527,415</td><td>0.7%</td><td>FPL -&gt; SOCO</td><td>2,810,915</td></tr><tr><td>BPAT - LDWP</td><td>-0.098</td><td>6,773,556</td><td>1.4%</td><td>BPAT -&gt; LDWP</td><td>6,138,562</td></tr><tr><td>BPAT - BANC</td><td>-0.127</td><td>3,927,078</td><td>0.8%</td><td>BANC -&gt; BPAT</td><td>1,156,038</td></tr><tr><td>BPAT - CISO</td><td>-0.085</td><td>5,458,963</td><td>1.1%</td><td>BPAT -&gt; CISO</td><td>1,141,151</td></tr><tr><td>TVA - SOCO</td><td>-0.079</td><td>5,660,484</td><td>1.1%</td><td>SOCO -&gt; TVA</td><td>3,456,874</td></tr><tr><td>MISO - SWPP</td><td>-0.095</td><td>3,989,884</td><td>0.8%</td><td>MISO -&gt; SWPP</td><td>849,274</td></tr><tr><td>BPAT - GRID</td><td>-0.228</td><td>1,626,752</td><td>0.3%</td><td>GRID -&gt; BPAT</td><td>1,617,598</td></tr></tbody></table></div></section><section class="band"><h2>Fiedler Seam</h2><div class="table-wrap"><table><thead><tr><th>Side</th><th>BAs</th><th>Members</th></tr></thead><tbody><tr><td>Smaller side</td><td>28</td><td>AECI, CPLE, CPLW, DUK, ERCO, FMPP, FPC, FPL, GVL, HST, ISNE, JEA, LGEE, MISO, NBSO, NYIS, PJM, SC, SCEG, SEC, SEPA, SOCO, SPA, SWPP, TAL, TEC, TVA, YAD</td></tr><tr><td>Other side</td><td>35</td><td>AVA, AVRN, AZPS, BANC, BPAT, CHPD, CISO, DEAA, DOPD, EPE, GCPD, GRID, GRIF, GWA, HGMA, IID, IPCO, LDWP, NEVP, NWMT, PACE, PACW, PGE, PNM, PSCO, PSEI, SCL, SRP, TEPC, TIDC, TPWR, WACM, WALC, WAUW, WWA</td></tr></tbody></table></div></section><section class="band"><h2>Most Meshed Ties</h2><div class="table-wrap"><table><thead><tr><th>Tie</th><th>Curvature</th></tr></thead><tbody><tr><td>SC - SCEG</td><td>+0.600</td></tr><tr><td>FMPP - TEC</td><td>+0.500</td></tr><tr><td>TEC - SEC</td><td>+0.500</td></tr><tr><td>NBSO - ISNE</td><td>+0.500</td></tr><tr><td>BANC - TIDC</td><td>+0.500</td></tr></tbody></table></div></section>
+  </main>
+</body>
+</html>

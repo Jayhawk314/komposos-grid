@@ -76,11 +76,11 @@ REGISTRY: List[DatasetEntry] = [
     DatasetEntry(
         key="eia930",
         title="EIA-930 Hourly Grid Monitor (BA demand, generation, interchange)",
-        problems=(WasteProblem.PEAKER_RELIANCE, WasteProblem.CURTAILMENT),
+        problems=(WasteProblem.DATA_COHERENCE, WasteProblem.PEAKER_RELIANCE, WasteProblem.CURTAILMENT),
         granularity="hourly, 65 balancing authorities, REST API",
         access="free API",
-        status="planned",
-        notes="level-2 coherence: plant sections aggregated along plant->BA must match",
+        status="implemented",
+        notes="sources/eia930.py; level-2 BA coherence and footprint repair proposals",
     ),
     DatasetEntry(
         key="lmp",

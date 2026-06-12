@@ -23,6 +23,20 @@ dataset-to-waste-problem map.
 """
 
 from domains.grid.coherence import GridCoherenceChecker, CoherenceReport, Section
+from domains.grid.ba_repair import BARepairReport, EntityMove
+from domains.grid.ba_footprint_crosswalk import BAFootprintCrosswalk, BAErrorScore
+from domains.grid.ba_footprint_report import BAFootprintReport
+from domains.grid.ba_review import BAFootprintReview, ReviewDecision, ReviewedMove
+from domains.grid.ba_dashboard import (
+    export_footprint_report_html,
+    export_review_html,
+)
+from domains.grid.flow_report import FlowBottleneckReport, FlowBottleneck
+from domains.grid.congestion_evidence import (
+    CongestionEvidenceReport,
+    CongestionEvidence,
+    CongestionClaim,
+)
 from domains.grid.ingest import GridCategoryBuilder
 from domains.grid.sources.base import GridDataSource, PlantRecord
 
@@ -30,6 +44,21 @@ __all__ = [
     "GridCoherenceChecker",
     "CoherenceReport",
     "Section",
+    "BARepairReport",
+    "EntityMove",
+    "BAFootprintCrosswalk",
+    "BAErrorScore",
+    "BAFootprintReport",
+    "BAFootprintReview",
+    "ReviewDecision",
+    "ReviewedMove",
+    "export_footprint_report_html",
+    "export_review_html",
+    "FlowBottleneckReport",
+    "FlowBottleneck",
+    "CongestionEvidenceReport",
+    "CongestionEvidence",
+    "CongestionClaim",
     "GridCategoryBuilder",
     "GridDataSource",
     "PlantRecord",

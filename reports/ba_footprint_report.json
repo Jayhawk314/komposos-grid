@@ -1,0 +1,295 @@
+{
+  "telemetry_source": "eia930",
+  "accounting_source": "accounting_consensus",
+  "accepted_corrections": 10,
+  "rejected_candidates": 3,
+  "before": {
+    "agreement_rate": 0.45161290322580644,
+    "contradictions": 11,
+    "abs_error_mwh": 290546334.89700055,
+    "outside_tolerance": 41,
+    "sheaf_energy_leak": 1.898978154151095
+  },
+  "after": {
+    "agreement_rate": 0.6290322580645161,
+    "contradictions": 7,
+    "abs_error_mwh": 231196270.03100052,
+    "outside_tolerance": 30,
+    "sheaf_energy_leak": 0.8184950606112942
+  },
+  "accepted": [
+    {
+      "entity": "3082",
+      "state": "OR",
+      "from_ba": "BPAT",
+      "to_ba": "GRID",
+      "value_mwh": 6793296.995999999,
+      "confidence": 1.0,
+      "candidate_improvement_mwh": 13586593.991999999,
+      "validated_improvement_mwh": 13586593.992000043,
+      "reasons": [
+        "accepted"
+      ]
+    },
+    {
+      "entity": "3895",
+      "state": "OR",
+      "from_ba": "BPAT",
+      "to_ba": "GRID",
+      "value_mwh": 5406985.001,
+      "confidence": 1.0,
+      "candidate_improvement_mwh": 10813970.002,
+      "validated_improvement_mwh": 10813970.002000034,
+      "reasons": [
+        "accepted"
+      ]
+    },
+    {
+      "entity": "2721",
+      "state": "NC",
+      "from_ba": "DUK",
+      "to_ba": "CPLW",
+      "value_mwh": 5244806.979499999,
+      "confidence": 0.7936595219366548,
+      "candidate_improvement_mwh": 8325182.0,
+      "validated_improvement_mwh": 8325181.99999994,
+      "reasons": [
+        "accepted"
+      ]
+    },
+    {
+      "entity": "55306",
+      "state": "AZ",
+      "from_ba": "SRP",
+      "to_ba": "AZPS",
+      "value_mwh": 7390743.0,
+      "confidence": 0.5283820571219972,
+      "candidate_improvement_mwh": 7810271.98,
+      "validated_improvement_mwh": 7810271.980000019,
+      "reasons": [
+        "accepted"
+      ]
+    },
+    {
+      "entity": "55821",
+      "state": "FL",
+      "from_ba": "FPC",
+      "to_ba": "FMPP",
+      "value_mwh": 3546362.0,
+      "confidence": 1.0,
+      "candidate_improvement_mwh": 7092724.0,
+      "validated_improvement_mwh": 7092724.0,
+      "reasons": [
+        "accepted"
+      ]
+    },
+    {
+      "entity": "55482",
+      "state": "WA",
+      "from_ba": "PSEI",
+      "to_ba": "GCPD",
+      "value_mwh": 2172002.0,
+      "confidence": 1.0,
+      "candidate_improvement_mwh": 4344004.0,
+      "validated_improvement_mwh": 4344004.0,
+      "reasons": [
+        "accepted"
+      ]
+    },
+    {
+      "entity": "55700",
+      "state": "WA",
+      "from_ba": "PSEI",
+      "to_ba": "GCPD",
+      "value_mwh": 1989583.0,
+      "confidence": 0.8548700908682875,
+      "candidate_improvement_mwh": 3401670.0,
+      "validated_improvement_mwh": 3401670.0,
+      "reasons": [
+        "accepted"
+      ]
+    },
+    {
+      "entity": "117",
+      "state": "AZ",
+      "from_ba": "AZPS",
+      "to_ba": "TEPC",
+      "value_mwh": 3053387.0,
+      "confidence": 0.3399115303759402,
+      "candidate_improvement_mwh": 2075762.8960000016,
+      "validated_improvement_mwh": 2075762.8960000277,
+      "reasons": [
+        "accepted"
+      ]
+    },
+    {
+      "entity": "10202",
+      "state": "FL",
+      "from_ba": "JEA",
+      "to_ba": "SEC",
+      "value_mwh": 557723.998,
+      "confidence": 1.0,
+      "candidate_improvement_mwh": 1115447.996,
+      "validated_improvement_mwh": 1115447.995999962,
+      "reasons": [
+        "accepted"
+      ]
+    },
+    {
+      "entity": "447",
+      "state": "CA",
+      "from_ba": "WALC",
+      "to_ba": "IID",
+      "value_mwh": 392219.0,
+      "confidence": 1.0,
+      "candidate_improvement_mwh": 784438.0,
+      "validated_improvement_mwh": 784438.0,
+      "reasons": [
+        "accepted"
+      ]
+    }
+  ],
+  "rejected": [
+    {
+      "entity": "55112",
+      "state": "CA",
+      "from_ba": "WALC",
+      "to_ba": "BANC",
+      "value_mwh": 2135122.0,
+      "confidence": 1.0,
+      "candidate_improvement_mwh": 4270244.0,
+      "validated_improvement_mwh": 0.0,
+      "reasons": [
+        "source and target BAs lack observed interchange tie"
+      ]
+    },
+    {
+      "entity": "65577",
+      "state": "MT",
+      "from_ba": "PSEI",
+      "to_ba": "NWMT",
+      "value_mwh": 1315806.0,
+      "confidence": 0.9747432353249648,
+      "candidate_improvement_mwh": 2565145.995000001,
+      "validated_improvement_mwh": 0.0,
+      "reasons": [
+        "source and target BAs lack observed interchange tie"
+      ]
+    },
+    {
+      "entity": "50188",
+      "state": "NC",
+      "from_ba": "CPLE",
+      "to_ba": "SEPA",
+      "value_mwh": 196939.55,
+      "confidence": 0.49948828968077147,
+      "candidate_improvement_mwh": 196737.99800000153,
+      "validated_improvement_mwh": 0.0,
+      "reasons": [
+        "source and target BAs lack observed interchange tie"
+      ]
+    }
+  ],
+  "unresolved_deltas_mwh": [
+    {
+      "ba": "MISO",
+      "delta_mwh": -39569124.96200001
+    },
+    {
+      "ba": "ERCO",
+      "delta_mwh": -31761206.4520002
+    },
+    {
+      "ba": "NA - PR",
+      "delta_mwh": -17501153.122000005
+    },
+    {
+      "ba": "SOCO",
+      "delta_mwh": -11333275.713499933
+    },
+    {
+      "ba": "TVA",
+      "delta_mwh": -10059475.647000015
+    },
+    {
+      "ba": "CPLE",
+      "delta_mwh": -9370872.184500009
+    },
+    {
+      "ba": "WALC",
+      "delta_mwh": -7842253.984000001
+    },
+    {
+      "ba": "PSCO",
+      "delta_mwh": 7761659.512000009
+    },
+    {
+      "ba": "PGE",
+      "delta_mwh": -6903038.994500002
+    },
+    {
+      "ba": "FPL",
+      "delta_mwh": 6665649.877999991
+    },
+    {
+      "ba": "HECO",
+      "delta_mwh": -6504894.001999999
+    },
+    {
+      "ba": "NYIS",
+      "delta_mwh": -6122817.105499968
+    },
+    {
+      "ba": "ISNE",
+      "delta_mwh": -5286453.324000016
+    },
+    {
+      "ba": "SWPP",
+      "delta_mwh": 4950158.049500108
+    },
+    {
+      "ba": "NA - AK",
+      "delta_mwh": -4495345.160000001
+    },
+    {
+      "ba": "AECI",
+      "delta_mwh": -4248422.986000001
+    },
+    {
+      "ba": "CISO",
+      "delta_mwh": -4053061.242000073
+    },
+    {
+      "ba": "PACW",
+      "delta_mwh": -3390921.0025000013
+    },
+    {
+      "ba": "NEVP",
+      "delta_mwh": -3093679.4970000014
+    },
+    {
+      "ba": "BPAT",
+      "delta_mwh": -2884429.4055000097
+    },
+    {
+      "ba": "DUK",
+      "delta_mwh": -2881230.3245000243
+    },
+    {
+      "ba": "WAUW",
+      "delta_mwh": -2822869.9995
+    },
+    {
+      "ba": "NA - HI",
+      "delta_mwh": -2653723.739
+    },
+    {
+      "ba": "PACE",
+      "delta_mwh": -2595839.230000004
+    },
+    {
+      "ba": "SRP",
+      "delta_mwh": -2505321.987999998
+    }
+  ]
+}

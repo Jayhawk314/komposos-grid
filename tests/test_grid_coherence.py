@@ -12,6 +12,9 @@ from domains.grid.coherence import (
     GLUE,
     GridCoherenceChecker,
     Section,
+    ba_mapping_from_records,
+    is_valid_ba_code,
+    pushforward,
     relative_discrepancy,
     sections_from_sources,
 )
@@ -79,6 +82,116 @@ def test_three_sections_pairwise():
     )
     assert len(report.pairs) == 3  # all pairs checked
     assert report.is_coherent
+
+
+# ---------------------------------------------------------------- pushforward / BA level
+
+def test_pushforward_sums_fibers_and_drops_unmapped():
+    section = Section("x", {"1": 10.0, "2": 20.0, "3": 5.0, "4": 7.0})
+    mapping = {"1": "ERCO", "2": "ERCO", "3": "CISO"}  # plant 4 unmapped
+    pushed = pushforward(section, mapping, source="x@ba")
+    assert pushed.source == "x@ba"
+    assert pushed.values == {"ERCO": 30.0, "CISO": 5.0}
+
+
+def test_ba_mapping_from_records_skips_missing():
+    fleet = make_fleet(n_plants=5, seed=2)
+    fleet[0].balancing_authority = ""
+    fleet[1].balancing_authority = "State-Fuel Level Increment"
+    mapping = ba_mapping_from_records(fleet)
+    assert fleet[0].plant_id not in mapping
+    assert fleet[1].plant_id not in mapping
+    assert len(mapping) == 3
+
+
+def test_is_valid_ba_code_rejects_aggregate_labels():
+    assert is_valid_ba_code("BPAT")
+    assert is_valid_ba_code("NA - PR")
+    assert not is_valid_ba_code("State-Fuel Level Increment")
+    assert not is_valid_ba_code("nan")
+
+
+def test_ba_level_coherence_against_independent_section():
+    fleet = make_fleet(n_plants=20, seed=3)
+    plant_section = Section(
+        "plants", {r.plant_id: r.net_generation_mwh for r in fleet}
+    )
+    mapping = ba_mapping_from_records(fleet)
+    pushed = pushforward(plant_section, mapping, source="plants@ba")
+
+    # Independent BA-level section agreeing within 2%, one BA off by 50%
+    telemetry = {ba: v * 1.02 for ba, v in pushed.values.items()}
+    bad_ba = next(iter(telemetry))
+    telemetry[bad_ba] = pushed.values[bad_ba] * 1.5
+
+    checker = GridCoherenceChecker(tolerance=0.05, key_namer=lambda c: f"ba:{c}")
+    report = checker.check([pushed, Section("telemetry", telemetry)])
+    contradictions = report.pairs[0].by_verdict(CONTRADICT)
+    assert [v.plant_id for v in contradictions] == [bad_ba]
+
+
+def test_ba_writeback_uses_ba_namer():
+    pushed = Section("plants@ba", {"ERCO": 100.0})
+    telemetry = Section("telemetry", {"ERCO": 200.0})
+    cat = Category(name="grid-test", db_path=":memory:")
+    checker = GridCoherenceChecker(
+        category=cat, tolerance=0.05, key_namer=lambda c: f"ba:{c}"
+    )
+    checker.check([pushed, telemetry])
+    disputes = [
+        m for m in cat.morphisms_from("source:plants@ba") if m.name == "disputes"
+    ]
+    assert [m.target for m in disputes] == ["ba:ERCO"]
+
+
+# ---------------------------------------------------------------- sheaf audit
+
+def test_probe_single_ratio_edge_is_satisfiable():
+    from komposos_wesys.validation.thermodynamic_probe import ThermodynamicSheaf
+
+    sheaf = ThermodynamicSheaf()
+    sheaf.add_flow("a", "b", efficiency=0.5)
+    audit = sheaf.audit()
+    assert audit.energy_leak == pytest.approx(0.0, abs=1e-10)
+    assert audit.assignment == audit.asefficiencyment
+
+
+def test_sheaf_audit_stable_under_global_calibration():
+    from domains.grid.sheaf_audit import sheaf_audit
+
+    # Source b reports exactly 0.97x source a everywhere: a pure gauge
+    # difference, which must NOT count as an obstruction.
+    values = {str(i): 1000.0 * (i + 1) for i in range(20)}
+    sections = [
+        Section("a", values),
+        Section("b", {k: v * 0.97 for k, v in values.items()}),
+    ]
+    audit = sheaf_audit(sections)
+    assert audit.stable
+    assert audit.n_edges == 20
+    assert audit.calibration["b"] == pytest.approx(1 / 0.97)
+    assert audit.fused_values["3"].value == pytest.approx(values["3"])
+
+
+def test_sheaf_audit_localizes_obstruction():
+    from domains.grid.sheaf_audit import sheaf_audit
+
+    values = {str(i): 1000.0 for i in range(20)}
+    perturbed = dict(values)
+    perturbed["7"] = 400.0  # one entity off by 2.5x
+    audit = sheaf_audit([Section("a", values), Section("b", perturbed)])
+    assert not audit.stable
+    assert audit.offenders[0].entity == "7"
+
+
+def test_sheaf_audit_skips_nonpositive_values():
+    from domains.grid.sheaf_audit import sheaf_audit
+
+    audit = sheaf_audit(
+        [Section("a", {"1": 100.0, "2": -5.0}), Section("b", {"1": 100.0, "2": 50.0})]
+    )
+    assert audit.n_edges == 1
+    assert audit.n_skipped == 1
 
 
 # ---------------------------------------------------------------- crosswalk
