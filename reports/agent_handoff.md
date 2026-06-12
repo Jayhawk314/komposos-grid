@@ -364,18 +364,64 @@ python -m domains.grid.run_solution_studies `
 
 - Validation: full suite `435 passed, 2 skipped`.
 
+## State as of 2026-06-12 (CHAWATCHAPAT mapped, first real B/C)
+
+- VERIFIED (was "verify before claiming"): CHAWATCHAPAT and MISO's
+  Charlie Creek-Watford are the SAME iron. SPP MMU FCA 2023 report
+  (spp.org/documents/71864) defines CHAWATCHAPAT = Charlie
+  Creek-Watford City 230 kV (WAUE = WAPA Upper Great Plains) ftlo
+  Charlie Creek-Patent Gate 345 kV; it is SPP flowgate 5717,
+  coordinated market-to-market with MISO. 1,871 binding h / 1,858
+  pivotal-supplier h in the SPP 2023 FCA study (Williston FCA).
+- Context: constraint blew up when Atlas Power data center (crypto,
+  Williston) connected; MDU FERC complaint EL24-61 + MISO complaint
+  EL24-85 over M2M duplicative payments were dismissed Oct 2024
+  (troutmanenergyreport.com summary). WAPA owns the constrained line.
+- THE named relief project exists with a published cost: SPP 2024 ITP
+  selected **Patent Gate - Pioneer 345 kV Ckt 1 (BEPC, $163,714,033
+  2024$, 33.5 mi, NTC-C issued)** explicitly "to provide congestion
+  relief for the economic constraint on the 230 kV line from Watford
+  to Charlie Creek" (2024 ITP Assessment Report v1.0 p.18 cost table +
+  p.167 narrative; spp.org/media/2229/2024-itp-assessment-report-v10.pdf).
+  Cost anchor nearby: Kummer Ridge-Roundup 345 kV (PID 92113 NTC,
+  $78,977,357, 33.2 mi, 1792 MVA, energized 2024-12-17) — note
+  Patent Gate-Pioneer is ~2x the per-mile cost.
+  Other ND-portfolio rows with costs: Spring Brook-Twelve Mile 345 kV
+  (BEPC $81.1M), Ren-Williston 115 kV rebuild (WAPA $9.4M),
+  Pioneer-Sanderson 115 kV (MWEC $15.3M).
+- Filled `reports/project_costs.csv` (committed, survives reruns —
+  the *_template.csv files are REGENERATED every run, never fill those
+  in place) and reran with `--project-costs reports/project_costs.csv`.
+- First real B/C in `reports/project_cost_results.csv` (bracketed):
+  - Full-relief cap case (relief capped at corridor gross flow):
+    **B/C 1.56, net +$10.6M/yr** — the line clears on MISO-SWPP seam
+    value ALONE if it relieves most observed seam congestion.
+  - 250 MW attribution sensitivity: B/C 0.73, net -$5.0M/yr — needs
+    intra-SPP/MISO constraint value (large, uncounted: this was
+    MISO's biggest 2023 constraint cost) to clear.
+  - O&M assumed 1.5% of capex; 10% FCR; both overridable in the CSV.
+- Validation: full suite `435 passed, 2 skipped`.
+- 2025 MISO seam rerun (MS.HUB/SOCO + ARKANSAS.HUB/SWPP, 365 daily
+  files) was launched in background; if it didn't finish this session,
+  rerun: `python -m domains.grid.run_miso_seam_evidence --start
+  2025-01-01 --end 2026-01-01 --out reports\miso_seam_evidence_2025.csv`
+  (cache makes restarts cheap).
+
 ## Best next handoff target
 
-- The benefit side of both priority studies is now same-year and
-  defensible. The ONLY remaining gap is real costs:
-  populate `reports/project_cost_template.csv` with quoted capex/O&M
-  (or explicit annual cost) and rerun to emit real B/C in
-  `reports/project_cost_results.csv` and the memos.
-- Best no-quote task: map CHAWATCHAPAT and Charlie Creek-Watford to
-  candidate MISO/SPP upgrade names and owners (MTEP/SPP ITP project
-  lists are public), so the cost template can be filled from published
-  project estimates rather than waiting on private quotes.
-- Cheap follow-on: 2025 MISO seam rerun (loaders are date-parameterized)
-  to pair with the MISO-SWPP 2025 flow row already in
-  `reports/same_year_flows.csv` — the net-flow collapse there hints the
-  seam economics moved again in 2025.
+- NYIS-PJM is now the corridor without a costed project: find the
+  PJM-side / NYISO-side named upgrade candidates (PJM RTEP baseline
+  projects at the NY interface, NYPA/ConEd upgrades, queue-rescue
+  candidates from reports/energy_solution_studies queue rows) and add
+  rows to `reports/project_costs.csv`. The $159.7M/yr same-year value
+  supports up to ~$1.6B capex at break-even (10% FCR) — even large
+  interface projects may clear; this is the highest-value open
+  question in the portfolio.
+- Close out the 2025 MISO seam rerun (see above) and compare
+  MISO-SWPP 2025 spread vs the 2024 6.31 $/MWh alongside the
+  2025 flow row already in reports/same_year_flows.csv (net flow
+  collapsed 2.44M -> 0.73M MWh — direction churn suggests the seam
+  moved again).
+- Refinement for the Patent Gate-Pioneer row: replace the 1.5% O&M
+  guess and the bracket capacities with BEPC's actuals if/when
+  published; check SPP NTC tracking for cost updates on the NTC-C.

@@ -109,7 +109,10 @@ A project clears on congestion value alone only if its real annual cost is below
 
 ## Quoted Project Costs
 
-- No quoted project costs supplied yet.
+| Project | Type | Capacity | Annual Cost | Relief Value | B/C | Net Value |
+|---|---|---:|---:|---:|---:|---:|
+| Patent Gate - Pioneer 345 kV Ckt 1 New Line (full-relief cap case) | transmission_or_grid_enhancing_transfer | 1,000 MW | $18,827,114/yr | $29,424,117/yr | 1.56 | $10,597,003/yr |
+| Patent Gate - Pioneer 345 kV Ckt 1 New Line (250 MW seam-relief sensitivity) | transmission_or_grid_enhancing_transfer | 250 MW | $18,827,114/yr | $13,818,900/yr | 0.73 | $-5,008,214/yr |
 
 ## Active Queue Candidates
 

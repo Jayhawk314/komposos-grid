@@ -456,7 +456,50 @@
           "notes": "Critical-window dispatch proxy, not firm transfer capability."
         }
       ],
-      "project_cost_results": []
+      "project_cost_results": [
+        {
+          "project_id": "SPP-PID-92113-NTC-C",
+          "project_name": "Patent Gate - Pioneer 345 kV Ckt 1 New Line (full-relief cap case)",
+          "geography": "MISO-SWPP",
+          "solution_type": "transmission_or_grid_enhancing_transfer",
+          "capacity_mw": 1000.0,
+          "effective_mwh_per_mw_year": 8760.0,
+          "capex_usd": 163714033.0,
+          "annualized_capex_usd": 16371403.3,
+          "annual_om_usd": 2455711.0,
+          "annual_cost_usd": 18827114.3,
+          "fixed_charge_rate": 0.1,
+          "relief_mwh": 4663093.0,
+          "relief_value_usd": 29424116.83,
+          "benefit_cost_ratio": 1.562858564575666,
+          "net_annual_value_usd": 10597002.529999997,
+          "clears_congestion_value": true,
+          "cost_method": "capex_fixed_charge_plus_om",
+          "source": "SPP 2024 ITP Assessment Report v1.0 p.18 + p.167 (spp.org/media/2229/2024-itp-assessment-report-v10.pdf)",
+          "notes": "SPP-selected congestion-relief project for the Watford-Charlie Creek 230 kV constraint (CHAWATCHAPAT / MISO Charlie Creek-Watford M2M flowgate). 33.5 mi NTC-C; cost is SPP 2024$ estimate; O&M assumed 1.5% of capex. Capacity entered above the cap so relief_mwh caps at corridor gross flow: this row asks whether eliminating ALL observed MISO-SWPP seam congestion pays for the line on seam value alone. Line benefits beyond the seam (intra-SPP shadow prices; MISO-side M2M congestion which was MISO's largest 2023 constraint cost; voltage collapse + thermal fixes per ITP) are NOT counted."
+        },
+        {
+          "project_id": "SPP-PID-92113-NTC-C-sens",
+          "project_name": "Patent Gate - Pioneer 345 kV Ckt 1 New Line (250 MW seam-relief sensitivity)",
+          "geography": "MISO-SWPP",
+          "solution_type": "transmission_or_grid_enhancing_transfer",
+          "capacity_mw": 250.0,
+          "effective_mwh_per_mw_year": 8760.0,
+          "capex_usd": 163714033.0,
+          "annualized_capex_usd": 16371403.3,
+          "annual_om_usd": 2455711.0,
+          "annual_cost_usd": 18827114.3,
+          "fixed_charge_rate": 0.1,
+          "relief_mwh": 2190000.0,
+          "relief_value_usd": 13818900.0,
+          "benefit_cost_ratio": 0.7339892763066722,
+          "net_annual_value_usd": -5008214.300000001,
+          "clears_congestion_value": false,
+          "cost_method": "capex_fixed_charge_plus_om",
+          "source": "SPP 2024 ITP Assessment Report v1.0 p.18 + p.167",
+          "notes": "Sensitivity: only 250 MW of the new line's transfer attributed to MISO-SWPP seam relief (uncapped). Together with the full-relief cap row this brackets the seam-only B/C. Same capex/O&M assumptions as the cap case."
+        }
+      ]
     }
   ]
 }
