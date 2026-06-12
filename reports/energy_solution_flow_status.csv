@@ -1,0 +1,3 @@
+study_id,geography,current_year,current_spread_usd_mwh,annual_value_usd,gross_flow_mwh,flow_year,same_year_flow_status,flow_basis,same_year_flow_source
+nyis_pjm,NYIS-PJM,2025,7.38,142391660.94,19294263.0,2023,needs_same_year_flow,current spread applied to existing baseline gross flow,inferred from current card value and 2023 EIA-930 flow baseline
+miso_swpp,MISO-SWPP,2024,6.31,25176168.04,3989884.0,2023,needs_same_year_flow,current spread applied to existing baseline gross flow,inferred from current card value and 2023 EIA-930 flow baseline

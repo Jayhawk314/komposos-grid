@@ -6,6 +6,7 @@
 - Current evidence year: **2025**
 - Current congestion spread: **$7.38/MWh**
 - Annual value at current spread: **$142,391,661/yr**
+- Gross flow basis: **19,294,263 MWh** (2023; needs_same_year_flow)
 - Trend: 2023 $1.53/MWh -> 2024 $2.02/MWh -> 2025 $7.38/MWh (4.8x over observed window).
 - Recommended path: Start with a 50-100 MW transfer-relief or queue-rescue package; storage clears only if it is paid for by more than seam congestion.
 - Next action: Price the top PJM-side active projects and a small transfer upgrade against the break-even capex envelope.
@@ -30,6 +31,10 @@ A project clears on congestion value alone only if its real annual cost is below
 | 250 MW targeted transfer upgrade | 250 MW | $16,162,200/yr | $16,162,200/yr | $161,622,000 | $646/kW |
 | 100 MW / 4-hour storage siting screen | 100 MW | $885,600/yr | $885,600/yr | $8,856,000 | $89/kW |
 | 100 MW flexible-load program | 100 MW | $442,800/yr | $442,800/yr | $4,428,000 | $44/kW |
+
+## Quoted Project Costs
+
+- No quoted project costs supplied yet.
 
 ## Active Queue Candidates
 

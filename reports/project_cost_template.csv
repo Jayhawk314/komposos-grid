@@ -1,0 +1,7 @@
+project_id,project_name,geography,ba_a,ba_b,solution_type,capacity_mw,effective_mwh_per_mw_year,capex_usd,annual_om_usd,annual_cost_usd,fixed_charge_rate,in_service_year,owner,source,notes
+,,NYIS-PJM,NYIS,PJM,transmission_or_grid_enhancing_transfer,,8760.0,,,,0.1,,,,
+,,NYIS-PJM,NYIS,PJM,storage,,1200.0,,,,0.1,,,,
+,,NYIS-PJM,NYIS,PJM,flexible_load,,600.0,,,,0.1,,,,
+,,MISO-SWPP,MISO,SWPP,transmission_or_grid_enhancing_transfer,,8760.0,,,,0.1,,,,
+,,MISO-SWPP,MISO,SWPP,storage,,1200.0,,,,0.1,,,,
+,,MISO-SWPP,MISO,SWPP,flexible_load,,600.0,,,,0.1,,,,

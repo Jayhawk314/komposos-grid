@@ -7,6 +7,13 @@
 | NYIS-PJM | $142,391,661/yr | $7.38/MWh | 85.5 GW | $161,622,000 | Price the top PJM-side active projects and a small transfer upgrade against the break-even capex envelope. |
 | MISO-SWPP | $25,176,168/yr | $6.31/MWh | 156.5 GW | $138,189,000 | Map CHAWATCHAPAT and Charlie Creek-Watford to upgrade candidates and price a 50-100 MW relief package. |
 
+## Flow Evidence Status
+
+| Corridor | Price Year | Flow Year | Status | Gross Flow | Annual Value |
+|---|---:|---:|---|---:|---:|
+| NYIS-PJM | 2025 | 2023 | needs_same_year_flow | 19,294,263 MWh | $142,391,661/yr |
+| MISO-SWPP | 2024 | 2023 | needs_same_year_flow | 3,989,884 MWh | $25,176,168/yr |
+
 # PJM-NYIS 2025 Solution Memo
 
 ## Decision Frame
@@ -15,6 +22,7 @@
 - Current evidence year: **2025**
 - Current congestion spread: **$7.38/MWh**
 - Annual value at current spread: **$142,391,661/yr**
+- Gross flow basis: **19,294,263 MWh** (2023; needs_same_year_flow)
 - Trend: 2023 $1.53/MWh -> 2024 $2.02/MWh -> 2025 $7.38/MWh (4.8x over observed window).
 - Recommended path: Start with a 50-100 MW transfer-relief or queue-rescue package; storage clears only if it is paid for by more than seam congestion.
 - Next action: Price the top PJM-side active projects and a small transfer upgrade against the break-even capex envelope.
@@ -39,6 +47,10 @@ A project clears on congestion value alone only if its real annual cost is below
 | 250 MW targeted transfer upgrade | 250 MW | $16,162,200/yr | $16,162,200/yr | $161,622,000 | $646/kW |
 | 100 MW / 4-hour storage siting screen | 100 MW | $885,600/yr | $885,600/yr | $8,856,000 | $89/kW |
 | 100 MW flexible-load program | 100 MW | $442,800/yr | $442,800/yr | $4,428,000 | $44/kW |
+
+## Quoted Project Costs
+
+- No quoted project costs supplied yet.
 
 ## Active Queue Candidates
 
@@ -68,6 +80,7 @@ A project clears on congestion value alone only if its real annual cost is below
 - Current evidence year: **2024**
 - Current congestion spread: **$6.31/MWh**
 - Annual value at current spread: **$25,176,168/yr**
+- Gross flow basis: **3,989,884 MWh** (2023; needs_same_year_flow)
 - Trend: 2023 $4.74/MWh -> 2024 $6.31/MWh (1.3x over observed window).
 - Recommended path: Start with targeted transfer relief around the wind-belt constraints, then test storage only where it also captures local energy or capacity value.
 - Next action: Map CHAWATCHAPAT and Charlie Creek-Watford to upgrade candidates and price a 50-100 MW relief package.
@@ -93,6 +106,10 @@ A project clears on congestion value alone only if its real annual cost is below
 | 250 MW targeted transfer upgrade | 250 MW | $13,818,900/yr | $13,818,900/yr | $138,189,000 | $553/kW |
 | 100 MW / 4-hour storage siting screen | 100 MW | $757,200/yr | $757,200/yr | $7,572,000 | $76/kW |
 | 100 MW flexible-load program | 100 MW | $378,600/yr | $378,600/yr | $3,786,000 | $38/kW |
+
+## Quoted Project Costs
+
+- No quoted project costs supplied yet.
 
 ## Active Queue Candidates
 

@@ -21,13 +21,14 @@ from __future__ import annotations
 import csv
 import json
 import math
-from dataclasses import dataclass
+from dataclasses import dataclass, field, replace
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Sequence
 
 
 HOURS_PER_YEAR = 8760.0
 DEFAULT_FIXED_CHARGE_RATE = 0.10
+DEFAULT_BASELINE_FLOW_YEAR = 2023
 
 
 @dataclass(frozen=True)
@@ -94,6 +95,16 @@ DEFAULT_INTERVENTIONS = [
 ]
 
 
+DEFAULT_EFFECTIVE_MWH_PER_MW_YEAR = {
+    "transmission_or_grid_enhancing_transfer": HOURS_PER_YEAR,
+    "transfer": HOURS_PER_YEAR,
+    "grid_enhancing_transfer": HOURS_PER_YEAR,
+    "storage": 1200.0,
+    "flexible_load": 600.0,
+    "demand_response": 600.0,
+}
+
+
 @dataclass(frozen=True)
 class QueueCandidate:
     q_id: str
@@ -155,6 +166,116 @@ class InterventionCase:
 
 
 @dataclass(frozen=True)
+class SameYearFlowEvidence:
+    geography: str
+    ba_a: str
+    ba_b: str
+    year: int
+    gross_mwh: float
+    net_mwh: float = 0.0
+    source: str = ""
+    notes: str = ""
+
+    def to_row(self) -> Dict[str, Any]:
+        return {
+            "geography": self.geography,
+            "ba_a": self.ba_a,
+            "ba_b": self.ba_b,
+            "year": self.year,
+            "gross_mwh": self.gross_mwh,
+            "net_mwh": self.net_mwh,
+            "source": self.source,
+            "notes": self.notes,
+        }
+
+
+@dataclass(frozen=True)
+class ProjectCostInput:
+    project_id: str
+    project_name: str
+    geography: str
+    ba_a: str
+    ba_b: str
+    solution_type: str
+    capacity_mw: float
+    effective_mwh_per_mw_year: float
+    capex_usd: float
+    annual_om_usd: float = 0.0
+    annual_cost_usd: float = 0.0
+    fixed_charge_rate: float = DEFAULT_FIXED_CHARGE_RATE
+    in_service_year: int = 0
+    owner: str = ""
+    source: str = ""
+    notes: str = ""
+
+    def to_row(self) -> Dict[str, Any]:
+        return {
+            "project_id": self.project_id,
+            "project_name": self.project_name,
+            "geography": self.geography,
+            "ba_a": self.ba_a,
+            "ba_b": self.ba_b,
+            "solution_type": self.solution_type,
+            "capacity_mw": self.capacity_mw,
+            "effective_mwh_per_mw_year": self.effective_mwh_per_mw_year,
+            "capex_usd": self.capex_usd,
+            "annual_om_usd": self.annual_om_usd,
+            "annual_cost_usd": self.annual_cost_usd,
+            "fixed_charge_rate": self.fixed_charge_rate,
+            "in_service_year": self.in_service_year,
+            "owner": self.owner,
+            "source": self.source,
+            "notes": self.notes,
+        }
+
+
+@dataclass(frozen=True)
+class ProjectCostResult:
+    project_id: str
+    project_name: str
+    geography: str
+    solution_type: str
+    capacity_mw: float
+    effective_mwh_per_mw_year: float
+    capex_usd: float
+    annualized_capex_usd: float
+    annual_om_usd: float
+    annual_cost_usd: float
+    fixed_charge_rate: float
+    relief_mwh: float
+    relief_value_usd: float
+    benefit_cost_ratio: float
+    net_annual_value_usd: float
+    clears_congestion_value: bool
+    cost_method: str
+    source: str
+    notes: str = ""
+
+    def to_row(self) -> Dict[str, Any]:
+        return {
+            "project_id": self.project_id,
+            "project_name": self.project_name,
+            "geography": self.geography,
+            "solution_type": self.solution_type,
+            "capacity_mw": self.capacity_mw,
+            "effective_mwh_per_mw_year": self.effective_mwh_per_mw_year,
+            "capex_usd": self.capex_usd,
+            "annualized_capex_usd": self.annualized_capex_usd,
+            "annual_om_usd": self.annual_om_usd,
+            "annual_cost_usd": self.annual_cost_usd,
+            "fixed_charge_rate": self.fixed_charge_rate,
+            "relief_mwh": self.relief_mwh,
+            "relief_value_usd": self.relief_value_usd,
+            "benefit_cost_ratio": self.benefit_cost_ratio,
+            "net_annual_value_usd": self.net_annual_value_usd,
+            "clears_congestion_value": self.clears_congestion_value,
+            "cost_method": self.cost_method,
+            "source": self.source,
+            "notes": self.notes,
+        }
+
+
+@dataclass(frozen=True)
 class CorridorStudy:
     study_id: str
     title: str
@@ -162,6 +283,11 @@ class CorridorStudy:
     current_year: int
     current_spread_usd_mwh: float
     annual_value_usd: float
+    gross_flow_mwh: float
+    flow_year: int
+    flow_basis: str
+    same_year_flow_status: str
+    same_year_flow_source: str
     trend_summary: str
     evidence_basis: str
     constraints: List[str]
@@ -173,6 +299,7 @@ class CorridorStudy:
     recommended_path: str
     next_action: str
     caveat: str
+    project_cost_results: List[ProjectCostResult] = field(default_factory=list)
 
     @property
     def best_intervention(self) -> InterventionCase | None:
@@ -189,6 +316,11 @@ class CorridorStudy:
             "current_year": self.current_year,
             "current_spread_usd_mwh": self.current_spread_usd_mwh,
             "annual_value_usd": self.annual_value_usd,
+            "gross_flow_mwh": self.gross_flow_mwh,
+            "flow_year": self.flow_year,
+            "same_year_flow_status": self.same_year_flow_status,
+            "flow_basis": self.flow_basis,
+            "same_year_flow_source": self.same_year_flow_source,
             "active_queue_gw": self.active_queue_gw,
             "withdrawn_queue_gw": self.withdrawn_queue_gw,
             "best_intervention": best.label if best else "",
@@ -211,6 +343,9 @@ class CorridorStudy:
             "top_active": [item.to_row() for item in self.top_active],
             "top_withdrawn": [item.to_row() for item in self.top_withdrawn],
             "interventions": [item.to_row() for item in self.interventions],
+            "project_cost_results": [
+                item.to_row() for item in self.project_cost_results
+            ],
         }
 
     def to_markdown(self) -> str:
@@ -223,6 +358,10 @@ class CorridorStudy:
             f"- Current evidence year: **{self.current_year}**",
             f"- Current congestion spread: **${self.current_spread_usd_mwh:.2f}/MWh**",
             f"- Annual value at current spread: **${self.annual_value_usd:,.0f}/yr**",
+            (
+                f"- Gross flow basis: **{self.gross_flow_mwh:,.0f} MWh** "
+                f"({self.flow_year}; {self.same_year_flow_status})"
+            ),
             f"- Trend: {self.trend_summary}",
             f"- Recommended path: {self.recommended_path}",
             f"- Next action: {self.next_action}",
@@ -255,6 +394,28 @@ class CorridorStudy:
                 f"${case.break_even_capex_usd:,.0f} | "
                 f"${case.break_even_capex_usd_per_kw:,.0f}/kW |"
             )
+
+        lines.extend([
+            "",
+            "## Quoted Project Costs",
+            "",
+        ])
+        if self.project_cost_results:
+            lines.extend([
+                "| Project | Type | Capacity | Annual Cost | Relief Value | B/C | Net Value |",
+                "|---|---|---:|---:|---:|---:|---:|",
+            ])
+            for result in self.project_cost_results:
+                lines.append(
+                    f"| {result.project_name or result.project_id} | "
+                    f"{result.solution_type} | {result.capacity_mw:,.0f} MW | "
+                    f"${result.annual_cost_usd:,.0f}/yr | "
+                    f"${result.relief_value_usd:,.0f}/yr | "
+                    f"{result.benefit_cost_ratio:.2f} | "
+                    f"${result.net_annual_value_usd:,.0f}/yr |"
+                )
+        else:
+            lines.append("- No quoted project costs supplied yet.")
 
         lines.extend([
             "",
@@ -326,6 +487,45 @@ class SolutionStudyReport:
                 })
         return rows
 
+    def to_flow_status_rows(self) -> List[Dict[str, Any]]:
+        return [
+            {
+                "study_id": study.study_id,
+                "geography": study.geography,
+                "current_year": study.current_year,
+                "current_spread_usd_mwh": study.current_spread_usd_mwh,
+                "gross_flow_mwh": study.gross_flow_mwh,
+                "flow_year": study.flow_year,
+                "same_year_flow_status": study.same_year_flow_status,
+                "annual_value_usd": study.annual_value_usd,
+                "flow_basis": study.flow_basis,
+                "same_year_flow_source": study.same_year_flow_source,
+            }
+            for study in self.ranked()
+        ]
+
+    def to_project_cost_rows(self) -> List[Dict[str, Any]]:
+        rows: List[Dict[str, Any]] = []
+        for study in self.ranked():
+            for result in study.project_cost_results:
+                rows.append({"study_id": study.study_id, **result.to_row()})
+        return rows
+
+    def with_project_costs(
+        self, project_costs: Sequence[ProjectCostInput]
+    ) -> "SolutionStudyReport":
+        return SolutionStudyReport(
+            studies=[
+                replace(
+                    study,
+                    project_cost_results=_project_cost_results_for_study(
+                        study, project_costs
+                    ),
+                )
+                for study in self.studies
+            ]
+        )
+
     def to_markdown(self) -> str:
         lines = [
             "# Energy Solution Studies",
@@ -343,6 +543,20 @@ class SolutionStudyReport:
                 f"{study.active_queue_gw:,.1f} GW | "
                 f"${best.break_even_capex_usd:,.0f} | {study.next_action} |"
             )
+        lines.extend([
+            "",
+            "## Flow Evidence Status",
+            "",
+            "| Corridor | Price Year | Flow Year | Status | Gross Flow | Annual Value |",
+            "|---|---:|---:|---|---:|---:|",
+        ])
+        for study in self.ranked():
+            lines.append(
+                f"| {study.geography} | {study.current_year} | {study.flow_year} | "
+                f"{study.same_year_flow_status} | "
+                f"{study.gross_flow_mwh:,.0f} MWh | "
+                f"${study.annual_value_usd:,.0f}/yr |"
+            )
         lines.append("")
         for study in self.ranked():
             lines.append(study.to_markdown())
@@ -358,6 +572,66 @@ class SolutionStudyReport:
 
     def export_interventions_csv(self, path: str | Path) -> None:
         _write_csv(path, self.to_intervention_rows())
+
+    def export_flow_status_csv(self, path: str | Path) -> None:
+        _write_csv(path, self.to_flow_status_rows())
+
+    def export_project_cost_results_csv(self, path: str | Path) -> None:
+        _write_csv_with_fields(
+            path,
+            self.to_project_cost_rows(),
+            PROJECT_COST_RESULT_FIELDS,
+        )
+
+    def export_project_cost_template_csv(self, path: str | Path) -> None:
+        rows: List[Dict[str, Any]] = []
+        for study in self.ranked():
+            ba_a, ba_b = _ba_pair_from_geography(study.geography)
+            for solution_type in [
+                "transmission_or_grid_enhancing_transfer",
+                "storage",
+                "flexible_load",
+            ]:
+                rows.append({
+                    "project_id": "",
+                    "project_name": "",
+                    "geography": study.geography,
+                    "ba_a": ba_a,
+                    "ba_b": ba_b,
+                    "solution_type": solution_type,
+                    "capacity_mw": "",
+                    "effective_mwh_per_mw_year": (
+                        DEFAULT_EFFECTIVE_MWH_PER_MW_YEAR[solution_type]
+                    ),
+                    "capex_usd": "",
+                    "annual_om_usd": "",
+                    "annual_cost_usd": "",
+                    "fixed_charge_rate": DEFAULT_FIXED_CHARGE_RATE,
+                    "in_service_year": "",
+                    "owner": "",
+                    "source": "",
+                    "notes": "",
+                })
+        _write_csv_with_fields(path, rows, PROJECT_COST_INPUT_FIELDS)
+
+    def export_same_year_flow_template_csv(self, path: str | Path) -> None:
+        rows: List[Dict[str, Any]] = []
+        for study in self.ranked():
+            ba_a, ba_b = _ba_pair_from_geography(study.geography)
+            rows.append({
+                "geography": study.geography,
+                "ba_a": ba_a,
+                "ba_b": ba_b,
+                "year": study.current_year,
+                "gross_mwh": "",
+                "net_mwh": "",
+                "source": "",
+                "notes": "Fill from same-year EIA-930 INTERCHANGE or ISO flow evidence.",
+                "current_fallback_flow_year": study.flow_year,
+                "current_fallback_gross_mwh": study.gross_flow_mwh,
+                "current_status": study.same_year_flow_status,
+            })
+        _write_csv_with_fields(path, rows, SAME_YEAR_FLOW_TEMPLATE_FIELDS)
 
     def export_markdown(self, path: str | Path) -> None:
         path = Path(path)
@@ -381,10 +655,14 @@ def build_solution_study_report(
     interventions: Sequence[InterventionTemplate] | None = None,
     fixed_charge_rate: float = DEFAULT_FIXED_CHARGE_RATE,
     top_projects: int = 5,
+    same_year_flows: Sequence[SameYearFlowEvidence] | None = None,
+    project_costs: Sequence[ProjectCostInput] | None = None,
+    baseline_flow_year: int = DEFAULT_BASELINE_FLOW_YEAR,
 ) -> SolutionStudyReport:
     cards = _load_solution_cards(solution_cards_path)
     queue = _load_queue(queue_match_path)
     interventions = list(interventions or DEFAULT_INTERVENTIONS)
+    flow_map = _same_year_flow_map(same_year_flows or [])
     target_geographies = {"NYIS-PJM", "MISO-SWPP"}
     studies: List[CorridorStudy] = []
     for card in cards:
@@ -394,9 +672,20 @@ def build_solution_study_report(
         key = _key_from_geography(geography)
         queue_row = queue.get(key, {})
         studies.append(
-            _build_study(card, queue_row, interventions, fixed_charge_rate, top_projects)
+            _build_study(
+                card,
+                queue_row,
+                interventions,
+                fixed_charge_rate,
+                top_projects,
+                flow_map.get((key, int(_float(card.get("current_year"))))),
+                baseline_flow_year,
+            )
         )
-    return SolutionStudyReport(studies=studies)
+    report = SolutionStudyReport(studies=studies)
+    if project_costs:
+        report = report.with_project_costs(project_costs)
+    return report
 
 
 def _build_study(
@@ -405,11 +694,29 @@ def _build_study(
     interventions: Sequence[InterventionTemplate],
     fixed_charge_rate: float,
     top_projects: int,
+    same_year_flow: SameYearFlowEvidence | None,
+    baseline_flow_year: int,
 ) -> CorridorStudy:
     geography = str(card.get("geography", ""))
     spread = _float(card.get("spread_usd_mwh"))
     annual_value = _float(card.get("annual_value_usd"))
     gross_mwh = annual_value / spread if spread > 0 else 0.0
+    current_year = int(_float(card.get("current_year")))
+    flow_year = baseline_flow_year
+    flow_source = "inferred from current card value and 2023 EIA-930 flow baseline"
+    flow_basis = "current spread applied to existing baseline gross flow"
+    same_year_flow_status = (
+        "same_year_flow"
+        if current_year == baseline_flow_year
+        else "needs_same_year_flow"
+    )
+    if same_year_flow and same_year_flow.gross_mwh > 0:
+        gross_mwh = same_year_flow.gross_mwh
+        annual_value = gross_mwh * spread
+        flow_year = same_year_flow.year
+        flow_source = same_year_flow.source
+        flow_basis = "same-year gross flow multiplied by current spread"
+        same_year_flow_status = "same_year_flow"
     constraints = _split_semicolon(card.get("constraints"))
     top_active = _project_candidates(
         queue_row.get("top_active", []),
@@ -431,9 +738,14 @@ def _build_study(
         study_id=study_id,
         title=_study_title(geography),
         geography=geography,
-        current_year=int(_float(card.get("current_year"))),
+        current_year=current_year,
         current_spread_usd_mwh=spread,
         annual_value_usd=annual_value,
+        gross_flow_mwh=gross_mwh,
+        flow_year=flow_year,
+        flow_basis=flow_basis,
+        same_year_flow_status=same_year_flow_status,
+        same_year_flow_source=flow_source,
         trend_summary=str(card.get("trend_summary", "")),
         evidence_basis=str(card.get("evidence_basis", "")),
         constraints=constraints,
@@ -446,6 +758,155 @@ def _build_study(
         next_action=next_action,
         caveat=caveat,
     )
+
+
+def load_same_year_flow_csv(path: str | Path) -> List[SameYearFlowEvidence]:
+    path = Path(path)
+    if not path.exists():
+        raise FileNotFoundError(path)
+    flows: List[SameYearFlowEvidence] = []
+    with path.open(newline="", encoding="utf-8-sig") as handle:
+        for row in csv.DictReader(handle):
+            year = int(_float(row.get("year")))
+            gross_mwh = _float(row.get("gross_mwh"))
+            if year <= 0 or gross_mwh <= 0:
+                continue
+            geography = str(row.get("geography") or row.get("corridor") or "")
+            ba_a = str(row.get("ba_a") or "")
+            ba_b = str(row.get("ba_b") or "")
+            if not geography and ba_a and ba_b:
+                geography = f"{ba_a}-{ba_b}"
+            if not ba_a or not ba_b:
+                ba_a, ba_b = _ba_pair_from_geography(geography)
+            if not geography or not ba_a or not ba_b:
+                continue
+            flows.append(
+                SameYearFlowEvidence(
+                    geography=geography,
+                    ba_a=ba_a,
+                    ba_b=ba_b,
+                    year=year,
+                    gross_mwh=gross_mwh,
+                    net_mwh=_float(row.get("net_mwh")),
+                    source=str(row.get("source") or ""),
+                    notes=str(row.get("notes") or ""),
+                )
+            )
+    return flows
+
+
+def load_project_cost_csv(path: str | Path) -> List[ProjectCostInput]:
+    path = Path(path)
+    if not path.exists():
+        raise FileNotFoundError(path)
+    costs: List[ProjectCostInput] = []
+    with path.open(newline="", encoding="utf-8-sig") as handle:
+        for row in csv.DictReader(handle):
+            capacity_mw = _float(row.get("capacity_mw"))
+            capex_usd = _float(row.get("capex_usd"))
+            annual_om_usd = _float(row.get("annual_om_usd"))
+            annual_cost_usd = _float(row.get("annual_cost_usd"))
+            if (
+                capacity_mw <= 0
+                or (capex_usd <= 0 and annual_om_usd <= 0 and annual_cost_usd <= 0)
+            ):
+                continue
+            geography = str(row.get("geography") or row.get("corridor") or "")
+            ba_a = str(row.get("ba_a") or "")
+            ba_b = str(row.get("ba_b") or "")
+            if not geography and ba_a and ba_b:
+                geography = f"{ba_a}-{ba_b}"
+            if not ba_a or not ba_b:
+                ba_a, ba_b = _ba_pair_from_geography(geography)
+            solution_type = str(
+                row.get("solution_type")
+                or "transmission_or_grid_enhancing_transfer"
+            )
+            fixed_charge_rate = (
+                _float(row.get("fixed_charge_rate")) or DEFAULT_FIXED_CHARGE_RATE
+            )
+            effective_mwh = (
+                _float(row.get("effective_mwh_per_mw_year"))
+                or _effective_mwh_per_mw_year(solution_type)
+            )
+            costs.append(
+                ProjectCostInput(
+                    project_id=str(row.get("project_id") or ""),
+                    project_name=str(row.get("project_name") or ""),
+                    geography=geography,
+                    ba_a=ba_a,
+                    ba_b=ba_b,
+                    solution_type=solution_type,
+                    capacity_mw=capacity_mw,
+                    effective_mwh_per_mw_year=effective_mwh,
+                    capex_usd=capex_usd,
+                    annual_om_usd=annual_om_usd,
+                    annual_cost_usd=annual_cost_usd,
+                    fixed_charge_rate=fixed_charge_rate,
+                    in_service_year=int(_float(row.get("in_service_year"))),
+                    owner=str(row.get("owner") or ""),
+                    source=str(row.get("source") or ""),
+                    notes=str(row.get("notes") or ""),
+                )
+            )
+    return costs
+
+
+def _same_year_flow_map(
+    flows: Sequence[SameYearFlowEvidence],
+) -> Dict[tuple[tuple[str, str], int], SameYearFlowEvidence]:
+    out: Dict[tuple[tuple[str, str], int], SameYearFlowEvidence] = {}
+    for flow in flows:
+        key = _tie_key(flow.ba_a, flow.ba_b)
+        out[(key, flow.year)] = flow
+    return out
+
+
+def _project_cost_results_for_study(
+    study: CorridorStudy,
+    project_costs: Sequence[ProjectCostInput],
+) -> List[ProjectCostResult]:
+    results: List[ProjectCostResult] = []
+    for cost in project_costs:
+        if not _cost_matches_study(cost, study):
+            continue
+        annualized_capex = cost.capex_usd * cost.fixed_charge_rate
+        if cost.annual_cost_usd > 0:
+            annual_cost = cost.annual_cost_usd
+            cost_method = "explicit_annual_cost"
+        else:
+            annual_cost = annualized_capex + cost.annual_om_usd
+            cost_method = "capex_fixed_charge_plus_om"
+        relief_mwh = min(
+            cost.capacity_mw * cost.effective_mwh_per_mw_year,
+            study.gross_flow_mwh,
+        )
+        relief_value = relief_mwh * study.current_spread_usd_mwh
+        bcr = relief_value / annual_cost if annual_cost > 0 else 0.0
+        results.append(
+            ProjectCostResult(
+                project_id=cost.project_id,
+                project_name=cost.project_name,
+                geography=study.geography,
+                solution_type=cost.solution_type,
+                capacity_mw=cost.capacity_mw,
+                effective_mwh_per_mw_year=cost.effective_mwh_per_mw_year,
+                capex_usd=cost.capex_usd,
+                annualized_capex_usd=annualized_capex,
+                annual_om_usd=cost.annual_om_usd,
+                annual_cost_usd=annual_cost,
+                fixed_charge_rate=cost.fixed_charge_rate,
+                relief_mwh=relief_mwh,
+                relief_value_usd=relief_value,
+                benefit_cost_ratio=bcr,
+                net_annual_value_usd=relief_value - annual_cost,
+                clears_congestion_value=bcr >= 1.0,
+                cost_method=cost_method,
+                source=cost.source,
+                notes=cost.notes,
+            )
+        )
+    return sorted(results, key=lambda item: item.benefit_cost_ratio, reverse=True)
 
 
 def _intervention_case(
@@ -499,6 +960,25 @@ def _project_candidates(
     return sorted(candidates, key=lambda item: item.relief_value_usd, reverse=True)[:top]
 
 
+def _cost_matches_study(cost: ProjectCostInput, study: CorridorStudy) -> bool:
+    if cost.geography:
+        return _key_from_geography(cost.geography) == _key_from_geography(study.geography)
+    return _tie_key(cost.ba_a, cost.ba_b) == _key_from_geography(study.geography)
+
+
+def _effective_mwh_per_mw_year(solution_type: str) -> float:
+    normalized = solution_type.strip().lower()
+    if normalized in DEFAULT_EFFECTIVE_MWH_PER_MW_YEAR:
+        return DEFAULT_EFFECTIVE_MWH_PER_MW_YEAR[normalized]
+    if "storage" in normalized:
+        return DEFAULT_EFFECTIVE_MWH_PER_MW_YEAR["storage"]
+    if "flex" in normalized or "demand" in normalized:
+        return DEFAULT_EFFECTIVE_MWH_PER_MW_YEAR["flexible_load"]
+    return DEFAULT_EFFECTIVE_MWH_PER_MW_YEAR[
+        "transmission_or_grid_enhancing_transfer"
+    ]
+
+
 def _study_guidance(geography: str) -> tuple[str, str, str]:
     if geography == "NYIS-PJM":
         return (
@@ -547,6 +1027,13 @@ def _key_from_geography(geography: str) -> tuple[str, str]:
     return _tie_key(left, right)
 
 
+def _ba_pair_from_geography(geography: str) -> tuple[str, str]:
+    if "-" not in geography:
+        return ("", "")
+    left, right = geography.split("-", 1)
+    return (left.strip(), right.strip())
+
+
 def _tie_key(ba_a: Any, ba_b: Any) -> tuple[str, str]:
     return tuple(sorted((str(ba_a).strip(), str(ba_b).strip())))
 
@@ -578,6 +1065,19 @@ def _write_csv(path: str | Path, rows: List[Dict[str, Any]]) -> None:
         writer.writerows(rows)
 
 
+def _write_csv_with_fields(
+    path: str | Path,
+    rows: List[Dict[str, Any]],
+    fieldnames: Sequence[str],
+) -> None:
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(fieldnames))
+        writer.writeheader()
+        writer.writerows(rows)
+
+
 def _fieldnames(rows: List[Dict[str, Any]]) -> List[str]:
     if not rows:
         return ["status"]
@@ -589,6 +1089,11 @@ def _fieldnames(rows: List[Dict[str, Any]]) -> List[str]:
         "current_year",
         "current_spread_usd_mwh",
         "annual_value_usd",
+        "gross_flow_mwh",
+        "flow_year",
+        "same_year_flow_status",
+        "flow_basis",
+        "same_year_flow_source",
         "active_queue_gw",
         "withdrawn_queue_gw",
         "best_intervention",
@@ -610,5 +1115,75 @@ def _fieldnames(rows: List[Dict[str, Any]]) -> List[str]:
         "fixed_charge_rate",
         "source",
         "notes",
+        "project_id",
+        "project_name",
+        "effective_mwh_per_mw_year",
+        "capex_usd",
+        "annualized_capex_usd",
+        "annual_om_usd",
+        "annual_cost_usd",
+        "benefit_cost_ratio",
+        "net_annual_value_usd",
+        "clears_congestion_value",
+        "cost_method",
     ]
     return [field for field in preferred if field in seen] + sorted(seen - set(preferred))
+
+
+PROJECT_COST_INPUT_FIELDS = [
+    "project_id",
+    "project_name",
+    "geography",
+    "ba_a",
+    "ba_b",
+    "solution_type",
+    "capacity_mw",
+    "effective_mwh_per_mw_year",
+    "capex_usd",
+    "annual_om_usd",
+    "annual_cost_usd",
+    "fixed_charge_rate",
+    "in_service_year",
+    "owner",
+    "source",
+    "notes",
+]
+
+
+PROJECT_COST_RESULT_FIELDS = [
+    "study_id",
+    "project_id",
+    "project_name",
+    "geography",
+    "solution_type",
+    "capacity_mw",
+    "effective_mwh_per_mw_year",
+    "capex_usd",
+    "annualized_capex_usd",
+    "annual_om_usd",
+    "annual_cost_usd",
+    "fixed_charge_rate",
+    "relief_mwh",
+    "relief_value_usd",
+    "benefit_cost_ratio",
+    "net_annual_value_usd",
+    "clears_congestion_value",
+    "cost_method",
+    "source",
+    "notes",
+]
+
+
+SAME_YEAR_FLOW_TEMPLATE_FIELDS = [
+    "geography",
+    "ba_a",
+    "ba_b",
+    "year",
+    "gross_mwh",
+    "net_mwh",
+    "source",
+    "notes",
+    "current_fallback_flow_year",
+    "current_fallback_gross_mwh",
+    "current_status",
+]

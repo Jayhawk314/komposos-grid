@@ -8,6 +8,11 @@
       "current_year": 2025,
       "current_spread_usd_mwh": 7.38,
       "annual_value_usd": 142391660.94,
+      "gross_flow_mwh": 19294263.0,
+      "flow_year": 2023,
+      "same_year_flow_status": "needs_same_year_flow",
+      "flow_basis": "current spread applied to existing baseline gross flow",
+      "same_year_flow_source": "inferred from current card value and 2023 EIA-930 flow baseline",
       "active_queue_gw": 85.45703240000006,
       "withdrawn_queue_gw": 524.2561670000003,
       "best_intervention": "250 MW targeted transfer upgrade",
@@ -221,7 +226,8 @@
           "source": "cost-gate envelope; compare against program bids",
           "notes": "Critical-window dispatch proxy, not firm transfer capability."
         }
-      ]
+      ],
+      "project_cost_results": []
     },
     {
       "study_id": "miso_swpp",
@@ -230,6 +236,11 @@
       "current_year": 2024,
       "current_spread_usd_mwh": 6.31,
       "annual_value_usd": 25176168.04,
+      "gross_flow_mwh": 3989884.0,
+      "flow_year": 2023,
+      "same_year_flow_status": "needs_same_year_flow",
+      "flow_basis": "current spread applied to existing baseline gross flow",
+      "same_year_flow_source": "inferred from current card value and 2023 EIA-930 flow baseline",
       "active_queue_gw": 156.53056500000002,
       "withdrawn_queue_gw": 344.6546689999996,
       "best_intervention": "250 MW targeted transfer upgrade",
@@ -444,7 +455,8 @@
           "source": "cost-gate envelope; compare against program bids",
           "notes": "Critical-window dispatch proxy, not firm transfer capability."
         }
-      ]
+      ],
+      "project_cost_results": []
     }
   ]
 }

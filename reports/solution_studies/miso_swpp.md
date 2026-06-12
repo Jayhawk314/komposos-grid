@@ -6,6 +6,7 @@
 - Current evidence year: **2024**
 - Current congestion spread: **$6.31/MWh**
 - Annual value at current spread: **$25,176,168/yr**
+- Gross flow basis: **3,989,884 MWh** (2023; needs_same_year_flow)
 - Trend: 2023 $4.74/MWh -> 2024 $6.31/MWh (1.3x over observed window).
 - Recommended path: Start with targeted transfer relief around the wind-belt constraints, then test storage only where it also captures local energy or capacity value.
 - Next action: Map CHAWATCHAPAT and Charlie Creek-Watford to upgrade candidates and price a 50-100 MW relief package.
@@ -31,6 +32,10 @@ A project clears on congestion value alone only if its real annual cost is below
 | 250 MW targeted transfer upgrade | 250 MW | $13,818,900/yr | $13,818,900/yr | $138,189,000 | $553/kW |
 | 100 MW / 4-hour storage siting screen | 100 MW | $757,200/yr | $757,200/yr | $7,572,000 | $76/kW |
 | 100 MW flexible-load program | 100 MW | $378,600/yr | $378,600/yr | $3,786,000 | $38/kW |
+
+## Quoted Project Costs
+
+- No quoted project costs supplied yet.
 
 ## Active Queue Candidates
 
