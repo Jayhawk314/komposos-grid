@@ -1,3 +1,6 @@
+PUBLIC : https://github.com/Jayhawk314/komposos-grid.git
+
+
 # The Grid Waste Project — Master Guide
 
 *Last updated: 2026-06-12. Maintained alongside `reports/agent_handoff.md`

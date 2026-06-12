@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>US Grid Waste — Public Findings</title><style>
+:root {
+  color-scheme: light;
+  --ink: #17202a; --muted: #5b6673; --line: #d8dee6;
+  --surface: #ffffff; --page: #f5f7fa; --blue: #1f6feb; --green: #1f8f5f;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); color: var(--ink);
+  font: 15px/1.55 Arial, Helvetica, sans-serif; }
+.shell { width: min(1100px, calc(100vw - 32px)); margin: 0 auto;
+  padding: 28px 0 40px; }
+header { border-bottom: 1px solid var(--line); margin-bottom: 18px;
+  padding-bottom: 16px; }
+h1 { font-size: clamp(26px, 4vw, 38px); line-height: 1.1; margin: 0 0 8px; }
+h2 { font-size: 18px; margin: 0 0 14px; }
+p { margin: 0 0 8px; color: var(--muted); }
+a { color: var(--blue); }
+.metrics { display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px; margin: 16px 0; }
+.metric, .band { background: var(--surface); border: 1px solid var(--line);
+  border-radius: 8px; padding: 14px; }
+.metric { min-height: 120px; border-top: 4px solid var(--blue);
+  display: grid; gap: 6px; align-content: start; }
+.metric:nth-child(2n) { border-top-color: var(--green); }
+.metric span { color: var(--muted); font-size: 12px;
+  text-transform: uppercase; }
+.metric strong { font-size: 26px; line-height: 1.05; }
+.metric small { color: var(--muted); }
+.band { margin: 16px 0; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 760px; }
+th, td { border-bottom: 1px solid var(--line); padding: 9px 10px;
+  text-align: left; vertical-align: top; }
+th { color: var(--muted); font-size: 12px; text-transform: uppercase;
+  background: #fbfcfe; }
+footer { color: var(--muted); font-size: 13px; margin-top: 18px; }
+@media (max-width: 640px) {
+  .shell { width: min(100vw - 20px, 1100px); padding-top: 18px; }
+  .metric strong { font-size: 22px; }
+}
+</style></head><body><main class="shell"><header><h1>US Grid Waste — Public Findings</h1><p>Where the US electric grid loses money, what would fix it, and whether the fix pays for itself — from public data only. <a href="https://github.com/Jayhawk314/komposos-grid">Code &amp; data</a> · <a href="https://github.com/Jayhawk314/komposos-grid/blob/master/reports/MASTER_GUIDE.md">Plain-English guide</a> · <a href="https://github.com/Jayhawk314/komposos-grid/blob/master/REPRODUCE.md">Reproduce these numbers yourself</a></p></header><section class="metrics"><article class="metric"><span>NYIS-PJM</span><strong>$159.7M/yr</strong><small>congestion value, 2025 spread x 2025 flow (same year flow)</small></article><article class="metric"><span>MISO-SWPP</span><strong>$31.1M/yr</strong><small>congestion value, 2025 spread x 2025 flow (same year flow)</small></article><article class="metric"><span>Named fix B/C</span><strong>0.85–1.65</strong><small>Patent Gate–Pioneer 345 kV vs MISO-SWPP seam value alone</small></article><article class="metric"><span>CHPE effect so far</span><strong>-0.31 $/MWh</strong><small>spread change beyond seasonality, first post-COD month</small></article></section><section class="band"><h2>Corridors, ranked</h2><div class="table-wrap"><table><thead><tr><th>Corridor</th><th>Status</th><th>Year</th><th>Congestion spread</th><th>Annual value</th><th>Trend</th></tr></thead><tbody><tr><td>NYIS-PJM</td><td>priority solution study</td><td>2025</td><td>$7.38/MWh</td><td>$142.4M/yr</td><td>2023 $1.53/MWh -&gt; 2024 $2.02/MWh -&gt; 2025 $7.38/MWh (4.8x over observed window).</td></tr><tr><td>MISO-SWPP</td><td>priority solution study</td><td>2025</td><td>$7.33/MWh</td><td>$29.2M/yr</td><td>2023 $4.74/MWh -&gt; 2024 $6.31/MWh -&gt; 2025 $7.33/MWh (1.5x over observed window).</td></tr><tr><td>CISO-SRP</td><td>methodology validated screen</td><td>2023</td><td>$1.39/MWh</td><td>$14.0M/yr</td><td>2023 $1.39/MWh.</td></tr><tr><td>BPAT-CISO</td><td>methodology validated screen</td><td>2023</td><td>$1.11/MWh</td><td>$6.1M/yr</td><td>2023 $1.11/MWh.</td></tr><tr><td>MISO-SOCO</td><td>bounded solution screen</td><td>2025</td><td>$2.09/MWh</td><td>$11.2M/yr</td><td>2023 $1.35/MWh -&gt; 2024 $1.53/MWh -&gt; 2025 $2.09/MWh (1.5x over observed window).</td></tr><tr><td>ERCO West-North hubs</td><td>watchlist for solution screen</td><td>2025</td><td>$5.78/MWh</td><td>—</td><td>2023 $4.94/MWh -&gt; 2025 $5.78/MWh.</td></tr></tbody></table></div></section><section class="band"><h2>Real projects vs the congestion they would relieve</h2><div class="table-wrap"><table><thead><tr><th>Project</th><th>Corridor</th><th>Capex</th><th>Annual cost</th><th>Relief value</th><th>B/C on seam value alone</th></tr></thead><tbody><tr><td>Champlain Hudson Power Express 1250 MW HVDC (context screen)</td><td>NYIS-PJM</td><td>$6.0B</td><td>$690.0M/yr</td><td>$80.8M/yr</td><td>0.12</td></tr><tr><td>Patent Gate - Pioneer 345 kV Ckt 1 New Line (full-relief cap case)</td><td>MISO-SWPP</td><td>$163.7M</td><td>$18.8M/yr</td><td>$31.1M/yr</td><td>1.65 ✓ clears</td></tr><tr><td>Patent Gate - Pioneer 345 kV Ckt 1 New Line (250 MW seam-relief sensitivity)</td><td>MISO-SWPP</td><td>$163.7M</td><td>$18.8M/yr</td><td>$16.1M/yr</td><td>0.85</td></tr></tbody></table></div></section><section class="band"><h2>The CHPE natural experiment</h2><p>A $6B, 1,250 MW power line from Quebec to NYC went live 2026-05-13. Did it shrink the New York price gap? Before/after, against 2025 as the seasonal control:</p><div class="table-wrap"><table><thead><tr><th>Window</th><th>Dates</th><th>Mean |spread|</th><th>Congestion part</th><th>NY more expensive</th></tr></thead><tbody><tr><td>pre-2025</td><td>2025-04-13..2025-05-12</td><td>$1.11</td><td>$0.41</td><td>95.7%</td></tr><tr><td>post-2025</td><td>2025-05-13..2025-06-11</td><td>$2.10</td><td>$1.35</td><td>98.8%</td></tr><tr><td>pre-2026</td><td>2026-04-13..2026-05-12</td><td>$2.64</td><td>$1.42</td><td>97.4%</td></tr><tr><td>post-2026</td><td>2026-05-13..2026-06-11</td><td>$3.24</td><td>$2.05</td><td>97.8%</td></tr></tbody></table></div><p><strong>Difference-in-differences: -0.31 $/MWh</strong> — mild compression beyond seasonality — CHPE is helping, but the seam did not collapse. One month of data; the summer rerun decides.</p></section><section class="band"><h2>Read this before quoting numbers</h2><p><strong>Measured</strong> numbers (seam spreads, corridor values) come from grid operators' own hourly settlement data times observed flows. <strong>Screening</strong> numbers (B/C brackets, assumed O&amp;M) are honest estimates with stated assumptions — good enough to rank options, not to commit money. Relief is always capped at the congestion that actually exists; the two sides of one border are never double-counted. Full trust ledger: <a href="https://github.com/Jayhawk314/komposos-grid/blob/master/reports/MASTER_GUIDE.md">MASTER_GUIDE §6</a>.</p></section><footer><p>Generated 2026-06-12. Every number is reproducible from keyless public sources; methods and caveats in the guide. Spread = hourly price gap between regions; B/C &gt; 1 means a fix pays for itself on congestion value alone.</p></footer></main></body></html>

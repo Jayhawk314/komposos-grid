@@ -24,7 +24,8 @@ evidence (Phase 0-1) → validated evidence (Phase 2) → paid evidence
 
 | # | Decision | Needed by |
 |---|---|---|
-| D1 | Make the `komposos-grid` repo public (or a cleaned mirror) | Phase 1 start |
+| D1 | ~~Make the `komposos-grid` repo public~~ **DONE 2026-06-12** | Phase 1 start |
+| D1b | Enable GitHub Pages (repo Settings → Pages → deploy from `master`, folder `/docs`) to publish the dashboard | Phase 4 |
 | D2 | Check ISO/EIA data redistribution terms before selling anything (selling *analysis* of public data is normal practice; redistributing raw ISO files may not be — verify) | Phase 3 start |
 | D3 | Who to approach for expert review and as design partners (warm intros beat cold email) | Phase 2-3 |
 | D4 | Price for the first study (recommendation: low, $5-25k — the reference matters more than the revenue) | Phase 3 |
@@ -36,14 +37,12 @@ evidence (Phase 0-1) → validated evidence (Phase 2) → paid evidence
 *Goal: a person we've never met, on a machine we've never touched,
 gets our headline number from a fresh clone in under one day.*
 
-- [ ] **`REPRODUCE.md`** at repo root: one target number (recommend
-      MISO-SWPP 2025: component spread **7.33 $/MWh** → corridor value
-      **$31.1M/yr**), exact commands, expected runtime, expected output.
-      Chosen because it is fully keyless and two-sided-corroborated.
-- [ ] **Fetch script** (`domains/grid/fetch_data.py` or shell): downloads
-      exactly the files the target number needs (MISO daily files via
-      cache, EIA-930 2025 interchange), with sizes and resume handling.
-      The gotchas are all documented in the handoff; encode them.
+- [x] **`REPRODUCE.md`** at repo root (2026-06-12): target number
+      MISO-SWPP 2025 component **7.33 $/MWh** → corridor value
+      **$31.1M/yr**, exact commands, expected output to the cent.
+- [x] **Fetch script** (2026-06-12): `domains/grid/fetch_eia930.py`
+      (stdlib-only, resume via HTTP Range); MISO daily files already
+      auto-download through the loader cache.
 - [ ] **Clean-room test:** run the reproduction in a fresh clone +
       fresh venv on this machine (agent-runnable). Fix every friction
       point found. Pass = number matches to the cent without help.

@@ -463,8 +463,38 @@ python -m domains.grid.run_solution_studies `
     seam value alone (250 MW sensitivity now near break-even).
 - Validation: full suite `438 passed, 2 skipped`.
 
+## State as of 2026-06-12 (Phase 0 kit + public dashboard)
+
+- Repo is now PUBLIC (user decision D1):
+  https://github.com/Jayhawk314/komposos-grid
+- Roadmap exists: `domains/grid/ROADMAP.md` (six phases, falsifiable
+  exit tests, James-only decisions D1-D4).
+- Phase 0 reproduction kit SHIPPED:
+  - `REPRODUCE.md` (repo root): stranger-facing walkthrough to the
+    MISO-SWPP 2025 headline (7.33 $/MWh -> $31.1M/yr), with expected
+    output to the cent. Minimal deps: pandas + pytest.
+  - `domains/grid/fetch_eia930.py` + tests: stdlib-only EIA-930 bulk
+    downloader with HTTP Range resume.
+  - Still open from Phase 0: true clean-room test (fresh clone +
+    venv, full re-download) and off-machine archive of evidence-chain
+    inputs (OASIS 39-month retention clock).
+- Public dashboard SHIPPED (UI decision: static HTML, no server):
+  - `domains/grid/dashboard.py` + `run_dashboard.py` + tests ->
+    `docs/index.html` (self-contained, no JS, reuses the report CSS
+    style). Renders corridor cards, project B/C verdicts, CHPE
+    event-study table from committed report JSONs/CSVs.
+  - Regenerate with `python -m domains.grid.run_dashboard` after any
+    report change.
+  - USER ACTION (D1b): enable GitHub Pages (Settings -> Pages ->
+    master, /docs) to put it on the web.
+  - Existing `streamlit_app.py` is a personal portfolio site, not a
+    findings dashboard — unrelated, untouched.
+
 ## Best next handoff target
 
+- Run the true clean-room reproduction (fresh clone, fresh venv,
+  re-download everything) and fix any friction found — the remaining
+  Phase 0 exit test. Then archive evidence-chain inputs off-machine.
 - Rerun the CHPE event study when more post months exist (just
   `python -m domains.grid.run_chpe_event_study` after dropping new
   monthly zips in csv2026) — the summer months decide whether the
