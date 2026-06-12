@@ -1,17 +1,17 @@
 {
-  "n_actions": 10,
+  "n_actions": 12,
   "counts_by_status": {
     "attach_evidence": 1,
     "policy_design": 1,
     "ready_for_scoping": 2,
     "review_required": 1,
-    "validate_proxy": 5
+    "validate_proxy": 7
   },
   "totals": {
     "measured_value_usd": 0.0,
-    "proxy_value_usd": 52421825.40140593,
+    "proxy_value_usd": 78564182.61140594,
     "upper_bound_value_usd": 172470247.8925022,
-    "reported_value_usd": 224892073.29390812
+    "reported_value_usd": 251034430.50390813
   },
   "actions": [
     {
@@ -87,6 +87,24 @@
       "caveat": "Component spread is stronger than hub price evidence, but still not direct settlement cost."
     },
     {
+      "action_id": "validate_congestion_miso_swpp",
+      "title": "Validate proxy congestion value for MISO-SWPP",
+      "decision_status": "validate_proxy",
+      "problem": "td_losses_congestion",
+      "geography": "MISO-SWPP",
+      "evidence_level": "measured_proxy",
+      "claim_ids": "congestion_miso_swpp",
+      "measured_value_usd": 0.0,
+      "proxy_value_usd": 18912050.16,
+      "upper_bound_value_usd": 0.0,
+      "reported_value_usd": 18912050.16,
+      "quantity_summary": "3,989,884 MWh gross interchange",
+      "priority_score": 394.3683467186064,
+      "next_step": "Replace component-spread proxy with direct congestion-cost or flow-attribution evidence.",
+      "rationale": "The corridor has settlement congestion-component evidence attached to a structural bottleneck.",
+      "caveat": "Component spread is stronger than hub price evidence, but still not direct settlement cost."
+    },
+    {
       "action_id": "validate_congestion_ciso_srp",
       "title": "Validate proxy congestion value for CISO-SRP",
       "decision_status": "validate_proxy",
@@ -100,6 +118,24 @@
       "reported_value_usd": 14038274.42,
       "quantity_summary": "10,099,478 MWh gross interchange",
       "priority_score": 393.47743655727277,
+      "next_step": "Replace component-spread proxy with direct congestion-cost or flow-attribution evidence.",
+      "rationale": "The corridor has settlement congestion-component evidence attached to a structural bottleneck.",
+      "caveat": "Component spread is stronger than hub price evidence, but still not direct settlement cost."
+    },
+    {
+      "action_id": "validate_congestion_miso_soco",
+      "title": "Validate proxy congestion value for MISO-SOCO",
+      "decision_status": "validate_proxy",
+      "problem": "td_losses_congestion",
+      "geography": "MISO-SOCO",
+      "evidence_level": "measured_proxy",
+      "claim_ids": "congestion_miso_soco",
+      "measured_value_usd": 0.0,
+      "proxy_value_usd": 7230307.050000001,
+      "upper_bound_value_usd": 0.0,
+      "reported_value_usd": 7230307.050000001,
+      "quantity_summary": "5,355,783 MWh gross interchange",
+      "priority_score": 390.32039106318507,
       "next_step": "Replace component-spread proxy with direct congestion-cost or flow-attribution evidence.",
       "rationale": "The corridor has settlement congestion-component evidence attached to a structural bottleneck.",
       "caveat": "Component spread is stronger than hub price evidence, but still not direct settlement cost."
@@ -181,15 +217,15 @@
       "title": "Attach evidence to remaining structural bottlenecks",
       "decision_status": "attach_evidence",
       "problem": "td_losses_congestion",
-      "geography": "BPAT-NWMT, BPAT-LDWP, TVA-SOCO, MISO-SOCO",
+      "geography": "BPAT-SCL, BPAT-NWMT, BPAT-LDWP, TVA-SOCO",
       "evidence_level": "structural_only",
-      "claim_ids": "congestion_bpat_nwmt; congestion_bpat_ldwp; congestion_tva_soco; congestion_miso_soco; congestion_miso_swpp; congestion_bpat_banc; congestion_soco_fpl; congestion_bpat_grid",
+      "claim_ids": "congestion_bpat_scl; congestion_bpat_nwmt; congestion_bpat_ldwp; congestion_tva_soco; congestion_cple_pjm; congestion_bpat_banc; congestion_soco_fpl; congestion_bpat_grid",
       "measured_value_usd": 0.0,
       "proxy_value_usd": 0.0,
       "upper_bound_value_usd": 0.0,
       "reported_value_usd": 0.0,
-      "quantity_summary": "38,082,266 MWh gross interchange under review",
-      "priority_score": 112.58072279360648,
+      "quantity_summary": "40,776,932 MWh gross interchange under review",
+      "priority_score": 112.61041455760528,
       "next_step": "Pull nodal LMP, congestion-cost, outage, or planning evidence for the remaining corridors.",
       "rationale": "Negative-curvature, high-flow ties are plausible congestion candidates.",
       "caveat": "Topology-only evidence is not counted as measured waste."

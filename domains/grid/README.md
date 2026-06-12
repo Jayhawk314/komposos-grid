@@ -301,14 +301,39 @@ This is the system working as designed: structural candidates ->
 proxy screening -> settlement-grade validation, with each stage
 allowed to shrink the previous one.
 
+## Phase 3b: Eastern Seams via MISO Interface Prices (implemented)
+
+`sources/miso.py` + `run_miso_seam_evidence.py` pull MISO's daily DA
+ex-post LMP reports (docs.misoenergy.org, keyless, cached, full-year
+retention). MISO prices its external interfaces (SOCO, SWPP, TVA,
+AECI, SPA...), enabling the NYISO proxy-bus method on the eastern
+seams. Full-year 2023, 8,760 hours, 0 days missing:
+
+- **MISO-SWPP** (ARKANSAS.HUB vs SWPP interface): mean |spread|
+  **$5.09/MWh**, 93.2% congestion component, max $116.59 - the
+  MISO-South/SPP transfer constraint, now the 2nd-largest measured
+  congestion claim ($18.9M/yr).
+- **MISO-SOCO** (MS.HUB vs SOCO interface): $1.58/MWh, 85.6%
+  congestion component ($7.2M/yr).
+
+Honest non-coverage: TVA-SOCO, SOCO-FPL/FPC have no organized market
+on either side (no LMP exists); AECI-SWPP, SPA-SWPP, CPLE-PJM are not
+MISO endpoints (PJM side needs a Data Miner API key). They remain
+structural_only.
+
+Chain totals after this phase: congestion $78.6M over 7 measured ties,
+unified ledger $251.0M (28 claims), 12-action portfolio still led by
+CAISO curtailment ($172.5M upper bound).
+
 ## Roadmap
 
 1. **Reviewed dashboard pass** - after a domain reviewer edits the review
    template, generate `ba_reviewed_dashboard.html` as the approved-only
    audience artifact.
-2. **Remaining seam validation** - PJM-NYIS is component-measured
-   (NYISO); BPAT-NEVP and PACW-CISO still carry ICE level proxies;
-   eastern seams (MISO-SOCO, TVA spokes) have no evidence yet.
+2. **Remaining proxies** - BPAT-NEVP and PACW-CISO still carry ICE level
+   proxies; PJM Data Miner key would unlock CPLE-PJM and a PJM-side
+   check of PJM-NYIS; non-market seams (SOCO/TVA spokes) need planning
+   or flow-based evidence instead of prices.
 4. **Congestion horns** - use LMP price separations as 2-cells and fill the
    inner horn `plant -> ? -> congestion-cost` to attribute congestion.
 5. **Gray coherence** - wire carefully into
