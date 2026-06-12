@@ -3,7 +3,9 @@
 Living document. Update at the end of every working session. Plan
 lives in `domains/grid/PLAN.md`; Codex's earlier handoff is in
 `reports/codex_session_handoff.md` (still accurate for the BA
-repair/review layers).
+repair/review layers). **Human-readable overview of everything:
+`reports/MASTER_GUIDE.md`** — keep its headline numbers in sync when
+findings change.
 
 ## State as of 2026-06-12 (commit 68aa2d8, pushed to `grid` remote)
 
