@@ -987,9 +987,11 @@ def _study_guidance(
     if geography == "NYIS-PJM":
         if same_year_flow_status == "same_year_flow":
             caveat = (
-                "Value uses same-year gross flow; remaining gap before a "
-                "final investment case is project-specific costing, not "
-                "flow evidence."
+                "Value uses same-year gross flow. CHPE (1,250 MW HVDC into "
+                "NYC) entered commercial operation 2026-05-13 and should "
+                "compress this seam's spread going forward, so the 2025 "
+                "spread-based value is an upper bound for post-2026 cases; "
+                "rerun seam evidence on post-CHPE months before committing."
             )
         else:
             caveat = (

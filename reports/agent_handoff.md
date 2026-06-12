@@ -407,21 +407,45 @@ python -m domains.grid.run_solution_studies `
   2025-01-01 --end 2026-01-01 --out reports\miso_seam_evidence_2025.csv`
   (cache makes restarts cheap).
 
+## State as of 2026-06-12 (NYIS-PJM seam research + CHPE)
+
+- NO named tie-upgrade project with a published cost exists for the
+  PJM-NYIS seam (unlike MISO-SWPP):
+  - DOE dropped the New York-Mid-Atlantic NIETC corridor in Dec 2024
+    (only 3 of 10 corridors advanced; this seam was not among them).
+  - The seam is PAR-governed: ABC lines (PSEG->NYC), JK/Waldwick
+    (upstate->PSEG), Branchburg-Ramapo 5018. The 1,000 MW ConEd-PSEG
+    wheel ended 2017, replaced by a 400 MW operational base flow.
+    Seam relief here means PAR replacement/uprates and JOA changes,
+    for which no public cost estimates were found.
+- **CHPE entered commercial operation 2026-05-13** (1,250 MW HVDC
+  Quebec->Queens, ~$6B, S&P Global). One month of post-CHPE NYISO
+  data exists as of today. This should compress the exploding
+  PJM-NYIS spread (2025: 7.38 $/MWh component, NY above PJM 97.9% of
+  hours) — all 2025-spread-based value is now an UPPER BOUND.
+  Added as a context-screen row in reports/project_costs.csv:
+  B/C 0.12 on seam value alone (supply-side HVDC at ~$4,800/kW is
+  justified by NYC clean-energy value, never by seam congestion).
+- NYIS-PJM memo caveat (code, `_study_guidance`) now says: rerun seam
+  evidence on post-CHPE months before committing to anything.
+- Validation: full suite `435 passed, 2 skipped`.
+
 ## Best next handoff target
 
-- NYIS-PJM is now the corridor without a costed project: find the
-  PJM-side / NYISO-side named upgrade candidates (PJM RTEP baseline
-  projects at the NY interface, NYPA/ConEd upgrades, queue-rescue
-  candidates from reports/energy_solution_studies queue rows) and add
-  rows to `reports/project_costs.csv`. The $159.7M/yr same-year value
-  supports up to ~$1.6B capex at break-even (10% FCR) — even large
-  interface projects may clear; this is the highest-value open
-  question in the portfolio.
-- Close out the 2025 MISO seam rerun (see above) and compare
-  MISO-SWPP 2025 spread vs the 2024 6.31 $/MWh alongside the
-  2025 flow row already in reports/same_year_flows.csv (net flow
-  collapsed 2.44M -> 0.73M MWh — direction churn suggests the seam
-  moved again).
-- Refinement for the Patent Gate-Pioneer row: replace the 1.5% O&M
-  guess and the bracket capacities with BEPC's actuals if/when
-  published; check SPP NTC tracking for cost updates on the NTC-C.
+- **Highest-value next measurement: post-CHPE seam check.** NYISO
+  daily DAM zonal files for 2026-05-13..present vs the same window in
+  2025 — did the PJM-NYIS spread compress after CHPE? This is a
+  natural experiment (relief_curves/pronoia SCM material) and decides
+  whether the $159.7M/yr corridor value survives. Loaders are
+  date-parameterized; it is just invocations.
+- Close out the 2025 MISO seam rerun if it didn't finish (see above;
+  cache makes restarts cheap), then compare MISO-SWPP 2025 spread vs
+  2024's 6.31 $/MWh alongside the 2025 flow row in
+  reports/same_year_flows.csv (net flow collapsed 2.44M -> 0.73M MWh).
+- Patent Gate-Pioneer row refinements: replace 1.5% O&M guess and
+  bracket capacities with BEPC actuals when published; watch SPP NTC
+  tracking for cost updates.
+- PJM-NYIS costed candidates if pursuing the seam directly: Ramapo
+  PAR replacement costs (FERC dockets from the PJM/NYISO cost
+  dispute), JK/ABC PAR uprates — needs docket digging, no public
+  numbers found this session.

@@ -21,7 +21,7 @@
       "best_break_even_capex_usd_per_kw": 646.488,
       "recommended_path": "Start with a 50-100 MW transfer-relief or queue-rescue package; storage clears only if it is paid for by more than seam congestion.",
       "next_action": "Price the top PJM-side active projects and a small transfer upgrade against the break-even capex envelope.",
-      "caveat": "Value uses same-year gross flow; remaining gap before a final investment case is project-specific costing, not flow evidence.",
+      "caveat": "Value uses same-year gross flow. CHPE (1,250 MW HVDC into NYC) entered commercial operation 2026-05-13 and should compress this seam's spread going forward, so the 2025 spread-based value is an upper bound for post-2026 cases; rerun seam evidence on post-CHPE months before committing.",
       "trend_summary": "2023 $1.53/MWh -> 2024 $2.02/MWh -> 2025 $7.38/MWh (4.8x over observed window).",
       "evidence_basis": "NYISO DAM zonal LBMP 2023 (mis.nyiso.com; hourly NYCA internal-zone mean vs NYISO PJM proxy bus); NYISO DAM zonal LBMP 2023 settlement components (mis.nyiso.com; NYCA internal-zone mean vs PJM proxy bus)",
       "constraints": [
@@ -227,7 +227,29 @@
           "notes": "Critical-window dispatch proxy, not firm transfer capability."
         }
       ],
-      "project_cost_results": []
+      "project_cost_results": [
+        {
+          "project_id": "CHPE-2026",
+          "project_name": "Champlain Hudson Power Express 1250 MW HVDC (context screen)",
+          "geography": "NYIS-PJM",
+          "solution_type": "transmission_or_grid_enhancing_transfer",
+          "capacity_mw": 1250.0,
+          "effective_mwh_per_mw_year": 8760.0,
+          "capex_usd": 6000000000.0,
+          "annualized_capex_usd": 600000000.0,
+          "annual_om_usd": 90000000.0,
+          "annual_cost_usd": 690000000.0,
+          "fixed_charge_rate": 0.1,
+          "relief_mwh": 10950000.0,
+          "relief_value_usd": 80811000.0,
+          "benefit_cost_ratio": 0.11711739130434783,
+          "net_annual_value_usd": -609189000.0,
+          "clears_congestion_value": false,
+          "cost_method": "capex_fixed_charge_plus_om",
+          "source": "S&P Global 2026-05-13 COD report; chpexpress.com; $6B widely reported",
+          "notes": "IN SERVICE 2026-05-13. Not a seam-tie upgrade and not justified by seam value (merchant line for NYC clean energy); included as a screen: even 1,250 MW of supply-side HVDC at ~$4,800/kW cannot clear on PJM-NYIS seam congestion value alone. Its real relevance is forward-looking: 1,250 MW into NYC should compress the 2025 spread (7.38 $/MWh congestion component, NY above PJM 97.9% of hours), so 2025-spread-based annual value is an UPPER BOUND for any post-2026 investment case. O&M assumed 1.5% of capex."
+        }
+      ]
     },
     {
       "study_id": "miso_swpp",

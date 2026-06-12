@@ -26,7 +26,7 @@
 - Trend: 2023 $1.53/MWh -> 2024 $2.02/MWh -> 2025 $7.38/MWh (4.8x over observed window).
 - Recommended path: Start with a 50-100 MW transfer-relief or queue-rescue package; storage clears only if it is paid for by more than seam congestion.
 - Next action: Price the top PJM-side active projects and a small transfer upgrade against the break-even capex envelope.
-- Caveat: Value uses same-year gross flow; remaining gap before a final investment case is project-specific costing, not flow evidence.
+- Caveat: Value uses same-year gross flow. CHPE (1,250 MW HVDC into NYC) entered commercial operation 2026-05-13 and should compress this seam's spread going forward, so the 2025 spread-based value is an upper bound for post-2026 cases; rerun seam evidence on post-CHPE months before committing.
 
 ## Constraints
 
@@ -50,7 +50,9 @@ A project clears on congestion value alone only if its real annual cost is below
 
 ## Quoted Project Costs
 
-- No quoted project costs supplied yet.
+| Project | Type | Capacity | Annual Cost | Relief Value | B/C | Net Value |
+|---|---|---:|---:|---:|---:|---:|
+| Champlain Hudson Power Express 1250 MW HVDC (context screen) | transmission_or_grid_enhancing_transfer | 1,250 MW | $690,000,000/yr | $80,811,000/yr | 0.12 | $-609,189,000/yr |
 
 ## Active Queue Candidates
 
