@@ -60,3 +60,38 @@ def test_aggregate_spp_constraints():
 def test_aggregate_spp_constraints_bad_columns():
     with pytest.raises(ValueError, match="unrecognized"):
         aggregate_spp_constraints([pd.DataFrame({"foo": [1]})])
+
+
+def test_seam_from_lmp_zip(tmp_path):
+    import zipfile
+
+    from domains.grid.sources.spp import seam_from_lmp_zip
+
+    rows = []
+    for loc, ptype, he1, he2 in [
+        ("SPPSOUTH_HUB", "LMP", 30.0, 50.0),
+        ("MISO", "LMP", 35.0, 44.0),
+        ("SPPSOUTH_HUB", "MCC", 1.0, 5.0),
+        ("MISO", "MCC", 0.0, 0.0),
+        ("OTHER_LOC", "LMP", 99.0, 99.0),
+    ]:
+        rows.append({
+            "Date": "06/01/2023",
+            " Settlement Location Name": f" {loc}",  # stray spaces, as real files
+            " PNODE Name": loc,
+            " Price Type": f" {ptype}",
+            " HE01": he1,
+            "HE02": he2,
+        })
+    csv_path = tmp_path / "DA-LMP-MONTHLY-SL-202306.csv"
+    pd.DataFrame(rows).to_csv(csv_path, index=False)
+    zip_path = tmp_path / "2023.zip"
+    with zipfile.ZipFile(zip_path, "w") as zf:
+        zf.write(csv_path, "2023/06/DA-LMP-MONTHLY-SL-202306.csv")
+
+    seam = seam_from_lmp_zip(zip_path)
+    assert seam["hours"] == 2
+    # spreads: 30-35=-5, 50-44=+6 -> mean 5.5
+    assert seam["mean_abs_lmp_spread"] == pytest.approx(5.5)
+    assert seam["mean_abs_congestion_spread"] == pytest.approx(3.0)
+    assert seam["share_hub_above"] == pytest.approx(0.5)

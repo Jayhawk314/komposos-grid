@@ -92,12 +92,27 @@ repair/review layers).
   DA constraints, 7.78M severity; top constraint CHAWATCHAPAT (5,951
   binding h) matches MISO's Charlie Creek-Watford corridor profile
   (likely same M2M iron — verify before claiming as fact).
-  Outstanding in A3: SPP-side seam LMP (yearly zip download was in
-  flight), ERCOT/ISO-NE loaders, 2024/2025 reruns.
+- A3 continued: SPP-side MISO seam from the yearly LMP archive
+  (seam_from_lmp_zip; monthly rollups inside, wide HE01-24 format
+  with stray leading spaces in headers): $6.12/MWh mean |spread|,
+  91% congestion component — corroborates MISO-side $5.09 within
+  ~20%. FIRST TWO-SIDED SEAM MEASUREMENT. Kept MISO-side as the
+  ledger evidence row (one row per tie; SPP side is corroboration in
+  reports/spp_2023.json, do NOT double-count).
+- A3 continued: ERCOT loader (sources/ercot.py; keyless yearly
+  DAMLZHBSPP zips via IceDocListJsonWS reportTypeId=13060).
+  West-North wind congestion grows: $4.94 (2023) -> $5.40 (2024) ->
+  $5.78/MWh (2025), West above North ~2/3 of hours.
+  reports/ercot_hub_spreads.{json,md}.
 
-## Next up (task list order)
+## A3 remainder / Next up
 
-- A3 (#15) remainder, then B4 daily job, C5-7, D8 (see PLAN.md).
+- A3: ISO-NE loader (iso-ne.com static CSVs, keyless) — low seam
+  relevance, breadth only; 2024/2025 reruns of NYISO/MISO/OASIS
+  evidence chains (loaders are date-parameterized; just invocations
+  + new evidence files).
+- Then B4 daily job, C5-7 categorical upgrades, D8 relief curves
+  (see PLAN.md).
 - A3 (#15): SPP/ERCOT/ISO-NE loaders + 2024/2025 reruns.
 - B4 (#16): daily streaming ledger job (EIA-930 poll).
 - C5-7 (#17): 2-cell evidence reconciliation, right Kan bounds for

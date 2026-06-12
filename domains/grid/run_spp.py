@@ -31,6 +31,8 @@ def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description="SPP curtailment + constraints")
     parser.add_argument("--ver-rollup", help="VER curtailments annual rollup CSV")
     parser.add_argument("--bc-zip", help="da-binding-constraints yearly zip")
+    parser.add_argument("--lmp-zip", help="da-lmp-by-settlement-location yearly zip "
+                        "(computes the SPP-side MISO seam spread)")
     parser.add_argument("--eia930", nargs="*", default=[],
                         help="EIA-930 BALANCE CSVs for production denominators")
     parser.add_argument("--year", type=int, default=2023)
@@ -71,6 +73,19 @@ def main(argv=None) -> int:
             )
         sections.append("\n".join(lines))
         payload["constraints"] = {"total_severity": total, "table": table}
+
+    if args.lmp_zip:
+        from domains.grid.sources.spp import seam_from_lmp_zip
+
+        seam = seam_from_lmp_zip(args.lmp_zip)
+        sections.append(
+            f"SPP-side MISO seam ({seam['hub']} vs {seam['interface']} "
+            f"interface): {seam['hours']} hours, mean |LMP spread| "
+            f"${seam['mean_abs_lmp_spread']:.2f}/MWh (congestion component "
+            f"${seam['mean_abs_congestion_spread']:.2f}), hub above "
+            f"{seam['share_hub_above']:.1%} of hours"
+        )
+        payload["miso_seam_spp_side"] = seam
 
     summary = "\n\n".join(sections)
     print(summary)

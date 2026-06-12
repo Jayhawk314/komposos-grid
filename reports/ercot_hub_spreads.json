@@ -1,0 +1,35 @@
+[
+ {
+  "hub_a": "HB_WEST",
+  "hub_b": "HB_NORTH",
+  "year": 2023,
+  "hours": 8759,
+  "mean_a": 56.488747573923966,
+  "mean_b": 55.50052289074096,
+  "mean_abs_spread_usd_mwh": 4.940776344331545,
+  "max_abs_spread_usd_mwh": 62.1,
+  "share_a_above": 0.6255280283137344
+ },
+ {
+  "hub_a": "HB_WEST",
+  "hub_b": "HB_NORTH",
+  "year": 2024,
+  "hours": 8783,
+  "mean_a": 28.944276443128775,
+  "mean_b": 27.06250711601958,
+  "mean_abs_spread_usd_mwh": 5.402249800751451,
+  "max_abs_spread_usd_mwh": 79.08000000000001,
+  "share_a_above": 0.6609358988955938
+ },
+ {
+  "hub_a": "HB_WEST",
+  "hub_b": "HB_NORTH",
+  "year": 2025,
+  "hours": 8759,
+  "mean_a": 33.73375841991095,
+  "mean_b": 32.940505765498344,
+  "mean_abs_spread_usd_mwh": 5.78355748373102,
+  "max_abs_spread_usd_mwh": 52.46000000000001,
+  "share_a_above": 0.6461924877269095
+ }
+]

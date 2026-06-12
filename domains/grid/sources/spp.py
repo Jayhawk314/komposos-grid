@@ -109,6 +109,74 @@ def swpp_production_from_eia930(
     return totals
 
 
+SPP_HUB_SOUTH = "SPPSOUTH_HUB"
+SPP_HUB_NORTH = "SPPNORTH_HUB"
+SPP_IFACE_MISO = "MISO"
+
+
+def seam_from_lmp_zip(
+    zip_path: str | Path,
+    hub: str = SPP_HUB_SOUTH,
+    interface: str = SPP_IFACE_MISO,
+) -> dict:
+    """Hourly DA seam spread from SPP's side: hub vs interface SL.
+
+    Reads the 12 DA-LMP-MONTHLY-SL files inside the yearly archive
+    (wide format: Date / Settlement Location Name / Price Type /
+    HE01..HE24, with stray leading spaces in headers). Returns stats
+    matching the other seam evidence producers.
+    """
+    import pandas as pd
+
+    frames = []
+    with zipfile.ZipFile(zip_path) as zf:
+        monthly = sorted(
+            n for n in zf.namelist() if "MONTHLY" in n.upper()
+            and n.lower().endswith(".csv")
+        )
+        for name in monthly:
+            df = pd.read_csv(io.BytesIO(zf.read(name)))
+            df.columns = [str(c).strip() for c in df.columns]
+            df["Settlement Location Name"] = (
+                df["Settlement Location Name"].astype(str).str.strip()
+            )
+            df["Price Type"] = df["Price Type"].astype(str).str.strip()
+            sub = df[df["Settlement Location Name"].isin([hub, interface])]
+            frames.append(sub)
+    df = pd.concat(frames, ignore_index=True)
+
+    he_cols = [c for c in df.columns if c.upper().startswith("HE")]
+    long = df.melt(
+        id_vars=["Date", "Settlement Location Name", "Price Type"],
+        value_vars=he_cols,
+        var_name="he",
+        value_name="price",
+    )
+    long["price"] = pd.to_numeric(long["price"], errors="coerce")
+    pivot = long.pivot_table(
+        index=["Date", "he"],
+        columns=["Settlement Location Name", "Price Type"],
+        values="price",
+        aggfunc="first",
+    )
+    lmp = (pivot[(hub, "LMP")] - pivot[(interface, "LMP")]).dropna()
+    try:
+        mcc = float((pivot[(hub, "MCC")] - pivot[(interface, "MCC")]).abs().mean())
+    except KeyError:
+        mcc = 0.0
+    return {
+        "hub": hub,
+        "interface": interface,
+        "hours": int(len(lmp)),
+        "mean_hub": float(pivot[(hub, "LMP")].mean()),
+        "mean_interface": float(pivot[(interface, "LMP")].mean()),
+        "mean_abs_lmp_spread": float(lmp.abs().mean()),
+        "max_abs_lmp_spread": float(lmp.abs().max()),
+        "share_hub_above": float((lmp > 0).mean()),
+        "mean_abs_congestion_spread": mcc,
+    }
+
+
 def constraint_frames_from_zip(zip_path: str | Path) -> List:
     """DA-BC CSVs from the yearly archive -> list of DataFrames.
 

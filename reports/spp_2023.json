@@ -9213,5 +9213,16 @@
     "max_abs_sp": 0.013
    }
   ]
+ },
+ "miso_seam_spp_side": {
+  "hub": "SPPSOUTH_HUB",
+  "interface": "MISO",
+  "hours": 8760,
+  "mean_hub": 26.967033424657537,
+  "mean_interface": 29.115727808219177,
+  "mean_abs_lmp_spread": 6.115206872146118,
+  "max_abs_lmp_spread": 83.99100000000001,
+  "share_hub_above": 0.3872146118721461,
+  "mean_abs_congestion_spread": 5.564575319634704
  }
 }
