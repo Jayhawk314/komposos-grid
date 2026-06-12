@@ -105,6 +105,14 @@ repair/review layers).
   $5.78/MWh (2025), West above North ~2/3 of hours.
   reports/ercot_hub_spreads.{json,md}.
 
+- A3 reruns, NYISO 2024+2025 (reports/nyiso_seam_2024_2025.txt):
+  PJM-NYIS seam spread is EXPLODING year-over-year —
+  2023 $2.01 -> 2024 $2.78 -> 2025 $9.03/MWh mean |spread|
+  (congestion component $1.53 -> $2.02 -> $7.38; NY above PJM 97.9%
+  of hours in 2025). The 2025 component implies ~$142M/yr on this tie
+  alone, 5x the 2023 ledger figure. Pattern matches ERCOT's rising
+  West-North trend: load growth vs stalled queue, visible in prices.
+
 ## A3 remainder / Next up
 
 - A3: ISO-NE loader (iso-ne.com static CSVs, keyless) — low seam
