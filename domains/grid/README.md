@@ -188,11 +188,12 @@ upgrade them into measured waste claims.
   CISO-SRP, MISO-SOCO/SWPP. Fiedler value 0.0033 (very weak coupling).
   Curvature runs on unit-distance topology: flow magnitude is coupling
   strength, not metric distance.
-- **Congestion evidence, populated** - 2023 EIA ICE hub spreads
-  (`reports/congestion_evidence_2023_hubs.csv`, from
-  `ice_electric-2023final.xlsx`): four Western ties carry ~$196M/yr of
-  spread-proxied congestion value (CISO-SRP $142M, BPAT-CISO $52M);
-  the other 21 ties stay `structural_only`.
+- **Congestion evidence, populated** - 2023 EIA ICE hub spreads plus the
+  NYISO hourly seam component audit: four Western ties carry ~$196.2M/yr of
+  conservative hub-spread-proxied congestion value (CISO-SRP $141.7M,
+  BPAT-CISO $51.7M), and PJM-NYIS uses NYISO settlement congestion-component spread
+  ($1.53/MWh, ~$29.5M/yr) instead of the all-in LBMP spread. The remaining
+  structural ties stay `structural_only`.
 - **Dual-Engine verification** (`verify_assignments.py`,
   `run_verify_assignments.py`) - ZFC/CAT verification of plant->BA
   assignments with flow-scaled counterfactuals. 2023: disputed BAs show
@@ -209,15 +210,81 @@ upgrade them into measured waste claims.
   into `domains/grid/data/`, then
   `python -m domains.grid.run_queue_analysis --queue <file>`.
 
+## Phase 2: Measured Waste Claims (in progress)
+
+- **Unified waste ledger** (`waste_ledger.py`, `run_waste_ledger.py`) -
+  combines the current proof artifacts into one evidence-separated decision
+  product. Current run: 26 claims (`measured` 12, `measured_proxy` 5,
+  `structural_only` 8, `validated_hypothesis` 1). Reported/proxy dollar
+  total is $398.2M: $172.5M CAISO curtailment upper-bound value plus
+  $225.7M congestion price-spread/component proxies. Generate with:
+  `python -m domains.grid.run_waste_ledger --report-md
+  reports/grid_waste_ledger.md --report-html
+  reports/grid_waste_dashboard.html`. Structural-only and hypothesis claims
+  are explicitly excluded from measured/proxy dollar totals.
+- **Action portfolio** (`action_portfolio.py`,
+  `run_action_portfolio.py`) - groups the ledger claims into decision-ready
+  work packages without changing claim values. Current run: 10 actions:
+  2 `ready_for_scoping`, 5 `validate_proxy`, 1 `review_required`,
+  1 `attach_evidence`, and 1 `policy_design`. Reported value stays split as
+  $225.7M proxy congestion value plus $172.5M CAISO curtailment upper-bound
+  value. Generate with:
+  `python -m domains.grid.run_action_portfolio --ledger
+  reports/grid_waste_ledger.json --report-md
+  reports/grid_action_portfolio.md --report-html
+  reports/grid_action_dashboard.html`.
+- **PJM-NYIS seam, component-audited** -
+  `run_nyiso_seam_evidence.py` reads NYISO DAM zonal LBMP settlement
+  components (8,759 hours). Mean absolute all-in LBMP spread is $2.01/MWh,
+  but the congestion component alone is $1.53/MWh (75.8% of the spread),
+  so the congestion join values PJM-NYIS at ~$29.5M/yr rather than the
+  older $38.8M all-in spread proxy. Export:
+  `python -m domains.grid.run_nyiso_seam_evidence --report-md
+  reports/nyiso_pjm_seam_audit.md --evidence-csv
+  reports/nyiso_pjm_seam_evidence.csv`.
+- **Western hub proxy audit** -
+  `run_western_hub_evidence.py` rebuilds the Western proxy rows from the
+  ICE workbook and checks same-day price spreads against EIA-930 interchange
+  direction. Dollar values stay conservative, using annual volume-weighted
+  hub spreads, while the audit exposes proxy quality: CISO-SRP has weak
+  flow/price alignment (39.0%), BPAT-CISO is mixed (58.9%) with thin NP15
+  data, BPAT-NEVP is mixed (45.3%), and PACW-CISO is directionally
+  supportive (82.5%) but small. Export:
+  `python -m domains.grid.run_western_hub_evidence --audit-md
+  reports/western_hub_audit.md --evidence-csv
+  reports/western_hub_evidence.csv`.
+- **Curtailment, quantified** (`curtailment.py`, `run_curtailment.py`) -
+  CAISO production+curtailments workbook (keyless): 2023 CISO curtailed
+  2.66 TWh of renewables (solar 5.9% of available). Decomposition:
+  78% is *Local* (congestion-driven) vs 22% *System* (oversupply) -
+  CAISO's curtailment problem is mostly a wires problem. Value
+  <= $172M/yr at the SP15 annual average (labeled upper bound).
+- **Reliability waste** (`outages.py`, `run_outages.py`) - EAGLE-I
+  county outages (figshare mirror of the ORNL data, ~1.1GB/yr) chunked
+  to state-level customer-hours with MCC denominators: a SAIDI-like
+  hours-per-customer figure computed identically across states. Full 2023
+  run processed 26,101,051 rows from `2023-01-01 00:00:00` through
+  `2023-12-31 23:45:00`: 1.059B customer-hours lost, worst normalized
+  burdens USVI 41.9 h/customer, Maine 38.9, Puerto Rico 34.3, Michigan
+  26.5. Export with:
+  `python -m domains.grid.run_outages --outages <eaglei.csv> --mcc <mcc.csv>
+  --report-md reports/outage_reliability_report.md --report-json
+  reports/outage_reliability_report.json --report-html
+  reports/outage_reliability_dashboard.html`. The same report can be written
+  back as `outage_burden` hom-values.
+- **Queue factorization, real data** - LBNL thru-2025 file: 29,010
+  decided projects, 16.5% completion. IA-executed cohort completes at
+  65.5% (4.0x direct); decided projects still in study phases withdraw
+  at 100%; ERCOT completes at 2.1x. The queue bottleneck is the IA
+  pipeline itself.
+
 ## Roadmap
 
 1. **Reviewed dashboard pass** - after a domain reviewer edits the review
    template, generate `ba_reviewed_dashboard.html` as the approved-only
    audience artifact.
-2. **Nodal LMP pull** - extend congestion evidence beyond the 4 hub-covered
-   ties using gridstatus nodal data (PJM-NYIS and MISO seams first).
-3. **Queue factorization on real data** - blocked on the manual LBNL
-   download above.
+2. **Nodal LMP pull** - extend congestion evidence beyond the 5 measured
+   ties using gridstatus nodal data (MISO-SOCO and BPAT spokes next).
 4. **Congestion horns** - use LMP price separations as 2-cells and fill the
    inner horn `plant -> ? -> congestion-cost` to attribute congestion.
 5. **Gray coherence** - wire carefully into

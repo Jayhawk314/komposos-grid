@@ -1,0 +1,435 @@
+{
+  "year": 2023,
+  "coverage_note": "EAGLE-I covers ~92% of US customers",
+  "rows_processed": 26101051,
+  "first_timestamp": "2023-01-01 00:00:00",
+  "last_timestamp": "2023-12-31 23:45:00",
+  "total_customer_hours": 1059209999.25,
+  "total_customers": 154451840.0,
+  "states": [
+    {
+      "rank": 1,
+      "state": "United States Virgin Islands",
+      "customer_hours": 2356667.0,
+      "customers": 56307.0,
+      "hours_per_customer": 41.85389028007175,
+      "customer_hours_share": 0.0022249289580618544
+    },
+    {
+      "rank": 2,
+      "state": "Maine",
+      "customer_hours": 31944610.0,
+      "customers": 820970.0,
+      "hours_per_customer": 38.91081281898242,
+      "customer_hours_share": 0.030158901466771627
+    },
+    {
+      "rank": 3,
+      "state": "Puerto Rico",
+      "customer_hours": 50994794.25,
+      "customers": 1485262.0,
+      "hours_per_customer": 34.33387122945312,
+      "customer_hours_share": 0.048144177534302106
+    },
+    {
+      "rank": 4,
+      "state": "Michigan",
+      "customer_hours": 128264703.25,
+      "customers": 4841201.0,
+      "hours_per_customer": 26.494397412956,
+      "customer_hours_share": 0.12109468692782452
+    },
+    {
+      "rank": 5,
+      "state": "Kentucky",
+      "customer_hours": 34848923.5,
+      "customers": 2338856.0,
+      "hours_per_customer": 14.899986788412797,
+      "customer_hours_share": 0.03290086340260727
+    },
+    {
+      "rank": 6,
+      "state": "Oklahoma",
+      "customer_hours": 29233071.75,
+      "customers": 2066485.0,
+      "hours_per_customer": 14.146278221230737,
+      "customer_hours_share": 0.027598938615288
+    },
+    {
+      "rank": 7,
+      "state": "Arkansas",
+      "customer_hours": 22596647.5,
+      "customers": 1657199.0,
+      "hours_per_customer": 13.63544601463071,
+      "customer_hours_share": 0.021333491485163582
+    },
+    {
+      "rank": 8,
+      "state": "West Virginia",
+      "customer_hours": 13744651.5,
+      "customers": 1012652.0,
+      "hours_per_customer": 13.572926829750003,
+      "customer_hours_share": 0.012976323401150142
+    },
+    {
+      "rank": 9,
+      "state": "Louisiana",
+      "customer_hours": 30873823.25,
+      "customers": 2416753.0,
+      "hours_per_customer": 12.774918764971018,
+      "customer_hours_share": 0.02914797185814048
+    },
+    {
+      "rank": 10,
+      "state": "North Carolina",
+      "customer_hours": 22970787.75,
+      "customers": 1821437.0,
+      "hours_per_customer": 12.611354523928085,
+      "customer_hours_share": 0.021686717238569346
+    },
+    {
+      "rank": 11,
+      "state": "Vermont",
+      "customer_hours": 4080533.5,
+      "customers": 380092.0,
+      "hours_per_customer": 10.735646896014648,
+      "customer_hours_share": 0.0038524310598364096
+    },
+    {
+      "rank": 12,
+      "state": "Tennessee",
+      "customer_hours": 37508328.75,
+      "customers": 3538697.0,
+      "hours_per_customer": 10.599474538226923,
+      "customer_hours_share": 0.035411607496680264
+    },
+    {
+      "rank": 13,
+      "state": "Mississippi",
+      "customer_hours": 16491972.75,
+      "customers": 1564226.0,
+      "hours_per_customer": 10.543216101765346,
+      "customer_hours_share": 0.015570068977518671
+    },
+    {
+      "rank": 14,
+      "state": "Hawaii",
+      "customer_hours": 5310131.25,
+      "customers": 504268.0,
+      "hours_per_customer": 10.530375217146439,
+      "customer_hours_share": 0.005013294109534437
+    },
+    {
+      "rank": 15,
+      "state": "New Hampshire",
+      "customer_hours": 7077621.5,
+      "customers": 744556.0,
+      "hours_per_customer": 9.505828305728516,
+      "customer_hours_share": 0.006681981387082341
+    },
+    {
+      "rank": 16,
+      "state": "Texas",
+      "customer_hours": 110537690.0,
+      "customers": 13710596.0,
+      "hours_per_customer": 8.062208965970553,
+      "customer_hours_share": 0.10435861640115648
+    },
+    {
+      "rank": 17,
+      "state": "California",
+      "customer_hours": 124976071.5,
+      "customers": 15742165.0,
+      "hours_per_customer": 7.938937973271148,
+      "customer_hours_share": 0.11798989019032337
+    },
+    {
+      "rank": 18,
+      "state": "Missouri",
+      "customer_hours": 21646185.5,
+      "customers": 2892799.0,
+      "hours_per_customer": 7.482782419379984,
+      "customer_hours_share": 0.020436160454798503
+    },
+    {
+      "rank": 19,
+      "state": "Ohio",
+      "customer_hours": 38259772.75,
+      "customers": 5633131.0,
+      "hours_per_customer": 6.791919582555421,
+      "customer_hours_share": 0.036121045663363056
+    },
+    {
+      "rank": 20,
+      "state": "Georgia",
+      "customer_hours": 34061712.75,
+      "customers": 5138121.0,
+      "hours_per_customer": 6.629215767787485,
+      "customer_hours_share": 0.03215765785266212
+    },
+    {
+      "rank": 21,
+      "state": "Alaska",
+      "customer_hours": 2207568.75,
+      "customers": 335515.0,
+      "hours_per_customer": 6.5796424899035815,
+      "customer_hours_share": 0.0020841653228001284
+    },
+    {
+      "rank": 22,
+      "state": "Alabama",
+      "customer_hours": 16145392.25,
+      "customers": 2647082.0,
+      "hours_per_customer": 6.099317002646688,
+      "customer_hours_share": 0.015242862379917246
+    },
+    {
+      "rank": 23,
+      "state": "Indiana",
+      "customer_hours": 19151611.5,
+      "customers": 3253212.0,
+      "hours_per_customer": 5.886985385520526,
+      "customer_hours_share": 0.01808103351890633
+    },
+    {
+      "rank": 24,
+      "state": "Massachusetts",
+      "customer_hours": 16885195.75,
+      "customers": 3298434.0,
+      "hours_per_customer": 5.119155256706668,
+      "customer_hours_share": 0.015941310752311613
+    },
+    {
+      "rank": 25,
+      "state": "Pennsylvania",
+      "customer_hours": 29876994.5,
+      "customers": 6144530.0,
+      "hours_per_customer": 4.862372630616174,
+      "customer_hours_share": 0.028206865986117154
+    },
+    {
+      "rank": 26,
+      "state": "Virginia",
+      "customer_hours": 18180683.25,
+      "customers": 3962973.0,
+      "hours_per_customer": 4.5876374252360534,
+      "customer_hours_share": 0.017164380305013438
+    },
+    {
+      "rank": 27,
+      "state": "Kansas",
+      "customer_hours": 6279542.5,
+      "customers": 1490674.0,
+      "hours_per_customer": 4.21255250980429,
+      "customer_hours_share": 0.005928515123956898
+    },
+    {
+      "rank": 28,
+      "state": "North Dakota",
+      "customer_hours": 1892635.0,
+      "customers": 466975.0,
+      "hours_per_customer": 4.052968574334814,
+      "customer_hours_share": 0.0017868364170845511
+    },
+    {
+      "rank": 29,
+      "state": "Illinois",
+      "customer_hours": 23952347.0,
+      "customers": 5931849.0,
+      "hours_per_customer": 4.037922576923317,
+      "customer_hours_share": 0.022613407177953432
+    },
+    {
+      "rank": 30,
+      "state": "Maryland",
+      "customer_hours": 9552111.75,
+      "customers": 2656350.0,
+      "hours_per_customer": 3.595953752329324,
+      "customer_hours_share": 0.009018147257638815
+    },
+    {
+      "rank": 31,
+      "state": "Florida",
+      "customer_hours": 38053434.25,
+      "customers": 11192057.0,
+      "hours_per_customer": 3.400039353802433,
+      "customer_hours_share": 0.03592624151673859
+    },
+    {
+      "rank": 32,
+      "state": "Wisconsin",
+      "customer_hours": 10350339.0,
+      "customers": 3085987.0,
+      "hours_per_customer": 3.3539801042583783,
+      "customer_hours_share": 0.009771753483566823
+    },
+    {
+      "rank": 33,
+      "state": "Nevada",
+      "customer_hours": 4400502.75,
+      "customers": 1413948.0,
+      "hours_per_customer": 3.1122097488733673,
+      "customer_hours_share": 0.004154513980339957
+    },
+    {
+      "rank": 34,
+      "state": "Oregon",
+      "customer_hours": 6276092.75,
+      "customers": 2066571.0,
+      "hours_per_customer": 3.036959654422713,
+      "customer_hours_share": 0.005925258215503954
+    },
+    {
+      "rank": 35,
+      "state": "Minnesota",
+      "customer_hours": 8088657.75,
+      "customers": 2757863.0,
+      "hours_per_customer": 2.932944004107528,
+      "customer_hours_share": 0.007636500557705626
+    },
+    {
+      "rank": 36,
+      "state": "South Carolina",
+      "customer_hours": 7600942.5,
+      "customers": 2832284.0,
+      "hours_per_customer": 2.6836794968301203,
+      "customer_hours_share": 0.007176048663987346
+    },
+    {
+      "rank": 37,
+      "state": "New Mexico",
+      "customer_hours": 2802468.25,
+      "customers": 1053737.0,
+      "hours_per_customer": 2.659551909062698,
+      "customer_hours_share": 0.0026458098507230457
+    },
+    {
+      "rank": 38,
+      "state": "Washington",
+      "customer_hours": 9096227.75,
+      "customers": 3566137.0,
+      "hours_per_customer": 2.550723023260183,
+      "customer_hours_share": 0.008587747242228463
+    },
+    {
+      "rank": 39,
+      "state": "District of Columbia",
+      "customer_hours": 819838.5,
+      "customers": 325122.0,
+      "hours_per_customer": 2.5216334176093897,
+      "customer_hours_share": 0.0007740094037825426
+    },
+    {
+      "rank": 40,
+      "state": "Utah",
+      "customer_hours": 3165543.5,
+      "customers": 1285473.0,
+      "hours_per_customer": 2.462551527725592,
+      "customer_hours_share": 0.002988589139303294
+    },
+    {
+      "rank": 41,
+      "state": "Idaho",
+      "customer_hours": 2271027.5,
+      "customers": 931598.0,
+      "hours_per_customer": 2.4377762725982666,
+      "customer_hours_share": 0.0021440767190718155
+    },
+    {
+      "rank": 42,
+      "state": "New Jersey",
+      "customer_hours": 9957167.5,
+      "customers": 4169800.0,
+      "hours_per_customer": 2.3879244807904456,
+      "customer_hours_share": 0.009400560329916088
+    },
+    {
+      "rank": 43,
+      "state": "Connecticut",
+      "customer_hours": 3960802.5,
+      "customers": 1689447.0,
+      "hours_per_customer": 2.3444372626072316,
+      "customer_hours_share": 0.003739393040855491
+    },
+    {
+      "rank": 44,
+      "state": "Delaware",
+      "customer_hours": 1185214.0,
+      "customers": 508412.0,
+      "hours_per_customer": 2.3312077606350754,
+      "customer_hours_share": 0.0011189603580396901
+    },
+    {
+      "rank": 45,
+      "state": "South Dakota",
+      "customer_hours": 1070437.5,
+      "customers": 471806.0,
+      "hours_per_customer": 2.2688085781020164,
+      "customer_hours_share": 0.0010105998817589996
+    },
+    {
+      "rank": 46,
+      "state": "New York",
+      "customer_hours": 18653457.75,
+      "customers": 8345066.0,
+      "hours_per_customer": 2.235267851686254,
+      "customer_hours_share": 0.017610726638917728
+    },
+    {
+      "rank": 47,
+      "state": "Colorado",
+      "customer_hours": 5915909.25,
+      "customers": 2814779.0,
+      "hours_per_customer": 2.1017313437395972,
+      "customer_hours_share": 0.005585209027661094
+    },
+    {
+      "rank": 48,
+      "state": "Arizona",
+      "customer_hours": 6656167.0,
+      "customers": 3214820.0,
+      "hours_per_customer": 2.0704633540913644,
+      "customer_hours_share": 0.006284086257411717
+    },
+    {
+      "rank": 49,
+      "state": "Iowa",
+      "customer_hours": 3199316.0,
+      "customers": 1614450.0,
+      "hours_per_customer": 1.9816754932020193,
+      "customer_hours_share": 0.003020473751442448
+    },
+    {
+      "rank": 50,
+      "state": "Wyoming",
+      "customer_hours": 644686.5,
+      "customers": 327888.0,
+      "hours_per_customer": 1.9661790001463915,
+      "customer_hours_share": 0.000608648427088572
+    },
+    {
+      "rank": 51,
+      "state": "Rhode Island",
+      "customer_hours": 993347.75,
+      "customers": 507984.0,
+      "hours_per_customer": 1.9554705463164195,
+      "customer_hours_share": 0.0009378194604501134
+    },
+    {
+      "rank": 52,
+      "state": "Montana",
+      "customer_hours": 1092275.5,
+      "customers": 621908.0,
+      "hours_per_customer": 1.7563297143628962,
+      "customer_hours_share": 0.0010312171342542204
+    },
+    {
+      "rank": 53,
+      "state": "Nebraska",
+      "customer_hours": 1053361.25,
+      "customers": 1036741.0,
+      "hours_per_customer": 1.016031245991043,
+      "customer_hours_share": 0.0009944781967181754
+    }
+  ]
+}

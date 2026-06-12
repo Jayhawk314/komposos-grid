@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Grid Action Portfolio Dashboard</title>
+  <style>
+:root {
+  color-scheme: light;
+  --ink: #17202a;
+  --muted: #5b6673;
+  --line: #d8dee6;
+  --surface: #ffffff;
+  --page: #f5f7fa;
+  --blue: #1f6feb;
+  --green: #1f8f5f;
+  --amber: #b7791f;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font: 14px/1.5 Arial, Helvetica, sans-serif;
+}
+.shell {
+  width: min(1280px, calc(100vw - 32px));
+  margin: 0 auto;
+  padding: 28px 0 40px;
+}
+header {
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 18px;
+  padding-bottom: 16px;
+}
+h1 {
+  font-size: clamp(26px, 4vw, 38px);
+  line-height: 1.1;
+  margin: 0 0 8px;
+  letter-spacing: 0;
+}
+h2 {
+  font-size: 18px;
+  line-height: 1.25;
+  margin: 0 0 14px;
+  letter-spacing: 0;
+}
+p { margin: 0; color: var(--muted); }
+.band {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  margin: 16px 0;
+  padding: 18px;
+}
+.summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.summary h2 { margin: 0; }
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.chip {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fbfcfe;
+  padding: 6px 10px;
+}
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+.metric {
+  min-height: 128px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--blue);
+  border-radius: 8px;
+  padding: 14px;
+  display: grid;
+  gap: 6px;
+  align-content: start;
+}
+.metric:nth-child(2n) { border-top-color: var(--green); }
+.metric:nth-child(3n) { border-top-color: var(--amber); }
+.metric span {
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+}
+.metric strong {
+  font-size: 24px;
+  line-height: 1.05;
+  letter-spacing: 0;
+}
+.metric small { color: var(--muted); }
+.table-wrap { overflow-x: auto; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 1040px;
+}
+th, td {
+  border-bottom: 1px solid var(--line);
+  padding: 9px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+th {
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+  background: #fbfcfe;
+}
+tr:hover td { background: #f9fbfd; }
+.empty {
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  padding: 14px;
+}
+@media (max-width: 640px) {
+  .shell { width: min(100vw - 20px, 1280px); padding-top: 18px; }
+  .band { padding: 14px; }
+  .metric { min-height: 116px; }
+  .metric strong { font-size: 21px; }
+}
+</style>
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <h1>Grid Action Portfolio Dashboard</h1>
+      <p>Decision portfolio derived from the grid waste ledger</p>
+    </header>
+    <section class="band summary"><h2>Actions separated by decision readiness</h2><div class="chips"><span class="chip">attach_evidence: 1</span><span class="chip">policy_design: 1</span><span class="chip">ready_for_scoping: 2</span><span class="chip">review_required: 1</span><span class="chip">validate_proxy: 5</span></div></section><section class="metrics"><article class="metric"><span>Actions</span><strong>10</strong><small>ranked decision items</small></article><article class="metric"><span>Measured value</span><strong>$0</strong><small>direct measured dollars</small></article><article class="metric"><span>Proxy value</span><strong>$225,692,599</strong><small>LMP/component/hub proxies</small></article><article class="metric"><span>Upper-bound value</span><strong>$172,470,248</strong><small>labeled upper bounds</small></article></section><section class="band"><h2>Actions</h2><div class="table-wrap"><table><thead><tr><th>Status</th><th>Action</th><th>Geography</th><th>Evidence</th><th>Quantity</th><th>Value</th><th>Next Step</th><th>Caveat</th></tr></thead><tbody><tr><td>ready_for_scoping</td><td>Scope CAISO curtailment reduction package</td><td>CISO</td><td>measured</td><td>2,659,525.80 MWh curtailed renewable energy</td><td>$172,470,248</td><td>Design storage, flexible-load, and transmission screens around CAISO curtailment windows.</td><td>Dollar value is an annual-average-price upper bound, not realized market value.</td></tr><tr><td>ready_for_scoping</td><td>Prioritize reliability hardening in highest-burden states</td><td>USVI, Maine, Puerto Rico, Michigan, Kentucky</td><td>measured</td><td>1,059,209,999.25 customer-hours</td><td></td><td>Use EAGLE-I/MCC burden rankings to select outage-hardening and distribution-resilience targets.</td><td>Customer-hour burden is not monetized here.</td></tr><tr><td>policy_design</td><td>Target queue reform at IA-stage mediators</td><td>US interconnection queues</td><td>measured</td><td>0.83 withdrawal share of decided projects</td><td></td><td>Study IA-executed completion structure and failure-path IA statuses before proposing process reform.</td><td>Mediators are descriptive, not causal proof.</td></tr><tr><td>validate_proxy</td><td>Validate proxy congestion value for CISO-SRP</td><td>CISO-SRP</td><td>measured_proxy</td><td>10,099,478 MWh gross interchange</td><td>$141,660,273</td><td>Replace hub/price-spread proxy with nodal LMP or direct congestion-cost evidence.</td><td>Hub proxy has weak flow/price alignment; Proxy value depends on hub-to-BA mapping and should not be treated as direct settlement cost.</td></tr><tr><td>validate_proxy</td><td>Validate proxy congestion value for BPAT-CISO</td><td>BPAT-CISO</td><td>measured_proxy</td><td>5,458,963 MWh gross interchange</td><td>$51,709,377</td><td>Replace hub/price-spread proxy with nodal LMP or direct congestion-cost evidence.</td><td>Hub proxy has mixed flow/price alignment; Proxy value depends on hub-to-BA mapping and should not be treated as direct settlement cost.</td></tr><tr><td>validate_proxy</td><td>Validate proxy congestion value for PJM-NYIS</td><td>PJM-NYIS</td><td>measured_proxy</td><td>19,294,263 MWh gross interchange</td><td>$29,461,244</td><td>Replace component-spread proxy with direct congestion-cost or flow-attribution evidence.</td><td>Component spread is stronger than hub price evidence, but still not direct settlement cost.</td></tr><tr><td>validate_proxy</td><td>Validate proxy congestion value for BPAT-NEVP</td><td>BPAT-NEVP</td><td>measured_proxy</td><td>569,040 MWh gross interchange</td><td>$2,155,331</td><td>Replace hub/price-spread proxy with nodal LMP or direct congestion-cost evidence.</td><td>Hub proxy has mixed flow/price alignment; Proxy value depends on hub-to-BA mapping and should not be treated as direct settlement cost.</td></tr><tr><td>validate_proxy</td><td>Validate proxy congestion value for PACW-CISO</td><td>PACW-CISO</td><td>measured_proxy</td><td>74,572 MWh gross interchange</td><td>$706,374</td><td>Replace hub/price-spread proxy with nodal LMP or direct congestion-cost evidence.</td><td>Hub proxy is directionally supportive, but proxy value depends on hub-to-BA mapping and should not be treated as direct settlement cost.</td></tr><tr><td>review_required</td><td>Review BA footprint correction candidates</td><td>US balancing authorities</td><td>validated_hypothesis</td><td>59,350,065 MWh BA absolute-error reduction</td><td></td><td>Have a domain reviewer approve, reject, or defer rows in ba_review_template.csv.</td><td>Not an official BA registration change until reviewed.</td></tr><tr><td>attach_evidence</td><td>Attach evidence to remaining structural bottlenecks</td><td>BPAT-NWMT, BPAT-LDWP, TVA-SOCO, MISO-SOCO</td><td>structural_only</td><td>38,082,266 MWh gross interchange under review</td><td></td><td>Pull nodal LMP, congestion-cost, outage, or planning evidence for the remaining corridors.</td><td>Topology-only evidence is not counted as measured waste.</td></tr></tbody></table></div></section>
+  </main>
+</body>
+</html>

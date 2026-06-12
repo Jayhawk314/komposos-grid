@@ -97,6 +97,26 @@ def test_price_spread_proxy_estimates_value_from_gross_flow(tmp_path):
     assert report.total_estimated_value_usd == pytest.approx(10_000.0)
 
 
+def test_lmp_component_proxy_overrides_all_in_price_spread(tmp_path):
+    flow_path = _flow_report_json(tmp_path)
+    evidence_path = tmp_path / "evidence.csv"
+    evidence_path.write_text(
+        "ba_a,ba_b,evidence_method,mean_price_spread_usd_mwh,"
+        "mean_congestion_component_spread_usd_mwh,hours_observed\n"
+        "PJM,NYIS,lmp_component_proxy,10,4,24\n",
+        encoding="utf-8",
+    )
+
+    evidence = load_congestion_evidence_csv([evidence_path])
+    report = build_congestion_evidence_report(flow_path, evidence)
+    claim = report.ranked_claims()[0]
+
+    assert claim.evidence_status == "lmp_component_proxy"
+    assert claim.estimated_value_usd == pytest.approx(4_000.0)
+    assert claim.evidence.mean_price_spread_usd_mwh == pytest.approx(10.0)
+    assert report.total_estimated_value_usd == pytest.approx(4_000.0)
+
+
 def test_congestion_evidence_exports_reports(tmp_path):
     flow_path = _flow_report_json(tmp_path)
     evidence_path = tmp_path / "evidence.csv"

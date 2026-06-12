@@ -1,4 +1,5 @@
 ba_a,ba_b,evidence_source,mean_price_spread_usd_mwh,max_price_spread_usd_mwh,congestion_cost_usd,hours_observed,notes
+PJM,NYIS,NYISO DAM zonal LBMP 2023 (mis.nyiso.com; hourly NYCA internal-zone mean vs NYISO PJM proxy bus),2.01,144.14,,8759,Mean absolute hourly spread; NYCA above PJM proxy 94.3% of hours (persistent west-to-east direction)
 BPAT,CISO,EIA ICE daily wholesale prices 2023 (volume-weighted peak),9.47,,,3904,Mid C Peak $82.66 vs NP15 EZ Gen DA LMP Peak $73.19; COI corridor; NP15 volume thin (99 trade days)
 CISO,SRP,EIA ICE daily wholesale prices 2023 (volume-weighted peak),14.02,,,3792,SP15 EZ Gen DA LMP Peak $64.85 vs Palo Verde Peak $78.87
 PACW,CISO,EIA ICE daily wholesale prices 2023 (volume-weighted peak),9.47,,,1584,PACW approximated by Mid C Peak $82.66 vs NP15 $73.19; hub-to-BA mapping approximate

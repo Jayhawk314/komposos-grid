@@ -37,6 +37,9 @@ from domains.grid.congestion_evidence import (
     CongestionEvidence,
     CongestionClaim,
 )
+from domains.grid.outages import OutageReport
+from domains.grid.waste_ledger import WasteLedger, WasteClaim
+from domains.grid.action_portfolio import ActionPortfolio, PortfolioAction
 from domains.grid.ingest import GridCategoryBuilder
 from domains.grid.sources.base import GridDataSource, PlantRecord
 
@@ -59,6 +62,11 @@ __all__ = [
     "CongestionEvidenceReport",
     "CongestionEvidence",
     "CongestionClaim",
+    "OutageReport",
+    "WasteLedger",
+    "WasteClaim",
+    "ActionPortfolio",
+    "PortfolioAction",
     "GridCategoryBuilder",
     "GridDataSource",
     "PlantRecord",

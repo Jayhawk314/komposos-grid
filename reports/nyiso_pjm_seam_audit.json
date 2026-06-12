@@ -1,0 +1,34 @@
+{
+  "audit": {
+    "proxy": "PJM",
+    "hours": 8759,
+    "internal_lbmp_mean_usd_mwh": 31.113789868083742,
+    "proxy_lbmp_mean_usd_mwh": 29.168366251855232,
+    "mean_abs_lbmp_spread_usd_mwh": 2.0138137396340388,
+    "max_abs_lbmp_spread_usd_mwh": 144.1436363636364,
+    "share_lbmp_internal_above": 0.942801689690604,
+    "internal_congestion_mean_usd_mwh": -4.802930803640931,
+    "proxy_congestion_mean_usd_mwh": -3.3752243406781597,
+    "mean_abs_congestion_spread_usd_mwh": 1.5269431960892172,
+    "max_abs_congestion_spread_usd_mwh": 131.43454545454546,
+    "share_congestion_internal_above": 0.08870875670738669,
+    "internal_loss_mean_usd_mwh": 1.029137458613997,
+    "proxy_loss_mean_usd_mwh": 0.5113683068843475,
+    "mean_abs_loss_spread_usd_mwh": 0.5193124993513165,
+    "max_abs_loss_spread_usd_mwh": 12.704545454545453,
+    "share_loss_internal_above": 0.9821897476880922
+  },
+  "evidence_row": {
+    "ba_a": "PJM",
+    "ba_b": "NYIS",
+    "evidence_source": "NYISO DAM zonal LBMP 2023 settlement components (mis.nyiso.com; NYCA internal-zone mean vs PJM proxy bus)",
+    "evidence_method": "lmp_component_proxy",
+    "mean_price_spread_usd_mwh": 2.0138137396340388,
+    "max_price_spread_usd_mwh": 144.1436363636364,
+    "mean_congestion_component_spread_usd_mwh": 1.5269431960892172,
+    "max_congestion_component_spread_usd_mwh": 131.43454545454546,
+    "mean_loss_component_spread_usd_mwh": 0.5193124993513165,
+    "hours_observed": 8759,
+    "notes": "Uses NYISO hourly settlement congestion component, not only annual hub price level. Congestion component is 75.8% of mean absolute LBMP spread; NYCA LBMP above PJM proxy 94.3% of hours."
+  }
+}

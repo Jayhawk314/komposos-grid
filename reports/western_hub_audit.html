@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Western Hub Evidence Audit</title><style>
+:root {
+  color-scheme: light;
+  --ink: #17202a;
+  --muted: #5b6673;
+  --line: #d8dee6;
+  --surface: #ffffff;
+  --page: #f5f7fa;
+  --blue: #1f6feb;
+  --green: #1f8f5f;
+  --amber: #b7791f;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font: 14px/1.5 Arial, Helvetica, sans-serif;
+}
+.shell {
+  width: min(1180px, calc(100vw - 32px));
+  margin: 0 auto;
+  padding: 28px 0 40px;
+}
+header {
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 18px;
+  padding-bottom: 16px;
+}
+h1 {
+  font-size: clamp(26px, 4vw, 38px);
+  line-height: 1.1;
+  margin: 0 0 8px;
+  letter-spacing: 0;
+}
+h2 {
+  font-size: 18px;
+  line-height: 1.25;
+  margin: 0 0 14px;
+  letter-spacing: 0;
+}
+p { margin: 0; color: var(--muted); }
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+.metric, .band {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px;
+}
+.metric {
+  min-height: 124px;
+  border-top: 4px solid var(--blue);
+  display: grid;
+  gap: 6px;
+  align-content: start;
+}
+.metric:nth-child(2n) { border-top-color: var(--green); }
+.metric:nth-child(3n) { border-top-color: var(--amber); }
+.metric span {
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+}
+.metric strong {
+  font-size: 24px;
+  line-height: 1.05;
+  letter-spacing: 0;
+}
+.metric small { color: var(--muted); }
+.band { margin: 16px 0; }
+.table-wrap { overflow-x: auto; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 860px;
+}
+th, td {
+  border-bottom: 1px solid var(--line);
+  padding: 9px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+th {
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+  background: #fbfcfe;
+}
+@media (max-width: 640px) {
+  .shell { width: min(100vw - 20px, 1180px); padding-top: 18px; }
+  .metric strong { font-size: 21px; }
+}
+</style></head><body><main class="shell"><header><h1>Western Hub Evidence Audit</h1><p>ICE daily hub spreads checked against EIA-930 interchange direction.</p></header><section class="metrics"><article class="metric"><span>Audited ties</span><strong>4</strong><small>Western hub proxy rows</small></article><article class="metric"><span>Supportive</span><strong>1</strong><small>flow/price alignment &gt;= 65%</small></article><article class="metric"><span>Mixed</span><strong>2</strong><small>flow/price alignment 45-65%</small></article><article class="metric"><span>Weak</span><strong>1</strong><small>flow/price alignment &lt; 45%</small></article></section><section class="band"><h2>Proxy Diagnostics</h2><div class="table-wrap"><table><thead><tr><th>Tie</th><th>Conservative Spread</th><th>Daily Mean Abs</th><th>Overlap Days</th><th>Flow Alignment</th><th>Note</th></tr></thead><tbody><tr><td>CISO - SRP</td><td>$14.03/MWh</td><td>$15.58/MWh</td><td>234</td><td>39.0%</td><td>flow/price alignment is weak. </td></tr><tr><td>BPAT - CISO</td><td>$9.47/MWh</td><td>$32.90/MWh</td><td>98</td><td>58.9%</td><td>flow/price alignment is mixed. NP15 volume is thin, so keep this as a hub-screening proxy.</td></tr><tr><td>BPAT - NEVP</td><td>$3.79/MWh</td><td>$24.02/MWh</td><td>241</td><td>45.3%</td><td>flow/price alignment is mixed. NEVP is approximated by Palo Verde.</td></tr><tr><td>PACW - CISO</td><td>$9.47/MWh</td><td>$32.90/MWh</td><td>98</td><td>82.5%</td><td>flow/price alignment is directionally supportive. PACW and CISO are approximated by Mid C and NP15.</td></tr></tbody></table></div></section></main></body></html>

@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EAGLE-I Reliability Waste Dashboard 2023</title>
+  <style>
+:root {
+  color-scheme: light;
+  --ink: #17202a;
+  --muted: #5b6673;
+  --line: #d8dee6;
+  --surface: #ffffff;
+  --page: #f5f7fa;
+  --blue: #1f6feb;
+  --green: #1f8f5f;
+  --amber: #b7791f;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font: 14px/1.5 Arial, Helvetica, sans-serif;
+}
+.shell {
+  width: min(1180px, calc(100vw - 32px));
+  margin: 0 auto;
+  padding: 28px 0 40px;
+}
+header {
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 18px;
+  padding-bottom: 16px;
+}
+h1 {
+  font-size: clamp(26px, 4vw, 38px);
+  line-height: 1.1;
+  margin: 0 0 8px;
+  letter-spacing: 0;
+}
+h2 {
+  font-size: 18px;
+  line-height: 1.25;
+  margin: 0 0 14px;
+  letter-spacing: 0;
+}
+p { margin: 0; color: var(--muted); }
+.band {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  margin: 16px 0;
+  padding: 18px;
+}
+.summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.summary h2 { margin: 0; }
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.chip {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fbfcfe;
+  padding: 6px 10px;
+}
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+.metric {
+  min-height: 128px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--blue);
+  border-radius: 8px;
+  padding: 14px;
+  display: grid;
+  gap: 6px;
+  align-content: start;
+}
+.metric:nth-child(2n) { border-top-color: var(--green); }
+.metric:nth-child(3n) { border-top-color: var(--amber); }
+.metric span {
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+}
+.metric strong {
+  font-size: 24px;
+  line-height: 1.05;
+  letter-spacing: 0;
+}
+.metric small { color: var(--muted); }
+.table-wrap { overflow-x: auto; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 760px;
+}
+th, td {
+  border-bottom: 1px solid var(--line);
+  padding: 9px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+th {
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+  background: #fbfcfe;
+}
+tr:hover td { background: #f9fbfd; }
+.empty {
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  padding: 14px;
+}
+@media (max-width: 640px) {
+  .shell { width: min(100vw - 20px, 1180px); padding-top: 18px; }
+  .band { padding: 14px; }
+  .metric { min-height: 116px; }
+  .metric strong { font-size: 21px; }
+}
+</style>
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <h1>EAGLE-I Reliability Waste Dashboard 2023</h1>
+      <p>EAGLE-I outage burden normalized by MCC customers</p>
+    </header>
+    <section class="band summary"><h2>Reliability waste from outage customer-hours</h2><div class="chips"><span class="chip">EAGLE-I covers ~92% of US customers</span><span class="chip">53 states ranked</span></div></section><section class="metrics"><article class="metric"><span>Customer-hours lost</span><strong>1,059M</strong><small>EAGLE-I covers ~92% of US customers</small></article><article class="metric"><span>Rows processed</span><strong>26,101,051</strong><small>chunked CSV aggregation</small></article><article class="metric"><span>Time range</span><strong>2023-01-01 00:00:00 to 2023-12-31 23:45:00</strong><small>source timestamps observed</small></article><article class="metric"><span>States ranked</span><strong>53</strong><small>normalized by MCC customers</small></article></section><section class="band"><h2>Worst States</h2><div class="table-wrap"><table><thead><tr><th>Rank</th><th>State</th><th>Hours/Customer</th><th>Customer-Hours</th><th>Customers</th><th>Share</th></tr></thead><tbody><tr><td>1</td><td>United States Virgin Islands</td><td>41.9</td><td>2,356,667</td><td>56,307</td><td>0.2%</td></tr><tr><td>2</td><td>Maine</td><td>38.9</td><td>31,944,610</td><td>820,970</td><td>3.0%</td></tr><tr><td>3</td><td>Puerto Rico</td><td>34.3</td><td>50,994,794</td><td>1,485,262</td><td>4.8%</td></tr><tr><td>4</td><td>Michigan</td><td>26.5</td><td>128,264,703</td><td>4,841,201</td><td>12.1%</td></tr><tr><td>5</td><td>Kentucky</td><td>14.9</td><td>34,848,924</td><td>2,338,856</td><td>3.3%</td></tr><tr><td>6</td><td>Oklahoma</td><td>14.1</td><td>29,233,072</td><td>2,066,485</td><td>2.8%</td></tr><tr><td>7</td><td>Arkansas</td><td>13.6</td><td>22,596,648</td><td>1,657,199</td><td>2.1%</td></tr><tr><td>8</td><td>West Virginia</td><td>13.6</td><td>13,744,652</td><td>1,012,652</td><td>1.3%</td></tr><tr><td>9</td><td>Louisiana</td><td>12.8</td><td>30,873,823</td><td>2,416,753</td><td>2.9%</td></tr><tr><td>10</td><td>North Carolina</td><td>12.6</td><td>22,970,788</td><td>1,821,437</td><td>2.2%</td></tr><tr><td>11</td><td>Vermont</td><td>10.7</td><td>4,080,534</td><td>380,092</td><td>0.4%</td></tr><tr><td>12</td><td>Tennessee</td><td>10.6</td><td>37,508,329</td><td>3,538,697</td><td>3.5%</td></tr></tbody></table></div></section>
+  </main>
+</body>
+</html>

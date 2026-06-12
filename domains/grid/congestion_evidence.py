@@ -35,8 +35,12 @@ class CongestionEvidence:
     ba_a: str
     ba_b: str
     evidence_source: str = ""
+    evidence_method: str = ""
     mean_price_spread_usd_mwh: float = 0.0
     max_price_spread_usd_mwh: float = 0.0
+    mean_congestion_component_spread_usd_mwh: float = 0.0
+    max_congestion_component_spread_usd_mwh: float = 0.0
+    mean_loss_component_spread_usd_mwh: float = 0.0
     congestion_cost_usd: float = 0.0
     hours_observed: float = 0.0
     notes: str = ""
@@ -53,6 +57,14 @@ class CongestionEvidence:
     def has_price_spread(self) -> bool:
         return self.mean_price_spread_usd_mwh > 0 or self.max_price_spread_usd_mwh > 0
 
+    @property
+    def has_lmp_component_spread(self) -> bool:
+        return (
+            self.evidence_method == "lmp_component_proxy"
+            or self.mean_congestion_component_spread_usd_mwh > 0
+            or self.max_congestion_component_spread_usd_mwh > 0
+        )
+
 
 @dataclass(frozen=True)
 class CongestionClaim:
@@ -65,6 +77,8 @@ class CongestionClaim:
             return "structural_only"
         if self.evidence.has_measured_cost:
             return "measured_cost"
+        if self.evidence.has_lmp_component_spread:
+            return "lmp_component_proxy"
         if self.evidence.has_price_spread:
             return "price_spread_proxy"
         return "evidence_attached"
@@ -75,6 +89,11 @@ class CongestionClaim:
             return 0.0
         if self.evidence.congestion_cost_usd > 0:
             return self.evidence.congestion_cost_usd
+        if self.evidence.mean_congestion_component_spread_usd_mwh > 0:
+            return (
+                self.evidence.mean_congestion_component_spread_usd_mwh
+                * self.bottleneck.gross_mwh
+            )
         if self.evidence.mean_price_spread_usd_mwh > 0:
             return self.evidence.mean_price_spread_usd_mwh * self.bottleneck.gross_mwh
         return 0.0
@@ -103,7 +122,11 @@ class CongestionEvidenceReport:
         return [
             claim
             for claim in self.claims
-            if claim.evidence_status in {"measured_cost", "price_spread_proxy"}
+            if claim.evidence_status in {
+                "measured_cost",
+                "lmp_component_proxy",
+                "price_spread_proxy",
+            }
         ]
 
     @property
@@ -169,10 +192,20 @@ class CongestionEvidenceReport:
                 "combined_priority": claim.combined_priority,
                 "estimated_value_usd": claim.estimated_value_usd,
                 "evidence_source": e.evidence_source if e else "",
+                "evidence_method": e.evidence_method if e else "",
                 "mean_price_spread_usd_mwh": (
                     e.mean_price_spread_usd_mwh if e else ""
                 ),
                 "max_price_spread_usd_mwh": e.max_price_spread_usd_mwh if e else "",
+                "mean_congestion_component_spread_usd_mwh": (
+                    e.mean_congestion_component_spread_usd_mwh if e else ""
+                ),
+                "max_congestion_component_spread_usd_mwh": (
+                    e.max_congestion_component_spread_usd_mwh if e else ""
+                ),
+                "mean_loss_component_spread_usd_mwh": (
+                    e.mean_loss_component_spread_usd_mwh if e else ""
+                ),
                 "congestion_cost_usd": e.congestion_cost_usd if e else "",
                 "hours_observed": e.hours_observed if e else "",
                 "notes": e.notes if e else "",
@@ -223,7 +256,11 @@ class CongestionEvidenceReport:
         metrics = [
             _metric("Bottlenecks", str(len(self.claims)), "structural candidates"),
             _metric("Evidence matched", str(len(self.matched_claims)), "rows joined by BA tie"),
-            _metric("Measured/proxy claims", str(len(self.measured_claims)), "cost or LMP spread"),
+            _metric(
+                "Measured/proxy claims",
+                str(len(self.measured_claims)),
+                "cost or LMP component/spread",
+            ),
             _metric(
                 "Estimated value",
                 f"${self.total_estimated_value_usd:,.0f}",
@@ -335,6 +372,7 @@ def evidence_from_row(row: Mapping[str, Any]) -> CongestionEvidence:
         ba_a=ba_a,
         ba_b=ba_b,
         evidence_source=_first(row, ["evidence_source", "source_name", "dataset"]),
+        evidence_method=_first(row, ["evidence_method", "method", "evidence_type"]),
         mean_price_spread_usd_mwh=_float(
             _first(row, [
                 "mean_price_spread_usd_mwh",
@@ -345,6 +383,26 @@ def evidence_from_row(row: Mapping[str, Any]) -> CongestionEvidence:
         ),
         max_price_spread_usd_mwh=_float(
             _first(row, ["max_price_spread_usd_mwh", "max_lmp_spread"])
+        ),
+        mean_congestion_component_spread_usd_mwh=_float(
+            _first(row, [
+                "mean_congestion_component_spread_usd_mwh",
+                "mean_marginal_congestion_spread_usd_mwh",
+                "mean_congestion_spread_usd_mwh",
+            ])
+        ),
+        max_congestion_component_spread_usd_mwh=_float(
+            _first(row, [
+                "max_congestion_component_spread_usd_mwh",
+                "max_marginal_congestion_spread_usd_mwh",
+                "max_congestion_spread_usd_mwh",
+            ])
+        ),
+        mean_loss_component_spread_usd_mwh=_float(
+            _first(row, [
+                "mean_loss_component_spread_usd_mwh",
+                "mean_marginal_loss_spread_usd_mwh",
+            ])
         ),
         congestion_cost_usd=_float(
             _first(row, ["congestion_cost_usd", "annual_congestion_cost_usd", "cost_usd"])
@@ -359,6 +417,7 @@ def merge_evidence(a: CongestionEvidence, b: CongestionEvidence) -> CongestionEv
         ba_a=a.ba_a,
         ba_b=a.ba_b,
         evidence_source="; ".join(x for x in [a.evidence_source, b.evidence_source] if x),
+        evidence_method=_stronger_method(a.evidence_method, b.evidence_method),
         mean_price_spread_usd_mwh=max(
             a.mean_price_spread_usd_mwh,
             b.mean_price_spread_usd_mwh,
@@ -367,8 +426,20 @@ def merge_evidence(a: CongestionEvidence, b: CongestionEvidence) -> CongestionEv
             a.max_price_spread_usd_mwh,
             b.max_price_spread_usd_mwh,
         ),
+        mean_congestion_component_spread_usd_mwh=max(
+            a.mean_congestion_component_spread_usd_mwh,
+            b.mean_congestion_component_spread_usd_mwh,
+        ),
+        max_congestion_component_spread_usd_mwh=max(
+            a.max_congestion_component_spread_usd_mwh,
+            b.max_congestion_component_spread_usd_mwh,
+        ),
+        mean_loss_component_spread_usd_mwh=max(
+            a.mean_loss_component_spread_usd_mwh,
+            b.mean_loss_component_spread_usd_mwh,
+        ),
         congestion_cost_usd=a.congestion_cost_usd + b.congestion_cost_usd,
-        hours_observed=a.hours_observed + b.hours_observed,
+        hours_observed=max(a.hours_observed, b.hours_observed),
         notes="; ".join(x for x in [a.notes, b.notes] if x),
     )
 
@@ -405,8 +476,12 @@ def evidence_template_rows(
             "net_mwh": item.net_mwh,
             "structural_priority_score": item.priority_score,
             "evidence_source": "",
+            "evidence_method": "",
             "mean_price_spread_usd_mwh": "",
             "max_price_spread_usd_mwh": "",
+            "mean_congestion_component_spread_usd_mwh": "",
+            "max_congestion_component_spread_usd_mwh": "",
+            "mean_loss_component_spread_usd_mwh": "",
             "congestion_cost_usd": "",
             "hours_observed": "",
             "notes": "",
@@ -440,6 +515,17 @@ def _float(value: Any) -> float:
     return float(text)
 
 
+def _stronger_method(a: str, b: str) -> str:
+    order = {
+        "": 0,
+        "price_spread_proxy": 1,
+        "hub_price_spread": 1,
+        "lmp_component_proxy": 2,
+        "measured_cost": 3,
+    }
+    return max((a, b), key=lambda method: order.get(method, 0))
+
+
 def _write_csv(path: str | Path, rows: List[Dict[str, Any]]) -> None:
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -464,8 +550,12 @@ def _fieldnames(rows: List[Dict[str, Any]]) -> List[str]:
         "combined_priority",
         "estimated_value_usd",
         "evidence_source",
+        "evidence_method",
         "mean_price_spread_usd_mwh",
         "max_price_spread_usd_mwh",
+        "mean_congestion_component_spread_usd_mwh",
+        "max_congestion_component_spread_usd_mwh",
+        "mean_loss_component_spread_usd_mwh",
         "congestion_cost_usd",
         "hours_observed",
         "notes",
