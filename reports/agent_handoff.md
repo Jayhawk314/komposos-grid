@@ -181,3 +181,45 @@ repair/review layers).
     `reports/miso_seam_evidence_2024.csv` untracked.
   - I intentionally left them out of the C5-C7/D8 commit so the A3
     rerun can be reviewed/closed separately.
+
+## State as of 2026-06-12 (solution-card continuation)
+
+- User explicitly pointed at the MISO 2024 rerun artifacts and asked to
+  learn them:
+  - `reports/miso_seam_2024.txt`
+  - `reports/miso_seam_evidence_2024.csv`
+- Learned A3 update:
+  - MISO-SOCO 2024: 8,736 hours, 2 missing report days, mean |spread|
+    1.77 $/MWh, congestion component 1.53 $/MWh, congestion is 86.8%
+    of mean spread.
+  - MISO-SWPP 2024: 8,736 hours, 2 missing report days, mean |spread|
+    6.63 $/MWh, congestion component 6.31 $/MWh, congestion is 95.2%
+    of mean spread.
+  - MISO-SWPP worsened versus 2023 component evidence
+    (4.74 -> 6.31 $/MWh); MISO-SOCO also rose
+    (1.35 -> 1.53 $/MWh).
+- Added solution cards:
+  - `domains/grid/solution_cards.py`
+  - `domains/grid/run_solution_cards.py`
+  - `tests/test_grid_solution_cards.py`
+  - Generated `reports/energy_solution_cards.{md,json,csv}`.
+- Current solution-card ranking:
+  - PJM-NYIS: priority solution study. Uses the 2025 NYISO component
+    trend, 7.38 $/MWh, about $142.4M/yr on the current gross-flow
+    baseline, generic B/C 0.43.
+  - MISO-SWPP: priority solution study. Uses the learned 2024 MISO
+    component, 6.31 $/MWh, about $25.2M/yr, generic B/C 0.35.
+  - CISO-SRP and BPAT-CISO: methodology-validated Western screens
+    using OASIS-corrected values, not old ICE hub proxies.
+  - MISO-SOCO: bounded Southeast solution screen, useful mostly as an
+    anchor for Southeast pricing/bounds unless better evidence arrives.
+  - ERCOT West-North: watchlist only until ERCOT-specific queue and
+    constraint evidence are attached.
+- Important interpretation:
+  - Generic benchmark interventions still do not clear B/C > 1.
+    The next useful move is project-specific costing for PJM-NYIS 2025
+    and MISO-SWPP 2024, not another generic cost curve.
+- Validation:
+  - Solution-card focused tests: `3 passed`.
+  - Nearby grid tests: `15 passed`.
+  - Full local suite: `288 passed`.
