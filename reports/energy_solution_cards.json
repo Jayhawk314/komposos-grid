@@ -23,18 +23,18 @@
       "recommended_solution": "Use 2025 congestion economics to scope NY import/export relief, storage, and queue-rescue packages.",
       "next_action": "Rebuild congestion evidence and relief curves on the 2025 NYISO component spread, then price named projects.",
       "caveat": "Generic costs still do not clear B/C > 1; the value is now high enough for project-specific costing.",
-      "source_files": "reports\\congestion_evidence_report.json; reports\\queue_match.json; reports\\grid_relief_curves.json; reports\\miso_seam_evidence_2024.csv; reports\\nyiso_seam_2024_2025.txt"
+      "source_files": "reports\\congestion_evidence_report.json; reports\\queue_match.json; reports\\grid_relief_curves.json; reports\\miso_seam_evidence_2024.csv; reports\\miso_seam_evidence_2025.csv; reports\\nyiso_seam_2024_2025.txt"
     },
     {
       "card_id": "solution_miso_swpp",
       "title": "MISO-SPP wind-belt transfer relief",
       "geography": "MISO-SWPP",
       "solution_status": "priority_solution_study",
-      "current_year": 2024,
+      "current_year": 2025,
       "evidence_basis": "MISO DA ex-post LMP (docs.misoenergy.org; ARKANSAS.HUB vs SWPP interface, 2023-01-01..2023-12-31)",
-      "annual_value_usd": 25176168.04,
-      "spread_usd_mwh": 6.31,
-      "trend_summary": "2023 $4.74/MWh -> 2024 $6.31/MWh (1.3x over observed window).",
+      "annual_value_usd": 29245849.72,
+      "spread_usd_mwh": 7.33,
+      "trend_summary": "2023 $4.74/MWh -> 2024 $6.31/MWh -> 2025 $7.33/MWh (1.5x over observed window).",
       "active_queue_gw": 156.53056500000002,
       "withdrawn_queue_gw": 344.6546689999996,
       "active_queue_can_reach_cap": true,
@@ -42,12 +42,12 @@
       "best_generic_intervention": "transmission_capacity",
       "best_generic_mw": 50.0,
       "best_generic_benefit_cost_ratio": 0.26216295907868237,
-      "updated_generic_benefit_cost_ratio": 0.3489975256933514,
+      "updated_generic_benefit_cost_ratio": 0.40541233967230833,
       "constraints": "MISO:CHAR_CK-WATFORD FLO PATINGATE-CHARLIE CK (5,138 h, severity 1,069,182); SPP:CHAWATCHAPAT (5,951 h, severity 895,951); MISO:MORRISOT-GRANTCO FLO HANK-WAP+WAP TR2 (2,453 h, severity 654,610); MISO:FORMAN TR12 FLO WAHPETON-HANKINSON (1,607 h, severity 389,783); SPP:OSAWEBCLESOO (2,078 h, severity 360,524); SPP:TMP499_26328 (2,074 h, severity 316,737)",
       "recommended_solution": "Target wind-belt transfer relief: transmission upgrades, storage on the export side, and queue rescue on the import side.",
       "next_action": "Tie CHAWATCHAPAT/Charlie Creek-Watford constraints to candidate upgrades and rerun relief curves on 2024 spread.",
       "caveat": "Screening uses MISO-side settlement evidence; SPP-side evidence corroborates but should not be double-counted.",
-      "source_files": "reports\\congestion_evidence_report.json; reports\\queue_match.json; reports\\grid_relief_curves.json; reports\\miso_seam_evidence_2024.csv; reports\\nyiso_seam_2024_2025.txt"
+      "source_files": "reports\\congestion_evidence_report.json; reports\\queue_match.json; reports\\grid_relief_curves.json; reports\\miso_seam_evidence_2024.csv; reports\\miso_seam_evidence_2025.csv; reports\\nyiso_seam_2024_2025.txt"
     },
     {
       "card_id": "solution_ciso_srp",
@@ -71,7 +71,7 @@
       "recommended_solution": "Use OASIS-corrected spreads for Western storage/transmission siting screens, not old ICE hub levels.",
       "next_action": "Replace generic benchmark costs with project-specific storage, flexible-load, or transmission estimates.",
       "caveat": "OASIS correction made this defensible but much smaller than the old hub-proxy headline.",
-      "source_files": "reports\\congestion_evidence_report.json; reports\\queue_match.json; reports\\grid_relief_curves.json; reports\\miso_seam_evidence_2024.csv; reports\\nyiso_seam_2024_2025.txt"
+      "source_files": "reports\\congestion_evidence_report.json; reports\\queue_match.json; reports\\grid_relief_curves.json; reports\\miso_seam_evidence_2024.csv; reports\\miso_seam_evidence_2025.csv; reports\\nyiso_seam_2024_2025.txt"
     },
     {
       "card_id": "solution_bpat_ciso",
@@ -95,18 +95,18 @@
       "recommended_solution": "Use OASIS-corrected spreads for Western storage/transmission siting screens, not old ICE hub levels.",
       "next_action": "Replace generic benchmark costs with project-specific storage, flexible-load, or transmission estimates.",
       "caveat": "OASIS correction made this defensible but much smaller than the old hub-proxy headline.",
-      "source_files": "reports\\congestion_evidence_report.json; reports\\queue_match.json; reports\\grid_relief_curves.json; reports\\miso_seam_evidence_2024.csv; reports\\nyiso_seam_2024_2025.txt"
+      "source_files": "reports\\congestion_evidence_report.json; reports\\queue_match.json; reports\\grid_relief_curves.json; reports\\miso_seam_evidence_2024.csv; reports\\miso_seam_evidence_2025.csv; reports\\nyiso_seam_2024_2025.txt"
     },
     {
       "card_id": "solution_miso_soco",
       "title": "MISO-SOCO Southeast boundary screen",
       "geography": "MISO-SOCO",
       "solution_status": "bounded_solution_screen",
-      "current_year": 2024,
+      "current_year": 2025,
       "evidence_basis": "MISO DA ex-post LMP (docs.misoenergy.org; MS.HUB vs SOCO interface, 2023-01-01..2023-12-31)",
-      "annual_value_usd": 8194347.99,
-      "spread_usd_mwh": 1.53,
-      "trend_summary": "2023 $1.35/MWh -> 2024 $1.53/MWh (1.1x over observed window).",
+      "annual_value_usd": 11193586.469999999,
+      "spread_usd_mwh": 2.09,
+      "trend_summary": "2023 $1.35/MWh -> 2024 $1.53/MWh -> 2025 $2.09/MWh (1.5x over observed window).",
       "active_queue_gw": 261.9142899999999,
       "withdrawn_queue_gw": 467.9472000000001,
       "active_queue_can_reach_cap": true,
@@ -114,12 +114,12 @@
       "best_generic_intervention": "transmission_capacity",
       "best_generic_mw": 50.0,
       "best_generic_benefit_cost_ratio": 0.0757023162451038,
-      "updated_generic_benefit_cost_ratio": 0.08579595841111765,
+      "updated_generic_benefit_cost_ratio": 0.11719840070538291,
       "constraints": "MISO:CHAR_CK-WATFORD FLO PATINGATE-CHARLIE CK (5,138 h, severity 1,069,182); MISO:MORRISOT-GRANTCO FLO HANK-WAP+WAP TR2 (2,453 h, severity 654,610); MISO:FORMAN TR12 FLO WAHPETON-HANKINSON (1,607 h, severity 389,783); MISO:SWAN LK-WILMARTH FLO HELENAMN-SHEASLK (1,924 h, severity 218,268); MISO:CREE-CRES2 FLO CRESTON-SUMMITLK N (829 h, severity 207,932)",
       "recommended_solution": "Keep as a Southeast import-boundary screen; use targeted price/constraint evidence before spending design effort.",
       "next_action": "Attach SOCO/neighbor settlement or planning evidence and compare to Right Kan Southeast bounds.",
       "caveat": "Value is smaller than PJM-NYIS and MISO-SWPP, but it anchors Southeast bounds.",
-      "source_files": "reports\\congestion_evidence_report.json; reports\\queue_match.json; reports\\grid_relief_curves.json; reports\\miso_seam_evidence_2024.csv; reports\\nyiso_seam_2024_2025.txt"
+      "source_files": "reports\\congestion_evidence_report.json; reports\\queue_match.json; reports\\grid_relief_curves.json; reports\\miso_seam_evidence_2024.csv; reports\\miso_seam_evidence_2025.csv; reports\\nyiso_seam_2024_2025.txt"
     },
     {
       "card_id": "solution_ercot_west_north",

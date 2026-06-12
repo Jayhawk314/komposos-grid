@@ -159,7 +159,7 @@ def test_solution_cards_learn_latest_trends_and_scale_bcr(tmp_path):
         congestion,
         queue,
         relief,
-        miso_2024_evidence=miso,
+        miso_evidence=miso,
         nyiso_2024_2025=nyiso,
     )
     cards = {card.geography: card for card in report.cards}
@@ -187,7 +187,7 @@ def test_solution_report_exports(tmp_path):
     _queue(queue)
     _relief(relief)
     _miso_2024(miso)
-    report = build_energy_solution_report(congestion, queue, relief, miso_2024_evidence=miso)
+    report = build_energy_solution_report(congestion, queue, relief, miso_evidence=miso)
 
     csv_path = tmp_path / "cards.csv"
     json_path = tmp_path / "cards.json"

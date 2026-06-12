@@ -1,0 +1,44 @@
+{
+  "pre_2025": {
+    "label": "pre-2025",
+    "start": "2025-04-13",
+    "end": "2025-05-12",
+    "days": 30,
+    "hours": 720,
+    "mean_abs_lbmp_spread_usd_mwh": 1.108998737373737,
+    "mean_abs_congestion_spread_usd_mwh": 0.4065378787878788,
+    "share_lbmp_internal_above": 0.9569444444444445
+  },
+  "post_2025": {
+    "label": "post-2025",
+    "start": "2025-05-13",
+    "end": "2025-06-11",
+    "days": 30,
+    "hours": 720,
+    "mean_abs_lbmp_spread_usd_mwh": 2.0953939393939396,
+    "mean_abs_congestion_spread_usd_mwh": 1.3453358585858588,
+    "share_lbmp_internal_above": 0.9875
+  },
+  "pre_2026": {
+    "label": "pre-2026",
+    "start": "2026-04-13",
+    "end": "2026-05-12",
+    "days": 30,
+    "hours": 720,
+    "mean_abs_lbmp_spread_usd_mwh": 2.6446060606060606,
+    "mean_abs_congestion_spread_usd_mwh": 1.4199545454545452,
+    "share_lbmp_internal_above": 0.9736111111111111
+  },
+  "post_2026": {
+    "label": "post-2026",
+    "start": "2026-05-13",
+    "end": "2026-06-11",
+    "days": 30,
+    "hours": 720,
+    "mean_abs_lbmp_spread_usd_mwh": 3.2410934343434343,
+    "mean_abs_congestion_spread_usd_mwh": 2.050092171717172,
+    "share_lbmp_internal_above": 0.9777777777777777
+  },
+  "did_congestion_usd_mwh": -0.30866035353535337,
+  "did_lbmp_usd_mwh": -0.3899078282828288
+}

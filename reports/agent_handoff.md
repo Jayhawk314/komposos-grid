@@ -430,22 +430,53 @@ python -m domains.grid.run_solution_studies `
   evidence on post-CHPE months before committing to anything.
 - Validation: full suite `435 passed, 2 skipped`.
 
+## State as of 2026-06-12 (CHPE event study + MISO 2025 close-out)
+
+- **CHPE event study DONE** (`domains/grid/chpe_event_study.py`,
+  `run_chpe_event_study.py`, 3 tests;
+  `reports/chpe_event_study.{md,json}`). DiD on NYISO DAM seam
+  spread, pre (Apr 13-May 12) vs post (May 13-Jun 11), 2025 control:
+  - The spread did NOT collapse post-CHPE: NY above PJM ~98% of
+    hours in all four cells; 2026 levels remain above 2025
+    (post component $2.05 vs $1.35).
+  - DiD congestion component **-0.31 $/MWh** (LBMP -0.39): mild
+    compression beyond seasonality. One month, spring (low season —
+    annual value is driven by summer/winter); screening-grade only.
+  - Data: `domains/grid/data/nyiso/csv2026/` (Apr 1-Jun 13 2026 via
+    monthly zips `<yyyymm01>damlbmp_zone_csv.zip`; individual daily
+    URLs only survive ~10 days, use the monthly zips).
+- **MISO 2025 seam rerun DONE** (`reports/miso_seam_2025.txt`,
+  `reports/miso_seam_evidence_2025.csv`): MISO-SWPP component
+  4.74 (2023) -> 6.31 (2024) -> **7.33 $/MWh (2025)**, congestion
+  93.4% of spread; MISO-SOCO up too (1.53 -> 2.09).
+  The wind-belt seam keeps worsening while PJM-NYIS gets CHPE relief.
+- `run_solution_cards` now takes `--miso-evidence` (nargs +, default
+  2024+2025 files; `build_energy_solution_report(miso_evidence=...)`
+  accepts path or list). Cards/studies regenerated on 2025 evidence:
+  - MISO-SWPP study is now fully 2025-on-2025: spread 7.33 x flow
+    4,249,335 MWh = **$31.1M/yr**, same_year_flow status.
+  - NYIS-PJM unchanged at $159.7M/yr (2025 NYISO evidence pending a
+    2026 full-evidence rerun; CHPE caveat in memo).
+  - Patent Gate-Pioneer bracket tightened UP: **B/C 0.85-1.65** on
+    seam value alone (250 MW sensitivity now near break-even).
+- Validation: full suite `438 passed, 2 skipped`.
+
 ## Best next handoff target
 
-- **Highest-value next measurement: post-CHPE seam check.** NYISO
-  daily DAM zonal files for 2026-05-13..present vs the same window in
-  2025 — did the PJM-NYIS spread compress after CHPE? This is a
-  natural experiment (relief_curves/pronoia SCM material) and decides
-  whether the $159.7M/yr corridor value survives. Loaders are
-  date-parameterized; it is just invocations.
-- Close out the 2025 MISO seam rerun if it didn't finish (see above;
-  cache makes restarts cheap), then compare MISO-SWPP 2025 spread vs
-  2024's 6.31 $/MWh alongside the 2025 flow row in
-  reports/same_year_flows.csv (net flow collapsed 2.44M -> 0.73M MWh).
-- Patent Gate-Pioneer row refinements: replace 1.5% O&M guess and
-  bracket capacities with BEPC actuals when published; watch SPP NTC
-  tracking for cost updates.
+- Rerun the CHPE event study when more post months exist (just
+  `python -m domains.grid.run_chpe_event_study` after dropping new
+  monthly zips in csv2026) — the summer months decide whether the
+  $159.7M/yr corridor value survives CHPE. Consider extending pre/post
+  windows once Jul-Aug 2026 data lands.
+- Patent Gate-Pioneer refinements: BEPC actual O&M/cost updates via
+  SPP NTC tracking; the seam-only case is already near/above
+  break-even — adding MISO-side M2M congestion value (it was MISO's
+  largest 2023 constraint cost) would likely push the conservative
+  sensitivity over 1.0. That requires MISO constraint-level dollars
+  (PJM key path or market-monitor data, see PLAN A2 notes).
 - PJM-NYIS costed candidates if pursuing the seam directly: Ramapo
   PAR replacement costs (FERC dockets from the PJM/NYISO cost
   dispute), JK/ABC PAR uprates — needs docket digging, no public
   numbers found this session.
+- ERCOT West-North card is still a watchlist: attach ERCOT queue +
+  constraint evidence to upgrade it to a screen.

@@ -255,24 +255,24 @@
       "study_id": "miso_swpp",
       "title": "MISO-SWPP Wind-Belt Solution Memo",
       "geography": "MISO-SWPP",
-      "current_year": 2024,
-      "current_spread_usd_mwh": 6.31,
-      "annual_value_usd": 29424116.83,
-      "gross_flow_mwh": 4663093.0,
-      "flow_year": 2024,
+      "current_year": 2025,
+      "current_spread_usd_mwh": 7.33,
+      "annual_value_usd": 31147625.55,
+      "gross_flow_mwh": 4249335.0,
+      "flow_year": 2025,
       "same_year_flow_status": "same_year_flow",
       "flow_basis": "same-year gross flow multiplied by current spread",
       "same_year_flow_source": "EIA-930 INTERCHANGE six-month files",
       "active_queue_gw": 156.53056500000002,
       "withdrawn_queue_gw": 344.6546689999996,
       "best_intervention": "250 MW targeted transfer upgrade",
-      "best_relief_value_usd": 13818900.0,
-      "best_break_even_capex_usd": 138189000.0,
-      "best_break_even_capex_usd_per_kw": 552.756,
+      "best_relief_value_usd": 16052700.0,
+      "best_break_even_capex_usd": 160527000.0,
+      "best_break_even_capex_usd_per_kw": 642.108,
       "recommended_path": "Start with targeted transfer relief around the wind-belt constraints, then test storage only where it also captures local energy or capacity value.",
       "next_action": "Map CHAWATCHAPAT and Charlie Creek-Watford to upgrade candidates and price a 50-100 MW relief package.",
       "caveat": "MISO-side and SPP-side seam evidence corroborate the problem; do not double-count them as separate benefits.",
-      "trend_summary": "2023 $4.74/MWh -> 2024 $6.31/MWh (1.3x over observed window).",
+      "trend_summary": "2023 $4.74/MWh -> 2024 $6.31/MWh -> 2025 $7.33/MWh (1.5x over observed window).",
       "evidence_basis": "MISO DA ex-post LMP (docs.misoenergy.org; ARKANSAS.HUB vs SWPP interface, 2023-01-01..2023-12-31)",
       "constraints": [
         "MISO:CHAR_CK-WATFORD FLO PATINGATE-CHARLIE CK (5,138 h, severity 1,069,182)",
@@ -293,7 +293,7 @@
           "role": "generation",
           "side": "SWPP",
           "relief_mwh": 3989884.0,
-          "relief_value_usd": 25176168.04
+          "relief_value_usd": 29245849.72
         },
         {
           "q_id": "GEN-2024-132",
@@ -305,7 +305,7 @@
           "role": "generation",
           "side": "SWPP",
           "relief_mwh": 3989884.0,
-          "relief_value_usd": 25176168.04
+          "relief_value_usd": 29245849.72
         },
         {
           "q_id": "GEN-2024-340",
@@ -317,7 +317,7 @@
           "role": "generation",
           "side": "SWPP",
           "relief_mwh": 3989884.0,
-          "relief_value_usd": 25176168.04
+          "relief_value_usd": 29245849.72
         },
         {
           "q_id": "GEN-2024-341",
@@ -329,7 +329,7 @@
           "role": "generation",
           "side": "SWPP",
           "relief_mwh": 3989884.0,
-          "relief_value_usd": 25176168.04
+          "relief_value_usd": 29245849.72
         },
         {
           "q_id": "ERAS-2025-011",
@@ -341,7 +341,7 @@
           "role": "generation",
           "side": "SWPP",
           "relief_mwh": 3613500.0000000005,
-          "relief_value_usd": 22801185.0
+          "relief_value_usd": 26486955.000000004
         }
       ],
       "top_withdrawn": [
@@ -355,7 +355,7 @@
           "role": "generation",
           "side": "SWPP",
           "relief_mwh": 3989884.0,
-          "relief_value_usd": 25176168.04
+          "relief_value_usd": 29245849.72
         },
         {
           "q_id": "GEN-2004-013",
@@ -367,7 +367,7 @@
           "role": "generation",
           "side": "SWPP",
           "relief_mwh": 3989884.0,
-          "relief_value_usd": 25176168.04
+          "relief_value_usd": 29245849.72
         },
         {
           "q_id": "GEN-2007-007",
@@ -379,7 +379,7 @@
           "role": "generation",
           "side": "SWPP",
           "relief_mwh": 3989884.0,
-          "relief_value_usd": 25176168.04
+          "relief_value_usd": 29245849.72
         },
         {
           "q_id": "GEN-2009-021",
@@ -391,7 +391,7 @@
           "role": "generation",
           "side": "SWPP",
           "relief_mwh": 3989884.0,
-          "relief_value_usd": 25176168.04
+          "relief_value_usd": 29245849.72
         },
         {
           "q_id": "GEN-2011-030",
@@ -403,7 +403,7 @@
           "role": "generation",
           "side": "SWPP",
           "relief_mwh": 3989884.0,
-          "relief_value_usd": 25176168.04
+          "relief_value_usd": 29245849.72
         }
       ],
       "interventions": [
@@ -413,10 +413,10 @@
           "solution_type": "transmission_or_grid_enhancing_transfer",
           "capacity_mw": 50.0,
           "relief_mwh": 438000.0,
-          "relief_value_usd": 2763780.0,
-          "break_even_annual_cost_usd": 2763780.0,
-          "break_even_capex_usd": 27637800.0,
-          "break_even_capex_usd_per_kw": 552.756,
+          "relief_value_usd": 3210540.0,
+          "break_even_annual_cost_usd": 3210540.0,
+          "break_even_capex_usd": 32105400.0,
+          "break_even_capex_usd_per_kw": 642.108,
           "fixed_charge_rate": 0.1,
           "source": "cost-gate envelope; compare against developer/utility estimate",
           "notes": "Use for reconductoring, ratings, phase-angle control, or small transfer upgrades."
@@ -427,10 +427,10 @@
           "solution_type": "transmission_or_grid_enhancing_transfer",
           "capacity_mw": 100.0,
           "relief_mwh": 876000.0,
-          "relief_value_usd": 5527560.0,
-          "break_even_annual_cost_usd": 5527560.0,
-          "break_even_capex_usd": 55275600.0,
-          "break_even_capex_usd_per_kw": 552.756,
+          "relief_value_usd": 6421080.0,
+          "break_even_annual_cost_usd": 6421080.0,
+          "break_even_capex_usd": 64210800.0,
+          "break_even_capex_usd_per_kw": 642.108,
           "fixed_charge_rate": 0.1,
           "source": "cost-gate envelope; compare against developer/utility estimate",
           "notes": "Firm-transfer case; assumes relief is usable across the year."
@@ -441,10 +441,10 @@
           "solution_type": "transmission_or_grid_enhancing_transfer",
           "capacity_mw": 250.0,
           "relief_mwh": 2190000.0,
-          "relief_value_usd": 13818900.0,
-          "break_even_annual_cost_usd": 13818900.0,
-          "break_even_capex_usd": 138189000.0,
-          "break_even_capex_usd_per_kw": 552.756,
+          "relief_value_usd": 16052700.0,
+          "break_even_annual_cost_usd": 16052700.0,
+          "break_even_capex_usd": 160527000.0,
+          "break_even_capex_usd_per_kw": 642.108,
           "fixed_charge_rate": 0.1,
           "source": "cost-gate envelope; compare against developer/utility estimate",
           "notes": "Larger transfer case; capped by the current annual seam value."
@@ -455,10 +455,10 @@
           "solution_type": "storage",
           "capacity_mw": 100.0,
           "relief_mwh": 120000.0,
-          "relief_value_usd": 757200.0,
-          "break_even_annual_cost_usd": 757200.0,
-          "break_even_capex_usd": 7572000.0,
-          "break_even_capex_usd_per_kw": 75.72,
+          "relief_value_usd": 879600.0,
+          "break_even_annual_cost_usd": 879600.0,
+          "break_even_capex_usd": 8796000.0,
+          "break_even_capex_usd_per_kw": 87.96,
           "fixed_charge_rate": 0.1,
           "source": "NREL ATB utility-scale battery storage methodology (https://atb.nrel.gov/electricity/2024/utility-scale_battery_storage); cost-gate envelope here is derived from local seam value",
           "notes": "Throughput proxy matches queue matching: 4h duration and about 300 cycles/year."
@@ -469,10 +469,10 @@
           "solution_type": "flexible_load",
           "capacity_mw": 100.0,
           "relief_mwh": 60000.0,
-          "relief_value_usd": 378600.0,
-          "break_even_annual_cost_usd": 378600.0,
-          "break_even_capex_usd": 3786000.0,
-          "break_even_capex_usd_per_kw": 37.86,
+          "relief_value_usd": 439800.0,
+          "break_even_annual_cost_usd": 439800.0,
+          "break_even_capex_usd": 4398000.0,
+          "break_even_capex_usd_per_kw": 43.98,
           "fixed_charge_rate": 0.1,
           "source": "cost-gate envelope; compare against program bids",
           "notes": "Critical-window dispatch proxy, not firm transfer capability."
@@ -491,10 +491,10 @@
           "annual_om_usd": 2455711.0,
           "annual_cost_usd": 18827114.3,
           "fixed_charge_rate": 0.1,
-          "relief_mwh": 4663093.0,
-          "relief_value_usd": 29424116.83,
-          "benefit_cost_ratio": 1.562858564575666,
-          "net_annual_value_usd": 10597002.529999997,
+          "relief_mwh": 4249335.0,
+          "relief_value_usd": 31147625.55,
+          "benefit_cost_ratio": 1.6544025310347215,
+          "net_annual_value_usd": 12320511.25,
           "clears_congestion_value": true,
           "cost_method": "capex_fixed_charge_plus_om",
           "source": "SPP 2024 ITP Assessment Report v1.0 p.18 + p.167 (spp.org/media/2229/2024-itp-assessment-report-v10.pdf)",
@@ -513,9 +513,9 @@
           "annual_cost_usd": 18827114.3,
           "fixed_charge_rate": 0.1,
           "relief_mwh": 2190000.0,
-          "relief_value_usd": 13818900.0,
-          "benefit_cost_ratio": 0.7339892763066722,
-          "net_annual_value_usd": -5008214.300000001,
+          "relief_value_usd": 16052700.0,
+          "benefit_cost_ratio": 0.8526373051232816,
+          "net_annual_value_usd": -2774414.3000000007,
           "clears_congestion_value": false,
           "cost_method": "capex_fixed_charge_plus_om",
           "source": "SPP 2024 ITP Assessment Report v1.0 p.18 + p.167",

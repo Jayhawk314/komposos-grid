@@ -191,7 +191,7 @@ def build_energy_solution_report(
     congestion_report: str | Path,
     queue_match: str | Path,
     relief_curves: str | Path,
-    miso_2024_evidence: str | Path | None = None,
+    miso_evidence: str | Path | Sequence[str | Path] | None = None,
     nyiso_2024_2025: str | Path | None = None,
     ercot_spreads: str | Path | None = None,
 ) -> EnergySolutionReport:
@@ -201,7 +201,8 @@ def build_energy_solution_report(
     congestion = _load_congestion(congestion_path)
     queue = _load_queue(queue_path)
     relief = _load_relief(relief_path)
-    trends = _collect_trends(congestion, miso_2024_evidence, nyiso_2024_2025)
+    miso_paths = _as_paths(miso_evidence)
+    trends = _collect_trends(congestion, miso_paths, nyiso_2024_2025)
 
     cards: List[EnergySolutionCard] = []
     priority_ties = [
@@ -224,7 +225,7 @@ def build_energy_solution_report(
                 str(queue_path),
                 str(relief_path),
             ]
-            + _existing_source_files(miso_2024_evidence, nyiso_2024_2025),
+            + _existing_source_files(*miso_paths, nyiso_2024_2025),
         )
         if card is not None:
             cards.append(card)
@@ -412,9 +413,19 @@ def _ercot_card(path: str | Path | None) -> EnergySolutionCard | None:
     )
 
 
+def _as_paths(
+    evidence: str | Path | Sequence[str | Path] | None,
+) -> List[Path]:
+    if evidence is None:
+        return []
+    if isinstance(evidence, (str, Path)):
+        return [Path(evidence)]
+    return [Path(p) for p in evidence]
+
+
 def _collect_trends(
     congestion: Mapping[tuple[str, str], Mapping[str, Any]],
-    miso_2024_evidence: str | Path | None,
+    miso_evidence: Sequence[Path],
     nyiso_2024_2025: str | Path | None,
 ) -> Dict[tuple[str, str], List[SeamTrend]]:
     trends: Dict[tuple[str, str], List[SeamTrend]] = {}
@@ -435,8 +446,10 @@ def _collect_trends(
                 notes=str(row.get("notes", "")),
             )
         )
-    if miso_2024_evidence and Path(miso_2024_evidence).exists():
-        for trend in load_miso_trends(miso_2024_evidence):
+    for evidence_path in miso_evidence:
+        if not evidence_path.exists():
+            continue
+        for trend in load_miso_trends(evidence_path):
             trends.setdefault(_tie_key(trend.ba_a, trend.ba_b), []).append(trend)
     if nyiso_2024_2025 and Path(nyiso_2024_2025).exists():
         for trend in load_nyiso_trends(nyiso_2024_2025):
