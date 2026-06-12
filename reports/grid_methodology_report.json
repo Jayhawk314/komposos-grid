@@ -1,0 +1,165 @@
+{
+  "correction_2cells": [
+    {
+      "ba_a": "CISO",
+      "ba_b": "SRP",
+      "source_method": "hub_daily_overlap_proxy",
+      "target_method": "oasis_settlement_spread",
+      "source_spread_usd_mwh": 14.026494542084393,
+      "target_spread_usd_mwh": 1.55,
+      "target_component_spread_usd_mwh": 1.39,
+      "overstatement_ratio": 9.049351317473802,
+      "gross_mwh": 10099478.0,
+      "source_value_usd": 141660273.0449014,
+      "target_value_usd": 15654190.9,
+      "avoided_overclaim_usd": 126006082.1449014,
+      "source_evidence": "EIA ICE daily wholesale prices 2023 + EIA-930 interchange",
+      "target_evidence": "CAISO OASIS PRC_LMP DAM v12 (TH_SP15_GEN-APND vs PALOVRDE_ASR-APND, 2023-04-01..2024-01-01)",
+      "note": "methodology correction tracked as a 2-cell"
+    },
+    {
+      "ba_a": "BPAT",
+      "ba_b": "CISO",
+      "source_method": "hub_daily_overlap_proxy",
+      "target_method": "oasis_settlement_spread",
+      "source_spread_usd_mwh": 9.472380856716995,
+      "target_spread_usd_mwh": 1.37,
+      "target_component_spread_usd_mwh": 1.11,
+      "overstatement_ratio": 6.914146610742332,
+      "gross_mwh": 5458963.0,
+      "source_value_usd": 51709376.61872638,
+      "target_value_usd": 7478779.3100000005,
+      "avoided_overclaim_usd": 44230597.30872638,
+      "source_evidence": "EIA ICE daily wholesale prices 2023 + EIA-930 interchange",
+      "target_evidence": "CAISO OASIS PRC_LMP DAM v12 (TH_NP15_GEN-APND vs MALIN_5_N101, 2023-04-01..2024-01-01)",
+      "note": "methodology correction tracked as a 2-cell"
+    }
+  ],
+  "mean_overstatement_ratio": 7.981748964108067,
+  "right_kan_bounds": [
+    {
+      "ba_a": "AECI",
+      "ba_b": "SWPP",
+      "gross_mwh": 2800533.0,
+      "net_direction": "SWPP -> AECI",
+      "curvature": -0.04166666666666674,
+      "bound_spread_usd_mwh": 4.74,
+      "bound_value_usd": 13274526.42,
+      "adjacent_measurements": "MISO-SWPP $4.74/MWh",
+      "status": "bounded",
+      "note": "Right Kan meet over adjacent priced measurements."
+    },
+    {
+      "ba_a": "SOCO",
+      "ba_b": "TVA",
+      "gross_mwh": 5660484.0,
+      "net_direction": "SOCO -> TVA",
+      "curvature": -0.07936507936507953,
+      "bound_spread_usd_mwh": 1.35,
+      "bound_value_usd": 7641653.4,
+      "adjacent_measurements": "MISO-SOCO $1.35/MWh",
+      "status": "bounded",
+      "note": "Right Kan meet over adjacent priced measurements."
+    },
+    {
+      "ba_a": "CPLE",
+      "ba_b": "PJM",
+      "gross_mwh": 4242136.0,
+      "net_direction": "CPLE -> PJM",
+      "curvature": -0.08571428571428563,
+      "bound_spread_usd_mwh": 1.5269431960892172,
+      "bound_value_usd": 6477500.702085128,
+      "adjacent_measurements": "NYIS-PJM $1.53/MWh",
+      "status": "bounded",
+      "note": "Right Kan meet over adjacent priced measurements."
+    },
+    {
+      "ba_a": "FPL",
+      "ba_b": "SOCO",
+      "gross_mwh": 3527415.0,
+      "net_direction": "FPL -> SOCO",
+      "curvature": -0.20833333333333304,
+      "bound_spread_usd_mwh": 1.35,
+      "bound_value_usd": 4762010.25,
+      "adjacent_measurements": "MISO-SOCO $1.35/MWh",
+      "status": "bounded",
+      "note": "Right Kan meet over adjacent priced measurements."
+    },
+    {
+      "ba_a": "FPC",
+      "ba_b": "SOCO",
+      "gross_mwh": 419575.0,
+      "net_direction": "FPC -> SOCO",
+      "curvature": -0.0952380952380949,
+      "bound_spread_usd_mwh": 1.35,
+      "bound_value_usd": 566426.25,
+      "adjacent_measurements": "MISO-SOCO $1.35/MWh",
+      "status": "bounded",
+      "note": "Right Kan meet over adjacent priced measurements."
+    },
+    {
+      "ba_a": "AECI",
+      "ba_b": "TVA",
+      "gross_mwh": 1198856.0,
+      "net_direction": "AECI -> TVA",
+      "curvature": -0.03571428571428603,
+      "bound_spread_usd_mwh": 0.0,
+      "bound_value_usd": 0.0,
+      "adjacent_measurements": "",
+      "status": "unbounded_no_priced_neighbor",
+      "note": "No adjacent priced measurement exists in the current report."
+    }
+  ],
+  "axioms": [
+    {
+      "name": "hub_level_proxy_overstates_hourly_seam_spread",
+      "description": "Annual or daily hub-level price proxies repeatedly overstated hourly settlement seam spreads. Future hub proxies require a settlement or nodal evidence 2-cell before being treated as actionable congestion value.",
+      "template": "hub_level_proxy(tie) and no_settlement_2cell(tie) -> screening_only(tie)",
+      "support": 2,
+      "agree_rate": 1.0,
+      "avg_confidence": 0.7981748964108066,
+      "domains": [
+        "grid",
+        "congestion_evidence"
+      ],
+      "example_episodes": [
+        "CISO-SRP",
+        "BPAT-CISO"
+      ]
+    }
+  ],
+  "proxy_warnings": [
+    {
+      "ba_a": "CISO",
+      "ba_b": "SRP",
+      "method": "hub_daily_overlap_proxy",
+      "spread_usd_mwh": 14.026494542084393,
+      "status": "resolved_by_2cell",
+      "warning": "Hub-level proxy has a settlement correction 2-cell; keep the settlement row as the actionable value."
+    },
+    {
+      "ba_a": "BPAT",
+      "ba_b": "CISO",
+      "method": "hub_daily_overlap_proxy",
+      "spread_usd_mwh": 9.472380856716995,
+      "status": "resolved_by_2cell",
+      "warning": "Hub-level proxy has a settlement correction 2-cell; keep the settlement row as the actionable value."
+    },
+    {
+      "ba_a": "BPAT",
+      "ba_b": "NEVP",
+      "method": "hub_daily_overlap_proxy",
+      "spread_usd_mwh": 3.78766202450781,
+      "status": "screening_only",
+      "warning": "Hub-level proxy has no settlement correction in this report; keep it as screening evidence only."
+    },
+    {
+      "ba_a": "CISO",
+      "ba_b": "PACW",
+      "method": "hub_daily_overlap_proxy",
+      "spread_usd_mwh": 9.472380856716995,
+      "status": "screening_only",
+      "warning": "Hub-level proxy has no settlement correction in this report; keep it as screening evidence only."
+    }
+  ]
+}

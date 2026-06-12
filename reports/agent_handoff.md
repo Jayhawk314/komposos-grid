@@ -128,3 +128,56 @@ repair/review layers).
 - D8 (#18): natural-experiment relief curves via pronoia/scm.py.
 - Product gates (PLAN E): M1 external reproduction, M2 expert review,
   M3 paying design partner.
+
+## State as of 2026-06-12 (Codex continuation after commit eb9f8e9)
+
+- PLAN B4 daily pulse was already committed at `eb9f8e9` before this
+  continuation. I did not change it.
+- PLAN C5-C7 DONE:
+  - Added `domains/grid/methodology.py` and
+    `domains/grid/run_methodology.py`.
+  - C5: formalized proxy-to-settlement methodology corrections as
+    2-cells using `categorical.two_categories.TwoCategory`.
+  - C6: added conservative Right Kan bounds for unpriced Southeast
+    structural ties. These are explicitly bounded screening claims,
+    not measured congestion costs.
+  - C7: mined the repeated hub-proxy correction into a methodology
+    axiom: hub-level proxies without a settlement/nodal correction
+    2-cell stay screening-only.
+  - Generated `reports/grid_methodology_report.{md,json}`,
+    `reports/grid_methodology_corrections.csv`,
+    `reports/grid_right_kan_bounds.csv`, and
+    `reports/grid_proxy_warnings.csv`.
+  - Result: 2 correction 2-cells, mean proxy overstatement 8.0x.
+    CISO-SRP corrected 14.03 -> 1.55 $/MWh (9.0x);
+    BPAT-CISO corrected 9.47 -> 1.37 $/MWh (6.9x).
+    Five Right Kan bounds were emitted; AECI-TVA remains unbounded
+    because no adjacent priced measurement exists in the current report.
+- PLAN D8 FIRST PASS DONE:
+  - Added `domains/grid/relief_curves.py` and
+    `domains/grid/run_relief_curves.py`.
+  - Uses `pronoia.scm.SCM` for deterministic `do(capacity_mw=x)`
+    relief curves over priced queue-match ties.
+  - Attaches MISO/PJM/SPP named constraint context where available.
+  - Adds annualized screening benchmarks for transmission capacity,
+    4-hour grid storage, and flexible load. These are overrideable
+    defaults; project-specific cost estimates should replace them for
+    any decision-grade study.
+  - Generated `reports/grid_relief_curves.{md,json,csv}` and
+    `reports/grid_relief_curve_points.csv`.
+  - Result: five priced ties evaluated. None of the generic benchmark
+    interventions clears B/C > 1 at the default annualized costs.
+    MISO-SWPP ranks first, with 50 MW transmission-capacity relief at
+    about $2.0M/yr benefit vs $7.5M/yr annualized cost.
+- Validation:
+  - Focused new tests: `6 passed`.
+  - Nearby grid tests: `27 passed` across methodology, relief curves,
+    congestion evidence, waste ledger, action portfolio, and queue matching.
+  - Full local suite: `285 passed`.
+- A3 caution:
+  - Two MISO rerun artifacts appeared in the worktree during this
+    continuation and were not authored here:
+    `reports/miso_seam_2024.txt` modified and
+    `reports/miso_seam_evidence_2024.csv` untracked.
+  - I intentionally left them out of the C5-C7/D8 commit so the A3
+    rerun can be reviewed/closed separately.

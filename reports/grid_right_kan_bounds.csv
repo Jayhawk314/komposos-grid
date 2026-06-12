@@ -1,0 +1,7 @@
+ba_a,ba_b,status,gross_mwh,bound_spread_usd_mwh,bound_value_usd,adjacent_measurements,note,curvature,net_direction
+AECI,SWPP,bounded,2800533.0,4.74,13274526.42,MISO-SWPP $4.74/MWh,Right Kan meet over adjacent priced measurements.,-0.04166666666666674,SWPP -> AECI
+SOCO,TVA,bounded,5660484.0,1.35,7641653.4,MISO-SOCO $1.35/MWh,Right Kan meet over adjacent priced measurements.,-0.07936507936507953,SOCO -> TVA
+CPLE,PJM,bounded,4242136.0,1.5269431960892172,6477500.702085128,NYIS-PJM $1.53/MWh,Right Kan meet over adjacent priced measurements.,-0.08571428571428563,CPLE -> PJM
+FPL,SOCO,bounded,3527415.0,1.35,4762010.25,MISO-SOCO $1.35/MWh,Right Kan meet over adjacent priced measurements.,-0.20833333333333304,FPL -> SOCO
+FPC,SOCO,bounded,419575.0,1.35,566426.25,MISO-SOCO $1.35/MWh,Right Kan meet over adjacent priced measurements.,-0.0952380952380949,FPC -> SOCO
+AECI,TVA,unbounded_no_priced_neighbor,1198856.0,0.0,0.0,,No adjacent priced measurement exists in the current report.,-0.03571428571428603,AECI -> TVA

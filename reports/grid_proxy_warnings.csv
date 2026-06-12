@@ -1,0 +1,5 @@
+ba_a,ba_b,method,status,warning,spread_usd_mwh
+CISO,SRP,hub_daily_overlap_proxy,resolved_by_2cell,Hub-level proxy has a settlement correction 2-cell; keep the settlement row as the actionable value.,14.026494542084393
+BPAT,CISO,hub_daily_overlap_proxy,resolved_by_2cell,Hub-level proxy has a settlement correction 2-cell; keep the settlement row as the actionable value.,9.472380856716995
+BPAT,NEVP,hub_daily_overlap_proxy,screening_only,Hub-level proxy has no settlement correction in this report; keep it as screening evidence only.,3.78766202450781
+CISO,PACW,hub_daily_overlap_proxy,screening_only,Hub-level proxy has no settlement correction in this report; keep it as screening evidence only.,9.472380856716995
