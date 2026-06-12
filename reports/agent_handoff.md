@@ -77,10 +77,27 @@ repair/review layers).
   da_bc.xls gotcha: file named by publish date, market date inside is
   +1 day; header is row 2 under banners; xls needs xlrd.
 
+- PLAN A2 DONE (no user key needed): pjm_dataminer.py uses PJM's
+  public subscription key (dataminer2 settings.json) + DoH fallback
+  (Google 8.8.8.8) for flaky resolvers. Feed is da_marginal_value
+  (da_transconstraints has no shadow prices). 2023: 857 constraints,
+  3.81M severity; Nottingham 230kV binds 69% of the year. M2M
+  flowgates (Chicago-Praxair3, Turkey Hill-Hilgard) rank high in BOTH
+  MISO and PJM tables — cross-ISO corroboration.
+- PLAN A3 underway: SPP loaders done (sources/spp.py, run_spp.py;
+  portal.spp.org file-browser-api, keyless; older years live in
+  yearly zips path=/2023/2023.zip with NESTED .csv.zip rollups).
+  2023 results: SPP curtailed 10.37 TWh (4x CAISO!), 82% Redispatch
+  (congestion-driven) — the wires-problem finding replicates. 1,532
+  DA constraints, 7.78M severity; top constraint CHAWATCHAPAT (5,951
+  binding h) matches MISO's Charlie Creek-Watford corridor profile
+  (likely same M2M iron — verify before claiming as fact).
+  Outstanding in A3: SPP-side seam LMP (yearly zip download was in
+  flight), ERCOT/ISO-NE loaders, 2024/2025 reruns.
+
 ## Next up (task list order)
 
-- A2 (#14) remaining: PJM constraint-level congestion DOLLARS —
-  blocked on user getting a free PJM Data Miner key.
+- A3 (#15) remainder, then B4 daily job, C5-7, D8 (see PLAN.md).
 - A3 (#15): SPP/ERCOT/ISO-NE loaders + 2024/2025 reruns.
 - B4 (#16): daily streaming ledger job (EIA-930 poll).
 - C5-7 (#17): 2-cell evidence reconciliation, right Kan bounds for

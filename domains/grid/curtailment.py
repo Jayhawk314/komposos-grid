@@ -70,9 +70,19 @@ class CurtailmentReport:
                 f"  {fuel}: {self.total(fuel)/1e6:.2f} TWh ({parts}) "
                 f"-- {self.share(fuel):.1%} of available {fuel}"
             )
+        all_reasons = sorted({
+            r for reasons in self.curtailed_mwh.values() for r in reasons
+        })
+        congestion = {"Local", "Redispatch"}
+        oversupply = {"System", "Energy"}
         lines.append(
-            f"  congestion-driven (Local): {self.by_reason('Local')/1e6:.2f} TWh; "
-            f"oversupply (System): {self.by_reason('System')/1e6:.2f} TWh"
+            "  by reason: "
+            + "; ".join(
+                f"{r}{' (congestion)' if r in congestion else ''}"
+                f"{' (oversupply)' if r in oversupply else ''} "
+                f"{self.by_reason(r)/1e6:.2f} TWh"
+                for r in all_reasons
+            )
         )
         if self.avg_price_usd_mwh:
             upper = self.total() * self.avg_price_usd_mwh
