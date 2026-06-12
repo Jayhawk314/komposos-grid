@@ -1,0 +1,548 @@
+{
+  "projects": [
+    {
+      "id": "SEC",
+      "name": "KOMPOSOS-SEC",
+      "short": "Mythos Defense & Process Integrity (IV)",
+      "domain": "Industrial & Climate",
+      "stage": "Concept prototype",
+      "audiences": [
+        "Security analysts",
+        "Aerospace engineering",
+        "Vulnerability researchers"
+      ],
+      "repo": "https://github.com/Jayhawk314/KOMPOSOS-SEC.git",
+      "local": "C:\\Users\\JAMES\\github\\KOMPOSOS-SEC",
+      "summary": "Protects against Anthropic Mythos-style autonomous exploit chains using 3-cell Gray Category theory, modeling process integrity and higher coherence for safety-critical software state transitions.",
+      "problem": "Traditional security and digital twins track 'what' and 'where' but fail to track 'Validity of State' and 'Higher Coherence,' leading to quality escapes and stealthy multi-step exploit chains.",
+      "what_it_gives": "Mythos-style attack simulations; Gray-coherence vulnerability detection (100% detection rate); COG Tier 3 ZFC Gating for build-claim verification; and formal Yoneda-based defect detection.",
+      "categorical_mapping": "Software/Factory states are Objects; 2-cells are Morphisms; 3-cells (modifications) witness the interchange law between processes.",
+      "engines_used": [
+        "COG",
+        "ZFC",
+        "OPTIMUS",
+        "PRONOIA"
+      ],
+      "proof": [
+        "Gray Coherence (3-Cells): Detects vulnerabilities where the interchange law breaks (e.g., Functor Escape -> Sandbox Escape).",
+        "Mythos Simulations: Modeled realistic APT chains based on real Anthropic Mythos capabilities (April 2026).",
+        "Associative Integrity: Proves quality escapes are logical impossibilities in a properly composed category.",
+        "Cubical Kan Filling: Predicts missing attack steps in commutative diagrams of techniques (e.g., predicting a credential dump)."
+      ],
+      "ask": "Can categorical process checks catch state-validity failures before they become quality escapes, and can 3-cells provide a 'structural shield' against zero-days?",
+      "caveat": "Research grade security and process layer. Safety-critical use requires formal validation.",
+      "maturity": "Prototype"
+    },
+    {
+      "id": "MANF",
+      "name": "KOMPOSOS-MANF",
+      "short": "Logical Digital Twin & Digital Thread (IV)",
+      "domain": "Industrial & Climate",
+      "stage": "Concept prototype",
+      "audiences": [
+        "Aerospace manufacturing",
+        "Quality systems",
+        "Digital twin engineers"
+      ],
+      "repo": "https://github.com/Jayhawk314/KOMPOSOS-SEC.git",
+      "local": "C:\\Users\\JAMES\\github\\KOMPOSOS-MANF",
+      "summary": "Implements the Boeing 'Total Plane' Plan as a Multi-Fiber Architecture for 'Logical Digital Twins' that mathematically ensure operational integrity by bridging CAD (STEP AP242) and NTSB logs.",
+      "problem": "Traditional digital twins lack categorical associativity, failing to capture missing or out-of-sequence manufacturing steps that lead to quality escapes.",
+      "what_it_gives": "A Multi-Fiber Manufacturing Architecture (Chemical, Structural, Process, Supply Chain) based on Grothendieck Fibrations.",
+      "categorical_mapping": "Components are Objects; assembly steps are Actual Morphisms; the aircraft is a 'Total Category' lifting properties from domain-specific fibers.",
+      "engines_used": [
+        "COG",
+        "OPTIMUS",
+        "PRONOIA"
+      ],
+      "proof": [
+        "Boeing 'Total Plane' Plan: 12-month roadmap for mathematically inseparable logic and structure in aerospace production.",
+        "Grothendieck Fibrations: A failure in one fiber (e.g., Chemical Cure-time) automatically blocks morphisms in others (e.g., Structural Load).",
+        "Digital Thread Ingestion: Direct parsing of NIST STEP AP242 CAD models into a Base Category of the aircraft section.",
+        "Invariant Verification: Ensures if ANY fiber has a gap, the total assembly is mathematically blocked from closure.",
+        "NTSB Case Study: Ingests Alaska 1282 investigative records to demonstrate how missing 'Torqued' morphisms block build-log closure."
+      ],
+      "ask": "Can categorical fibrations prevent quality escapes by making safety-critical gaps mathematically visible before build-log closure?",
+      "caveat": "Implementation Plan and fiber-architecture layer. Depends on KOMPOSOS-SEC for core Tier 3 ZFC logical gating.",
+      "maturity": "Demo"
+    },
+    {
+      "id": "PHARM",
+      "name": "KOMPOSOS-IV-PHARM",
+      "short": "Oncology Research Triage (IV)",
+      "domain": "Life Sciences",
+      "stage": "Public demo",
+      "audiences": [
+        "Oncology",
+        "Pharmacology",
+        "Computational biology"
+      ],
+      "repo": "https://github.com/Jayhawk314/KOMPOSOS-IV-PHARM",
+      "demo": "https://komposos-iv-pharm.streamlit.app/",
+      "local": "C:\\Users\\JAMES\\github\\KOMPOSOS-IV-PHARM",
+      "summary": "The high-fidelity benchmark anchor for KOMPOSOS-IV, ranking oncology drug-disease candidates from typed biomedical graphs with auditable evidence trails.",
+      "problem": "Identifying high-signal drug-repurposing leads for oncology from noisy knowledge graphs while maintaining an explicit evidence trail for expert review.",
+      "what_it_gives": "Ranked hypotheses categorized by status (Known, Inferred, Research); downloadable PRONOIA prediction audits with MDL transparency; AUROC 0.981 benchmarks.",
+      "categorical_mapping": "Genes, Proteins, Drugs, and Diseases are Objects; typed biological interactions are Morphisms in a Fused IV Category.",
+      "engines_used": [
+        "OPERADUM",
+        "PRONOIA",
+        "COG"
+      ],
+      "proof": [
+        "Benchmark Performance: KOMPOSOS AUROC 0.9705; PRONOIA v2 AUROC 0.981 on strict hidden-label FDA datasets.",
+        "Evidence Separation: Distinguishes established mechanism-path edges from final drug-disease relationship inferences.",
+        "Decision Ranking: Uses OPERADUM to package shortlisted candidates into prioritized action reports.",
+        "MDL Transparency: Retains raw zlib-MDL metrics as a secondary transparency signal for prediction grounding."
+      ],
+      "ask": "Does this save expert time without hiding uncertainty, and what evidence would make a generated hypothesis worth deeper review?",
+      "caveat": "Research prototype only. Not medical advice, not a clinical decision system.",
+      "maturity": "Live"
+    },
+    {
+      "id": "CHEM",
+      "name": "KOMPOSOS-III-LAMBDA-max-3D-chem",
+      "short": "Materials Inverse Design (IV-Migrated)",
+      "domain": "Life Sciences",
+      "stage": "Research prototype",
+      "audiences": [
+        "Computational chemistry",
+        "Battery/Semiconductor R&D"
+      ],
+      "repo": "https://github.com/Jayhawk314/KOMPOSOS-IV-CHEM",
+      "local": "C:\\Users\\JAMES\\github\\KOMPOSOS-III-LAMBDA-max-3D-chem",
+      "summary": "Compositional reasoning for material compatibility and 'Crystal Dreamer' inverse design across disparate physical domains.",
+      "problem": "Predicting material compatibility across disparate domains (battery, polymer, ceramic) without training on every pair; navigating vast composition space for target properties.",
+      "what_it_gives": "5D compatibility scores with provenance; ranked synthesis routes; and PFAS compliance audits with alternatives.",
+      "categorical_mapping": "Material domains are Bridges; physical property constraints are Morphisms; Molecule-to-Material transitions are Cross-bridge Functors.",
+      "engines_used": [
+        "COG",
+        "ZFC",
+        "OPTIMUS"
+      ],
+      "proof": [
+        "Crystal Dreamer: Inverse design generating 500 validated candidates in ~2.5s using perturbation/substitution strategies.",
+        "PFAS Compliance: Urgency-based screening against 35 curated substances with real-world regulatory mapping.",
+        "Composition Prediction: Kan extension + Dempster-Shafer fusion over 103K+ materials; voltage error 1.6-7.2%.",
+        "ZFC Verification: Independent set-theoretic verification of bonding constraints (lengths, coordination numbers)."
+      ],
+      "ask": "Does the compositional structure save chemistry research time, or is it just ordinary feature engineering with category language?",
+      "caveat": "Research prototype. Not a replacement for DFT or experimental validation.",
+      "maturity": "Works"
+    },
+    {
+      "id": "MATH",
+      "name": "KOMPOSOS-MATH",
+      "short": "Synthetic 8-Category Foundations (IV)",
+      "domain": "Math & Foundations",
+      "stage": "Formal scaffold",
+      "audiences": [
+        "Synthetic 8-category theorists",
+        "Formal methods researchers"
+      ],
+      "repo": "https://github.com/Jayhawk314/KOMPOSOS-MATH.git",
+      "local": "C:\\Users\\JAMES\\github\\KOMPOSOS-MATH",
+      "summary": "Implementing Simplicial Type Theory (STT) as a unified foundation for synthetic 8-category theory and security audits.",
+      "problem": "Traditional category theory implementations often rely on 1-categorical 'cheats' that fail to capture higher-order coherence required for secure system state transitions.",
+      "what_it_gives": "A Lean 4 formal blueprint for 8-category theory; sorry-free constructions for Yoneda and Kan; and the structural foundation for Mythos Defense.",
+      "categorical_mapping": "Directed Intervals and Segal Types are foundational; Fibrations and Extension Types model design intent vs. actual work.",
+      "engines_used": [
+        "COG",
+        "ZFC",
+        "PRONOIA"
+      ],
+      "proof": [
+        "STT Library: Lean 4 implementation of Directed Interval, Segal Types, and Covariant Fibrations (Riehl-Verity axioms).",
+        "Higher Coherence: Formalizes 2-cells and 3-cell modifications (Gray Coherence) to detect interchange gaps.",
+        "Mythos Defense: Utilizes higher-dimensional structural analysis to identify reasoning vulnerabilities in LLM logic chains.",
+        "Formal Correspondence: Blueprints for the synthetic 8-category theory community."
+      ],
+      "ask": "Can synthetic 8-category theory provide a 'security proof' for AI reasoning?",
+      "caveat": "Mathematical blueprint in Lean 4 syntax. Not yet type-checked by the Lean 4 compiler ('lake').",
+      "maturity": "Prototype"
+    },
+    {
+      "id": "wesys",
+      "name": "KOMPOSOS-wesys",
+      "short": "Energy Alignment & Coordination Audit",
+      "domain": "Industrial & Climate",
+      "stage": "Runnable prototype",
+      "audiences": [
+        "Energy infrastructure",
+        "Public finance",
+        "Climate tech"
+      ],
+      "repo": "https://github.com/Jayhawk314/KOMPOSOS-IV.git",
+      "local": "C:\\Users\\JAMES\\github\\KOMPOSOS-wesys",
+      "summary": "Resolves coordination and transaction-cost problems in waste-to-energy systems by mapping physical hotspots to actor-incentive alignment recommendations.",
+      "problem": "Actors in complex energy systems often have misaligned 'objects of action' (permit compliance vs. methane reduction), leading to systemic waste.",
+      "what_it_gives": "Alignment Recommendations including Activity/Game Diagnoses (Coordination vs. Bargaining) and Performance-Based Contract Paths.",
+      "categorical_mapping": "Resource Families and Actor Roles are Objects; physical flows, agreements, and incentive-sharing are Morphisms.",
+      "engines_used": [
+        "OPTIMUS",
+        "PRONOIA",
+        "COG"
+      ],
+      "proof": [
+        "California Energy Vision Audit: Generated reports mapping infrastructure hotspots to $5M+ savings potentials.",
+        "Game Diagnosis: Automated classification of system failures into coordination or bargaining problems.",
+        "Contract Synthesis: Generates performance-based interconnection and offtake-sharing agreement structures.",
+        "Thermodynamic Integrity: Enforces E_out <= E_in constraints across all modeled energy loops."
+      ],
+      "ask": "If a hotspot appeared in a real system, who verifies it, who pays to fix it, and who receives the benefit?",
+      "caveat": "Dollar values are planning estimates until validated by measured operating data.",
+      "maturity": "Works"
+    },
+    {
+      "id": "GDELT",
+      "name": "KOMPOSOS-III-GDELT",
+      "short": "Geopolitical Narrative & Risk Audit",
+      "domain": "Intelligence & Risk",
+      "stage": "Platform prototype",
+      "audiences": [
+        "Geopolitical analysts",
+        "OSINT researchers",
+        "Risk managers"
+      ],
+      "local": "C:\\Users\\JAMES\\github\\KOMPOSOS-III-GDELT",
+      "summary": "Bridges global GDELT event streams into a narrative topology engine for propaganda detection and geopolitical prediction.",
+      "problem": "Filtering noise and detecting structural inconsistencies (propaganda) in global event data where traditional sentiment analysis fails.",
+      "what_it_gives": "Audit reports flagging HOLLOW (impossible) and ORPHAN (required but unreported) events via dual-engine verdicts.",
+      "categorical_mapping": "Actors and Nations are Objects; Events and Diplomatic actions are Morphisms; Narratives are Functors.",
+      "engines_used": [
+        "COG",
+        "ZFC",
+        "PRONOIA"
+      ],
+      "proof": [
+        "HOLLOW Detection: Identifies structurally present but logically impossible events (propaganda signals).",
+        "ORPHAN Prediction: Uses axiomatic consistency to identify missing but required events in a narrative chain.",
+        "Phase-Transition Detection: Utilizes a state-space engine for latent actor variables to predict regime shifts.",
+        "Infrastructure Scale: 91 MCP tools, 64 REST endpoints, and 981 passing tests."
+      ],
+      "ask": "Do ORPHAN/HOLLOW/REJECT labels help analysts ask better questions about event data?",
+      "caveat": "Risk-analysis prototype. It flags questions for analysts, not 'geopolitical truth'.",
+      "maturity": "Works"
+    },
+    {
+      "id": "BIT",
+      "name": "KOMPOSOS-III-BETA-BIT",
+      "short": "Spectral Cyber & Crypto Forensics",
+      "domain": "Intelligence & Risk",
+      "stage": "Research prototype",
+      "audiences": [
+        "Cybersecurity",
+        "Crypto forensics",
+        "Information theory"
+      ],
+      "local": "C:\\Users\\JAMES\\github\\KOMPOSOS-III-BETA-BIT",
+      "summary": "Advanced information theory and crypto analysis using spectral graph theory and discrete Ricci flow to detect hidden network regimes.",
+      "problem": "Detecting sophisticated deanonymization paths and malicious regime transitions in massive blockchain and cybersecurity network flows.",
+      "what_it_gives": "Regime detection and anomaly signals based on discrete Ricci flow/curvature.",
+      "categorical_mapping": "Wallets/Nodes are Objects; Transactions/Flows are Morphisms; Network regimes are Categories.",
+      "engines_used": [
+        "COG",
+        "PRONOIA",
+        "OPTIMUS"
+      ],
+      "proof": [
+        "Discrete Ricci Flow: Uses network curvature to identify stable regimes and detect de-anonymization paths.",
+        "Spectral Analysis: Applies spectral graph theory and cellular automata to model malicious strategy transitions.",
+        "Fusion Oracle: Integrates physics-informed signals with cybersecurity event streams.",
+        "Game Theory: Models actor incentives and malicious state-transition costs."
+      ],
+      "ask": "Can spectral signals detect deanonymization paths before traditional heuristics?",
+      "caveat": "High complexity. Requires domain expertise to interpret spectral signals.",
+      "maturity": "Prototype"
+    },
+    {
+      "id": "REESHI",
+      "name": "KOMPOSOS-III-BETA-REESHI",
+      "short": "Sanskrit Categorical Knowledge Graph",
+      "domain": "Linguistics & Philosophy",
+      "stage": "Research prototype",
+      "audiences": [
+        "Indologists",
+        "Computational linguists",
+        "Category theorists"
+      ],
+      "local": "C:\\Users\\JAMES\\github\\KOMPOSOS-III-BETA-REESHI",
+      "summary": "Applies 50+ categorical operations to a 35-text Sanskrit sacred corpus to build a mathematically-grounded knowledge graph.",
+      "problem": "Analyzing concept evolution across 2,500 years of literature requires a formal model of relational meaning and cross-genre equivalence.",
+      "what_it_gives": "Categorical maps of 8,600+ terms and 82,000+ morphisms; variant myth detection using natural transformation squares.",
+      "categorical_mapping": "Sanskrit terms are Objects; semantic relations are Morphisms; genres form Base Category surfaces for Grothendieck Fibrations.",
+      "engines_used": [
+        "COG",
+        "PRONOIA",
+        "ZFC"
+      ],
+      "proof": [
+        "Genre Fibrations: Uses Grothendieck construction to model text genres as dissociated fibers, tracking concept drift.",
+        "Myth Detection: Utilizes Natural Transformations to identify structural variants of myths via naturality squares.",
+        "Geometric Evolution: Applies Ollivier-Ricci curvature to measure the growth of the sacred-text network over time.",
+        "IAST Normalization: Implements NFKD decomposition for a 99.3% resolution rate."
+      ],
+      "ask": "Can categorical fibrations detect the 'birth' of a philosophical concept before it is explicitly named?",
+      "caveat": "Relies on lemmatized TEI-encoded inputs; categorical findings are structural hypotheses.",
+      "maturity": "Prototype"
+    },
+    {
+      "id": "CO2",
+      "name": "KOMPOSOS-III-CO2",
+      "short": "Climate Structural Audit",
+      "domain": "Industrial & Climate",
+      "stage": "Research artifact",
+      "audiences": [
+        "Climate scientists",
+        "System dynamicists",
+        "Policy analysts"
+      ],
+      "local": "C:\\Users\\JAMES\\github\\KOMPOSOS-III-CO2",
+      "summary": "Objective categorical and spectral analysis of 800,000 years of paleoclimate data vs. modern observations to measure structural shifts.",
+      "problem": "Traditional climate analysis often relies on narrative fitting; we require an objective mathematical measure of structural network change.",
+      "what_it_gives": "Spectral coupling strength measures (lambda1) and Granger-causality categorical networks revealing structural decoupling.",
+      "categorical_mapping": "Climate variables are Objects; directional Granger-causal relationships are Morphisms.",
+      "engines_used": [
+        "COG",
+        "PRONOIA",
+        "ZFC"
+      ],
+      "proof": [
+        "Structural Decoupling: Demonstrates a 92.5% reduction in modern climate network coupling (lambda1=1.0) vs. paleoclimate baseline.",
+        "Regime Change Detection: Identifies 3 major climate reorganizations in the last 800ka.",
+        "Spectral Analysis: Uses the Fiedler eigenvalue of the graph Laplacian to quantify system-wide coupling.",
+        "Mauna Loa Integration: Ingests 10,000+ records into a unified categorical model."
+      ],
+      "ask": "Does the 92.5% reduction in algebraic connectivity indicate a 'broken' climate control loop?",
+      "caveat": "Objective structural analysis; reports mathematical facts about network coupling.",
+      "maturity": "Works"
+    },
+    {
+      "id": "RULIAD",
+      "name": "KOMPOSOS-IV-RULIAD",
+      "short": "Categorical Multiway Systems",
+      "domain": "Math & Foundations",
+      "stage": "Exploration",
+      "audiences": [
+        "Complex systems",
+        "Mathematical physicists"
+      ],
+      "local": "C:\\Users\\JAMES\\github\\KOMPOSOS-IV-RULIAD",
+      "summary": "Models finite slices of multiway rewriting systems as enriched categories to measure the geometry and topology of computation space.",
+      "problem": "Infinite computational limit structures are unobservable; we require finite slices and rigorous categorical tools to analyze state evolution.",
+      "what_it_gives": "Causal and branchial graph constructions; Ollivier-Ricci curvature measures of state evolution; and persistent homology of rewrite states.",
+      "categorical_mapping": "Rewrite States are Objects; Rule Applications are Morphisms; evolutionary paths are Functors.",
+      "engines_used": [
+        "COG",
+        "OPTIMUS"
+      ],
+      "proof": [
+        "Multiway Evolution: Efficiently computes finite slices of string and hypergraph rewrite systems.",
+        "Causal Graph Construction: Maps dependencies between rewrite events as morphisms in a directed acyclic category.",
+        "Geometric Analysis: Implements Ollivier-Ricci curvature to measure the growth and clustering of rule space.",
+        "Observer Functors: Implements coarse-graining strategies to model finite observer perspectives."
+      ],
+      "ask": "Can categorical coarse-graining model the 'emergence' of physics?",
+      "caveat": "Treats speculative physics claims as analogies.",
+      "maturity": "Sketch"
+    },
+    {
+      "id": "PSI",
+      "name": "KOMPOSOS-III-PSI",
+      "short": "Consciousness Research Bridge",
+      "domain": "Math & Foundations",
+      "stage": "Speculative research",
+      "audiences": [
+        "Consciousness researchers",
+        "Philosophers of mind"
+      ],
+      "local": "C:\\Users\\JAMES\\github\\KOMPOSOS-III-PSI",
+      "summary": "A mathematical bridge between Integrated Information Theory (IIT) and Analytical Idealism using a dual-engine (ZFC + CAT) architecture.",
+      "problem": "Consciousness theories often lack a shared formal language, making it difficult to verify the structural integrity of mind-model states.",
+      "what_it_gives": "Automated IIT 4.0 Phi computation via ZFC; fibered category models of dissociation; and Ricci curvature measures of integration.",
+      "categorical_mapping": "Experiential states are Objects; Dissociation is modeled as a Fibration; Alters are Fibers.",
+      "engines_used": [
+        "COG",
+        "ZFC",
+        "PRONOIA"
+      ],
+      "proof": [
+        "IIT Phi Computation: ZFC-based power set enumeration and partition separation.",
+        "Idealism Dissociation: Uses Category Theory (Fibrations) to model 'Alters' as dissociated fibers.",
+        "Geometric Signaling: Implements Discrete Ricci Flow to identify integration hubs and dissociative boundaries.",
+        "Dual-Engine Verdicts: Classifies cross-framework hypotheses using ZFC proposals and CAT verification."
+      ],
+      "ask": "Which mathematical mappings between IIT and Idealism are testable?",
+      "caveat": "Speculative research mapping; presents consciousness as a mathematical model.",
+      "maturity": "Sketch"
+    },
+    {
+      "id": "rshi",
+      "name": "KOMPOSOS-rshi",
+      "short": "Modular Research Workstation",
+      "domain": "Workbench",
+      "stage": "Workbench",
+      "audiences": [
+        "Research tool builders",
+        "AI systems engineers"
+      ],
+      "local": "C:\\Users\\JAMES\\github\\KOMPOSOS-rshi",
+      "summary": "A modular workstation controller for the KOMPOSOS pipeline, enabling iterative research, precision semantic validation, and categorical synthesis.",
+      "problem": "One-command lab scripts are difficult to debug; research noise often masks actual categorical equivalence between domains.",
+      "what_it_gives": "A 5-phase modular controller (Research, Extract, Precision, Theory, Synthesis) and explicit Categorical Equivalence Statements.",
+      "categorical_mapping": "Lab phases are Objects; Data artifacts are States; transitions are Morphisms.",
+      "engines_used": [
+        "COG",
+        "OPTIMUS"
+      ],
+      "proof": [
+        "Modular Controller: Separates raw data research from structural extraction.",
+        "Precision Validation: Implements a dedicated phase using GloVe embeddings to semantically validate morphisms.",
+        "Equivalence Synthesis: Replaces vague insights with formal Categorical Equivalence Statements.",
+        "Structure Detection: Automated detection of Adjunctions and Products within extracted categories."
+      ],
+      "ask": "Which parts of the research workflow can be automated without losing precision?",
+      "caveat": "Workbench layer; the factory for building knowledge graphs.",
+      "maturity": "Sketch"
+    },
+    {
+      "id": "LEGACY_III",
+      "name": "KOMPOSOS-III",
+      "short": "Legacy Research Pipeline (III)",
+      "domain": "Workbench",
+      "stage": "Legacy",
+      "audiences": [
+        "System historians"
+      ],
+      "local": "C:\\Users\\JAMES\\github\\KOMPOSOS-III",
+      "summary": "The original, fragmented research pipeline that preceded the KOMPOSOS-IV Fused Runtime.",
+      "problem": "Relied on 'seams' between data storage and mathematical modeling, leading to high translation costs.",
+      "what_it_gives": "Lineage of the categorical research idea: separate Store, Category, and EnrichedCategory modules.",
+      "categorical_mapping": "Concepts are Objects; Relationships are Morphisms; Persistence is external.",
+      "engines_used": [],
+      "proof": [
+        "Structural Fragmentation: Clearly demonstrates the 'Store/CAT split'.",
+        "1-Categorical Base: Focuses on 1-morphisms without higher-order coherence.",
+        "Historical Result: Original DeepMind and Newton-Schrödinger homotopy results."
+      ],
+      "ask": "How much speed and accuracy was lost to the 'seams' in the III-era architecture?",
+      "caveat": "Legacy system. Use only for lineage.",
+      "maturity": "Sketch"
+    }
+  ],
+  "engines": [
+    {
+      "id": "OPERADUM",
+      "name": "OPERADUM",
+      "short": "Decision-ranking and resource-operation engine",
+      "summary": "The 'Decision Engine' that ranks next actions based on resource constraints and target goals. The constructive mirror to KOMPOSOS.",
+      "features": [
+        "Resource-operation design and ranking for AML/Portfolio.",
+        "Tekton master spec integration for valid assembly construction.",
+        "Symmetric-Monoidal Operads: Primitives for building complex assemblies.",
+        "Linear Logic Judging: Ensures resource-safe synthesis and prevents 'Copy Errors'."
+      ]
+    },
+    {
+      "id": "PRONOIA",
+      "name": "PRONOIA",
+      "short": "Audit, MDL, and sheaf/contradiction probes",
+      "summary": "The 'Audit Engine' that detects structural contradictions and measures model reasoning fidelity.",
+      "features": [
+        "Cellular Sheaf Probes: Localizes inconsistencies in signed graphs (H1 obstructions).",
+        "MDL Honesty Audits: Measures sincerity via Minimum Description Length compression.",
+        "Contradiction detection in power grid topologies and reasoning traces.",
+        "Honest-Ranking: Decision filter that abstains if no sincere path exists."
+      ]
+    },
+    {
+      "id": "COG",
+      "name": "COG",
+      "short": "Cognitive router and 5-tier verification",
+      "summary": "The 'Routing Engine' that orchestrates a 5-tier verification stack based on energy cost and complexity.",
+      "features": [
+        "5-tier verification path (Direct, Compositional, Higher-Order, ZFC, CAT).",
+        "Categorical gradient descent for path refinement.",
+        "Axiom-based gatekeeping and refinement budgeting.",
+        "Ricci Flow integration for Tier 4 topological audits."
+      ]
+    },
+    {
+      "id": "OPTIMUS",
+      "name": "OPTIMUS",
+      "short": "Higher-order optimization and discovery",
+      "summary": "The 'Discovery Engine' that finds missing morphisms and stabilizes unstable processes.",
+      "features": [
+        "Higher-order cell discovery and process stabilization.",
+        "Categorical bridge building between disparate domains.",
+        "Tarski Stability: Guarantees monotone convergence to a fixpoint.",
+        "Yoneda Fingerprinting: Structural object reconstruction via relational footprints."
+      ]
+    },
+    {
+      "id": "CORE_RUNTIME",
+      "name": "Categorical Runtime (Core/IV)",
+      "short": "Mathematical Foundation & Persistence Layer",
+      "summary": "The low-level kernel providing the fused categorical runtime where objects and morphisms persist to SQLite and carry enrichment natively.",
+      "features": [
+        "Category (core/category.py): The fused runtime class unifying structure, persistence, and enrichment.",
+        "Cosmos (core/cosmos.py): Implementation of infinity-Cosmos (Riehl-Verity) for recursive complexity.",
+        "Gray Coherence (core/gray_coherence.py): Massive engine for verifying 3-cell modifications and interchange law stability.",
+        "Formal Yoneda (core/formal_yoneda.py): Implementation of the Yoneda Lemma for object representability.",
+        "Adjunction (core/adjunction.py): Formal derivation of adjoint pairs (Unit/Counit) and Hom-isomorphism verification."
+      ]
+    },
+    {
+      "id": "DUAL_ZFC_CAT",
+      "name": "Dual-Engine (ZFC/CAT)",
+      "short": "Proposal-Verification Architecture",
+      "summary": "The critical reasoning loop where ZFC proposes logical claims and CAT meta-verifies their structural soundness.",
+      "features": [
+        "ZFC Engine (zfc/proof_engine.py): Proposes transitive chains and logical entailments using set-theoretic axioms.",
+        "CAT Meta-Verifier (oracle/categorical_verifier.py): Independently assesses ZFC claims using geometric and topological data.",
+        "Proposal-Verification Loop: ZFC proposes (Separation, Well-Ordering) -> CAT verifies (Ricci, Kan, Homology).",
+        "Geometric Classification: Reports whether a claim is SPHERICAL (tight cluster), EUCLIDEAN (pathway), or HYPERBOLIC (fragile bridge)."
+      ]
+    },
+    {
+      "id": "ORACLE_SYSTEM",
+      "name": "Inference Oracle (Oracle)",
+      "short": "Strategic Reasoning & Prediction Engine",
+      "summary": "The 'Reasoning Heart' that synthesizes multiple categorical strategies into actionable predictions and gap detections.",
+      "features": [
+        "Topos Strategy: Multi-valued truth evaluation and internal logic reasoning via Heyting algebras.",
+        "Operadic Decomposition: Constructive assembly analysis breaking complex operations into typed primitives.",
+        "Fibration Strategy: Models 'Standard Work' vs. 'Actual Work' via Cartesian lifts.",
+        "Natural Transformation: Identifies structural variants and concept drift across domain categories.",
+        "Topological Anomaly: Detects structural inconsistencies and H1 obstructions using sheaf probes."
+      ]
+    }
+  ],
+  "pipeline_layers": [
+    {
+      "num": "1",
+      "name": "DATA",
+      "desc": "Prima Materia: Gather raw graph structure, docs, and measurements."
+    },
+    {
+      "num": "2",
+      "name": "ALGEBRA",
+      "desc": "Extract: Discover objects and morphisms (Identity)."
+    },
+    {
+      "num": "3",
+      "name": "TOPOLOGY",
+      "desc": "Equivalence: Dissolve into paths and mechanism equivalences."
+    },
+    {
+      "num": "4",
+      "name": "GEOMETRY",
+      "desc": "Curvature: Measure hierarchy, clusters, and stability."
+    },
+    {
+      "num": "5",
+      "name": "ORACLE",
+      "desc": "Conjunction: Synthesize strategies into ranked next actions."
+    }
+  ]
+}

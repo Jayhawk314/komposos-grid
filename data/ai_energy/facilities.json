@@ -1,0 +1,103 @@
+{
+  "meta": {
+    "description": "Representative stranded-generation and AI-load entries for the KOMPOSOS-WESyS AI-energy matching engine. These are NOT a live queue export. Each entry is calibrated to real 2026 figures and announced deals so the engine's behavior is realistic; swap this file for an ISO/RTO queue + EIA-860 export for a real audit.",
+    "queue_context": {
+      "us_total_queue_gw_end_2025": 2060,
+      "ercot_large_load_queue_gw": 226,
+      "ercot_large_load_queue_gw_year_prior": 63,
+      "ercot_solar_storage_share_of_queue": 0.77,
+      "datacenter_energy_mix": {"gas": 0.40, "renewables": 0.24, "coal": 0.15}
+    },
+    "sources": [
+      "LBNL 'Queued Up' (emp.lbl.gov/queues), data through end of 2025, updated May 2026",
+      "Latitude Media: ERCOT large-load queue quadrupled to 226 GW (2025)",
+      "IEEE Spectrum / Introl: Amazon-Susquehanna 300 MW behind-the-meter (+180 MW requested); Microsoft-Three Mile Island 835 MW restart",
+      "CNBC (2025-10-17): data-center energy mix ~gas 40% / renewables 24% / coal 15%",
+      "Chevron + GE Vernova: up to 4 GW behind-the-meter gas for data centers (18-24 month timelines)"
+    ],
+    "schema": {
+      "generator": "name, region, nameplate_mw, utilization (0..1 used today), kind, interconnected (bool), note, source",
+      "load": "name, region, needed_mw, flexibility (0..1 interruptible share), queue_years, note, source",
+      "kinds_firm": ["gas", "nuclear", "coal"],
+      "kinds_variable": ["solar+storage", "wind", "hydro"]
+    }
+  },
+
+  "generators": [
+    {
+      "name": "Curtailed Solar+Storage (West TX)", "region": "ERCOT",
+      "nameplate_mw": 1500, "utilization": 0.55, "kind": "solar+storage", "interconnected": true,
+      "note": "ERCOT solar+storage is ~77% of the queue and routinely curtailed; large headroom most hours.",
+      "source": "LBNL Queued Up; ERCOT"
+    },
+    {
+      "name": "Underused Gas Peaker Fleet", "region": "ERCOT",
+      "nameplate_mw": 800, "utilization": 0.30, "kind": "gas", "interconnected": true,
+      "note": "Peakers run at low capacity factor; firm headroom available for co-located load.",
+      "source": "EIA-860/923 capacity-factor norms"
+    },
+    {
+      "name": "Aging Coal Unit (low capacity factor)", "region": "PJM-West",
+      "nameplate_mw": 1300, "utilization": 0.22, "kind": "coal", "interconnected": true,
+      "note": "Coal ~15% of data-center mix and declining; existing interconnection is the asset.",
+      "source": "CNBC 2025; EIA"
+    },
+    {
+      "name": "Nuclear Behind-the-Meter Carve-out (Susquehanna-style)", "region": "PJM-West",
+      "nameplate_mw": 2500, "utilization": 0.88, "kind": "nuclear", "interconnected": true,
+      "note": "Models the Amazon-Susquehanna 300 MW behind-the-meter carve-out (+180 MW requested).",
+      "source": "IEEE Spectrum; Introl (2025)"
+    },
+    {
+      "name": "Seasonal Spilled Hydro", "region": "MISO",
+      "nameplate_mw": 500, "utilization": 0.40, "kind": "hydro", "interconnected": true,
+      "note": "Seasonal spill = variable headroom; good for flexible load, not firm 24/7 load.",
+      "source": "EIA hydro generation profiles"
+    },
+    {
+      "name": "Curtailed Wind", "region": "SPP",
+      "nameplate_mw": 1200, "utilization": 0.45, "kind": "wind", "interconnected": true,
+      "note": "SPP is wind-rich with frequent curtailment; variable, cannot firm a 24/7 load alone.",
+      "source": "SPP; LBNL"
+    }
+  ],
+
+  "loads": [
+    {
+      "name": "Hyperscaler Training Campus", "region": "ERCOT",
+      "needed_mw": 750, "flexibility": 0.65, "queue_years": 4,
+      "note": "Training is largely interruptible; ERCOT large-load queue is 226 GW (4x in one year).",
+      "source": "Latitude Media (2025)"
+    },
+    {
+      "name": "Inference Cluster (24/7)", "region": "ERCOT",
+      "needed_mw": 400, "flexibility": 0.15, "queue_years": 4,
+      "note": "Near-firm serving load; needs firm generation, not variable-only co-location.",
+      "source": "operator load profiles"
+    },
+    {
+      "name": "Burst Training Pod", "region": "ERCOT",
+      "needed_mw": 300, "flexibility": 0.80, "queue_years": 3,
+      "note": "Highly interruptible; ideal partner for curtailed renewables.",
+      "source": "operator load profiles"
+    },
+    {
+      "name": "AI Campus (Susquehanna-style)", "region": "PJM-West",
+      "needed_mw": 480, "flexibility": 0.35, "queue_years": 5,
+      "note": "Sized to the Amazon-Susquehanna 300+180 MW behind-the-meter campus.",
+      "source": "IEEE Spectrum; Introl (2025)"
+    },
+    {
+      "name": "Sovereign AI Build", "region": "MISO",
+      "needed_mw": 350, "flexibility": 0.30, "queue_years": 6,
+      "note": "Moderate flexibility; long expected interconnection wait in MISO.",
+      "source": "MISO interconnection update (2025)"
+    },
+    {
+      "name": "Research Supercompute (24/7)", "region": "SPP",
+      "needed_mw": 250, "flexibility": 0.05, "queue_years": 4,
+      "note": "Firm 24/7 load in a wind-only stranded region: an honest non-match (needs firming/transmission).",
+      "source": "operator load profiles"
+    }
+  ]
+}
