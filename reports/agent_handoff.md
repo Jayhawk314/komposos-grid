@@ -64,10 +64,23 @@ repair/review layers).
   class loads x EIA-861-ish meter mix), all overridable; swapping in
   exact ICE 2.0 calculator values is a clean upgrade path.
 
+- PLAN A2 keyless half DONE: MISO binding-constraint severity
+  (sources/miso_constraints.py + run_miso_constraints.py; needs xlrd,
+  now in requirements.txt). Full-year 2023, 365/365 days: 2,463
+  constraints, 10.07M $/MWh-hours severity. Headline: the top
+  constraints are the Upper-Midwest wind belt (Charlie Creek-Watford
+  ND bound 5,138 h = 59% of the year; WAUE/OTP/NSP/ALTW dominate) —
+  MISO's deepest congestion is wind export, not the southern seams.
+  Severity is an index, NOT dollars (flow MW not public); dollars
+  arrive via PJM key or market-monitor data.
+  Artifacts: reports/miso_constraints_2023.{json,md}.
+  da_bc.xls gotcha: file named by publish date, market date inside is
+  +1 day; header is row 2 under banners; xls needs xlrd.
+
 ## Next up (task list order)
 
-- A2 (#14): constraint-level congestion costs — partially blocked on
-  user getting a free PJM Data Miner key; MISO MCC files keyless.
+- A2 (#14) remaining: PJM constraint-level congestion DOLLARS —
+  blocked on user getting a free PJM Data Miner key.
 - A3 (#15): SPP/ERCOT/ISO-NE loaders + 2024/2025 reruns.
 - B4 (#16): daily streaming ledger job (EIA-930 poll).
 - C5-7 (#17): 2-cell evidence reconciliation, right Kan bounds for
