@@ -55,7 +55,9 @@ PATH_TERMS = (
     "path", "route", "connect", "connected", "connection", "get from",
     "between", "how does power", "how is",
 )
-EXPLAIN_TERMS = ("explain", "why", "important", "matter", "evidence", "support")
+EXPLAIN_TERMS = ("explain", "why", "important", "matter", "evidence", "support",
+                 "mean", "define", "definition", "what is", "what are",
+                 "glossary", "methodology", "how do you know")
 
 
 @dataclass
@@ -227,6 +229,15 @@ def _rows_for(result: Mapping) -> List[Dict[str, object]]:
                 ),
             },
         ]
+    if result.get("tool") == "explain":
+        return [
+            {
+                "label": f"{p.get('source')} § {p.get('section')}",
+                "value": p.get("excerpt"),
+                "meta": f"score {p.get('score')}",
+            }
+            for p in data.get("passages", [])[:3]
+        ]
     return []
 
 
@@ -388,6 +399,12 @@ def answer_question(
             results.append(_call_tool("tie", a, b, year=year))
         elif codes:
             results.append(_call_tool("ba", codes[0], year=year))
+
+        # RAG: "why / how do you know / what does this mean" -> cited docs.
+        if wants_explain:
+            explain = _call_tool("explain", text, year=year)
+            if explain.get("result", {}).get("passages") or not results:
+                results.append(explain)
 
         if not results:
             return {

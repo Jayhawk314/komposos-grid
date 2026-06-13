@@ -75,6 +75,14 @@ TOOL_SPECS: List[Dict] = [
         "returns": ["summary", "provenance", "gaps"],
         "example": f"{ENTRYPOINT} gaps --top 5",
     },
+    {
+        "name": "explain",
+        "command": f"{ENTRYPOINT} explain WORDS --top N",
+        "use_when": "Answer why/how/what-does-this-mean from the repo's own "
+                    "methodology docs (lexical RAG; returns cited passages).",
+        "returns": ["summary", "provenance", "passages"],
+        "example": f"{ENTRYPOINT} explain why cap relief at observed congestion",
+    },
 ]
 
 

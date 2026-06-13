@@ -231,10 +231,26 @@
       <p><code>why is PJM-NYIS important?</code></p>
       <p><code>what breaks if PJM-NYIS fails?</code></p>
       <p><code>what should I look at next?</code></p>
+      <p><code>what does curtailment mean?</code> · <code>explain the queue methodology</code></p>
     </div>
     <p><b>Highlight on map</b> dims unrelated nodes and ties so the computed
     result is visible. <b>Apply cut to map</b> switches to What-if mode and
     disables the tie(s) from the AI scenario.</p>
+    <h3>"Why / what does this mean" questions (explain)</h3>
+    <p>Definition and methodology questions are answered by the
+    <code>explain</code> tool, which retrieves <b>verbatim passages from this
+    repository's own committed docs</b> (the master guide, methodology reports,
+    waste ledger) and shows them as cards with a file&nbsp;&sect;&nbsp;section
+    citation. Ask it directly with <code>python -m domains.grid.agent_tools
+    explain what is curtailment</code>, or just ask "why" in the AI tab and it
+    attaches the cited passages alongside the computed answer.</p>
+    <div class="callout limit">
+      <p>This retrieval is <b>lexical</b> (keyword/TF-IDF), not semantic search:
+      it surfaces passages that share words with your question, so phrase
+      questions by keyword and treat the citation, not the ranking, as the
+      ground truth. The excerpt is the document's words verbatim; any synthesis
+      around it is the agent's.</p>
+    </div>
   </section>
 
   <section>

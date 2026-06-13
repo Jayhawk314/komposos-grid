@@ -338,6 +338,110 @@ def tool_gaps(top: int = 5, year: str | None = None) -> Dict:
     }
 
 
+# --- explain: lexical RAG over this repo's own committed docs ---------------
+# Honest scope: this is *lexical* (TF-IDF) retrieval, not semantic/embedding
+# RAG. It grounds the "why / how do you know / what does this mean" questions
+# the computed tools can't, by returning verbatim passages + citations from
+# the repo's own methodology docs. (The data/ embeddings engine could swap in
+# for semantic retrieval later; lexical keeps it dependency-free and offline.)
+import math
+import re as _re
+
+_DOC_GLOBS = ("reports/*.md", "domains/grid/*.md")
+_DOC_EXTRA = ("REPRODUCE.md", "README.md")
+_STOP = {"the", "and", "for", "are", "but", "not", "you", "with", "that", "this",
+         "from", "have", "has", "was", "what", "why", "how", "does", "explain",
+         "where", "which", "into", "over", "per", "its", "their", "our"}
+
+
+def _doc_sections():
+    """Committed docs split into (source, heading, text) sections by heading."""
+    paths: List[Path] = []
+    for pattern in _DOC_GLOBS:
+        paths.extend(sorted(Path().glob(pattern)))
+    paths.extend(Path(p) for p in _DOC_EXTRA if Path(p).exists())
+    sections = []
+    for path in paths:
+        try:
+            lines = path.read_text(encoding="utf-8").splitlines()
+        except OSError:
+            continue
+        heading, buf = "(intro)", []
+        for line in lines:
+            if _re.match(r"^#{1,6}\s", line):
+                if buf:
+                    sections.append((str(path).replace("\\", "/"), heading,
+                                     "\n".join(buf).strip()))
+                heading, buf = _re.sub(r"^#{1,6}\s*", "", line).strip(), []
+            else:
+                buf.append(line)
+        if buf:
+            sections.append((str(path).replace("\\", "/"), heading,
+                             "\n".join(buf).strip()))
+    return [s for s in sections if s[2]]
+
+
+def _terms(text: str) -> List[str]:
+    return [t for t in _re.findall(r"[a-z0-9]+", text.lower())
+            if len(t) >= 3 and t not in _STOP]
+
+
+def tool_explain(query: str, top: int = 3, year: str | None = None) -> Dict:
+    q_terms = set(_terms(query))
+    if not q_terms:
+        return {"tool": "explain", "error": "give a concept to explain, "
+                "e.g. 'explain curtailment' or 'why cap relief at observed congestion'"}
+    sections = _doc_sections()
+    if not sections:
+        return {"tool": "explain", "error": "no committed docs found to retrieve from"}
+    # TF-IDF: rare query terms weigh more; score each section.
+    n = len(sections)
+    df = {t: 0 for t in q_terms}
+    toks = []
+    for _, _, text in sections:
+        tt = _terms(text)
+        toks.append(tt)
+        present = set(tt)
+        for t in q_terms:
+            if t in present:
+                df[t] += 1
+    idf = {t: math.log(n / (1 + df[t])) + 1.0 for t in q_terms}
+    scored = []
+    for (src, heading, text), tt in zip(sections, toks):
+        counts = {t: tt.count(t) for t in q_terms}
+        score = sum(counts[t] * idf[t] for t in q_terms)
+        if score <= 0:
+            continue
+        # excerpt: window around the first hit of the highest-idf matched term
+        hit_term = max((t for t in q_terms if counts[t]),
+                       key=lambda t: idf[t], default=None)
+        low = text.lower()
+        i = low.find(hit_term) if hit_term else 0
+        start = max(0, i - 120)
+        excerpt = text[start:start + 320].strip().replace("\n", " ")
+        if start > 0:
+            excerpt = "…" + excerpt
+        scored.append({"source": src, "section": heading,
+                       "score": round(score, 2), "excerpt": excerpt})
+    scored.sort(key=lambda d: d["score"], reverse=True)
+    scored = scored[:top]
+    if not scored:
+        return {"tool": "explain", "query": query,
+                "summary": f"No committed doc passage matches '{query}'.",
+                "provenance": "lexical retrieval over repo docs; nothing matched.",
+                "result": {"passages": []}}
+    top_cite = f"{scored[0]['source']} § {scored[0]['section']}"
+    return {
+        "tool": "explain", "query": query,
+        "summary": f"{len(scored)} passage(s); best: {top_cite}.",
+        "provenance": "lexical (TF-IDF) retrieval over this repo's committed "
+                      "docs; excerpts are quoted verbatim with file + section "
+                      "citations. Synthesis is the agent's; the words are the "
+                      "doc's. Not semantic search — phrase queries by keyword.",
+        "result": {"passages": scored},
+    }
+
+
 def tool_manifest() -> Dict:
     return agent_manifest()
 
@@ -352,6 +456,7 @@ _TOOLS = {
     "whatif": lambda a: tool_whatif(
         [c for c in (a.cut or "").split(",") if c], a.year),
     "gaps": lambda a: tool_gaps(a.top, a.year),
+    "explain": lambda a: tool_explain(" ".join(a.query), a.top, a.year),
     "manifest": lambda a: tool_manifest(),
 }
 
@@ -374,6 +479,8 @@ def main(argv=None) -> int:
     sub.add_parser("whatif").add_argument("--cut", required=True,
                                           help="comma-separated A-B pairs")
     sub.add_parser("gaps").add_argument("--top", type=int, default=5)
+    p = sub.add_parser("explain"); p.add_argument("query", nargs="+")
+    p.add_argument("--top", type=int, default=3)
     args = parser.parse_args(argv)
 
     if args.cmd == "prompt":

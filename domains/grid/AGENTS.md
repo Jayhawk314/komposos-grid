@@ -58,7 +58,16 @@ python -m domains.grid.agent_tools bottlenecks --top 10
 python -m domains.grid.agent_tools seam
 python -m domains.grid.agent_tools whatif --cut PJM-NYIS,MISO-SWPP
 python -m domains.grid.agent_tools gaps --top 5
+python -m domains.grid.agent_tools explain what is curtailment
 ```
+
+`explain` is the "why / how do you know / what does this mean" tool. It is
+**lexical RAG** (keyword/TF-IDF retrieval) over this repo's own committed docs,
+returning verbatim passages with `source § section` citations in
+`result.passages`. Use it for definitions and methodology; quote the cited
+excerpt rather than paraphrasing from memory. It is not semantic search and not
+a substitute for the computed tools — pair it with `ba`/`tie`/etc. for "why is
+X …" questions (the map chat does this automatically).
 
 Every normal tool returns JSON with:
 
