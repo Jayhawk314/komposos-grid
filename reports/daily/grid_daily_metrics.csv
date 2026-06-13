@@ -4,3 +4,8 @@ date,metric,value,unit,detail
 2026-06-11,miso_soco_seam_spread,3.31,usd_per_mwh,hours=24
 2026-06-11,miso_constraint_severity,51281.9,usd_per_mwh_hours,top=RAPTOR-RDRCK FLO KING-EAU CLAIRE
 2026-06-11,pjm_constraint_severity,184650.7,usd_per_mwh_hours,top=OX4      TX2      XFORMER   H   500 KV
+2026-06-12,pjm_nyis_seam_spread,4.368,usd_per_mwh,hours=24
+2026-06-12,miso_swpp_seam_spread,2.454,usd_per_mwh,hours=24
+2026-06-12,miso_soco_seam_spread,4.28,usd_per_mwh,hours=24
+2026-06-12,miso_constraint_severity,38007.7,usd_per_mwh_hours,top=ROXANA-PRAXAIR13835 FLO WC-DUM
+2026-06-12,pjm_constraint_severity,120178.7,usd_per_mwh_hours,top=PLEASNTV-ASHBURN  274D      A  230 KV
