@@ -1,0 +1,39 @@
+{
+  "demand_twh": {
+    "2023": 4078.972669,
+    "2024": 4198.102877,
+    "2025": 4294.309865
+  },
+  "interchange_twh": {
+    "2023": 499.719924,
+    "2024": 501.844792,
+    "2025": 493.662162
+  },
+  "concentration": {
+    "MISO": {
+      "n_constraints": 2463,
+      "top10_share": 0.33238071236994515
+    },
+    "PJM": {
+      "n_constraints": 857,
+      "top10_share": 0.3818580692361303
+    },
+    "SPP": {
+      "n_constraints": 1532,
+      "top10_share": 0.3592630630920616
+    }
+  },
+  "curtailment_twh": {
+    "CAISO 2023": 2.66,
+    "SPP 2023": 10.367625992499997
+  },
+  "queue_completion": {
+    "overall": 0.16508100654946567,
+    "ia_executed": 0.6553092501368363
+  },
+  "waste_usd_m": {
+    "Seam congestion (measured ties)": 78.6,
+    "Waste ledger, all claims": 251.03443050390814,
+    "Reliability floor": 4369.24124690625
+  }
+}

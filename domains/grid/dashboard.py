@@ -108,6 +108,7 @@ def build_dashboard_html(
         "<header><h1>US Grid Waste — Public Findings</h1>"
         "<p>Where the US electric grid loses money, what would fix it, "
         "and whether the fix pays for itself — from public data only. "
+        '<a href="network_map.html">Explore the interactive grid map</a> · '
         f'<a href="{REPO_URL}">Code &amp; data</a> · '
         f'<a href="{REPO_URL}/blob/master/reports/MASTER_GUIDE.md">'
         "Plain-English guide</a> · "

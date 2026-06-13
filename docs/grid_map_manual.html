@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KOMPOSOS Grid Map Manual</title>
+  <style>
+    :root { color-scheme: dark; --ink:#ece9df; --muted:#aaa79c;
+      --line:#38352d; --page:#11110f; --surface:#1b1a17;
+      --blue:#78b7ff; --red:#ff766f; --green:#58c08f; --amber:#e3ad56; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--page); color:var(--ink);
+      font:15px/1.6 Arial, Helvetica, sans-serif; }
+    header { background:var(--surface); border-bottom:1px solid var(--line);
+      padding:26px 22px; }
+    main { max-width:1040px; margin:0 auto; padding:22px; }
+    h1 { margin:0 0 8px; font-size:clamp(24px,4vw,36px); }
+    h2 { margin:30px 0 10px; font-size:22px; }
+    h3 { margin:20px 0 8px; font-size:17px; }
+    p { margin:8px 0; }
+    a { color:var(--blue); }
+    .lede { color:var(--muted); max-width:880px; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:12px; margin:14px 0; }
+    .card { background:var(--surface); border:1px solid var(--line);
+      border-radius:8px; padding:14px; }
+    .card h3 { margin-top:0; }
+    .tag { display:inline-block; border-radius:999px; padding:2px 8px;
+      font-size:12px; margin-right:5px; background:#16273a; color:var(--blue); }
+    .warn { background:#332819; color:var(--amber); }
+    .good { background:#163025; color:var(--green); }
+    .bad { background:#3a1c1b; color:var(--red); }
+    table { width:100%; border-collapse:collapse; background:var(--surface);
+      border:1px solid var(--line); margin:12px 0; }
+    th, td { text-align:left; vertical-align:top; border-bottom:1px solid var(--line);
+      padding:9px 10px; }
+    th { background:#25231f; font-size:13px; }
+    code { background:#25231f; color:#f4d08a; padding:1px 5px; border-radius:4px; }
+    .callout { border-left:4px solid var(--blue); background:var(--surface);
+      padding:12px 14px; margin:14px 0; }
+    .limit { border-left-color:var(--amber); }
+    footer { border-top:1px solid var(--line); color:var(--muted);
+      padding:18px 22px; margin-top:30px; background:var(--surface); }
+  </style>
+</head>
+<body>
+<header>
+  <h1>KOMPOSOS Grid Map Manual</h1>
+  <p class="lede">How to use the interactive grid map, what the public grid
+  data means, how to interpret the categorical/spectral screens, and where the
+  current findings are strong or still limited.</p>
+</header>
+<main>
+  <section>
+    <h2>Fast Start</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Inspect</h3>
+        <p>Click a hub to inspect a balancing authority, or click a line to
+        inspect an interchange tie. The side panel shows measured flows,
+        demand/generation facts, queue facts, congestion evidence, and
+        reliability/curtailment overlays where available.</p>
+      </div>
+      <div class="card">
+        <h3>Views</h3>
+        <p><b>Geographic</b> places BAs near representative territory
+        centroids. <b>Spectral</b> places BAs by measured flow coupling, so
+        tightly connected areas sit together and weak seams pull apart.</p>
+      </div>
+      <div class="card">
+        <h3>What-if</h3>
+        <p>Click a tie to cut it, or a BA to take all its ties offline. The
+        browser recomputes connectivity, islanding, exposed flow, queue, and
+        known value on the disabled ties.</p>
+      </div>
+      <div class="card">
+        <h3>AI</h3>
+        <p>When running locally with <code>python -m domains.grid.agent_server</code>,
+        the AI tab asks the Python backend to run grounded tools. Try plain
+        questions like <code>where is power getting stuck?</code> or
+        <code>what breaks if PJM-NYIS fails?</code>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>What The Map Shows</h2>
+    <table>
+      <thead><tr><th>UI element</th><th>Meaning</th><th>How to read it</th></tr></thead>
+      <tbody>
+        <tr><td>Hub / circle</td><td>A balancing authority (BA), such as PJM,
+        MISO, CISO, NYIS, SWPP.</td><td>Larger circles have more measured
+        interchange usage with neighbors.</td></tr>
+        <tr><td>Line / tie</td><td>Measured direct interchange between two
+        BAs from EIA-930 hourly telemetry.</td><td>Thicker lines carry more
+        gross interchange. Red lines are structural bottleneck screens.</td></tr>
+        <tr><td>Blue / amber hubs</td><td>The two sides of the spectral seam
+        partition.</td><td>This is not politics or geography. It is the
+        weakest split found from the interchange graph.</td></tr>
+        <tr><td>Red tie</td><td>Negative Ollivier-Ricci curvature.</td><td>A
+        thin passage between neighborhoods that are otherwise weakly connected.
+        This is a screening signal for congestion, not a congestion dollar by
+        itself.</td></tr>
+        <tr><td>Added green line</td><td>A hypothetical new tie created in
+        What-if mode.</td><td>It changes topology/connectivity only. It does
+        not carry measured flow and is not a power-flow simulation.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Core Data Terms</h2>
+    <table>
+      <thead><tr><th>Term</th><th>Definition</th><th>Interpretation</th></tr></thead>
+      <tbody>
+        <tr><td>EIA-930 interchange</td><td>Hourly reported power interchange
+        between balancing authorities.</td><td>The backbone of the map. It is
+        measured telemetry, but it is BA-to-BA accounting, not physical line
+        routing.</td></tr>
+        <tr><td>Gross flow</td><td>Sum of absolute hourly interchange over the
+        year.</td><td>How heavily a tie is used, regardless of which direction
+        dominates.</td></tr>
+        <tr><td>Net flow</td><td>Annual signed flow from the net-exporting side
+        toward the net-importing side.</td><td>Useful for direction, but it can
+        hide back-and-forth hourly usage.</td></tr>
+        <tr><td>Demand / net generation</td><td>Annual EIA-930 BA-level load and
+        generation totals.</td><td>Used to understand whether a region tends
+        to import or export energy.</td></tr>
+        <tr><td>Queue data</td><td>LBNL interconnection queue records joined to
+        BA/seam geography.</td><td>Shows how many projects are waiting,
+        withdrawn, or potentially relevant to a bottleneck.</td></tr>
+        <tr><td>Congestion spread</td><td>Hourly price difference across a seam,
+        preferably using settlement congestion components.</td><td>A measured
+        proxy for dollars trapped by congestion. Stronger than topology alone.</td></tr>
+        <tr><td>Same-year flow</td><td>Using 2025 flow with 2025 spread, 2024
+        flow with 2024 spread, etc.</td><td>Prevents mixing old volumes with
+        new price conditions.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>How To Interpret The Math</h2>
+    <div class="card">
+      <h3>Curvature</h3>
+      <p>Ollivier-Ricci curvature is a structural lens on the graph. Negative
+      curvature means the edge joins neighborhoods that do not overlap much.
+      In grid terms, that is a candidate corridor where congestion, fragility,
+      or single-failure exposure can concentrate.</p>
+      <p><span class="tag warn">Limit</span>Curvature is not a direct physical
+      overload claim and not a dollar claim. It tells you where to look next.</p>
+    </div>
+    <div class="card">
+      <h3>Fiedler / Spectral Seam</h3>
+      <p>The Fiedler vector comes from the graph Laplacian. It finds the weakest
+      global split in the measured interchange network. The map uses it both
+      for the spectral layout and for the blue/amber seam-side colors.</p>
+    </div>
+    <div class="card">
+      <h3>Structural Similarity</h3>
+      <p>The AI tool reports shared-neighbor Jaccard similarity: which BAs
+      connect to similar neighbors. This is intentionally transparent. It is a
+      structural screen for "acts like this BA," not an operational equivalence
+      claim.</p>
+    </div>
+    <div class="card">
+      <h3>What-if Recompute</h3>
+      <p>The UI's What-if mode recomputes connectivity in the browser. The AI
+      server can also run a deeper Python-side Ricci/spectral recompute after
+      cutting ties. Neither one is AC/DC load flow; they explain topology and
+      structure, not how power would physically dispatch after a contingency.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Evidence Levels</h2>
+    <table>
+      <thead><tr><th>Level</th><th>Meaning</th><th>How much to trust it</th></tr></thead>
+      <tbody>
+        <tr><td><span class="tag good">measured</span></td><td>Direct public
+        measurement, such as curtailment MWh or outage customer-hours.</td><td>Strong,
+        subject to source definitions.</td></tr>
+        <tr><td><span class="tag good">measured_proxy</span></td><td>Computed
+        from measured prices/flows, such as hourly congestion-component spread
+        times same-year flow.</td><td>Useful for value ranking; read the source
+        and caveats.</td></tr>
+        <tr><td><span class="tag warn">structural_only</span></td><td>Graph/math
+        evidence without a measured dollar or price observation.</td><td>Good
+        for screening, not for spend decisions by itself.</td></tr>
+        <tr><td><span class="tag warn">validated_hypothesis</span></td><td>A
+        machine-validated candidate that still needs human/domain review.</td><td>Use
+        as a review queue, not as final truth.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Current Findings To Know</h2>
+    <div class="grid">
+      <div class="card"><h3>PJM-NYIS</h3><p>The New York/PJM seam is a major
+      worsening corridor. The 2025 congestion component is much larger than the
+      2023 baseline, and same-year flow makes it a priority study.</p></div>
+      <div class="card"><h3>MISO-SWPP</h3><p>The wind-belt transfer seam has
+      strong MISO-side and SPP-side evidence. It is one of the cleanest
+      reproducible headline numbers.</p></div>
+      <div class="card"><h3>CAISO Curtailment</h3><p>2023 renewable curtailment
+      is 2.66 TWh, and most of it is local/congestion-driven. This supports the
+      "wires problem" interpretation.</p></div>
+      <div class="card"><h3>SPP Curtailment</h3><p>SPP curtailment is much
+      larger than CAISO in 2023 and mostly redispatch/congestion-driven, which
+      replicates the wires-problem pattern outside California.</p></div>
+      <div class="card"><h3>Reliability</h3><p>EAGLE-I shows 1.059B
+      customer-hours lost in 2023. Dollar valuation is huge but screening-grade
+      because customer-class assumptions matter.</p></div>
+      <div class="card"><h3>Interconnection Queue</h3><p>Only 16.5% of decided
+      LBNL queue projects complete. Withdrawn and delayed projects cluster near
+      the same bottleneck geography.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Using The AI Tab</h2>
+    <p>The AI tab is not a hosted chatbot. It works locally when the map is
+    served by <code>domains.grid.agent_server</code>. The server routes natural
+    language to grounded tools and returns cards with provenance and map
+    actions.</p>
+    <div class="callout">
+      <p>Good questions:</p>
+      <p><code>where is power getting stuck?</code></p>
+      <p><code>what areas act like PJM?</code></p>
+      <p><code>why is PJM-NYIS important?</code></p>
+      <p><code>what breaks if PJM-NYIS fails?</code></p>
+      <p><code>what should I look at next?</code></p>
+    </div>
+    <p><b>Highlight on map</b> dims unrelated nodes and ties so the computed
+    result is visible. <b>Apply cut to map</b> switches to What-if mode and
+    disables the tie(s) from the AI scenario.</p>
+  </section>
+
+  <section>
+    <h2>Limits And Honesty Rules</h2>
+    <div class="callout limit">
+      <p>This is not a physical power-flow model, not a transmission-line GIS,
+      and not a replacement for ISO planning studies. It is a public-data
+      screening and evidence instrument.</p>
+    </div>
+    <ul>
+      <li>Geographic lines are schematic BA-to-BA ties, not actual routes.</li>
+      <li>Structural bottlenecks are candidates until joined to measured price,
+      outage, queue, or planning evidence.</li>
+      <li>Some non-market seams have no public LMP on one or both sides.</li>
+      <li>Some BA footprint corrections still need human review.</li>
+      <li>Some public sources expire or change retention windows, so evidence
+      inputs must be archived for long-term reproducibility.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Related Files</h2>
+    <ul>
+      <li><a href="network_map.html">Interactive network map</a></li>
+      <li><a href="https://github.com/Jayhawk314/komposos-grid/blob/master/reports/MASTER_GUIDE.md">Master guide</a></li>
+      <li><a href="https://github.com/Jayhawk314/komposos-grid/blob/master/REPRODUCE.md">Reproduction walkthrough</a></li>
+      <li><a href="https://github.com/Jayhawk314/komposos-grid/blob/master/domains/grid/README.md">Grid domain README</a></li>
+    </ul>
+  </section>
+</main>
+<footer>
+  Generated as a static manual for the KOMPOSOS grid dashboard. Public data
+  sources include EIA-930, eGRID, EIA-923, LBNL queue data, ISO settlement
+  files, CAISO OASIS, SPP/MISO/NYISO/PJM public feeds, and EAGLE-I outage data.
+</footer>
+</body>
+</html>

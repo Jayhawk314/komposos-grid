@@ -325,6 +325,38 @@ Chain totals after this phase: congestion $78.6M over 7 measured ties,
 unified ledger $251.0M (28 claims), 12-action portfolio still led by
 CAISO curtailment ($172.5M upper bound).
 
+## Local AI Handoff
+
+The interactive map includes an `AI` tab backed by a local Python API. It is not
+an online chatbot and it does not require a repo-provided API key. Run the local
+bridge from the repository root:
+
+```bash
+python -m domains.grid.agent_server --port 8000
+```
+
+Then open:
+
+```text
+http://127.0.0.1:8000/network_map.html
+```
+
+The chat panel calls `/api/grid/chat`, and the server answers by running
+grounded JSON tools:
+
+```bash
+python -m domains.grid.agent_tools prompt
+python -m domains.grid.agent_tools manifest
+python -m domains.grid.agent_tools ba PJM
+python -m domains.grid.agent_tools whatif --cut PJM-NYIS
+```
+
+The contract is simple: the local agent reports tool results and provenance,
+labels screening results as screening results, and says when the tools cannot
+ground a claim. In plain GitHub Pages/static mode the page cannot call Python,
+so the AI panel degrades to a message telling the user to start the local
+bridge.
+
 ## Roadmap
 
 1. **Reviewed dashboard pass** - after a domain reviewer edits the review

@@ -1,0 +1,1212 @@
+{
+  "NA - AK": {
+    "centroid": [
+      64.0,
+      -152.0
+    ],
+    "states": [
+      "AK"
+    ],
+    "fuel_mix": {
+      "hydro": 1528438.0,
+      "oil": 843361.4,
+      "coal": 738594.8,
+      "gas": 1328852.0,
+      "othf": -3130.0,
+      "wind": 59183.0,
+      "solar": 46.0
+    }
+  },
+  "CEA": {
+    "centroid": [
+      64.0,
+      -152.0
+    ],
+    "states": [
+      "AK"
+    ],
+    "fuel_mix": {
+      "gas": 1854184.0,
+      "hydro": 244176.0,
+      "wind": 46280.0,
+      "biomass": 38920.0
+    }
+  },
+  "SOCO": {
+    "centroid": [
+      32.5555,
+      -85.1224
+    ],
+    "states": [
+      "AL",
+      "FL",
+      "GA",
+      "MA",
+      "MS"
+    ],
+    "fuel_mix": {
+      "gas": 136541495.5,
+      "solar": 9026541.0,
+      "biomass": 10254664.5,
+      "hydro": 6167800.0,
+      "coal": 35935397.0,
+      "nuclear": 52135365.0,
+      "oil": 445980.4
+    }
+  },
+  "TVA": {
+    "centroid": [
+      34.6637,
+      -86.9232
+    ],
+    "states": [
+      "AL",
+      "GA",
+      "KY",
+      "MS",
+      "NC",
+      "TN",
+      "VA"
+    ],
+    "fuel_mix": {
+      "nuclear": 68757947.0,
+      "gas": 55617351.5,
+      "solar": 1618747.4,
+      "biomass": 1045777.7,
+      "hydro": 15029868.0,
+      "coal": 22805963.0,
+      "oil": 645.0,
+      "wind": 16213.0
+    }
+  },
+  "MISO": {
+    "centroid": [
+      39.6166,
+      -91.2196
+    ],
+    "states": [
+      "AR",
+      "FL",
+      "IA",
+      "IL",
+      "IN",
+      "KY",
+      "LA",
+      "MI",
+      "MN",
+      "MO",
+      "MS",
+      "MT",
+      "ND",
+      "SD",
+      "TX",
+      "WI"
+    ],
+    "fuel_mix": {
+      "nuclear": 87177069.0,
+      "solar": 9111524.5,
+      "hydro": 7866272.0,
+      "gas": 244263637.0,
+      "biomass": 9341170.8,
+      "coal": 191002260.2,
+      "wind": 92310535.0,
+      "oil": 2163751.5,
+      "othf": 6009135.6,
+      "ofsl": 2728891.0
+    }
+  },
+  "SWPP": {
+    "centroid": [
+      37.6157,
+      -98.3469
+    ],
+    "states": [
+      "AR",
+      "CO",
+      "IA",
+      "KS",
+      "LA",
+      "MN",
+      "MO",
+      "MT",
+      "ND",
+      "NE",
+      "NM",
+      "OK",
+      "SD",
+      "TX"
+    ],
+    "fuel_mix": {
+      "biomass": 1418257.9,
+      "solar": 1013732.0,
+      "gas": 79117532.6,
+      "hydro": 8347192.0,
+      "coal": 69870254.0,
+      "oil": 78457.3,
+      "wind": 102121421.0,
+      "othf": 298266.0,
+      "nuclear": 17227918.0,
+      "ofsl": 45620.0
+    }
+  },
+  "SPA": {
+    "centroid": [
+      36.2637,
+      -94.3194
+    ],
+    "states": [
+      "AR",
+      "MO",
+      "OK"
+    ],
+    "fuel_mix": {
+      "hydro": 3368751.0,
+      "gas": 810.0,
+      "solar": 34457.0,
+      "coal": 1359345.0,
+      "oil": 1709.1,
+      "wind": 1433724.0
+    }
+  },
+  "AECI": {
+    "centroid": [
+      37.0825,
+      -93.8796
+    ],
+    "states": [
+      "AR",
+      "IA",
+      "MO",
+      "OK"
+    ],
+    "fuel_mix": {
+      "gas": 13349512.0,
+      "solar": 2870.0,
+      "oil": 348.0,
+      "biomass": 16475.0,
+      "wind": 2596551.0,
+      "hydro": 37164.0,
+      "coal": 10648347.0
+    }
+  },
+  "SRP": {
+    "centroid": [
+      34.2,
+      -111.7
+    ],
+    "states": [
+      "AZ"
+    ],
+    "fuel_mix": {
+      "gas": 32772762.0,
+      "solar": 1569365.0,
+      "coal": 3082129.0,
+      "wind": 111556.0,
+      "hydro": 329207.0,
+      "nuclear": 31522590.0,
+      "othf": -2948.0
+    }
+  },
+  "AZPS": {
+    "centroid": [
+      34.2919,
+      -109.1271
+    ],
+    "states": [
+      "AZ",
+      "NM"
+    ],
+    "fuel_mix": {
+      "gas": 4296981.0,
+      "solar": 1876537.0,
+      "wind": 592680.0,
+      "coal": 9222616.0,
+      "oil": 90.0,
+      "biomass": 193150.0
+    }
+  },
+  "TEPC": {
+    "centroid": [
+      34.2162,
+      -111.2463
+    ],
+    "states": [
+      "AZ",
+      "NM"
+    ],
+    "fuel_mix": {
+      "solar": 1096819.0,
+      "gas": 1586312.6,
+      "othf": -341.0,
+      "coal": 6733669.9,
+      "wind": 830233.0
+    }
+  },
+  "CISO": {
+    "centroid": [
+      37.1997,
+      -119.2413
+    ],
+    "states": [
+      "AZ",
+      "CA",
+      "NV"
+    ],
+    "fuel_mix": {
+      "solar": 41177452.0,
+      "wind": 13938564.0,
+      "hydro": 23371281.0,
+      "biomass": 4736323.9,
+      "gas": 77874038.9,
+      "othf": 139602.0,
+      "geothermal": 8050010.0,
+      "coal": 244809.5,
+      "nuclear": 17718368.0,
+      "oil": 35426.0
+    }
+  },
+  "WALC": {
+    "centroid": [
+      35.1822,
+      -113.3874
+    ],
+    "states": [
+      "AZ",
+      "CA",
+      "NV"
+    ],
+    "fuel_mix": {
+      "solar": 747353.0,
+      "coal": 1982377.0,
+      "hydro": 7395094.0,
+      "wind": 961409.0,
+      "gas": 5329686.0
+    }
+  },
+  "DEAA": {
+    "centroid": [
+      34.2,
+      -111.7
+    ],
+    "states": [
+      "AZ"
+    ],
+    "fuel_mix": {
+      "gas": 3496839.0
+    }
+  },
+  "GRIF": {
+    "centroid": [
+      34.2,
+      -111.7
+    ],
+    "states": [
+      "AZ"
+    ],
+    "fuel_mix": {
+      "gas": 3670670.0
+    }
+  },
+  "HGMA": {
+    "centroid": [
+      34.2,
+      -111.7
+    ],
+    "states": [
+      "AZ"
+    ],
+    "fuel_mix": {
+      "gas": 2326465.0
+    }
+  },
+  "LDWP": {
+    "centroid": [
+      37.8862,
+      -117.0569
+    ],
+    "states": [
+      "CA",
+      "NV",
+      "UT"
+    ],
+    "fuel_mix": {
+      "solar": 2414586.0,
+      "gas": 7664544.1,
+      "othf": 572780.0,
+      "hydro": 797045.0,
+      "ofsl": 334633.0,
+      "biomass": 147296.0,
+      "wind": 546219.0,
+      "coal": 4448880.0
+    }
+  },
+  "PACW": {
+    "centroid": [
+      44.5526,
+      -120.5337
+    ],
+    "states": [
+      "CA",
+      "OR",
+      "WA"
+    ],
+    "fuel_mix": {
+      "solar": 850480.0,
+      "hydro": 3131001.0,
+      "biomass": 403872.0,
+      "wind": 1206268.0,
+      "gas": 3027140.0
+    }
+  },
+  "BANC": {
+    "centroid": [
+      37.2,
+      -119.4
+    ],
+    "states": [
+      "CA"
+    ],
+    "fuel_mix": {
+      "solar": 477041.0,
+      "hydro": 6433512.0,
+      "gas": 2427166.0,
+      "ofsl": 2914550.0,
+      "biomass": 66639.0
+    }
+  },
+  "TIDC": {
+    "centroid": [
+      37.2,
+      -119.4
+    ],
+    "states": [
+      "CA"
+    ],
+    "fuel_mix": {
+      "gas": 1754444.0,
+      "hydro": 566651.0
+    }
+  },
+  "IID": {
+    "centroid": [
+      37.2,
+      -119.4
+    ],
+    "states": [
+      "CA"
+    ],
+    "fuel_mix": {
+      "geothermal": 3687547.0,
+      "solar": 891380.0,
+      "gas": 1195849.5,
+      "biomass": 201906.0,
+      "hydro": 174064.0
+    }
+  },
+  "NEVP": {
+    "centroid": [
+      39.2996,
+      -116.6005
+    ],
+    "states": [
+      "CA",
+      "NV"
+    ],
+    "fuel_mix": {
+      "hydro": 79601.0,
+      "gas": 23044591.5,
+      "solar": 6907597.0,
+      "geothermal": 3769305.0,
+      "othf": 28265.0,
+      "coal": 2067528.0,
+      "biomass": 53667.0,
+      "wind": 291247.0
+    }
+  },
+  "WACM": {
+    "centroid": [
+      40.8683,
+      -106.2983
+    ],
+    "states": [
+      "CO",
+      "ND",
+      "NE",
+      "NM",
+      "SD",
+      "UT",
+      "WY"
+    ],
+    "fuel_mix": {
+      "solar": 528681.0,
+      "hydro": 1556514.0,
+      "oil": 3979.0,
+      "wind": 4475798.0,
+      "coal": 27560276.0,
+      "othf": 46189.0,
+      "gas": 3305466.0,
+      "biomass": 10875.0
+    }
+  },
+  "PSCO": {
+    "centroid": [
+      39.0,
+      -105.5
+    ],
+    "states": [
+      "CO"
+    ],
+    "fuel_mix": {
+      "solar": 3106520.0,
+      "oil": 6957.0,
+      "gas": 14543812.5,
+      "hydro": 192096.0,
+      "wind": 13652624.0,
+      "biomass": 122633.0,
+      "coal": 6654443.0
+    }
+  },
+  "PACE": {
+    "centroid": [
+      41.2393,
+      -109.836
+    ],
+    "states": [
+      "CO",
+      "ID",
+      "MT",
+      "UT",
+      "WY"
+    ],
+    "fuel_mix": {
+      "hydro": 784613.0,
+      "gas": 12722864.0,
+      "wind": 9128035.0,
+      "biomass": 85749.0,
+      "solar": 4097980.0,
+      "geothermal": 458024.0,
+      "coal": 27361666.0,
+      "othf": 200651.4,
+      "oil": 675.0,
+      "ofsl": 7267.8
+    }
+  },
+  "ISNE": {
+    "centroid": [
+      42.5956,
+      -71.8186
+    ],
+    "states": [
+      "CT",
+      "MA",
+      "ME",
+      "NH",
+      "NY",
+      "RI",
+      "VT"
+    ],
+    "fuel_mix": {
+      "solar": 3693703.0,
+      "gas": 57459766.8,
+      "oil": 184183.9,
+      "hydro": 8164588.0,
+      "biomass": 5526458.9,
+      "nuclear": 23204239.0,
+      "wind": 3337269.1,
+      "othf": -1387.0,
+      "ofsl": 409066.0,
+      "coal": 161737.0
+    }
+  },
+  "PJM": {
+    "centroid": [
+      40.0051,
+      -81.1825
+    ],
+    "states": [
+      "DC",
+      "DE",
+      "IL",
+      "IN",
+      "KY",
+      "MD",
+      "MI",
+      "MN",
+      "NC",
+      "NJ",
+      "OH",
+      "PA",
+      "TN",
+      "VA",
+      "WV"
+    ],
+    "fuel_mix": {
+      "gas": 372088855.2,
+      "solar": 14262114.3,
+      "biomass": 9198728.2,
+      "oil": 2967871.6,
+      "othf": 2631620.0,
+      "coal": 113682668.0,
+      "wind": 28455903.0,
+      "nuclear": 272591331.0,
+      "hydro": 6451063.0,
+      "ofsl": 660038.9
+    }
+  },
+  "FMPP": {
+    "centroid": [
+      28.6,
+      -82.4
+    ],
+    "states": [
+      "FL"
+    ],
+    "fuel_mix": {
+      "solar": 379390.0,
+      "gas": 7975329.2,
+      "coal": 5275453.0
+    }
+  },
+  "JEA": {
+    "centroid": [
+      28.6,
+      -82.4
+    ],
+    "states": [
+      "FL"
+    ],
+    "fuel_mix": {
+      "solar": 62854.0,
+      "gas": 8979908.0,
+      "biomass": 775213.6
+    }
+  },
+  "TEC": {
+    "centroid": [
+      28.6,
+      -82.4
+    ],
+    "states": [
+      "FL"
+    ],
+    "fuel_mix": {
+      "solar": 1718240.0,
+      "gas": 19729827.0,
+      "biomass": 351502.0,
+      "othf": 856827.0
+    }
+  },
+  "FPC": {
+    "centroid": [
+      28.6,
+      -82.4
+    ],
+    "states": [
+      "FL"
+    ],
+    "fuel_mix": {
+      "solar": 2266372.0,
+      "gas": 43550411.5,
+      "oil": 4482.0,
+      "biomass": 1015664.0,
+      "othf": 91490.0
+    }
+  },
+  "FPL": {
+    "centroid": [
+      28.6,
+      -82.4
+    ],
+    "states": [
+      "FL"
+    ],
+    "fuel_mix": {
+      "solar": 8749453.0,
+      "biomass": 2141010.0,
+      "gas": 92232183.0,
+      "oil": 2890.0,
+      "hydro": 224192.0,
+      "nuclear": 36522784.0
+    }
+  },
+  "TAL": {
+    "centroid": [
+      28.6,
+      -82.4
+    ],
+    "states": [
+      "FL"
+    ],
+    "fuel_mix": {
+      "gas": 3056533.0,
+      "solar": 106314.0
+    }
+  },
+  "SEC": {
+    "centroid": [
+      28.6,
+      -82.4
+    ],
+    "states": [
+      "FL"
+    ],
+    "fuel_mix": {
+      "solar": 60434.7,
+      "biomass": 9659.0,
+      "gas": 2681992.0,
+      "coal": 9880840.0
+    }
+  },
+  "GVL": {
+    "centroid": [
+      28.6,
+      -82.4
+    ],
+    "states": [
+      "FL"
+    ],
+    "fuel_mix": {
+      "solar": 3423.0,
+      "gas": 1065963.0,
+      "biomass": 288855.0
+    }
+  },
+  "HST": {
+    "centroid": [
+      28.6,
+      -82.4
+    ],
+    "states": [
+      "FL"
+    ],
+    "fuel_mix": {
+      "gas": -3965.0
+    }
+  },
+  "SEPA": {
+    "centroid": [
+      33.2132,
+      -82.2319
+    ],
+    "states": [
+      "GA",
+      "NC",
+      "SC"
+    ],
+    "fuel_mix": {
+      "solar": 41345.0,
+      "hydro": 1341988.0,
+      "biomass": 4005.0
+    }
+  },
+  "SCEG": {
+    "centroid": [
+      33.8961,
+      -80.9076
+    ],
+    "states": [
+      "GA",
+      "SC"
+    ],
+    "fuel_mix": {
+      "hydro": 472651.0,
+      "solar": 1835137.0,
+      "gas": 11744926.0,
+      "biomass": 735588.0,
+      "oil": -271.0,
+      "nuclear": 7515709.0,
+      "coal": 3738066.0
+    }
+  },
+  "NA - HI": {
+    "centroid": [
+      20.3,
+      -156.4
+    ],
+    "states": [
+      "HI"
+    ],
+    "fuel_mix": {
+      "solar": 130028.0,
+      "biomass": 42207.0,
+      "hydro": 93299.0,
+      "oil": 1964125.7,
+      "wind": 231476.0,
+      "geothermal": 192588.0
+    }
+  },
+  "HECO": {
+    "centroid": [
+      20.3,
+      -156.4
+    ],
+    "states": [
+      "HI"
+    ],
+    "fuel_mix": {
+      "solar": 519226.0,
+      "wind": 367047.0,
+      "oil": 5265438.0,
+      "biomass": 353183.0
+    }
+  },
+  "IPCO": {
+    "centroid": [
+      44.2695,
+      -116.1662
+    ],
+    "states": [
+      "ID",
+      "OR"
+    ],
+    "fuel_mix": {
+      "hydro": 7264343.0,
+      "gas": 3006699.9,
+      "solar": 1010428.0,
+      "biomass": 76772.0,
+      "wind": 1810068.0,
+      "oil": 49.0,
+      "othf": 72415.0,
+      "geothermal": 175991.0
+    }
+  },
+  "BPAT": {
+    "centroid": [
+      46.2793,
+      -120.0945
+    ],
+    "states": [
+      "ID",
+      "MT",
+      "OR",
+      "WA",
+      "WY"
+    ],
+    "fuel_mix": {
+      "hydro": 60918736.0,
+      "wind": 7956459.0,
+      "geothermal": 88590.0,
+      "biomass": 1329481.7,
+      "solar": 197097.0,
+      "gas": 11808861.7,
+      "coal": 4143372.0,
+      "nuclear": 8435018.0
+    }
+  },
+  "AVA": {
+    "centroid": [
+      45.9145,
+      -115.9612
+    ],
+    "states": [
+      "ID",
+      "MT",
+      "WA"
+    ],
+    "fuel_mix": {
+      "hydro": 3956628.0,
+      "biomass": 868666.0,
+      "gas": 2653006.0,
+      "solar": 37050.0,
+      "wind": 640486.0
+    }
+  },
+  "LGEE": {
+    "centroid": [
+      37.5,
+      -85.3
+    ],
+    "states": [
+      "KY",
+      "VA"
+    ],
+    "fuel_mix": {
+      "gas": 5053707.0,
+      "hydro": 316011.0,
+      "coal": 25650199.0,
+      "biomass": 1726.0,
+      "oil": 337.1
+    }
+  },
+  "NBSO": {
+    "centroid": [
+      45.4,
+      -69.2
+    ],
+    "states": [
+      "ME"
+    ],
+    "fuel_mix": {
+      "solar": 4294.0,
+      "wind": 104817.0,
+      "hydro": 682.0,
+      "othf": 100828.0,
+      "biomass": 366562.0
+    }
+  },
+  "NWMT": {
+    "centroid": [
+      46.9999,
+      -109.5999
+    ],
+    "states": [
+      "MT",
+      "WY"
+    ],
+    "fuel_mix": {
+      "solar": 240185.0,
+      "gas": 658793.0,
+      "wind": 1415330.0,
+      "hydro": 3363905.0,
+      "coal": 11567774.0,
+      "oil": 491261.0
+    }
+  },
+  "WAUW": {
+    "centroid": [
+      44.7336,
+      -109.2369
+    ],
+    "states": [
+      "MT",
+      "UT",
+      "WY"
+    ],
+    "fuel_mix": {
+      "hydro": 3197470.0,
+      "wind": 179080.0
+    }
+  },
+  "PSEI": {
+    "centroid": [
+      47.361,
+      -119.4385
+    ],
+    "states": [
+      "MT",
+      "WA"
+    ],
+    "fuel_mix": {
+      "wind": 2494291.0,
+      "hydro": 834572.0,
+      "solar": 32051.0,
+      "biomass": 194117.0,
+      "oil": 10.0,
+      "gas": 9956358.0,
+      "othf": -54.0
+    }
+  },
+  "GWA": {
+    "centroid": [
+      47.0,
+      -109.6
+    ],
+    "states": [
+      "MT"
+    ],
+    "fuel_mix": {
+      "wind": 456345.0
+    }
+  },
+  "WWA": {
+    "centroid": [
+      47.0,
+      -109.6
+    ],
+    "states": [
+      "MT"
+    ],
+    "fuel_mix": {
+      "wind": 563641.0
+    }
+  },
+  "DUK": {
+    "centroid": [
+      34.7741,
+      -80.0805
+    ],
+    "states": [
+      "NC",
+      "SC"
+    ],
+    "fuel_mix": {
+      "solar": 3507031.0,
+      "oil": 953.0,
+      "hydro": 1104101.0,
+      "gas": 36958632.6,
+      "biomass": 331944.7,
+      "coal": 6980154.0,
+      "nuclear": 59480629.0
+    }
+  },
+  "CPLE": {
+    "centroid": [
+      35.322,
+      -79.5669
+    ],
+    "states": [
+      "NC",
+      "SC"
+    ],
+    "fuel_mix": {
+      "solar": 5141431.0,
+      "gas": 23270741.0,
+      "hydro": 607256.0,
+      "nuclear": 30961728.0,
+      "biomass": 1475193.4,
+      "oil": 1989.8,
+      "coal": 5257790.0,
+      "othf": 236604.0
+    }
+  },
+  "CPLW": {
+    "centroid": [
+      35.5,
+      -79.4
+    ],
+    "states": [
+      "NC"
+    ],
+    "fuel_mix": {
+      "solar": 41606.0,
+      "othf": -216.0
+    }
+  },
+  "YAD": {
+    "centroid": [
+      35.5,
+      -79.4
+    ],
+    "states": [
+      "NC"
+    ],
+    "fuel_mix": {
+      "hydro": 825435.0
+    }
+  },
+  "NYIS": {
+    "centroid": [
+      42.7676,
+      -75.4608
+    ],
+    "states": [
+      "NJ",
+      "NY"
+    ],
+    "fuel_mix": {
+      "gas": 64258890.4,
+      "solar": 2046296.0,
+      "oil": 502716.5,
+      "othf": -13896.0,
+      "hydro": 28031194.0,
+      "wind": 4771901.4,
+      "biomass": 2584517.8,
+      "nuclear": 27524923.0
+    }
+  },
+  "PNM": {
+    "centroid": [
+      34.4,
+      -106.1
+    ],
+    "states": [
+      "NM"
+    ],
+    "fuel_mix": {
+      "gas": 6837592.0,
+      "solar": 1297953.7,
+      "wind": 8595946.0,
+      "othf": 149260.0,
+      "geothermal": 35858.0,
+      "biomass": 20036.1
+    }
+  },
+  "GRIS": {
+    "centroid": [
+      34.4,
+      -106.1
+    ],
+    "states": [
+      "NM"
+    ],
+    "fuel_mix": {
+      "wind": 1232745.0
+    }
+  },
+  "EPE": {
+    "centroid": [
+      32.2677,
+      -101.0852
+    ],
+    "states": [
+      "NM",
+      "TX",
+      "UT"
+    ],
+    "fuel_mix": {
+      "solar": 555207.0,
+      "wind": 131779.0,
+      "gas": 5454398.3,
+      "biomass": 15760.0
+    }
+  },
+  "ERCO": {
+    "centroid": [
+      31.5435,
+      -99.2809
+    ],
+    "states": [
+      "OK",
+      "TX"
+    ],
+    "fuel_mix": {
+      "gas": 229432484.4,
+      "solar": 27340253.0,
+      "hydro": 349080.0,
+      "wind": 106676687.0,
+      "biomass": 412176.0,
+      "othf": 1474261.0,
+      "oil": 139978.0,
+      "ofsl": 3917523.0,
+      "coal": 62518486.0,
+      "nuclear": 40679870.0
+    }
+  },
+  "PGE": {
+    "centroid": [
+      44.0611,
+      -120.5954
+    ],
+    "states": [
+      "OR",
+      "WA"
+    ],
+    "fuel_mix": {
+      "solar": 271650.0,
+      "gas": 10964645.0,
+      "wind": 1612998.0,
+      "biomass": 65942.0,
+      "hydro": 1822049.0,
+      "othf": -338.0
+    }
+  },
+  "AVRN": {
+    "centroid": [
+      44.4009,
+      -120.5857
+    ],
+    "states": [
+      "OR",
+      "WA"
+    ],
+    "fuel_mix": {
+      "wind": 3729374.0,
+      "gas": 3065321.6,
+      "solar": 598265.0
+    }
+  },
+  "GRID": {
+    "centroid": [
+      43.9,
+      -120.6
+    ],
+    "states": [
+      "OR"
+    ],
+    "fuel_mix": {
+      "gas": 3918106.2
+    }
+  },
+  "nan": {
+    "centroid": [
+      41.7,
+      -71.5
+    ],
+    "states": [
+      "RI"
+    ],
+    "fuel_mix": {
+      "oil": 55.0
+    }
+  },
+  "SC": {
+    "centroid": [
+      33.9,
+      -80.9
+    ],
+    "states": [
+      "SC"
+    ],
+    "fuel_mix": {
+      "biomass": 787478.0,
+      "solar": 457902.0,
+      "coal": 11095910.0,
+      "oil": -734.0,
+      "hydro": 465214.0,
+      "gas": 5588958.0
+    }
+  },
+  "TPWR": {
+    "centroid": [
+      47.4,
+      -120.5
+    ],
+    "states": [
+      "WA"
+    ],
+    "fuel_mix": {
+      "hydro": 2015293.0,
+      "biomass": 179307.2
+    }
+  },
+  "SCL": {
+    "centroid": [
+      47.4,
+      -120.5
+    ],
+    "states": [
+      "WA"
+    ],
+    "fuel_mix": {
+      "hydro": 4587134.0,
+      "gas": 1302.8,
+      "biomass": 7214.0
+    }
+  },
+  "CHPD": {
+    "centroid": [
+      47.4,
+      -120.5
+    ],
+    "states": [
+      "WA"
+    ],
+    "fuel_mix": {
+      "hydro": 7339987.0
+    }
+  },
+  "GCPD": {
+    "centroid": [
+      47.4,
+      -120.5
+    ],
+    "states": [
+      "WA"
+    ],
+    "fuel_mix": {
+      "hydro": 4131457.0
+    }
+  },
+  "DOPD": {
+    "centroid": [
+      47.4,
+      -120.5
+    ],
+    "states": [
+      "WA"
+    ],
+    "fuel_mix": {
+      "hydro": 3498318.0
+    }
+  }
+}
