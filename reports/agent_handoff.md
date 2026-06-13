@@ -490,6 +490,26 @@ python -m domains.grid.run_solution_studies `
   - Existing `streamlit_app.py` is a personal portfolio site, not a
     findings dashboard — unrelated, untouched.
 
+## State as of 2026-06-12 (SVG charts everywhere)
+
+- `domains/grid/charts.py`: pure-Python SVG chart generator (no
+  matplotlib, no JS; line + grouped-bar, label-collision nudging,
+  1/2/5 axis ceilings). Tests in tests/test_grid_charts.py.
+- Dashboard now embeds: seam-trend lines, corridor-value bars,
+  project-B/C bars vs break-even line, CHPE 4-window bars.
+- `run_dashboard` also writes standalone figures to
+  `reports/figures/*.svg`; MASTER_GUIDE embeds them at §3.2/3.3/3.4;
+  `reports/figures/README.md` is a stand-alone "findings in four
+  pictures" doc with plain-English explanations (user-requested).
+- Display consistency: cards still carry the older inferred-baseline
+  value ($142.4M NYIS-PJM); `study_value_overrides` makes the
+  dashboard table + value chart prefer the same-year study values
+  ($159.7M) so the public page never shows two numbers for one
+  corridor. The cards JSON itself is unchanged.
+- Visual QA done via PyMuPDF SVG->PNG renders (label collisions and
+  truncated bar labels found and fixed this way).
+- Validation: full suite `448 passed, 2 skipped`.
+
 ## Best next handoff target
 
 - Run the true clean-room reproduction (fresh clone, fresh venv,

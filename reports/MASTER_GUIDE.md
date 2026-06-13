@@ -92,6 +92,10 @@ across a seam is money lost every hour the border is congested.
 | Northwest ↔ California (BPAT-CISO) | corrected to $1.11 | $6.1M/yr | Validated screen |
 | ERCOT West-North (Texas, internal) | 2023: $4.94 → 2024: $5.40 → 2025: $5.78 | not yet valued | Watchlist |
 
+![Seam congestion spread by year — the New York line is the steep one](figures/seam_trends.svg)
+
+![What each border bottleneck costs per year](figures/corridor_values.svg)
+
 > **In plain English:** Two borders are getting dramatically worse.
 > New York paid more than PJM (its neighbor to the south/west) in
 > **97.9% of all hours in 2025** — New York is almost permanently the
@@ -135,6 +139,8 @@ physical equipment:
   cost, voltage problems) are not counted yet — so the true B/C is
   likely well above 1.
 
+![Does the fix pay for itself? Project benefit/cost vs the break-even line](figures/project_bc.svg)
+
 > **In plain English:** We found the grid's worst traffic jam, the
 > agency that owns the road, the reason traffic exploded (a bitcoin
 > mine moved in), and the bypass highway that's already been approved
@@ -161,6 +167,8 @@ First measurement (one month of data, `reports/chpe_event_study.md`):
 | Spring 2025, post-May-13 | $2.10 | $1.35 | 98.8% |
 | Spring 2026, pre-CHPE | $2.64 | $1.42 | 97.4% |
 | Spring 2026, post-CHPE | $3.24 | $2.05 | 97.8% |
+
+![PJM-NYIS seam before and after CHPE, 2025 as the seasonal control](figures/chpe_event_study.svg)
 
 Result: a **difference-in-differences of −0.31 $/MWh** — mild relief
 beyond normal seasonal patterns, but **the spread did not collapse**.

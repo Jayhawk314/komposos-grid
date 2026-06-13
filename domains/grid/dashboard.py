@@ -20,12 +20,22 @@ from __future__ import annotations
 
 import csv
 import json
+import re
 from datetime import date
 from html import escape
 from pathlib import Path
 from typing import Any, Dict, List, Mapping, Sequence
 
+from domains.grid.charts import bar_chart, line_chart
+
 REPO_URL = "https://github.com/Jayhawk314/komposos-grid"
+
+_TREND_RE = re.compile(r"(20\d{2}) \$([\d.]+)/MWh")
+
+
+def parse_trend_summary(text: str) -> List[tuple[int, float]]:
+    """Extract (year, $/MWh) pairs from a card's trend_summary string."""
+    return [(int(y), float(v)) for y, v in _TREND_RE.findall(str(text))]
 
 
 def load_inputs(reports_dir: str | Path = "reports") -> Dict[str, Any]:
@@ -67,11 +77,24 @@ def build_dashboard_html(
 ) -> str:
     generated = generated or date.today()
     metrics = _metric_cards(studies, projects, chpe)
-    sections = [
-        _band("Corridors, ranked", _corridor_table(cards)),
-        _band("Real projects vs the congestion they would relieve",
-              _project_table(projects)),
-    ]
+    sections = []
+    trend_svg = seam_trend_chart(cards)
+    if trend_svg:
+        sections.append(_band(
+            "The trend, drawn",
+            "<p>Congestion spread per seam, by year — the New York seam "
+            "is the steep one.</p>" + trend_svg,
+        ))
+    sections.append(_band("Corridors, ranked",
+                          _corridor_table(cards, studies)))
+    project_body = _project_table(projects)
+    bc_svg = project_bc_chart(projects)
+    if bc_svg:
+        project_body += ("<p>Above the dashed line, a project pays for "
+                         "itself on seam congestion value alone.</p>"
+                         + bc_svg)
+    sections.append(_band(
+        "Real projects vs the congestion they would relieve", project_body))
     if chpe:
         sections.append(_band("The CHPE natural experiment", _chpe_section(chpe)))
     sections.append(_band("Read this before quoting numbers", _trust_note()))
@@ -98,6 +121,109 @@ def build_dashboard_html(
         "the guide. Spread = hourly price gap between regions; B/C &gt; 1 "
         "means a fix pays for itself on congestion value alone.</p></footer>"
         "</main></body></html>\n"
+    )
+
+
+def seam_trend_chart(cards: Sequence[Mapping[str, Any]]) -> str:
+    """Line chart of congestion spread by year for every card with a trend."""
+    per_seam: Dict[str, Dict[int, float]] = {}
+    years: set[int] = set()
+    for card in cards:
+        points = parse_trend_summary(card.get("trend_summary", ""))
+        if len(points) < 2:
+            continue
+        name = str(card.get("geography", ""))
+        per_seam[name] = dict(points)
+        years.update(y for y, _ in points)
+    if not per_seam:
+        return ""
+    x_labels = sorted(years)
+    series = {
+        name: [vals.get(year) for year in x_labels]
+        for name, vals in per_seam.items()
+    }
+    return line_chart(
+        x_labels, series,
+        title="Seam congestion spread by year",
+        y_label="$/MWh (mean hourly congestion-component spread)",
+    )
+
+
+def study_value_overrides(
+    studies: Sequence[Mapping[str, Any]],
+) -> Dict[str, float]:
+    """Same-year study values supersede card values for display.
+
+    Cards value corridors on the inferred flow baseline; the studies
+    re-value the priority corridors on same-year flows. Showing both
+    side by side would look like a contradiction, so display always
+    prefers the study number.
+    """
+    return {
+        str(s.get("geography", "")): float(s.get("annual_value_usd", 0) or 0)
+        for s in studies
+        if float(s.get("annual_value_usd", 0) or 0) > 0
+    }
+
+
+def corridor_value_chart(
+    cards: Sequence[Mapping[str, Any]],
+    studies: Sequence[Mapping[str, Any]] = (),
+) -> str:
+    """Bar chart of annual congestion value per corridor, $M/yr."""
+    overrides = study_value_overrides(studies)
+    cats, vals = [], []
+    for card in cards:
+        geography = str(card.get("geography", ""))
+        value = overrides.get(
+            geography, float(card.get("annual_value_usd", 0) or 0))
+        if value <= 0:
+            continue
+        cats.append(geography)
+        vals.append(value / 1e6)
+    if not cats:
+        return ""
+    return bar_chart(
+        cats, {"Annual congestion value": vals},
+        title="What each border bottleneck costs per year",
+        y_label="$ million per year",
+        value_fmt="{:.1f}",
+    )
+
+
+def project_bc_chart(projects: Sequence[Mapping[str, Any]]) -> str:
+    """Bar chart of project benefit/cost ratios against the 1.0 line."""
+    cats, vals = [], []
+    for row in projects:
+        bcr = float(row.get("benefit_cost_ratio", 0) or 0)
+        if bcr <= 0:
+            continue
+        cats.append(str(row.get("project_name", row.get("project_id", ""))))
+        vals.append(bcr)
+    if not cats:
+        return ""
+    return bar_chart(
+        cats, {"B/C on seam value alone": vals},
+        title="Does the fix pay for itself?",
+        y_label="benefit / cost per year",
+        ref_line=1.0, ref_label="break-even",
+    )
+
+
+def chpe_chart(chpe: Mapping[str, Any]) -> str:
+    """Grouped bars for the four event-study windows."""
+    cats, lbmp, congestion = [], [], []
+    for key in ("pre_2025", "post_2025", "pre_2026", "post_2026"):
+        cell = chpe.get(key) or {}
+        cats.append(str(cell.get("label", key)))
+        lbmp.append(float(cell.get("mean_abs_lbmp_spread_usd_mwh", 0)))
+        congestion.append(
+            float(cell.get("mean_abs_congestion_spread_usd_mwh", 0)))
+    return bar_chart(
+        cats,
+        {"Full price spread": lbmp, "Congestion component": congestion},
+        title="PJM-NYIS seam, before and after CHPE (2025 = control)",
+        y_label="$/MWh",
     )
 
 
@@ -136,18 +262,24 @@ def _metric_cards(
     return out
 
 
-def _corridor_table(cards: Sequence[Mapping[str, Any]]) -> str:
+def _corridor_table(
+    cards: Sequence[Mapping[str, Any]],
+    studies: Sequence[Mapping[str, Any]] = (),
+) -> str:
     if not cards:
         return "<p>No corridor cards available.</p>"
+    overrides = study_value_overrides(studies)
     rows = []
     for card in cards:
+        geography = str(card.get("geography", ""))
+        value = overrides.get(
+            geography, float(card.get("annual_value_usd", 0) or 0))
         rows.append([
-            str(card.get("geography", "")),
+            geography,
             str(card.get("solution_status", "")).replace("_", " "),
             str(card.get("current_year", "")),
             f"${float(card.get('spread_usd_mwh', 0)):.2f}/MWh",
-            f"{fmt_money(card.get('annual_value_usd', 0))}/yr"
-            if float(card.get("annual_value_usd", 0) or 0) > 0 else "—",
+            f"{fmt_money(value)}/yr" if value > 0 else "—",
             str(card.get("trend_summary", "")),
         ])
     return _table(
@@ -206,6 +338,7 @@ def _chpe_section(chpe: Mapping[str, Any]) -> str:
              "NY more expensive"],
             rows,
         )
+        + chpe_chart(chpe)
         + f"<p><strong>Difference-in-differences: {did:+.2f} $/MWh</strong> "
         f"— {verdict}. One month of data; the summer rerun decides.</p>"
     )
