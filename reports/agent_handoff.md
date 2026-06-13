@@ -510,6 +510,69 @@ python -m domains.grid.run_solution_studies `
   truncated bar labels found and fixed this way).
 - Validation: full suite `448 passed, 2 skipped`.
 
+## State as of 2026-06-13 (interactive network map + local AI)
+
+- Commit pushed to `grid/master`: `93f5daf Grid map manual and local agent chat`.
+  Repo: https://github.com/Jayhawk314/komposos-grid.git.
+- Interactive BA network map shipped:
+  - Source: `domains/grid/network_map.py`, runner
+    `domains/grid/run_network_map.py`, output `docs/network_map.html`.
+  - Multi-year selector covers 2023/2024/2025 EIA-930 interchange.
+  - Views: Geographic (eGRID BA footprint centroids) and Spectral
+    (flow-graph Laplacian layout).
+  - Mobile/touch support: pointer-event pan/zoom, pinch zoom, tap
+    selection, mobile inspector stacking, collapsed legend on phones.
+  - What-if mode: click a tie to cut, a BA to outage all ties, add a
+    hypothetical link, undo, and inspect component/islanding summary.
+- Local AI bridge shipped:
+  - `domains/grid/agent_server.py`: stdlib HTTP server serving
+    `docs/network_map.html` plus `POST /api/grid/chat`.
+  - `domains/grid/agent_tools.py`: grounded JSON tools (`ba`, `tie`,
+    `path`, `similar`, `bottlenecks`, `seam`, `whatif`, `gaps`,
+    `manifest`, `prompt`).
+  - `domains/grid/agent_contract.py` + `domains/grid/AGENTS.md`:
+    vendor-neutral local-agent contract.
+  - Start the connected local UI with:
+    `python -m domains.grid.agent_server --port 8000`
+    then open `http://127.0.0.1:8000/network_map.html`.
+  - Do not use plain `python -m http.server` when testing the AI tab;
+    static mode cannot call Python tools. The AI panel degrades with a
+    message telling users to start the local bridge.
+- AI UX behavior:
+  - Natural-language intents route phrases like "where is power
+    getting stuck?", "what areas act like PJM?", "why is PJM-NYIS
+    important?", "what breaks if PJM-NYIS fails?", and "what should I
+    look at next?"
+  - Result cards carry provenance and map actions: `Highlight on map`
+    and `Apply cut to map` for what-if answers.
+  - `Apply cut to map` switches into What-if mode and disables the
+    tie(s) returned by the backend scenario.
+  - This is a grounded tool-running agent API, not a hosted LLM. A
+    future model adapter can sit behind `/api/grid/chat`, but the
+    current implementation deliberately avoids ungrounded generation.
+- Manual shipped:
+  - `docs/grid_map_manual.html` (dark by default) explains UI controls,
+    data terms, curvature/Fiedler/similarity/what-if interpretation,
+    evidence levels, current findings, AI usage, and limits.
+  - Linked from the map toolbar as `Manual`.
+- System overview assets shipped:
+  - `domains/grid/system_overview.py`, `reports/system_overview.json`,
+    `reports/SYSTEM_OVERVIEW.md`, and public figures under
+    `reports/figures/`.
+  - `docs/network_map.html` includes overlay/fact data from report
+    artifacts via `domains/grid/map_overlays.py`.
+- Validation performed before commit:
+  - Grid suite: `169 passed` via PowerShell-expanded
+    `tests/test_grid_*.py`.
+  - Focused local-agent/map tests: `23 passed`.
+  - Generated network-map JS syntax checked with `node --check`.
+  - Headless Playwright browser check passed: AI tab sent natural
+    language questions to `/api/grid/chat`, rendered result cards,
+    showed `Highlight on map` / `Apply cut to map`, zero console
+    errors.
+  - Final push verification: `grid/master...HEAD` = `0 0`, worktree
+    clean immediately after push.
+
 ## Best next handoff target
 
 - Run the true clean-room reproduction (fresh clone, fresh venv,
@@ -532,3 +595,7 @@ python -m domains.grid.run_solution_studies `
   numbers found this session.
 - ERCOT West-North card is still a watchlist: attach ERCOT queue +
   constraint evidence to upgrade it to a screen.
+- UX follow-up if continuing the map: add a real LLM/model adapter
+  behind `/api/grid/chat` while preserving the current tool/provenance
+  contract; add more tool artifacts for COG claim verification and
+  deeper OPTIMUS relief explanations.
