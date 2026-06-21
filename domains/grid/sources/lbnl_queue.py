@@ -36,6 +36,10 @@ ALIASES = {
     "mw": ["mw1", "mw_1", "capacity_mw", "mw"],
     "ia_status": ["ia_status", "ia_status_clean", "ia_phase_clean",
                   "interconnection_agreement"],
+    "cluster": ["cluster", "cluster_name", "study_cluster", "dpp"],
+    "q_date": ["q_date", "queue_date", "ir_date", "request_date"],
+    "ia_date": ["ia_date", "ia_executed_date"],
+    "on_date": ["on_date", "cod_date", "online_date", "operational_date"],
 }
 
 OPERATIONAL = "operational"
@@ -54,6 +58,10 @@ class QueueProject:
     state: str
     mw: Optional[float]
     ia_status: str = ""
+    cluster: str = ""
+    q_date: str = ""      # ISO date of interconnection request (IR)
+    ia_date: str = ""     # ISO date IA executed
+    on_date: str = ""     # ISO date of commercial operation (COD)
 
     @property
     def decided(self) -> bool:
@@ -62,6 +70,22 @@ class QueueProject:
 
 def _norm(s: str) -> str:
     return re.sub(r"[^a-z0-9]+", "_", str(s).strip().lower()).strip("_")
+
+
+def _iso(v) -> str:
+    """Coerce a date-like cell (pandas Timestamp, datetime, str) to YYYY-MM-DD.
+    Returns '' for missing/unparseable values."""
+    if v is None or (isinstance(v, float) and v != v) or v == "":
+        return ""
+    try:
+        import pandas as pd
+
+        ts = pd.to_datetime(v, errors="coerce")
+        if ts is None or pd.isna(ts):
+            return ""
+        return ts.date().isoformat()
+    except Exception:
+        return ""
 
 
 def _norm_status(raw: str) -> str:
@@ -134,6 +158,10 @@ class LBNLQueueSource:
                     state=str(get("state", "")),
                     mw=float(mw) if mw not in (None, "") else None,
                     ia_status=_norm(get("ia_status", "")),
+                    cluster=str(get("cluster", "")).strip(),
+                    q_date=_iso(get("q_date", "")),
+                    ia_date=_iso(get("ia_date", "")),
+                    on_date=_iso(get("on_date", "")),
                 )
             )
         return projects
