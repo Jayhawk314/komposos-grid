@@ -53,6 +53,7 @@ with st.sidebar:
             "⚡ Grid Network Map",
             "📊 MISO vs ERCOT Queue Study",
             "📈 Seam Congestion Findings",
+            "📖 Grid Map Manual",
         ]
     )
     
@@ -117,4 +118,20 @@ elif selection == "📈 Seam Congestion Findings":
         st.error(
             "index.html not found. Please run the following command to generate it:\n"
             "`python -m domains.grid.run_dashboard`"
+        )
+
+elif selection == "📖 Grid Map Manual":
+    st.title("📖 Grid Map Manual & Documentation")
+    st.write(
+        "Technical documentation and user guide for the interactive grid network map, "
+        "including metrics, curvatures, Fiedler seams, and what-if interpretation rules."
+    )
+    
+    manual_path = DOCS_DIR / "grid_map_manual.html"
+    if manual_path.exists():
+        html_content = manual_path.read_text(encoding="utf-8")
+        st.components.v1.html(html_content, height=900, scrolling=True)
+    else:
+        st.error(
+            "grid_map_manual.html not found. Please ensure it is present in the docs/ directory."
         )
