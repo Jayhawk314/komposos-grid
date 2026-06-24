@@ -439,6 +439,37 @@ def render_journey():
     )
 
 
+def render_network_map():
+    st.title("⚡ Grid Network Map")
+    st.write(
+        "An interactive, zoomable network map of the Balancing Authority (BA) interchange grid. "
+        "Each node represents a BA, and edges represent interchange tie-lines. "
+        "Edge colors represent Ollivier-Ricci curvature (red = structural bottleneck)."
+    )
+    
+    map_path = Path(__file__).parent / "docs" / "network_map.html"
+    if map_path.exists():
+        html_content = map_path.read_text(encoding="utf-8")
+        st.components.v1.html(html_content, height=850, scrolling=True)
+    else:
+        st.error("network_map.html not found in docs/ directory. Please run: `python -m domains.grid.run_network_map` to generate it.")
+
+
+def render_queue_brief():
+    st.title("📊 MISO vs. ERCOT Queue Study")
+    st.write(
+        "A detailed comparison of regional study processes, milestone funnels, and cycle trends "
+        "based on LBNL Queued Up data through 2026. This was prepared for the i2X STITCH webinar."
+    )
+    
+    brief_path = Path(__file__).parent / "reports" / "stitch_2026-06-23" / "queue_process_brief.html"
+    if brief_path.exists():
+        html_content = brief_path.read_text(encoding="utf-8")
+        st.components.v1.html(html_content, height=900, scrolling=True)
+    else:
+        st.error("queue_process_brief.html not found. Please run the script `run_stitch_brief.py` to generate it.")
+
+
 # --- SIDEBAR & ROUTING ---
 
 apply_custom_css()
@@ -449,7 +480,7 @@ with st.sidebar:
 
     nav_selection = st.radio(
         "Navigation",
-        ["Home", "Shared Core"]
+        ["Home", "Shared Core", "⚡ Grid Network Map", "📊 MISO vs ERCOT Queue"]
         + [p["id"] for p in REGISTRY["projects"]]
         + ["🗺 The Map", "📖 How it grew"]
     )
@@ -462,6 +493,10 @@ if nav_selection == "Home":
     render_home()
 elif nav_selection == "Shared Core":
     render_shared_core()
+elif nav_selection == "⚡ Grid Network Map":
+    render_network_map()
+elif nav_selection == "📊 MISO vs ERCOT Queue":
+    render_queue_brief()
 elif nav_selection == "🗺 The Map":
     render_map()
 elif nav_selection == "📖 How it grew":
