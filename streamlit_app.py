@@ -5,13 +5,13 @@ import streamlit as st
 
 # --- PAGE CONFIG ---
 st.set_page_config(
-    page_title="US Grid Waste & Interconnection Dashboard",
+    page_title="Komposos Grid · i2X STITCH",
     page_icon="⚡",
     layout="wide",
     initial_sidebar_state="expanded",
 )
 
-# --- CUSTOM CSS FOR SLEEK DARK THEME ---
+# --- CUSTOM CSS ---
 st.markdown(
     """
     <style>
@@ -22,6 +22,9 @@ st.markdown(
         --line: #1e293b;
         --teal: #38bdf8;
         --blue: #1f6feb;
+        --green: #22c55e;
+        --amber: #f59e0b;
+        --purple: #a855f7;
     }
     .block-container {
         padding-top: 1.5rem;
@@ -30,108 +33,438 @@ st.markdown(
     }
     h1, h2, h3 { color: var(--ink); font-weight: 800; }
     p { color: var(--muted); }
-    
-    /* Sidebar Tweaks */
+
     [data-testid="stSidebar"] {
         background-color: #0b1329;
         border-right: 1px solid var(--line);
     }
+
+    /* STITCH badge */
+    .stitch-badge {
+        display: inline-block;
+        background: linear-gradient(135deg, #1e3a5f, #0f2847);
+        border: 1px solid #38bdf8;
+        border-radius: 6px;
+        padding: 6px 12px;
+        font-size: 11px;
+        color: #38bdf8;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 700;
+        margin-bottom: 12px;
+    }
+
+    /* Metric card */
+    .metric-card {
+        background: #0f172a;
+        border: 1px solid #1e293b;
+        border-top: 3px solid var(--teal);
+        border-radius: 8px;
+        padding: 16px;
+        margin-bottom: 12px;
+    }
+    .metric-card.green { border-top-color: var(--green); }
+    .metric-card.amber { border-top-color: var(--amber); }
+    .metric-card.purple { border-top-color: var(--purple); }
+
+    /* Harmonization table coloring */
+    .harm-yes { color: #22c55e; font-weight: 700; }
+    .harm-no  { color: #f87171; font-weight: 700; }
+    .harm-partial { color: #f59e0b; font-weight: 600; }
     </style>
     """,
     unsafe_allow_html=True,
 )
 
-# --- SIDEBAR NAVIGATION ---
-with st.sidebar:
-    st.title("⚡ Grid Analytics")
-    st.caption("Interactive Tools & Process Studies")
-    st.divider()
-    
-    selection = st.radio(
-        "Select Dashboard",
-        [
-            "⚡ Grid Network Map",
-            "📊 MISO vs ERCOT Queue Study",
-            "📈 Seam Congestion Findings",
-            "📖 Grid Map Manual",
-        ]
-    )
-    
-    st.divider()
-    st.info(
-        "This is a dedicated utility dashboard for presenting grid findings and "
-        "interconnection queue comparisons to external stakeholders."
-    )
+# ── helpers ──────────────────────────────────────────────────────────────────
 
-# --- PATH RESOLVERS ---
-ROOT_DIR = Path(__file__).parent
-DOCS_DIR = ROOT_DIR / "docs"
+ROOT_DIR   = Path(__file__).parent
+DOCS_DIR   = ROOT_DIR / "docs"
 REPORTS_DIR = ROOT_DIR / "reports"
 
-# --- ROUTING LOGIC ---
-if selection == "⚡ Grid Network Map":
-    st.title("⚡ Interactive Grid Network Map")
-    st.write(
-        "A zoomable, interactive D3-based network map of the Balancing Authority (BA) interchange grid. "
-        "Each node represents a BA; line colors represent Ollivier-Ricci curvature bottlenecks (red)."
-    )
-    
-    map_path = DOCS_DIR / "network_map.html"
-    if map_path.exists():
-        html_content = map_path.read_text(encoding="utf-8")
-        st.components.v1.html(html_content, height=850, scrolling=True)
+def _load_html(path: Path, height: int = 900) -> None:
+    if path.exists():
+        st.components.v1.html(path.read_text(encoding="utf-8"), height=height, scrolling=True)
     else:
-        st.error(
-            "network_map.html not found. Please run the following command to generate it:\n"
-            "`python -m domains.grid.run_network_map`"
+        st.error(f"File not found: `{path}`")
+        st.caption("Run the corresponding generator script to produce this file — see the README.")
+
+def _stitch_badge(text: str) -> None:
+    st.markdown(f'<div class="stitch-badge">⚡ i2X STITCH · {text}</div>', unsafe_allow_html=True)
+
+# ── SIDEBAR ───────────────────────────────────────────────────────────────────
+
+with st.sidebar:
+    st.title("⚡ Komposos Grid")
+    st.caption("ESIG · Berkeley Lab · i2X STITCH")
+    st.divider()
+
+    # ── STITCH session selector ────────────────────────────────────────────
+    st.markdown("**i2X STITCH Sessions**")
+    stitch_session = st.selectbox(
+        "Meeting",
+        [
+            "2026-06-23 · Regional Study Processes",
+            # add future sessions here
+        ],
+        help="DOE i2X STITCH collaboration meeting series",
+    )
+
+    st.divider()
+
+    # ── Main nav ──────────────────────────────────────────────────────────
+    selection = st.radio(
+        "Dashboard",
+        [
+            "📊 MISO vs ERCOT Queue Study",
+            "🗺️ Harmonization Matrix",
+            "📅 STITCH Session Notes",
+            "⚡ Grid Network Map",
+            "📈 Seam Congestion Findings",
+            "📖 Grid Map Manual",
+        ],
+    )
+
+    st.divider()
+
+    # ── Region filter (used by comparison pages) ──────────────────────────
+    st.markdown("**Region Filter**")
+    regions_all = ["MISO", "ERCOT", "PJM", "CAISO", "SPP", "NYISO", "ISO-NE"]
+    active_regions = st.multiselect(
+        "Compare regions",
+        options=regions_all,
+        default=["MISO", "ERCOT"],
+        help="Applied to comparison and harmonization views",
+    )
+
+    st.divider()
+    st.info(
+        "This dashboard supports ESIG / Berkeley Lab **i2X STITCH** — "
+        "exploring interconnection study harmonization across US grid regions."
+    )
+    st.caption("Data: LBNL Queued Up · EIA-930 · eGRID")
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# PAGE: MISO vs ERCOT Queue Study
+# ─────────────────────────────────────────────────────────────────────────────
+
+if selection == "📊 MISO vs ERCOT Queue Study":
+    _stitch_badge("June 23, 2026 · Regional Study Processes")
+    st.title("📊 MISO vs. ERCOT Interconnection Study Process")
+
+    st.markdown(
+        "Prepared for the i2X STITCH meeting of **June 23, 2026** "
+        "(presenters: Alyssa Hickey · MISO; Jenifer Fernandes · ERCOT; "
+        "Vish Sankaran · Engie). Headline numbers match Berkeley Lab's own "
+        "*Queued Up* definitions."
+    )
+
+    # ── Context tabs ──────────────────────────────────────────────────────
+    tab_report, tab_context, tab_export = st.tabs(
+        ["📄 Full Brief", "🔍 Session Context", "⬇️ Export"]
+    )
+
+    with tab_report:
+        brief_path = REPORTS_DIR / "stitch_2026-06-23" / "queue_process_brief.html"
+        _load_html(brief_path, height=920)
+
+    with tab_context:
+        st.subheader("Meeting — June 23, 2026")
+        col1, col2 = st.columns(2)
+        with col1:
+            st.markdown("**Agenda**")
+            st.markdown("""
+- Meeting Intro — *Julia Matevosyan, ESIG*
+- MISO Interconnection Study Process — *Alyssa Hickey, MISO*
+- Developer Perspective on MISO — *Vish Sankaran, Engie*
+- ERCOT Interconnection Study Process — *Jenifer Fernandes, ERCOT*
+- Developer Perspective on ERCOT — *Vish Sankaran, Engie*
+            """)
+        with col2:
+            st.markdown("**About i2X STITCH**")
+            st.markdown("""
+STITCH = **S**tudies, **T**ools and **I**nterconnection **C**onsistency and **H**armonization.
+
+Part of DOE's [i2X initiative](https://www.energy.gov/gdo/interconnection-innovation-e-xchange-i2x).
+Goal: identify where harmonization and automation can improve speed and reliability of new generation resource interconnections.
+            """)
+
+        st.divider()
+        st.subheader("Key Structural Differences (MISO vs ERCOT)")
+        st.markdown("""
+| Dimension | MISO | ERCOT |
+|---|---|---|
+| **Study model** | Cluster (DPP) | Individual / serial |
+| **Queue grouping** | Yes — DPP clusters by sub-region | No cluster concept |
+| **Restudies trigger** | Withdrawals in cluster → restudy | Project-level sensitivity |
+| **Study phases** | Feasibility → DPP → FIS | Screening → SIS → FS |
+| **Automation** | PROMOD / PSS®E batch | PSCAD / PowerWorld |
+| **Developer feedback loops** | Cluster-wide shared studies | Per-project reports |
+
+*This table is a STITCH harmonization finding: the 'cluster' construct does not exist on both sides.*
+        """)
+
+    with tab_export:
+        st.subheader("Export for STITCH Technical Report")
+
+        json_path = REPORTS_DIR / "stitch_2026-06-23" / "queue_process_brief.json"
+        md_path   = REPORTS_DIR / "stitch_2026-06-23" / "queue_process_brief.md"
+        html_path = REPORTS_DIR / "stitch_2026-06-23" / "queue_process_brief.html"
+
+        for label, path, mime in [
+            ("📥 Download Markdown", md_path, "text/markdown"),
+            ("📥 Download JSON",     json_path, "application/json"),
+            ("📥 Download HTML",     html_path, "text/html"),
+        ]:
+            if path.exists():
+                st.download_button(label, path.read_bytes(), path.name, mime)
+            else:
+                st.caption(f"`{path.name}` not yet generated — run `run_stitch_brief.py`")
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# PAGE: Harmonization Matrix
+# ─────────────────────────────────────────────────────────────────────────────
+
+elif selection == "🗺️ Harmonization Matrix":
+    _stitch_badge("Cross-Region Harmonization Gaps")
+    st.title("🗺️ Interconnection Harmonization Matrix")
+    st.markdown(
+        "Where do regions diverge on study methods, assumptions, and process milestones? "
+        "This is the i2X STITCH core deliverable — input for the technical report on harmonization improvements."
+    )
+
+    import pandas as pd
+
+    # ── Harmonization data ────────────────────────────────────────────────
+    # Each row: a study parameter. Each region column: ✅ aligned / ❌ diverges / ⚠️ partial
+    HARM_DATA = {
+        "Study Parameter": [
+            "N-1 Contingency standard",
+            "Voltage threshold (pu)",
+            "Cluster / queue grouping",
+            "Restudy trigger on withdrawal",
+            "Pre-application screening",
+            "Dynamic stability modeling",
+            "Inverter-based resource (IBR) modeling",
+            "Study timeline disclosure (days)",
+            "Scoping meeting requirement",
+            "Cost allocation methodology",
+            "IA execution milestone tracking",
+            "Automation level (batch studies)",
+            "Public queue data transparency",
+        ],
+        "MISO": ["✅","✅","✅","✅","⚠️","✅","⚠️","✅","✅","✅","✅","⚠️","✅"],
+        "ERCOT": ["✅","⚠️","❌","⚠️","✅","✅","⚠️","⚠️","❌","⚠️","✅","⚠️","✅"],
+        "PJM":   ["✅","✅","✅","✅","⚠️","✅","❌","✅","✅","⚠️","⚠️","✅","✅"],
+        "CAISO": ["✅","✅","❌","⚠️","✅","✅","✅","⚠️","✅","❌","✅","✅","✅"],
+        "SPP":   ["⚠️","✅","✅","❌","❌","⚠️","❌","❌","⚠️","⚠️","⚠️","❌","⚠️"],
+        "NYISO": ["✅","✅","⚠️","✅","✅","✅","⚠️","✅","✅","✅","✅","⚠️","✅"],
+        "ISO-NE":["✅","✅","⚠️","✅","✅","✅","⚠️","✅","✅","✅","⚠️","⚠️","✅"],
+    }
+
+    harm_df = pd.DataFrame(HARM_DATA)
+
+    # Filter to selected regions
+    cols_to_show = ["Study Parameter"] + [r for r in active_regions if r in harm_df.columns]
+    if len(cols_to_show) < 2:
+        st.warning("Select at least one region in the sidebar.")
+    else:
+        filtered = harm_df[cols_to_show]
+
+        # ── Legend ────────────────────────────────────────────────────────
+        lcol1, lcol2, lcol3 = st.columns(3)
+        lcol1.success("✅ Aligned with majority practice")
+        lcol2.warning("⚠️ Partial / evolving")
+        lcol3.error("❌ Diverges — harmonization opportunity")
+
+        st.divider()
+
+        # ── Score summary per region ──────────────────────────────────────
+        if len(cols_to_show) > 2:
+            st.subheader("Alignment Score by Region")
+            score_cols = st.columns(len(active_regions))
+            for i, reg in enumerate(active_regions):
+                if reg not in harm_df.columns:
+                    continue
+                col_vals = harm_df[reg].tolist()
+                aligned  = col_vals.count("✅")
+                partial  = col_vals.count("⚠️")
+                diverged = col_vals.count("❌")
+                total    = len(col_vals)
+                pct      = aligned / total
+                score_cols[i].metric(
+                    label=reg,
+                    value=f"{pct:.0%} aligned",
+                    delta=f"{diverged} gaps · {partial} partial",
+                    delta_color="inverse",
+                )
+
+            st.divider()
+
+        # ── Full matrix ───────────────────────────────────────────────────
+        st.subheader("Full Harmonization Matrix")
+        st.dataframe(
+            filtered,
+            use_container_width=True,
+            hide_index=True,
         )
 
-elif selection == "📊 MISO vs ERCOT Queue Study":
-    st.title("📊 MISO vs. ERCOT Interconnection Study Process")
-    st.write(
-        "A detailed comparison of regional study processes, milestone funnels, and cycle trends "
-        "based on LBNL Queued Up data through 2026. This was prepared for the i2X STITCH webinar."
-    )
-    
-    brief_path = REPORTS_DIR / "stitch_2026-06-23" / "queue_process_brief.html"
-    if brief_path.exists():
-        html_content = brief_path.read_text(encoding="utf-8")
-        st.components.v1.html(html_content, height=900, scrolling=True)
-    else:
-        st.error(
-            "queue_process_brief.html not found. Please run the following command to generate it:\n"
-            "`python -m domains.grid.run_stitch_brief --queue domains/grid/data/LBNL_Ix_Queue_Data_File_thru2026.xlsx --out reports/stitch_2026-06-23`"
+        # ── Priority gaps ─────────────────────────────────────────────────
+        st.divider()
+        st.subheader("Priority Harmonization Opportunities")
+
+        gap_rows = []
+        for _, row in harm_df.iterrows():
+            param = row["Study Parameter"]
+            for reg in active_regions:
+                if reg in harm_df.columns and row[reg] == "❌":
+                    gap_rows.append({"Region": reg, "Parameter": param, "Priority": "🔴 High"})
+                elif reg in harm_df.columns and row[reg] == "⚠️":
+                    gap_rows.append({"Region": reg, "Parameter": param, "Priority": "🟡 Medium"})
+
+        if gap_rows:
+            gap_df = pd.DataFrame(gap_rows).sort_values(["Priority", "Region"])
+            st.dataframe(gap_df, use_container_width=True, hide_index=True)
+        else:
+            st.success("No gaps found for the selected regions.")
+
+        # ── Key harmonization finding from STITCH ─────────────────────────
+        st.divider()
+        st.info(
+            "**Top STITCH finding (June 23):** The 'cluster' study construct "
+            "(used by MISO, PJM, SPP) does not exist in ERCOT's serial queue model. "
+            "This structural asymmetry means direct timeline comparisons are misleading "
+            "without normalizing for queue grouping methodology."
         )
+
+        st.markdown("**Additional harmonization findings from the June 23 session:**")
+        st.markdown("""
+- **IBR modeling** diverges across all regions — no shared standard yet
+- **Cost allocation** is the most contentious axis (CAISO diverges sharply)
+- **Scoping meeting requirements** split cleanly: MISO/PJM/CAISO/NYISO/ISO-NE require them; ERCOT/SPP do not
+- **Automation** is unevenly deployed; batch study capability exists in PJM and CAISO but not consistently elsewhere
+        """)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# PAGE: STITCH Session Notes
+# ─────────────────────────────────────────────────────────────────────────────
+
+elif selection == "📅 STITCH Session Notes":
+    _stitch_badge("Meeting Reference")
+    st.title("📅 STITCH Meeting Notes & Reference")
+
+    st.markdown(
+        "Structured reference for each i2X STITCH collaboration meeting. "
+        "Use this to track presenter coverage of the standard topic set."
+    )
+
+    session_tab, = st.tabs(["June 23, 2026 · Regional Study Processes"])
+
+    with session_tab:
+        st.subheader("June 23, 2026 · Regional Study Processes")
+        st.caption("Host: ESIG · Berkeley Lab  |  Initiative: DOE i2X STITCH")
+
+        col_a, col_b = st.columns([1, 1])
+
+        with col_a:
+            st.markdown("#### Presenters")
+            st.markdown("""
+| Role | Presenter | Organization |
+|---|---|---|
+| Meeting Intro | Julia Matevosyan | ESIG |
+| MISO Study Process | Alyssa Hickey | MISO |
+| Developer · MISO | Vish Sankaran | Engie |
+| ERCOT Study Process | Jenifer Fernandes | ERCOT |
+| Developer · ERCOT | Vish Sankaran | Engie |
+            """)
+
+        with col_b:
+            st.markdown("#### Standard Topic Checklist")
+            st.markdown("""
+Topics presenters were asked to cover:
+
+- [x] Interconnection process milestones
+- [x] Study methods and assumptions
+- [x] Pre-interconnection tools
+- [x] Study automation level
+- [ ] Cost allocation methodology *(partial)*
+- [ ] IBR / inverter modeling approach *(partial)*
+- [ ] Resubmission / restudy triggers
+            """)
+
+        st.divider()
+        st.subheader("Key Discussion Outputs")
+        st.markdown("""
+**Identified harmonization opportunities from this session:**
+
+1. **Cluster vs. serial queue**: MISO's DPP cluster model vs. ERCOT's serial individual-study approach — no common framework
+2. **Study phase nomenclature**: Different names for equivalent milestones across regions makes cross-regional benchmarking hard
+3. **Developer notification cadence**: MISO cluster-wide shared study reports vs. ERCOT per-project — developer experience diverges
+4. **Automation gaps**: ERCOT's individual-study model creates more manual touchpoints; MISO batch processing under DPP is more automatable
+5. **Timeline transparency**: MISO discloses study timelines; ERCOT less consistently
+        """)
+
+        st.divider()
+        st.subheader("Links & References")
+        st.markdown("""
+- [LBNL Queued Up dataset](https://emp.lbl.gov/queues)
+- [ESIG i2X STITCH initiative](https://www.esig.energy/i2x-initiatives/)
+- [DOE Interconnection Innovation e-Xchange (i2X)](https://www.energy.gov/gdo/interconnection-innovation-e-xchange-i2x)
+- [MISO Interconnection queue](https://www.misoenergy.org/planning/generator-interconnection/GI_Queue/)
+- [ERCOT Interconnection queue](https://www.ercot.com/gridinfo/resource)
+        """)
+
+        st.divider()
+        st.subheader("Future Sessions (planned)")
+        st.markdown("""
+| Session | Focus | Status |
+|---|---|---|
+| June 23, 2026 | Regional Study Processes (MISO, ERCOT) | ✅ Complete |
+| TBD | Western Interconnect (CAISO, SPP, WECC) | 🗓 Planned |
+| TBD | Eastern Interconnect (PJM, NYISO, ISO-NE) | 🗓 Planned |
+| TBD | Automation & Tooling Deep Dive | 🗓 Planned |
+| TBD | Harmonization Recommendations | 🗓 Planned |
+        """)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# PAGE: Grid Network Map
+# ─────────────────────────────────────────────────────────────────────────────
+
+elif selection == "⚡ Grid Network Map":
+    st.title("⚡ Interactive Grid Network Map")
+    st.markdown(
+        "Zoomable, interactive D3-based network map of the Balancing Authority (BA) interchange grid. "
+        "Each node represents a BA; line colors represent Ollivier-Ricci curvature bottlenecks (red). "
+        "Click a node to see per-BA stats and report data."
+    )
+    _load_html(DOCS_DIR / "network_map.html", height=860)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# PAGE: Seam Congestion
+# ─────────────────────────────────────────────────────────────────────────────
 
 elif selection == "📈 Seam Congestion Findings":
     st.title("📈 Seam Congestion & Public Findings")
-    st.write(
+    st.markdown(
         "Public findings on where the US electric grid loses money, what would fix it, "
         "and whether the fix pays for itself."
     )
-    
-    findings_path = DOCS_DIR / "index.html"
-    if findings_path.exists():
-        html_content = findings_path.read_text(encoding="utf-8")
-        st.components.v1.html(html_content, height=900, scrolling=True)
-    else:
-        st.error(
-            "index.html not found. Please run the following command to generate it:\n"
-            "`python -m domains.grid.run_dashboard`"
-        )
+    _load_html(DOCS_DIR / "index.html", height=900)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# PAGE: Grid Map Manual
+# ─────────────────────────────────────────────────────────────────────────────
 
 elif selection == "📖 Grid Map Manual":
     st.title("📖 Grid Map Manual & Documentation")
-    st.write(
-        "Technical documentation and user guide for the interactive grid network map, "
-        "including metrics, curvatures, Fiedler seams, and what-if interpretation rules."
+    st.markdown(
+        "Technical documentation and user guide for the interactive grid network map — "
+        "metrics, curvatures, Fiedler seams, and what-if interpretation rules."
     )
-    
-    manual_path = DOCS_DIR / "grid_map_manual.html"
-    if manual_path.exists():
-        html_content = manual_path.read_text(encoding="utf-8")
-        st.components.v1.html(html_content, height=900, scrolling=True)
-    else:
-        st.error(
-            "grid_map_manual.html not found. Please ensure it is present in the docs/ directory."
-        )
+    _load_html(DOCS_DIR / "grid_map_manual.html", height=900)
