@@ -116,7 +116,7 @@ with st.sidebar:
     selection = st.radio(
         "Dashboard",
         [
-            "📊 MISO vs ERCOT Queue Study",
+            "📊 Regional Queue Study",
             "🗺️ Harmonization Matrix",
             "📅 STITCH Session Notes",
             "⚡ Grid Network Map",
@@ -147,18 +147,17 @@ with st.sidebar:
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# PAGE: MISO vs ERCOT Queue Study
+# PAGE: Regional Queue Study
 # ─────────────────────────────────────────────────────────────────────────────
 
-if selection == "📊 MISO vs ERCOT Queue Study":
-    _stitch_badge("June 23, 2026 · Regional Study Processes")
-    st.title("📊 MISO vs. ERCOT Interconnection Study Process")
+if selection == "📊 Regional Queue Study":
+    _stitch_badge("Regional Interconnection Queue Studies")
+    st.title("📊 Regional Interconnection Queue Studies")
 
     st.markdown(
-        "Prepared for the i2X STITCH meeting of **June 23, 2026** "
-        "(presenters: Alyssa Hickey · MISO; Jenifer Fernandes · ERCOT; "
-        "Vish Sankaran · Engie). Headline numbers match Berkeley Lab's own "
-        "*Queued Up* definitions."
+        "Prepared for the i2X STITCH collaboration, exploring interconnection study "
+        "processes and cycle timelines across all major US grid regions. "
+        "Headline numbers match Berkeley Lab's own *Queued Up* definitions."
     )
 
     # ── Context tabs ──────────────────────────────────────────────────────
@@ -192,7 +191,7 @@ Goal: identify where harmonization and automation can improve speed and reliabil
             """)
 
         st.divider()
-        st.subheader("Key Structural Differences (MISO vs ERCOT)")
+        st.subheader("Key Structural Differences (Sample Regions)")
         st.markdown("""
 | Dimension | MISO | ERCOT |
 |---|---|---|

@@ -51,7 +51,7 @@ with st.sidebar:
         "Select Dashboard",
         [
             "⚡ Grid Network Map",
-            "📊 MISO vs ERCOT Queue Study",
+            "📊 Regional Queue Study",
             "📈 Seam Congestion Findings",
             "🎯 Seam Opportunity Screen",
         ]
@@ -86,11 +86,11 @@ if selection == "⚡ Grid Network Map":
             "`python -m domains.grid.run_network_map`"
         )
 
-elif selection == "📊 MISO vs ERCOT Queue Study":
-    st.title("📊 MISO vs. ERCOT Interconnection Study Process")
+elif selection == "📊 Regional Queue Study":
+    st.title("📊 Regional Interconnection Queue Studies")
     st.write(
         "A detailed comparison of regional study processes, milestone funnels, and cycle trends "
-        "based on LBNL Queued Up data through 2026. This was prepared for the i2X STITCH webinar."
+        "across all US grid regions based on LBNL Queued Up data through 2026."
     )
     
     brief_path = REPORTS_DIR / "stitch_2026-06-23" / "queue_process_brief.html"
