@@ -122,7 +122,7 @@ with st.sidebar:
             "⚡ Grid Network Map",
             "📈 Seam Congestion Findings",
             "📖 Grid Map Manual",
-            "🔬 Advanced Math Analytics",
+            "🎯 Seam Opportunity Screen",
         ],
     )
 
@@ -475,13 +475,12 @@ elif selection == "📖 Grid Map Manual":
 # PAGE: Advanced Math Analytics
 # ─────────────────────────────────────────────────────────────────────────────
 
-elif selection == "🔬 Advanced Math Analytics":
-    _stitch_badge("Topological & Category-Theoretic Methods")
-    st.title("🔬 Advanced Mathematical Analytics")
+elif selection == "🎯 Seam Opportunity Screen":
+    _stitch_badge("Economic Seam Screening & Optimization")
+    st.title("🎯 Seam Opportunity Screening")
     st.markdown(
-        "Leveraging the Komposos category-theoretic and topological core to compute novel, "
-        "non-trivial grid performance metrics. These calculations map algebraic connectivity, "
-        "Right Kan limits, and sheaf Laplacians directly onto real flow and telemetry data."
+        "Surfacing hidden grid value and identifying high-priority transmission and storage upgrades. "
+        "These metrics translate physical flows and market boundaries into clean, actionable investment indicators."
     )
 
     import json
@@ -497,10 +496,10 @@ elif selection == "🔬 Advanced Math Analytics":
         st.stop()
 
     tab_yoneda, tab_kan, tab_bcr, tab_sheaf = st.tabs([
-        "🧬 Yoneda BA Similarity", 
-        "📐 Right Kan Southeast Bounds", 
-        "📈 Marginal BCR Curves",
-        "🕸️ Cohomological Sheaf Audit"
+        "🧬 RTO Portability Score", 
+        "📐 Shadow Market Valuation", 
+        "📈 Optimal Sizing Curves",
+        "🕸️ Data Integrity Index"
     ])
 
     with tab_yoneda:
