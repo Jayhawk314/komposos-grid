@@ -1,0 +1,230 @@
+{
+  "yoneda_matrix": {
+    "SPP": {
+      "SPP": 1.0,
+      "ERCOT": 0.0,
+      "ISNE": 0.0,
+      "PJM": 0.0542,
+      "CISO": 0.0,
+      "MISO": 0.0714,
+      "NYIS": 0.0
+    },
+    "ERCOT": {
+      "SPP": 0.0,
+      "ERCOT": 1.0,
+      "ISNE": 0.0,
+      "PJM": 0.0,
+      "CISO": 0.004,
+      "MISO": 0.0218,
+      "NYIS": 0.0
+    },
+    "ISNE": {
+      "SPP": 0.0,
+      "ERCOT": 0.0,
+      "ISNE": 1.0,
+      "PJM": 0.0976,
+      "CISO": 0.0,
+      "MISO": 0.0,
+      "NYIS": 0.0591
+    },
+    "PJM": {
+      "SPP": 0.0542,
+      "ERCOT": 0.0,
+      "ISNE": 0.0976,
+      "PJM": 1.0,
+      "CISO": 0.0,
+      "MISO": 0.0685,
+      "NYIS": 0.0
+    },
+    "CISO": {
+      "SPP": 0.0,
+      "ERCOT": 0.004,
+      "ISNE": 0.0,
+      "PJM": 0.0,
+      "CISO": 1.0,
+      "MISO": 0.0,
+      "NYIS": 0.0
+    },
+    "MISO": {
+      "SPP": 0.0714,
+      "ERCOT": 0.0218,
+      "ISNE": 0.0,
+      "PJM": 0.0685,
+      "CISO": 0.0,
+      "MISO": 1.0,
+      "NYIS": 0.3011
+    },
+    "NYIS": {
+      "SPP": 0.0,
+      "ERCOT": 0.0,
+      "ISNE": 0.0591,
+      "PJM": 0.0,
+      "CISO": 0.0,
+      "MISO": 0.3011,
+      "NYIS": 1.0
+    }
+  },
+  "right_kan_bounds": [
+    {
+      "tie": "AECI - SWPP",
+      "unpriced_ba": "AECI",
+      "priced_neighbors_count": 1,
+      "bound_spread_usd_mwh": 5.09,
+      "gross_mwh": 2800533.0,
+      "bound_value_usd": 14254712.97
+    },
+    {
+      "tie": "TVA - SOCO",
+      "unpriced_ba": "TVA",
+      "priced_neighbors_count": 1,
+      "bound_spread_usd_mwh": 1.58,
+      "gross_mwh": 5660484.0,
+      "bound_value_usd": 8943564.72
+    },
+    {
+      "tie": "CPLE - PJM",
+      "unpriced_ba": "CPLE",
+      "priced_neighbors_count": 1,
+      "bound_spread_usd_mwh": 2.01,
+      "gross_mwh": 4242136.0,
+      "bound_value_usd": 8542871.76
+    },
+    {
+      "tie": "SOCO - FPL",
+      "unpriced_ba": "SOCO",
+      "priced_neighbors_count": 1,
+      "bound_spread_usd_mwh": 1.58,
+      "gross_mwh": 3527415.0,
+      "bound_value_usd": 5573315.7
+    },
+    {
+      "tie": "SOCO - FPC",
+      "unpriced_ba": "SOCO",
+      "priced_neighbors_count": 1,
+      "bound_spread_usd_mwh": 1.58,
+      "gross_mwh": 419575.0,
+      "bound_value_usd": 662928.5
+    }
+  ],
+  "sheaf_metrics": {
+    "before_leak": 1.899,
+    "after_leak": 0.8185,
+    "improvement": "56.9%",
+    "before_rate": 0.452,
+    "after_rate": 0.629,
+    "error_reduction_twh": 59.4
+  },
+  "marginal_curves": {
+    "PJM - NYIS": [
+      {
+        "mw": 50,
+        "marginal_bcr": 0.11,
+        "residual_spread": 1.96
+      },
+      {
+        "mw": 100,
+        "marginal_bcr": 0.11,
+        "residual_spread": 1.92
+      },
+      {
+        "mw": 200,
+        "marginal_bcr": 0.11,
+        "residual_spread": 1.84
+      },
+      {
+        "mw": 400,
+        "marginal_bcr": 0.1,
+        "residual_spread": 1.68
+      },
+      {
+        "mw": 600,
+        "marginal_bcr": 0.09,
+        "residual_spread": 1.53
+      },
+      {
+        "mw": 800,
+        "marginal_bcr": 0.08,
+        "residual_spread": 1.4
+      },
+      {
+        "mw": 1000,
+        "marginal_bcr": 0.07,
+        "residual_spread": 1.28
+      }
+    ],
+    "MISO - SWPP": [
+      {
+        "mw": 50,
+        "marginal_bcr": 0.27,
+        "residual_spread": 4.56
+      },
+      {
+        "mw": 100,
+        "marginal_bcr": 0.24,
+        "residual_spread": 4.09
+      },
+      {
+        "mw": 200,
+        "marginal_bcr": 0.19,
+        "residual_spread": 3.28
+      },
+      {
+        "mw": 400,
+        "marginal_bcr": 0.12,
+        "residual_spread": 2.12
+      },
+      {
+        "mw": 600,
+        "marginal_bcr": 0.08,
+        "residual_spread": 1.36
+      },
+      {
+        "mw": 800,
+        "marginal_bcr": 0.05,
+        "residual_spread": 0.88
+      },
+      {
+        "mw": 1000,
+        "marginal_bcr": 0.03,
+        "residual_spread": 0.57
+      }
+    ],
+    "CISO - SRP": [
+      {
+        "mw": 50,
+        "marginal_bcr": 0.23,
+        "residual_spread": 3.95
+      },
+      {
+        "mw": 100,
+        "marginal_bcr": 0.22,
+        "residual_spread": 3.78
+      },
+      {
+        "mw": 200,
+        "marginal_bcr": 0.2,
+        "residual_spread": 3.46
+      },
+      {
+        "mw": 400,
+        "marginal_bcr": 0.17,
+        "residual_spread": 2.91
+      },
+      {
+        "mw": 600,
+        "marginal_bcr": 0.14,
+        "residual_spread": 2.45
+      },
+      {
+        "mw": 800,
+        "marginal_bcr": 0.12,
+        "residual_spread": 2.06
+      },
+      {
+        "mw": 1000,
+        "marginal_bcr": 0.1,
+        "residual_spread": 1.73
+      }
+    ]
+  }
+}
