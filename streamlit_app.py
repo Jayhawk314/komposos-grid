@@ -526,7 +526,7 @@ elif selection == "🔬 Advanced Math Analytics":
             y_df = pd.DataFrame(y_matrix)
             # Display matrix with sleek style
             st.dataframe(
-                y_df.style.background_gradient(cmap="Blues", axis=None).format("{:.4f}"),
+                y_df.style.format("{:.4f}"),
                 use_container_width=True
             )
         
@@ -590,7 +590,7 @@ elif selection == "🔬 Advanced Math Analytics":
             
             col_chart, col_tbl = st.columns([2, 1])
             with col_chart:
-                st.line_chart(pts_df.set_index("Upgrade Capacity (MW)")["Marginal BCR"])
+                st.line_chart(pts_df.set_index("Upgrade Capacity (MW)")[["Marginal BCR"]])
             with col_tbl:
                 st.dataframe(pts_df, use_container_width=True, hide_index=True)
 
