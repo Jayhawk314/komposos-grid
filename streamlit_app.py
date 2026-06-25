@@ -166,8 +166,101 @@ if selection == "📊 Regional Queue Study":
     )
 
     with tab_report:
-        brief_path = REPORTS_DIR / "stitch_2026-06-23" / "queue_process_brief.html"
-        _load_html(brief_path, height=920)
+        # Load queue brief data
+        brief_json_path = REPORTS_DIR / "stitch_2026-06-23" / "queue_process_brief.json"
+        if brief_json_path.exists():
+            with open(brief_json_path, encoding="utf-8") as f:
+                brief_data = json.load(f)
+            
+            # Map regions
+            regions_map = {r["region"].upper(): r for r in brief_data.get("regions", [])}
+            
+            # Let user select region
+            selected_region = st.selectbox(
+                "Select Grid Region to Screen",
+                options=list(regions_map.keys()),
+                index=0,
+                help="Choose from 9 US grid regions to load detailed sub-data"
+            )
+            
+            r = regions_map[selected_region]
+            
+            st.divider()
+            st.subheader(f"⚡ Interconnection Metrics: {selected_region}")
+            
+            col_a, col_b, col_c, col_d = st.columns(4)
+            col_a.metric("Total Requests (All-Time)", f"{r['total_requests']:,}")
+            col_b.metric("Active Stalled in Queue", f"{r['active_in_queue']:,}")
+            col_c.metric("LBNL Completion (2000-2020)", f"{r['completion_lbnl']['rate']:.1%}")
+            col_d.metric("Built after Signing IA", f"{r['post_ia']['rate']:.1%}")
+            
+            st.divider()
+            
+            # Sub-data tabs
+            st.markdown("#### Detailed Regional Queue Sub-Data")
+            sub_tab_fuel, sub_tab_ms, sub_tab_cycle, sub_tab_dur = st.tabs([
+                "🔋 Active Capacity by Fuel", 
+                "📉 Milestone Funnel", 
+                "📅 Study Cycle Cohort Trend", 
+                "⏱️ Pipeline Durations"
+            ])
+            
+            with sub_tab_fuel:
+                st.markdown("**Active Queue Capacity (GW)**")
+                fuel_gw = r.get("active_fuel_gw", {})
+                if fuel_gw:
+                    fuel_df = pd.DataFrame(list(fuel_gw.items()), columns=["Fuel Type", "Capacity (GW)"])
+                    st.bar_chart(fuel_df.set_index("Fuel Type"))
+                else:
+                    st.write("No active capacity data available.")
+                    
+            with sub_tab_ms:
+                st.markdown("**Milestone Completion Funnel**")
+                st.markdown("Percentage of decided projects that went operational, grouped by their furthest milestone:")
+                ms_df = pd.DataFrame(r.get("milestones", []))
+                if not ms_df.empty:
+                    ms_df.columns = ["Milestone Stage", "Decided Projects", "Operational Projects", "Completion Rate", "Thin Cohort (<30)"]
+                    st.dataframe(
+                        ms_df.style.format({"Completion Rate": "{:.1%}"}),
+                        use_container_width=True,
+                        hide_index=True
+                    )
+                else:
+                    st.write("No milestone data available.")
+                    
+            with sub_tab_cycle:
+                st.markdown("**Study Cycle / Cohort Trend**")
+                st.markdown("Completion rate and decided share (maturity) by cluster study cycle or submission cohort year:")
+                cycle_df = pd.DataFrame(r.get("cycles", []))
+                if not cycle_df.empty:
+                    cycle_df.columns = ["Cycle / Cohort", "Total Requests", "Decided", "Operational", "Withdrawn", "Active", "Completion Rate", "Maturity Index (Decided %)", "Immature", "Thin"]
+                    st.line_chart(cycle_df.set_index("Cycle / Cohort")[["Completion Rate", "Maturity Index (Decided %)"]])
+                    st.dataframe(
+                        cycle_df[["Cycle / Cohort", "Total Requests", "Decided", "Active", "Completion Rate", "Maturity Index (Decided %)"]].style.format({
+                            "Completion Rate": "{:.1%}",
+                            "Maturity Index (Decided %)": "{:.1%}"
+                        }),
+                        use_container_width=True,
+                        hide_index=True
+                    )
+                else:
+                    st.write("No cycle data available.")
+                    
+            with sub_tab_dur:
+                st.markdown("**Interconnection Pipeline Durations**")
+                st.markdown("Median months elapsed, with [p25–p75] interquartile range (IQR) spreads:")
+                dur = r.get("durations", {})
+                if dur:
+                    dur_rows = [
+                        {"Stage Pipeline": "Study & Agreement (IR ➔ IA)", "Median (Months)": dur["ir_to_ia"]["median_months"], "IQR Range (Months)": f"{dur['ir_to_ia']['p25_months']} – {dur['ir_to_ia']['p75_months']}"},
+                        {"Stage Pipeline": "Construction & Build (IA ➔ COD)", "Median (Months)": dur["ia_to_cod"]["median_months"], "IQR Range (Months)": f"{dur['ia_to_cod']['p25_months']} – {dur['ia_to_cod']['p75_months']}"},
+                        {"Stage Pipeline": "Total End-to-End (IR ➔ COD)", "Median (Months)": dur["ir_to_cod"]["median_months"], "IQR Range (Months)": f"{dur['ir_to_cod']['p25_months']} – {dur['ir_to_cod']['p75_months']}"},
+                    ]
+                    st.dataframe(pd.DataFrame(dur_rows), use_container_width=True, hide_index=True)
+                else:
+                    st.write("No duration data available.")
+        else:
+            st.error("Queue brief JSON not found. Run `run_stitch_brief.py` first.")
 
     with tab_context:
         st.subheader("Meeting — June 23, 2026")
@@ -619,3 +712,25 @@ elif selection == "🎯 Seam Opportunity Screen":
             "sheaf energy leak from **1.899** to **0.818** (a **56.9%** coherence improvement). "
             "This provides dual-verified verification that accounting adjustments improve macroscopic flow physics."
         )
+
+        # Load plant corrections sub-data
+        footprint_report_path = REPORTS_DIR / "ba_footprint_report.json"
+        if footprint_report_path.exists():
+            with open(footprint_report_path, encoding="utf-8") as f:
+                fp_data = json.load(f)
+            
+            st.divider()
+            st.subheader("Calibrated Plant Footprint Adjustments (Sub-Data)")
+            st.markdown(
+                "Individual physical generators (at the micro-scale fiber level of the Grothendieck Fibration) "
+                "whose RTO/BA footprint mappings were corrected by the crosswalk engine to reconcile the global sheaf:"
+            )
+            accepted = fp_data.get("accepted", [])
+            if accepted:
+                fp_df = pd.DataFrame(accepted)[["entity", "state", "from_ba", "to_ba", "value_mwh", "confidence"]]
+                fp_df.columns = ["Plant ORIS ID", "State", "Original BA", "Corrected BA", "Annual Generation (MWh)", "Match Confidence"]
+                st.dataframe(
+                    fp_df.style.format({"Annual Generation (MWh)": "{:,.0f}", "Match Confidence": "{:.2f}"}),
+                    use_container_width=True,
+                    hide_index=True
+                )
