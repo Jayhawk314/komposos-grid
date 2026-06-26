@@ -956,6 +956,8 @@ elif selection == "⚛️ Nuclear Enrichment Bottlenecks":
             from cog.schema import CogClaim
 
             cat = Category(name="web_simulator", db_path=":memory:")
+            cat.add("mine:mcclean", type_name="mine")
+            cat.add("conversion:metropolis", type_name="conversion_facility")
             cat.add("urenco:eunice", type_name="enrichment_facility")
             cat.add("fabrication:columbia", type_name="fabrication_facility")
             cat.add("reactor:smr", type_name="reactor")
@@ -970,6 +972,8 @@ elif selection == "⚛️ Nuclear Enrichment Bottlenecks":
                 st.error(f"❌ Timeline mismatch: Cascades are completed in {urenco_date}, but SMR requires fuel by {smr_date}. Physical delay is {urenco_date - smr_date} years.")
 
             # Connect morphisms
+            cat.connect("mine:mcclean", "conversion:metropolis", name="processes_to", confidence=0.95)
+            cat.connect("conversion:metropolis", "urenco:eunice", name="processes_to", confidence=conversion_stability)
             cat.connect("urenco:eunice", "fabrication:columbia", name="processes_to", confidence=mismatch_confidence)
             cat.connect("fabrication:columbia", "reactor:smr", name="powers", confidence=fabrication_stability)
             cat.connect("reactor:smr", "demand:hyperscaler_dc", name="powers", confidence=0.85)
@@ -977,7 +981,7 @@ elif selection == "⚛️ Nuclear Enrichment Bottlenecks":
             session = CogSession(category=cat)
             cog = CogEngine(session=session)
             claim = CogClaim(
-                source="urenco:eunice",
+                source="mine:mcclean",
                 target="demand:hyperscaler_dc",
                 relation="powers",
                 confidence=0.50
@@ -985,7 +989,7 @@ elif selection == "⚛️ Nuclear Enrichment Bottlenecks":
             result = cog.check_claim(claim)
 
             # Calculate the actual path weight (Multiplicative Quantale tensor product)
-            opt_path = cat.optimal_path("urenco:eunice", "demand:hyperscaler_dc")
+            opt_path = cat.optimal_path("mine:mcclean", "demand:hyperscaler_dc")
             if opt_path:
                 path_nodes, path_weight = opt_path
             else:
