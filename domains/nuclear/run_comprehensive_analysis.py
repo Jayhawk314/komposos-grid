@@ -92,12 +92,16 @@ async def run_scenario_suite():
         session = CogSession(category=cat)
         cog = CogEngine(session=session)
         claim = CogClaim(
-            source="enrichment:urenco_eunice",
+            source="mine:mcclean_lake",
             target="demand:hyperscaler_dc",
             relation="powers",
             confidence=0.50
         )
         check_result = cog.check_claim(claim)
+        
+        # 3. Full Supply Chain Path Yield (Multiplicative Quantale Weight)
+        opt = cat.optimal_path("mine:mcclean_lake", "demand:hyperscaler_dc")
+        path_yield = opt[1] if opt else 0.0
         
         results.append({
             "key": key,
@@ -105,6 +109,7 @@ async def run_scenario_suite():
             "fiedler": geom.fiedler_value,
             "claim_status": check_result.status.value,
             "claim_confidence": check_result.confidence,
+            "path_yield": path_yield,
             "curvatures": geom.edge_curvatures,
             "partition": geom.partition
         })
@@ -119,16 +124,16 @@ async def run_scenario_suite():
         "",
         "## 1. Scenario Summary Matrix",
         "",
-        "The following table compares the spectral Fiedler connectivity (coupling strength) and the system-wide cognitive claim confidence score (for the assertion `urenco_eunice -powers-> hyperscaler_dc`) across all configurations:",
+        "The following table compares the spectral Fiedler connectivity (coupling strength), logical claim status, and the physical path throughput yield (multiplicative product of all edge confidences from `mine` to `demand`) across all configurations:",
         "",
-        "| Scenario Name | Fiedler Connectivity | Claim Status | Claim Confidence | Upstream Seam Members | Downstream Seam Members |",
-        "| :--- | :---: | :---: | :---: | :--- | :--- |"
+        "| Scenario Name | Fiedler Connectivity | Claim Status | Claim Confidence | Path Yield (Dynamic) | Upstream Seam Members | Downstream Seam Members |",
+        "| :--- | :---: | :---: | :---: | :---: | :--- | :--- |"
     ]
 
     for res in results:
         part_a, part_b = res["partition"]
         report_lines.append(
-            f"| **{res['name']}** | {res['fiedler']:.5f} | {res['claim_status'].upper()} | {res['claim_confidence']:.3f} | {', '.join(part_a)} | {', '.join(part_b)} |"
+            f"| **{res['name']}** | {res['fiedler']:.5f} | {res['claim_status'].upper()} | {res['claim_confidence']:.3f} | {res['path_yield']:.4f} | {', '.join(part_a)} | {', '.join(part_b)} |"
         )
 
     report_lines.extend([
@@ -151,15 +156,15 @@ async def run_scenario_suite():
         # Scenario-specific commentary
         commentary = ""
         if res["key"] == "baseline":
-            commentary = "In the baseline configuration, the supply chain is highly vulnerable due to the centralized conversion node (+0.2500 curvature) and enrichment queues. The cumulative confidence of fueling the compute load is restricted to **0.100**."
+            commentary = "In the baseline configuration, the supply chain is vulnerable due to the centralized conversion node and enrichment queues. The logical confidence is restricted to **0.100**, and the physical path yield is **0.1798**."
         elif res["key"] == "accelerated_enrichment":
-            commentary = "Accelerating the centrifuge expansion at Urenco Eunice resolves the queue bottleneck, increasing its local edge confidence to 0.85. However, because the conversion step remains a high-risk constraint, the overall claim confidence only rises to **0.160**."
+            commentary = "Accelerating the centrifuge expansion at Urenco Eunice resolves the queue bottleneck, increasing its local edge confidence to 0.85. The physical path yield increases from 0.1798 to **0.2779**, but remains restricted by the upstream conversion bottleneck."
         elif res["key"] == "upgraded_conversion":
-            commentary = "Resolving the conversion capacity constraint (increasing Metropolis confidence to 0.90) secures the upstream sector. The overall claim confidence increases slightly to **0.120**, but remains limited by the centrifuge cascade installation queue."
+            commentary = "Resolving the conversion capacity constraint (increasing Metropolis confidence to 0.90) secures the upstream sector. The physical path yield increases from 0.1798 to **0.3596**, but remains limited by the centrifuge queue."
         elif res["key"] == "dual_intervention":
-            commentary = "Applying both ACT-001 (Conversion) and ACT-002 (Centrifuges) resolves both primary bottlenecks. The cumulative confidence for powering the hyperscaler compute load rises to **0.300** (a **3x increase** over the baseline), demonstrating that both upgrades are required jointly to unlock supply chain yield."
+            commentary = "Applying both ACT-001 (Conversion) and ACT-002 (Centrifuges) resolves both primary bottlenecks. The physical path yield rises to **0.5562** (a **3x increase** over the baseline), demonstrating that both upgrades are required jointly to unlock supply chain output."
         elif res["key"] == "supply_disruption":
-            commentary = "A conversion shutdown (representing regulatory closure or an accident) drops Metropolis confidence to 0.05. This disconnects the upstream flow, dropping the claim check confidence to **0.010** (near total system failure)."
+            commentary = "A conversion shutdown drops Metropolis confidence to 0.05. This disconnects the upstream flow, dropping the physical path yield to **0.0200** (representing near total system failure)."
 
         report_lines.extend([
             "",
