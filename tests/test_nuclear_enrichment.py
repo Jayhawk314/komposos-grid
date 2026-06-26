@@ -102,3 +102,28 @@ def test_comprehensive_scenarios():
     assert c_base == 0.55
     assert c_dual == 0.85
 
+
+def test_nuclear_agent_tools():
+    from domains.nuclear.agent_tools import tool_stats, tool_path, tool_bottlenecks, tool_whatif
+    
+    stats = tool_stats()
+    assert stats["tool"] == "stats"
+    assert len(stats["result"]["facilities"]) == 6
+    
+    path = tool_path("enrichment:urenco_eunice", "demand:hyperscaler_dc")
+    assert path["tool"] == "path"
+    assert path["result"]["yield"] > 0.0
+    
+    bottlenecks = tool_bottlenecks()
+    assert bottlenecks["tool"] == "bottlenecks"
+    assert len(bottlenecks["result"]["edges"]) == 5
+    
+    whatif_shut = tool_whatif(shutdown="conversion:metropolis_converdyn")
+    assert whatif_shut["tool"] == "whatif"
+    assert whatif_shut["result"]["fiedler_connectivity"] == 0.0
+    
+    whatif_up = tool_whatif(upgrade="enrichment:urenco_eunice-fabrication:westinghouse_columbia=0.85")
+    assert whatif_up["tool"] == "whatif"
+    assert whatif_up["result"]["fiedler_connectivity"] > 0.0
+
+
