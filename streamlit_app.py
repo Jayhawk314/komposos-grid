@@ -1029,11 +1029,16 @@ elif selection == "⚛️ Nuclear Enrichment Bottlenecks":
             )
             check_res = cog.check_claim(claim)
             
+            # Calculate the actual path weight (Multiplicative Quantale tensor product)
+            opt_path = scenario_cat.optimal_path("mine:mcclean_lake", "demand:hyperscaler_dc")
+            path_yield = opt_path[1] if opt_path else 0.0
+
             matrix_rows.append({
                 "Scenario Name": name,
                 "Fiedler Connectivity": f"{geom.fiedler_value:.5f}",
                 "Claim Status": check_res.status.value.upper(),
                 "Claim Confidence": f"{check_res.confidence:.3f}",
+                "Path Yield (Dynamic)": f"{path_yield:.4f}",
             })
 
         st.table(pd.DataFrame(matrix_rows))
