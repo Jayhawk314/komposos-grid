@@ -984,10 +984,18 @@ elif selection == "⚛️ Nuclear Enrichment Bottlenecks":
             )
             result = cog.check_claim(claim)
 
+            # Calculate the actual path weight (Multiplicative Quantale tensor product)
+            opt_path = cat.optimal_path("urenco:eunice", "demand:hyperscaler_dc")
+            if opt_path:
+                path_nodes, path_weight = opt_path
+            else:
+                path_weight = 0.0
+
             # Display metrics
-            st.metric("System-Wide Fuel Confidence", f"{result.confidence:.3f}", delta=f"{result.confidence - 0.100:+.3f} vs baseline")
+            st.metric("System-Wide Fuel Confidence", f"{result.confidence:.3f}", help="Topological score based on graph path length and count.")
+            st.metric("Physical Path Throughput Yield", f"{path_weight:.3f}", delta=f"{path_weight - 0.038:+.3f} vs baseline", help="The multiplicative product of all connection confidences along the path (Quantale weight).")
             st.info(f"**Cognitive Verdict:** {result.status.value.upper()}")
-            st.caption(f"**Proof Path:** {result.supporting_paths}")
+            st.caption(f"**Compositional Proof Path:** {result.supporting_paths}")
 
     with tab_scenarios:
         st.subheader("5-Part Scenario Incoherence Matrix")
