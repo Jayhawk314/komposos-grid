@@ -125,6 +125,7 @@ with st.sidebar:
             "📈 Seam Congestion Findings",
             "📖 Grid Map Manual",
             "🎯 Seam Opportunity Screen",
+            "⚡ Large Load Siting (ESIG)",
         ],
     )
 
@@ -736,3 +737,168 @@ elif selection == "🎯 Seam Opportunity Screen":
                     use_container_width=True,
                     hide_index=True
                 )
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# PAGE: Large Load Siting (ESIG)
+# ─────────────────────────────────────────────────────────────────────────────
+
+elif selection == "⚡ Large Load Siting (ESIG)":
+    _stitch_badge("Large Load Siting & Interconnection Simulation")
+    st.title("⚡ Large Load Siting & Interconnection")
+    st.markdown(
+        "Interactive simulation page exploring large load (data center) interconnection and "
+        "siting dynamics based on the June 2026 ESIG report. Analyze utility-RTO coordination "
+        "scenarios and run financial trade-off NPV evaluations for Flexible (Non-Firm) service options."
+    )
+
+    import json
+    import pandas as pd
+    
+    # Load side experiment data
+    exp_path = REPORTS_DIR / "experiments" / "large_load_coordination_experiment.json"
+    if exp_path.exists():
+        with open(exp_path, encoding="utf-8") as f:
+            exp_data = json.load(f)
+    else:
+        st.error("Side experiment simulation data not found. Run the simulation first.")
+        st.stop()
+        
+    tab_sim, tab_calc = st.tabs([
+        "📊 Coordination Simulation",
+        "🧮 Interactive NPV Siting Calculator"
+    ])
+    
+    with tab_sim:
+        st.subheader("Large Load Interconnection: Isolated vs. Coordinated Studies")
+        st.markdown(
+            "This tab compares the results of 5 simulated data center requests totaling **1,100 MW** "
+            "attempting to connect to a local grid node with **800 MW** of available headroom. "
+            "The system requires a **$45M regional upgrade** to expand transmission."
+        )
+        
+        # Display simulated cohort
+        st.markdown("### Simulated Load Requests Cohort")
+        cohort = [
+            {"Load ID": "LD-001", "Name": "Hyperscaler Cluster A", "Capacity (MW)": 250, "Flexibility (%)": "20%", "Value Factor": "$150/MWh"},
+            {"Load ID": "LD-002", "Name": "Inference Center B", "Capacity (MW)": 200, "Flexibility (%)": "15%", "Value Factor": "$180/MWh"},
+            {"Load ID": "LD-003", "Name": "AI Training Pod C", "Capacity (MW)": 300, "Flexibility (%)": "50%", "Value Factor": "$120/MWh"},
+            {"Load ID": "LD-004", "Name": "Sovereign Compute D", "Capacity (MW)": 150, "Flexibility (%)": "10%", "Value Factor": "$200/MWh"},
+            {"Load ID": "LD-005", "Name": "Giga-Factory E", "Capacity (MW)": 200, "Flexibility (%)": "5%", "Value Factor": "$250/MWh"}
+        ]
+        st.dataframe(pd.DataFrame(cohort), use_container_width=True, hide_index=True)
+        
+        st.divider()
+        
+        # Display scenario metrics
+        col_iso, col_coord = st.columns(2)
+        
+        with col_iso:
+            st.markdown("#### Scenario A: Isolated Utility Studies")
+            st.caption("Current Practice: Sequential utility-level reviews ignoring transmission constraints.")
+            st.metric("Average Queue Delay", f"{exp_data['scenarios']['isolated']['average_delay_months']:.1f} months")
+            st.metric("Project Withdrawal Rate", "40%", delta="-2 projects (350 MW)", delta_color="inverse")
+            st.error("Result: Cumulative overload triggers late-stage restudy cascades. LD-004 & LD-005 withdraw.")
+            
+        with col_coord:
+            st.markdown("#### Scenario B: Coordinated Cluster Studies")
+            st.caption("ESIG Recommendation: Joint utility-RTO study using a coordinated data sheaf.")
+            st.metric("Average Queue Delay", f"{exp_data['scenarios']['coordinated']['average_delay_months']:.1f} months", "-7.2 months")
+            st.metric("Project Withdrawal Rate", "0%", delta="All 5 projects built", delta_color="normal")
+            st.success("Result: $45M upgrade is identified upfront. Upgrade costs are allocated proportionally.")
+
+        st.divider()
+        st.subheader("Proportional Upgrade Cost Allocation (Coordinated Scenario)")
+        alloc_data = exp_data["scenarios"]["coordinated"]["allocated_upgrade_costs_usd"]
+        alloc_rows = [
+            {"Load ID": k, "MW": 250 if k=="LD-001" else 200 if k=="LD-002" else 300 if k=="LD-003" else 150 if k=="LD-004" else 200, "Upgrade Cost Allocation ($)": f"${v:,.2f}"}
+            for k, v in alloc_data.items()
+        ]
+        st.dataframe(pd.DataFrame(alloc_rows), use_container_width=True, hide_index=True)
+
+    with tab_calc:
+        st.subheader("Hyperscaler NPV Trade-off Calculator")
+        st.markdown(
+            "Hyperscalers prioritizing speed-to-market can request **Flexible (Non-Firm) Interconnection Service**. "
+            "This bypasses upfront CapEx upgrades and shortens the queue timeline, but subjects the data center to "
+            "curtailment during peak congestion hours. Adjust the parameters below to run the cash flow NPV simulation."
+        )
+        
+        col_inp1, col_inp2 = st.columns(2)
+        with col_inp1:
+            st.markdown("**Project Specifications**")
+            p_mw = st.slider("Project Capacity (MW)", 50, 1000, 300, 50)
+            p_cf = st.slider("Target Capacity Factor (%)", 50, 100, 90, 5)
+            p_rev = st.number_input("Compute Revenue ($/MWh)", 50.0, 500.0, 120.0, 10.0)
+            p_discount = st.slider("Discount Rate (%)", 5, 20, 10, 1)
+            
+        with col_inp2:
+            st.markdown("**Interconnection Options**")
+            p_upgrade = st.slider("Firm Upgrade Cost ($ Millions)", 1.0, 100.0, 12.27, 0.5) * 1e6
+            p_delay_firm = st.slider("Timeline to Firm Power (Months)", 12, 60, 24, 6)
+            p_delay_nonfirm = st.slider("Timeline to Non-Firm Power (Months)", 6, 36, 12, 6)
+            p_flex_share = st.slider("Flexible Capacity Share (%)", 10, 100, 50, 5) / 100.0
+            p_curt_hrs = st.slider("Annual Peak Congestion (Hours)", 10, 500, 120, 10)
+            
+        # Run NPV calculations dynamically
+        # Year 1 to 10 Cash Flow
+        annual_hrs = 8760.0 * (p_cf / 100.0)
+        annual_rev_firm = p_mw * annual_hrs * p_rev
+        
+        # Option 1: Firm Connection
+        years_delay_firm = p_delay_firm / 12.0
+        npv_firm = -p_upgrade
+        for y in range(1, 11):
+            if y <= years_delay_firm:
+                cf = 0.0
+            else:
+                cf = annual_rev_firm
+            npv_firm += cf / ((1 + (p_discount/100.0)) ** y)
+            
+        # Option 2: Non-Firm Connection (Speed-to-power)
+        years_delay_nonfirm = p_delay_nonfirm / 12.0
+        flex_mw = p_mw * p_flex_share
+        lost_rev_curt = flex_mw * p_curt_hrs * p_rev
+        annual_rev_nonfirm = annual_rev_firm - lost_rev_curt
+        
+        npv_nonfirm = 0.0
+        for y in range(1, 11):
+            if y <= years_delay_nonfirm:
+                cf = 0.0
+            else:
+                cf = annual_rev_nonfirm
+            npv_nonfirm += cf / ((1 + (p_discount/100.0)) ** y)
+            
+        npv_delta = npv_nonfirm - npv_firm
+        
+        # Display side-by-side results
+        st.divider()
+        col_res_f, col_res_nf = st.columns(2)
+        
+        with col_res_f:
+            st.markdown("### Option 1: Firm Connection")
+            st.metric("Upfront CapEx Upgrade Cost", f"${p_upgrade/1e6:.2f}M")
+            st.metric("Time-to-Power", f"{p_delay_firm} months ({years_delay_firm:.1f} yrs)")
+            st.metric("10-Year Project NPV", f"${npv_firm/1e6:,.2f}M")
+            
+        with col_res_nf:
+            st.markdown("### Option 2: Non-Firm (Flexible) Connection")
+            st.metric("Upfront CapEx Upgrade Cost", "$0.00M", delta="-$12.27M CapEx Saved" if abs(p_upgrade - 12.27e6) < 1e5 else f"-${p_upgrade/1e6:.2f}M CapEx Saved")
+            st.metric("Time-to-Power", f"{p_delay_nonfirm} months ({years_delay_nonfirm:.1f} yrs)", f"-{p_delay_firm - p_delay_nonfirm} months saved")
+            st.metric("10-Year Project NPV", f"${npv_nonfirm/1e6:,.2f}M")
+            
+        st.divider()
+        if npv_delta > 0:
+            st.success(
+                f"💡 **Non-Firm Service is the Optimal Siting Choice!** \n\n"
+                f"Bypassing the grid upgrade and connecting **{p_delay_firm - p_delay_nonfirm} months earlier** "
+                f"offsets the annual operational curtailment cost of **${lost_rev_curt/1e6:.2f}M/yr**, "
+                f"resulting in a Net Present Value gain of **${npv_delta/1e6:,.2f}M**."
+            )
+        else:
+            st.warning(
+                f"⚠️ **Firm Connection is the Optimal Siting Choice!** \n\n"
+                f"The annual operational curtailment cost of **${lost_rev_curt/1e6:.2f}M/yr** "
+                f"is too severe, wiping out the speed-to-market advantage. Waiting for firm service yields "
+                f"a Net Present Value gain of **${abs(npv_delta)/1e6:,.2f}M** over non-firm service."
+            )

@@ -1,0 +1,52 @@
+{
+  "queue_total_mw": 1100,
+  "scenarios": {
+    "isolated": {
+      "delays_months": {
+        "LD-001": 18,
+        "LD-002": 20,
+        "LD-003": 22,
+        "LD-004": 48,
+        "LD-005": 48
+      },
+      "withdrawn_projects": [
+        "LD-004",
+        "LD-005"
+      ],
+      "operational_projects": [
+        "LD-001",
+        "LD-002",
+        "LD-003"
+      ],
+      "average_delay_months": 31.2
+    },
+    "coordinated": {
+      "delays_months": {
+        "LD-001": 24,
+        "LD-002": 24,
+        "LD-003": 24,
+        "LD-004": 24,
+        "LD-005": 24
+      },
+      "withdrawn_projects": [],
+      "allocated_upgrade_costs_usd": {
+        "LD-001": 10227272.73,
+        "LD-002": 8181818.18,
+        "LD-003": 12272727.27,
+        "LD-004": 6136363.64,
+        "LD-005": 8181818.18
+      },
+      "average_delay_months": 24.0
+    },
+    "flexible_nonfirm_ld003": {
+      "upgrade_cost_saved_usd": 12272727.27,
+      "time_to_power_months_saved": 12,
+      "annual_curtailment_hours": 120.0,
+      "curtailed_energy_mwh": 18000.0,
+      "curtailed_revenue_loss_usd": 2160000.0,
+      "npv_firm_usd": 1239115779.5,
+      "npv_nonfirm_usd": 1474645167.44,
+      "net_present_value_gain_usd": 235529387.94
+    }
+  }
+}
