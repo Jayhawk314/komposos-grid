@@ -1,0 +1,6 @@
+source,target,relation_name,confidence,flow_value
+mine:mcclean_lake,conversion:metropolis_converdyn,feeds_into,0.95,8000
+conversion:metropolis_converdyn,enrichment:urenco_eunice,processes_to,0.45,7000
+enrichment:urenco_eunice,fabrication:westinghouse_columbia,processes_to,0.55,3000
+fabrication:westinghouse_columbia,reactor:smr_pilot,powers,0.90,60
+reactor:smr_pilot,demand:hyperscaler_dc,powers,0.85,300

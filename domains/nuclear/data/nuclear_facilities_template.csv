@@ -1,0 +1,7 @@
+name,type_name,capacity,location
+mine:mcclean_lake,mine,12000,Canada
+conversion:metropolis_converdyn,conversion_facility,15000,"IL, USA"
+enrichment:urenco_eunice,enrichment_facility,4300,"NM, USA"
+fabrication:westinghouse_columbia,fabrication_facility,1200,"SC, USA"
+reactor:smr_pilot,reactor,300,"USA"
+demand:hyperscaler_dc,demand,1000,"USA"

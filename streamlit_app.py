@@ -126,6 +126,7 @@ with st.sidebar:
             "📖 Grid Map Manual",
             "🎯 Seam Opportunity Screen",
             "⚡ Large Load Siting (ESIG)",
+            "⚛️ Nuclear Enrichment Bottlenecks",
         ],
     )
 
@@ -902,3 +903,164 @@ elif selection == "⚡ Large Load Siting (ESIG)":
                 f"is too severe, wiping out the speed-to-market advantage. Waiting for firm service yields "
                 f"a Net Present Value gain of **${abs(npv_delta)/1e6:,.2f}M** over non-firm service."
             )
+
+# ─────────────────────────────────────────────────────────────────────────────
+# PAGE: Nuclear Enrichment Bottlenecks
+# ─────────────────────────────────────────────────────────────────────────────
+
+elif selection == "⚛️ Nuclear Enrichment Bottlenecks":
+    _stitch_badge("Nuclear Enrichment Bottlenecks")
+    st.title("⚛️ Civilian Nuclear Enrichment Bottlenecks")
+
+    st.markdown(
+        "Hyperscalers prioritizing carbon-free compute are funding next-generation Small Modular Reactors (SMRs). "
+        "However, these advanced reactors require **High-Assay Low-Enriched Uranium (HALEU)**. "
+        "The Western supply chain has zero commercial HALEU capacity, leaving reactors constrained by fuel availability. "
+        "This dashboard uses category theory and flow geometry to evaluate supply chain interventions and timelines."
+    )
+
+    st.divider()
+
+    # --- TABS FOR DIFFERENT VIEWPORTS ---
+    tab_sim, tab_scenarios, tab_portfolio = st.tabs([
+        "📅 SMR Timeline Simulator", 
+        "📊 Scenario Comparison Matrix", 
+        "🎯 Prioritized Relief Actions"
+    ])
+
+    with tab_sim:
+        st.subheader("Interactive What-If SMR Timeline Simulator")
+        st.markdown(
+            "Model the time-delay gap between Urenco's centrifuge expansion and your data center's SMR startup date. "
+            "Adjust the timelines below to compute the categorical confidence score for fuel delivery."
+        )
+
+        col_timeline_inp, col_timeline_res = st.columns([1, 1])
+
+        with col_timeline_inp:
+            st.markdown("**Timeline Configuration**")
+            smr_date = st.slider("Target SMR Reactor Startup Year", 2026, 2036, 2028, 1)
+            urenco_date = st.slider("Urenco Centrifuge Cascade Completion Year", 2026, 2036, 2032, 1)
+            
+            st.markdown("**Flow Performance**")
+            conversion_stability = st.slider("Conversion Facility Stability (Metropolis)", 10, 100, 45, 5) / 100.0
+            fabrication_stability = st.slider("Westinghouse Fuel Fabrication Stability", 50, 100, 90, 5) / 100.0
+
+        with col_timeline_res:
+            st.markdown("**Categorical Claim Check Results**")
+            
+            # Build the custom Category
+            from core.category import Category
+            from cog.session import CogSession
+            from cog.engine import CogEngine
+            from cog.schema import CogClaim
+
+            cat = Category(name="web_simulator", db_path=":memory:")
+            cat.add("urenco:eunice", type_name="enrichment_facility")
+            cat.add("fabrication:columbia", type_name="fabrication_facility")
+            cat.add("reactor:smr", type_name="reactor")
+            cat.add("demand:hyperscaler_dc", type_name="demand")
+
+            # Determine temporal mismatch confidence
+            if urenco_date <= smr_date:
+                mismatch_confidence = 0.90
+                st.success("✅ Timelines align: Centrifuge cascades are ready before SMR startup.")
+            else:
+                mismatch_confidence = 0.05
+                st.error(f"❌ Timeline mismatch: Cascades are completed in {urenco_date}, but SMR requires fuel by {smr_date}. Physical delay is {urenco_date - smr_date} years.")
+
+            # Connect morphisms
+            cat.connect("urenco:eunice", "fabrication:columbia", name="processes_to", confidence=mismatch_confidence)
+            cat.connect("fabrication:columbia", "reactor:smr", name="powers", confidence=fabrication_stability)
+            cat.connect("reactor:smr", "demand:hyperscaler_dc", name="powers", confidence=0.85)
+
+            session = CogSession(category=cat)
+            cog = CogEngine(session=session)
+            claim = CogClaim(
+                source="urenco:eunice",
+                target="demand:hyperscaler_dc",
+                relation="powers",
+                confidence=0.50
+            )
+            result = cog.check_claim(claim)
+
+            # Display metrics
+            st.metric("System-Wide Fuel Confidence", f"{result.confidence:.3f}", delta=f"{result.confidence - 0.100:+.3f} vs baseline")
+            st.info(f"**Cognitive Verdict:** {result.status.value.upper()}")
+            st.caption(f"**Proof Path:** {result.supporting_paths}")
+
+    with tab_scenarios:
+        st.subheader("5-Part Scenario Incoherence Matrix")
+        st.markdown(
+            "This matrix compares the Fiedler spectral connectivity (coupling strength) and claim checks across "
+            "different industry configurations. Note how **Dual Intervention** is required to unlock real capacity."
+        )
+
+        from domains.nuclear.run_comprehensive_analysis import configure_scenario_category
+        
+        matrix_rows = []
+        for key, name in [
+            ("baseline", "Baseline 2026 Constraints"),
+            ("accelerated_enrichment", "Scenario A: Accelerated Centrifuges (ACT-002)"),
+            ("upgraded_conversion", "Scenario B: Upgraded Conversion (ACT-001)"),
+            ("dual_intervention", "Scenario C: Dual Intervention (ACT-001 + ACT-002)"),
+            ("supply_disruption", "Scenario D: Severe Conversion Disruption"),
+        ]:
+            scenario_cat = configure_scenario_category(key)
+            from domains.nuclear.flow_geometry import analyze_enrichment_geometry
+            geom = analyze_enrichment_geometry(scenario_cat)
+            
+            # Cognitive claim
+            session = CogSession(category=scenario_cat)
+            cog = CogEngine(session=session)
+            claim = CogClaim(
+                source="enrichment:urenco_eunice",
+                target="demand:hyperscaler_dc",
+                relation="powers",
+                confidence=0.50
+            )
+            check_res = cog.check_claim(claim)
+            
+            matrix_rows.append({
+                "Scenario Name": name,
+                "Fiedler Connectivity": f"{geom.fiedler_value:.5f}",
+                "Claim Status": check_res.status.value.upper(),
+                "Claim Confidence": f"{check_res.confidence:.3f}",
+            })
+
+        st.table(pd.DataFrame(matrix_rows))
+        st.caption("Fiedler values close to 0 denote weak, vulnerable networks. Higher values show cohesive supply chains.")
+
+    with tab_portfolio:
+        st.subheader("Prioritized Interventions for Bottleneck Relief")
+        st.markdown("Translating mathematical constraints into decision-ready business packages.")
+
+        col_act1, col_act2, col_act3 = st.columns(3)
+
+        with col_act1:
+            st.error("### ACT-001: CRITICAL")
+            st.markdown("**Conversion Capacity Expansion**")
+            st.caption("Target Node: Metropolis ConverDyn")
+            st.markdown(
+                "The domestic conversion facility is a high-risk, single-point bottleneck. "
+                "**Proposed Action:** Co-fund facility upgrades or secure long-term European conversion contracts."
+            )
+
+        with col_act2:
+            st.warning("### ACT-002: HIGH")
+            st.markdown("**Centrifuge Cascade Acceleration**")
+            st.caption("Target Node: Urenco Eunice")
+            st.markdown(
+                "Centrifuge centrifuge construction queues limit downstream output. "
+                "**Proposed Action:** Coordinate federal DPA capital to pull construction forward from 2032 to 2029."
+            )
+
+        with col_act3:
+            st.success("### ACT-003: MEDIUM")
+            st.markdown("**Tails Re-enrichment**")
+            st.caption("Target Node: Co-located SMRs")
+            st.markdown(
+                "Depleted uranium tails can be re-enriched to supply HALEU. "
+                "**Proposed Action:** Route zero-cost grid curtailment energy to run secondary enrichment cascades."
+            )
+
