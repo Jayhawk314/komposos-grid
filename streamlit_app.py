@@ -1041,7 +1041,7 @@ elif selection == "⚛️ Nuclear Enrichment Bottlenecks":
                 "Path Yield (Dynamic)": f"{path_yield:.4f}",
             })
 
-        st.table(pd.DataFrame(matrix_rows))
+        st.table(pd.DataFrame(matrix_rows).set_index("Scenario Name"))
         st.caption("Fiedler values close to 0 denote weak, vulnerable networks. Higher values show cohesive supply chains.")
 
     with tab_portfolio:
