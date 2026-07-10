@@ -99,6 +99,19 @@ st.markdown(
 ROOT_DIR   = Path(__file__).parent
 DOCS_DIR   = ROOT_DIR / "docs"
 REPORTS_DIR = ROOT_DIR / "reports"
+REGISTRY_PATH = REPORTS_DIR / "stitch_sessions" / "registry.json"
+
+REGION_DISPLAY = {
+    "miso": "MISO", "ercot": "ERCOT", "pjm": "PJM", "caiso": "CAISO",
+    "spp": "SPP", "nyiso": "NYISO", "iso_ne": "ISO-NE",
+    "southeast": "Southeast (non-market)", "west": "West (non-ISO)",
+}
+
+def _load_session_registry() -> list:
+    if REGISTRY_PATH.exists():
+        with open(REGISTRY_PATH, encoding="utf-8") as f:
+            return json.load(f).get("sessions", [])
+    return []
 
 def _load_html(path: Path, height: int = 900) -> None:
     if path.exists():
@@ -137,15 +150,18 @@ with st.sidebar:
     st.caption("ESIG · Berkeley Lab · i2X STITCH")
     st.divider()
 
-    # ── STITCH session selector ────────────────────────────────────────────
+    # ── STITCH session selector (driven by reports/stitch_sessions/registry.json) ──
     st.markdown("**i2X STITCH Sessions**")
+    _sessions = _load_session_registry()
+    _session_labels = [
+        f"{s['id']} · {s['title']}" + (" ✅" if s.get("status") == "held" else " 🔜")
+        for s in _sessions
+    ] or ["2026-06-23 · Regional Study Processes"]
     stitch_session = st.selectbox(
         "Meeting",
-        [
-            "2026-06-23 · Regional Study Processes",
-            # add future sessions here
-        ],
-        help="DOE i2X STITCH collaboration meeting series",
+        _session_labels,
+        help="DOE i2X STITCH collaboration meeting series — edit "
+             "reports/stitch_sessions/registry.json to add or update sessions",
     )
 
     st.divider()
@@ -214,7 +230,49 @@ if selection == "📊 Regional Queue Study":
         if brief_json_path.exists():
             with open(brief_json_path, encoding="utf-8") as f:
                 brief_data = json.load(f)
-            
+
+            # ── The IA-Certainty Spectrum (cross-region lead figure) ──────
+            st.subheader("🎚️ The IA-Certainty Spectrum")
+            st.markdown(
+                "**What is an executed Interconnection Agreement actually worth?** "
+                "The same contract milestone carries very different completion "
+                "information depending on where it is signed — the June 23 "
+                "MISO/ERCOT finding, extended to all nine LBNL regions."
+            )
+
+            def _mo(entry) -> str:
+                med = (entry or {}).get("median_months")
+                return f"{med:.1f} mo" if med is not None else "—"
+
+            spec_rows = []
+            for r0 in brief_data.get("regions", []):
+                pia0 = r0.get("post_ia") or {}
+                lbnl0 = r0.get("completion_lbnl") or {}
+                dur0 = r0.get("durations") or {}
+                tracked = bool(pia0.get("signed_decided"))
+                spec_rows.append({
+                    "Region": REGION_DISPLAY.get(r0["region"], r0["region"].upper()),
+                    "Requests": f"{r0.get('total_requests') or 0:,}",
+                    "LBNL Completion": f"{lbnl0.get('rate') or 0:.1%}",
+                    "Post-IA Completion": (f"{pia0['rate']:.1%}" if tracked else "— (not tracked)"),
+                    "Study (Req→IA)": _mo(dur0.get("ir_to_ia")),
+                    "Build (IA→COD)": _mo(dur0.get("ia_to_cod")),
+                    "_sort": -(pia0.get("rate") or 0) if tracked else 1.0,
+                })
+            spec_df = pd.DataFrame(
+                sorted(spec_rows, key=lambda x: x["_sort"])
+            ).drop(columns=["_sort"])
+            st.dataframe(spec_df, use_container_width=True, hide_index=True)
+            st.caption(
+                "“Not tracked” is a finding, not a pipeline gap: that region's LBNL records "
+                "do not record IA execution for withdrawn projects, so the milestone's "
+                "certainty content cannot be computed there — evidence that milestone data "
+                "coverage itself needs harmonizing. Shareable per-region packs: "
+                "`python -m domains.grid.run_region_packs`."
+            )
+
+            st.divider()
+
             # Map regions
             regions_map = {r["region"].upper(): r for r in brief_data.get("regions", [])}
             
@@ -496,6 +554,29 @@ elif selection == "📅 STITCH Session Notes":
         "Structured reference for each i2X STITCH collaboration meeting. "
         "Use this to track presenter coverage of the standard topic set."
     )
+
+    # ── Upcoming sessions (from reports/stitch_sessions/registry.json) ────
+    _upcoming = [s for s in _load_session_registry() if s.get("status") != "held"]
+    if _upcoming:
+        st.subheader("🔜 Upcoming Sessions")
+        up_cols = st.columns(len(_upcoming))
+        for up_col, s in zip(up_cols, _upcoming):
+            with up_col:
+                st.markdown(f"**{s['id']}**")
+                st.caption(s.get("title", ""))
+                presenters = s.get("presenters", [])
+                if presenters:
+                    st.markdown("*Presenters:* " + "; ".join(presenters))
+                checklist = s.get("prep_checklist", [])
+                if checklist:
+                    st.markdown("**Prep checklist:**")
+                    for item in checklist:
+                        st.markdown(f"- {item}")
+        st.caption(
+            "When ESIG announces presenters, update "
+            "`reports/stitch_sessions/registry.json` — this page and the sidebar follow."
+        )
+        st.divider()
 
     session_tab, = st.tabs(["June 23, 2026 · Regional Study Processes"])
 
