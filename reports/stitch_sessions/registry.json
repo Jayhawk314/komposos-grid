@@ -1,0 +1,68 @@
+{
+  "series": "i2X STITCH — Studies, Tools, and Interconnection Consistency and Harmonization",
+  "facilitators": ["ESIG", "Berkeley Lab", "Elevate Energy Consulting"],
+  "sessions": [
+    {
+      "id": "2026-06-23",
+      "title": "Regional Study Processes (MISO vs. ERCOT)",
+      "status": "held",
+      "presenters": [
+        "Julia Matevosyan (ESIG)",
+        "Alyssa Hickey (MISO)",
+        "Vish Sankaran (ENGIE)",
+        "Jenifer Fernandes (ERCOT)"
+      ],
+      "regions": ["miso", "ercot"],
+      "artifacts": [
+        "reports/stitch_2026-06-23/queue_process_brief.json",
+        "docs/webinar_research_brief.md",
+        "docs/webinar_engagement_and_verification_guide.md"
+      ],
+      "region_packs": [
+        "reports/stitch_sessions/region_packs/miso.md",
+        "reports/stitch_sessions/region_packs/ercot.md"
+      ],
+      "key_claims": [
+        "MISO post-IA completion ~35% (476/1365)",
+        "ERCOT post-IA completion ~80% (486/610)",
+        "DPP-2022 cycle: 171 GW requested; DPP-2025 fell to 78 GW under queue caps"
+      ]
+    },
+    {
+      "id": "2026-07-28",
+      "title": "Regional Study Processes Cont.",
+      "status": "announced",
+      "presenters": ["TBD — check ESIG events page"],
+      "regions": ["TBD"],
+      "prep_checklist": [
+        "Confirm presenters and regions from the ESIG event page",
+        "Fill in Session prep notes in the matching region packs",
+        "Run /webinar-prep to refresh figures and diff against baseline",
+        "Send follow-up email to Julia Matevosyan BEFORE this session"
+      ]
+    },
+    {
+      "id": "2026-08-18",
+      "title": "Regional Study Processes Cont.",
+      "status": "announced",
+      "presenters": ["TBD — check ESIG events page"],
+      "regions": ["TBD"],
+      "prep_checklist": [
+        "Confirm presenters and regions from the ESIG event page",
+        "ERCOT Batch Zero inclusion notices expected this month — have the tracker ready",
+        "Run /webinar-prep to refresh figures and diff against baseline"
+      ]
+    },
+    {
+      "id": "2026-09-22",
+      "title": "Regional Study Processes Cont.",
+      "status": "announced",
+      "presenters": ["TBD — check ESIG events page"],
+      "regions": ["TBD"],
+      "prep_checklist": [
+        "Confirm presenters and regions from the ESIG event page",
+        "Run /webinar-prep to refresh figures and diff against baseline"
+      ]
+    }
+  ]
+}

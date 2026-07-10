@@ -27,6 +27,11 @@ pip install pandas pytest streamlit
     ```bash
     python -m domains.grid.run_dashboard
     ```
+*   **Generate Per-Region STITCH Engagement Packs (all 9 regions + IA-certainty index):**
+    ```bash
+    python -m domains.grid.run_region_packs
+    ```
+    Session registry for the STITCH webinar series: `reports/stitch_sessions/registry.json`.
 
 ### Launching the Dashboard App
 ```bash
