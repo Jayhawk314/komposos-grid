@@ -73,6 +73,22 @@ st.markdown(
     .harm-yes { color: #22c55e; font-weight: 700; }
     .harm-no  { color: #f87171; font-weight: 700; }
     .harm-partial { color: #f59e0b; font-weight: 600; }
+
+    /* Data provenance badges */
+    .prov-badge {
+        display: inline-block;
+        border-radius: 5px;
+        padding: 3px 10px;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 700;
+        margin-bottom: 10px;
+        margin-right: 6px;
+    }
+    .prov-measured  { background: #052e16; border: 1px solid #22c55e; color: #22c55e; }
+    .prov-derived   { background: #1e2a05; border: 1px solid #f59e0b; color: #f59e0b; }
+    .prov-simulated { background: #2e0a16; border: 1px solid #f87171; color: #f87171; }
     </style>
     """,
     unsafe_allow_html=True,
@@ -93,6 +109,26 @@ def _load_html(path: Path, height: int = 900) -> None:
 
 def _stitch_badge(text: str) -> None:
     st.markdown(f'<div class="stitch-badge">⚡ i2X STITCH · {text}</div>', unsafe_allow_html=True)
+
+_PROV_LABELS = {
+    "measured": "📏 Measured",
+    "derived": "🧮 Derived",
+    "simulated": "🧪 Simulated",
+}
+
+def _provenance_badge(kind: str, source: str) -> None:
+    """Tag a figure or section with its data provenance tier.
+
+    measured  — reconciles to a published external dataset (e.g. LBNL Queued Up)
+    derived   — computed by our models from measured inputs or user parameters
+    simulated — stylized/illustrative scenario; numbers are not observations
+    """
+    label = _PROV_LABELS.get(kind, kind.title())
+    st.markdown(
+        f'<span class="prov-badge prov-{kind}">{label}</span>'
+        f'<span style="font-size:11px;color:#94a3b8;">{source}</span>',
+        unsafe_allow_html=True,
+    )
 
 # ── SIDEBAR ───────────────────────────────────────────────────────────────────
 
@@ -156,6 +192,10 @@ with st.sidebar:
 if selection == "📊 Regional Queue Study":
     _stitch_badge("Regional Interconnection Queue Studies")
     st.title("📊 Regional Interconnection Queue Studies")
+    _provenance_badge(
+        "measured",
+        "LBNL Queued Up (data through 2026) — headline rates reconcile to the published sheets to the integer.",
+    )
 
     st.markdown(
         "Prepared for the i2X STITCH collaboration, exploring interconnection study "
@@ -769,55 +809,106 @@ elif selection == "⚡ Large Load Siting (ESIG)":
         "🧮 Interactive NPV Siting Calculator"
     ])
     
+    # Cohort and scenario facts all come from the experiment JSON — regenerate with
+    # `python -m domains.grid.experiments.large_load_coordination`.
+    cohort = exp_data.get("cohort", [])
+    mw_by_id = {l["id"]: l["mw"] for l in cohort}
+    total_mw = exp_data.get("queue_total_mw", sum(mw_by_id.values()))
+    headroom_mw = exp_data.get("headroom_mw", 0)
+    upgrade_cost = exp_data.get("upgrade_cost_usd", 0.0)
+    iso = exp_data["scenarios"]["isolated"]
+    coord = exp_data["scenarios"]["coordinated"]
+
     with tab_sim:
         st.subheader("Large Load Interconnection: Isolated vs. Coordinated Studies")
-        st.markdown(
-            "This tab compares the results of 5 simulated data center requests totaling **1,100 MW** "
-            "attempting to connect to a local grid node with **800 MW** of available headroom. "
-            "The system requires a **$45M regional upgrade** to expand transmission."
+        _provenance_badge(
+            "simulated",
+            exp_data.get("provenance", {}).get(
+                "source", "Stylized scenario after the June 2026 ESIG Large Loads report."
+            ),
         )
-        
+        st.markdown(
+            f"This tab compares the results of {len(cohort)} simulated data center requests totaling "
+            f"**{total_mw:,} MW** attempting to connect to a local grid node with **{headroom_mw:,} MW** "
+            f"of available headroom. The system requires a **${upgrade_cost/1e6:.0f}M regional upgrade** "
+            "to expand transmission."
+        )
+
         # Display simulated cohort
         st.markdown("### Simulated Load Requests Cohort")
-        cohort = [
-            {"Load ID": "LD-001", "Name": "Hyperscaler Cluster A", "Capacity (MW)": 250, "Flexibility (%)": "20%", "Value Factor": "$150/MWh"},
-            {"Load ID": "LD-002", "Name": "Inference Center B", "Capacity (MW)": 200, "Flexibility (%)": "15%", "Value Factor": "$180/MWh"},
-            {"Load ID": "LD-003", "Name": "AI Training Pod C", "Capacity (MW)": 300, "Flexibility (%)": "50%", "Value Factor": "$120/MWh"},
-            {"Load ID": "LD-004", "Name": "Sovereign Compute D", "Capacity (MW)": 150, "Flexibility (%)": "10%", "Value Factor": "$200/MWh"},
-            {"Load ID": "LD-005", "Name": "Giga-Factory E", "Capacity (MW)": 200, "Flexibility (%)": "5%", "Value Factor": "$250/MWh"}
+        cohort_rows = [
+            {
+                "Load ID": l["id"],
+                "Name": l["name"],
+                "Capacity (MW)": l["mw"],
+                "Flexibility (%)": f"{l['flexibility']:.0%}",
+                "Value Factor": f"${l['rev_per_mw_hr']}/MWh",
+            }
+            for l in cohort
         ]
-        st.dataframe(pd.DataFrame(cohort), use_container_width=True, hide_index=True)
-        
+        st.dataframe(pd.DataFrame(cohort_rows), use_container_width=True, hide_index=True)
+
         st.divider()
-        
+
         # Display scenario metrics
+        iso_withdrawn = iso.get("withdrawn_projects", [])
+        iso_withdrawn_mw = sum(mw_by_id.get(pid, 0) for pid in iso_withdrawn)
+        iso_withdraw_rate = len(iso_withdrawn) / len(cohort) if cohort else 0.0
+        coord_withdrawn = coord.get("withdrawn_projects", [])
+        coord_withdraw_rate = len(coord_withdrawn) / len(cohort) if cohort else 0.0
+        delay_saved = iso["average_delay_months"] - coord["average_delay_months"]
+
         col_iso, col_coord = st.columns(2)
-        
+
         with col_iso:
             st.markdown("#### Scenario A: Isolated Utility Studies")
             st.caption("Current Practice: Sequential utility-level reviews ignoring transmission constraints.")
-            st.metric("Average Queue Delay", f"{exp_data['scenarios']['isolated']['average_delay_months']:.1f} months")
-            st.metric("Project Withdrawal Rate", "40%", delta="-2 projects (350 MW)", delta_color="inverse")
-            st.error("Result: Cumulative overload triggers late-stage restudy cascades. LD-004 & LD-005 withdraw.")
-            
+            st.metric("Average Queue Delay", f"{iso['average_delay_months']:.1f} months")
+            st.metric(
+                "Project Withdrawal Rate",
+                f"{iso_withdraw_rate:.0%}",
+                delta=f"-{len(iso_withdrawn)} projects ({iso_withdrawn_mw:,} MW)",
+                delta_color="inverse",
+            )
+            st.error(
+                "Result: Cumulative overload triggers late-stage restudy cascades. "
+                f"{' & '.join(iso_withdrawn)} withdraw."
+            )
+
         with col_coord:
             st.markdown("#### Scenario B: Coordinated Cluster Studies")
             st.caption("ESIG Recommendation: Joint utility-RTO study using a coordinated data sheaf.")
-            st.metric("Average Queue Delay", f"{exp_data['scenarios']['coordinated']['average_delay_months']:.1f} months", "-7.2 months")
-            st.metric("Project Withdrawal Rate", "0%", delta="All 5 projects built", delta_color="normal")
-            st.success("Result: $45M upgrade is identified upfront. Upgrade costs are allocated proportionally.")
+            st.metric(
+                "Average Queue Delay",
+                f"{coord['average_delay_months']:.1f} months",
+                f"-{delay_saved:.1f} months",
+            )
+            st.metric(
+                "Project Withdrawal Rate",
+                f"{coord_withdraw_rate:.0%}",
+                delta=f"All {len(cohort) - len(coord_withdrawn)} projects built",
+                delta_color="normal",
+            )
+            st.success(
+                f"Result: ${upgrade_cost/1e6:.0f}M upgrade is identified upfront. "
+                "Upgrade costs are allocated proportionally."
+            )
 
         st.divider()
         st.subheader("Proportional Upgrade Cost Allocation (Coordinated Scenario)")
-        alloc_data = exp_data["scenarios"]["coordinated"]["allocated_upgrade_costs_usd"]
+        alloc_data = coord["allocated_upgrade_costs_usd"]
         alloc_rows = [
-            {"Load ID": k, "MW": 250 if k=="LD-001" else 200 if k=="LD-002" else 300 if k=="LD-003" else 150 if k=="LD-004" else 200, "Upgrade Cost Allocation ($)": f"${v:,.2f}"}
+            {"Load ID": k, "MW": mw_by_id.get(k, "—"), "Upgrade Cost Allocation ($)": f"${v:,.2f}"}
             for k, v in alloc_data.items()
         ]
         st.dataframe(pd.DataFrame(alloc_rows), use_container_width=True, hide_index=True)
 
     with tab_calc:
         st.subheader("Hyperscaler NPV Trade-off Calculator")
+        _provenance_badge(
+            "derived",
+            "10-year cash-flow model computed from the parameters you set below — not observed data.",
+        )
         st.markdown(
             "Hyperscalers prioritizing speed-to-market can request **Flexible (Non-Firm) Interconnection Service**. "
             "This bypasses upfront CapEx upgrades and shortens the queue timeline, but subjects the data center to "
@@ -883,7 +974,7 @@ elif selection == "⚡ Large Load Siting (ESIG)":
             
         with col_res_nf:
             st.markdown("### Option 2: Non-Firm (Flexible) Connection")
-            st.metric("Upfront CapEx Upgrade Cost", "$0.00M", delta="-$12.27M CapEx Saved" if abs(p_upgrade - 12.27e6) < 1e5 else f"-${p_upgrade/1e6:.2f}M CapEx Saved")
+            st.metric("Upfront CapEx Upgrade Cost", "$0.00M", delta=f"-${p_upgrade/1e6:.2f}M CapEx Saved")
             st.metric("Time-to-Power", f"{p_delay_nonfirm} months ({years_delay_nonfirm:.1f} yrs)", f"-{p_delay_firm - p_delay_nonfirm} months saved")
             st.metric("10-Year Project NPV", f"${npv_nonfirm/1e6:,.2f}M")
             
