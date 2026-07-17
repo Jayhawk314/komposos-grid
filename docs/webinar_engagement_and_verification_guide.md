@@ -66,7 +66,7 @@ Ask the presenters to verify the baseline project counts for requests submitted 
 > **Reconciliation Check:** These numbers match the published tables on **LBNL Queued Up Sheet 25** to the integer. They prove the data pipeline in the repository is not corrupt or buggy.
 
 ### Step 2: Establish the Overall Completion Rate
-Using the standard Berkeley Lab definition (`Operational / (Operational + Withdrawn)`):
+Using the standard Berkeley Lab definition (`Operational ÷ all 2000–2020 requests`, i.e. the denominator **includes still-active/censored projects**, not just decided ones):
 
 * **MISO Overall Completion:** **18.1%** ($509 \div 2,806$ requests, including active/censored)
 * **ERCOT Overall Completion:** **29.6%** ($459 \div 1,553$ requests, including active/censored)

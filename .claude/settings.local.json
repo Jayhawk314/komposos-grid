@@ -36,5 +36,8 @@
       "PowerShell(python -m domains.grid.run_miso_constraints --report-json reports\\\\miso_constraints_2023.json --report-md reports\\\\miso_constraints_2023.md --top 12)",
       "PowerShell(Import-Csv *)"
     ]
-  }
+  },
+  "enabledMcpjsonServers": [
+    "komposos-grid"
+  ]
 }

@@ -19,12 +19,12 @@ The following table compares the spectral Fiedler connectivity (coupling strengt
 ### Baseline 2026 Constraints
 
 #### Edge Curvature Profile
-Negative curvature indicates flow bottlenecks; positive curvature indicates redundant or stable corridors.
-*   `conversion:metropolis_converdyn -> enrichment:urenco_eunice`: Curvature = `+0.2500` (BOTTLENECK)
-*   `enrichment:urenco_eunice -> fabrication:westinghouse_columbia`: Curvature = `+0.2500` (BOTTLENECK)
-*   `fabrication:westinghouse_columbia -> reactor:smr_pilot`: Curvature = `+0.2500` (BOTTLENECK)
-*   `mine:mcclean_lake -> conversion:metropolis_converdyn`: Curvature = `+0.5000` (STABLE)
-*   `reactor:smr_pilot -> demand:hyperscaler_dc`: Curvature = `+0.5000` (STABLE)
+All curvatures in this small chain graph are positive; *relatively lower* curvature marks the more constrained interior edges. A truly negative curvature would indicate a hard structural bottleneck — none appears here.
+*   `conversion:metropolis_converdyn -> enrichment:urenco_eunice`: Curvature = `+0.2500` (MORE CONSTRAINED (relatively low curvature))
+*   `enrichment:urenco_eunice -> fabrication:westinghouse_columbia`: Curvature = `+0.2500` (MORE CONSTRAINED (relatively low curvature))
+*   `fabrication:westinghouse_columbia -> reactor:smr_pilot`: Curvature = `+0.2500` (MORE CONSTRAINED (relatively low curvature))
+*   `mine:mcclean_lake -> conversion:metropolis_converdyn`: Curvature = `+0.5000` (MORE ROBUST)
+*   `reactor:smr_pilot -> demand:hyperscaler_dc`: Curvature = `+0.5000` (MORE ROBUST)
 
 #### Verdict & Interpretation
 In the baseline configuration, the supply chain is vulnerable due to the centralized conversion node and enrichment queues. The logical confidence is restricted to **0.100**, and the physical path yield is **0.1798**.
@@ -34,12 +34,12 @@ In the baseline configuration, the supply chain is vulnerable due to the central
 ### Scenario A: Accelerated Centrifuge Expansion (ACT-002)
 
 #### Edge Curvature Profile
-Negative curvature indicates flow bottlenecks; positive curvature indicates redundant or stable corridors.
-*   `conversion:metropolis_converdyn -> enrichment:urenco_eunice`: Curvature = `+0.2500` (BOTTLENECK)
-*   `enrichment:urenco_eunice -> fabrication:westinghouse_columbia`: Curvature = `+0.2500` (BOTTLENECK)
-*   `fabrication:westinghouse_columbia -> reactor:smr_pilot`: Curvature = `+0.2500` (BOTTLENECK)
-*   `mine:mcclean_lake -> conversion:metropolis_converdyn`: Curvature = `+0.5000` (STABLE)
-*   `reactor:smr_pilot -> demand:hyperscaler_dc`: Curvature = `+0.5000` (STABLE)
+All curvatures in this small chain graph are positive; *relatively lower* curvature marks the more constrained interior edges. A truly negative curvature would indicate a hard structural bottleneck — none appears here.
+*   `conversion:metropolis_converdyn -> enrichment:urenco_eunice`: Curvature = `+0.2500` (MORE CONSTRAINED (relatively low curvature))
+*   `enrichment:urenco_eunice -> fabrication:westinghouse_columbia`: Curvature = `+0.2500` (MORE CONSTRAINED (relatively low curvature))
+*   `fabrication:westinghouse_columbia -> reactor:smr_pilot`: Curvature = `+0.2500` (MORE CONSTRAINED (relatively low curvature))
+*   `mine:mcclean_lake -> conversion:metropolis_converdyn`: Curvature = `+0.5000` (MORE ROBUST)
+*   `reactor:smr_pilot -> demand:hyperscaler_dc`: Curvature = `+0.5000` (MORE ROBUST)
 
 #### Verdict & Interpretation
 Accelerating the centrifuge expansion at Urenco Eunice resolves the queue bottleneck, increasing its local edge confidence to 0.85. The physical path yield increases from 0.1798 to **0.2779**, but remains restricted by the upstream conversion bottleneck.
@@ -49,12 +49,12 @@ Accelerating the centrifuge expansion at Urenco Eunice resolves the queue bottle
 ### Scenario B: Redundant Conversion Capacity (ACT-001)
 
 #### Edge Curvature Profile
-Negative curvature indicates flow bottlenecks; positive curvature indicates redundant or stable corridors.
-*   `conversion:metropolis_converdyn -> enrichment:urenco_eunice`: Curvature = `+0.2500` (BOTTLENECK)
-*   `enrichment:urenco_eunice -> fabrication:westinghouse_columbia`: Curvature = `+0.2500` (BOTTLENECK)
-*   `fabrication:westinghouse_columbia -> reactor:smr_pilot`: Curvature = `+0.2500` (BOTTLENECK)
-*   `mine:mcclean_lake -> conversion:metropolis_converdyn`: Curvature = `+0.5000` (STABLE)
-*   `reactor:smr_pilot -> demand:hyperscaler_dc`: Curvature = `+0.5000` (STABLE)
+All curvatures in this small chain graph are positive; *relatively lower* curvature marks the more constrained interior edges. A truly negative curvature would indicate a hard structural bottleneck — none appears here.
+*   `conversion:metropolis_converdyn -> enrichment:urenco_eunice`: Curvature = `+0.2500` (MORE CONSTRAINED (relatively low curvature))
+*   `enrichment:urenco_eunice -> fabrication:westinghouse_columbia`: Curvature = `+0.2500` (MORE CONSTRAINED (relatively low curvature))
+*   `fabrication:westinghouse_columbia -> reactor:smr_pilot`: Curvature = `+0.2500` (MORE CONSTRAINED (relatively low curvature))
+*   `mine:mcclean_lake -> conversion:metropolis_converdyn`: Curvature = `+0.5000` (MORE ROBUST)
+*   `reactor:smr_pilot -> demand:hyperscaler_dc`: Curvature = `+0.5000` (MORE ROBUST)
 
 #### Verdict & Interpretation
 Resolving the conversion capacity constraint (increasing Metropolis confidence to 0.90) secures the upstream sector. The physical path yield increases from 0.1798 to **0.3596**, but remains limited by the centrifuge queue.
@@ -64,12 +64,12 @@ Resolving the conversion capacity constraint (increasing Metropolis confidence t
 ### Scenario C: Dual Intervention (ACT-001 + ACT-002)
 
 #### Edge Curvature Profile
-Negative curvature indicates flow bottlenecks; positive curvature indicates redundant or stable corridors.
-*   `conversion:metropolis_converdyn -> enrichment:urenco_eunice`: Curvature = `+0.2500` (BOTTLENECK)
-*   `enrichment:urenco_eunice -> fabrication:westinghouse_columbia`: Curvature = `+0.2500` (BOTTLENECK)
-*   `fabrication:westinghouse_columbia -> reactor:smr_pilot`: Curvature = `+0.2500` (BOTTLENECK)
-*   `mine:mcclean_lake -> conversion:metropolis_converdyn`: Curvature = `+0.5000` (STABLE)
-*   `reactor:smr_pilot -> demand:hyperscaler_dc`: Curvature = `+0.5000` (STABLE)
+All curvatures in this small chain graph are positive; *relatively lower* curvature marks the more constrained interior edges. A truly negative curvature would indicate a hard structural bottleneck — none appears here.
+*   `conversion:metropolis_converdyn -> enrichment:urenco_eunice`: Curvature = `+0.2500` (MORE CONSTRAINED (relatively low curvature))
+*   `enrichment:urenco_eunice -> fabrication:westinghouse_columbia`: Curvature = `+0.2500` (MORE CONSTRAINED (relatively low curvature))
+*   `fabrication:westinghouse_columbia -> reactor:smr_pilot`: Curvature = `+0.2500` (MORE CONSTRAINED (relatively low curvature))
+*   `mine:mcclean_lake -> conversion:metropolis_converdyn`: Curvature = `+0.5000` (MORE ROBUST)
+*   `reactor:smr_pilot -> demand:hyperscaler_dc`: Curvature = `+0.5000` (MORE ROBUST)
 
 #### Verdict & Interpretation
 Applying both ACT-001 (Conversion) and ACT-002 (Centrifuges) resolves both primary bottlenecks. The physical path yield rises to **0.5562** (a **3x increase** over the baseline), demonstrating that both upgrades are required jointly to unlock supply chain output.
@@ -79,12 +79,12 @@ Applying both ACT-001 (Conversion) and ACT-002 (Centrifuges) resolves both prima
 ### Scenario D: Severe Conversion Disruption (Shutdown)
 
 #### Edge Curvature Profile
-Negative curvature indicates flow bottlenecks; positive curvature indicates redundant or stable corridors.
-*   `conversion:metropolis_converdyn -> enrichment:urenco_eunice`: Curvature = `+0.2500` (BOTTLENECK)
-*   `enrichment:urenco_eunice -> fabrication:westinghouse_columbia`: Curvature = `+0.2500` (BOTTLENECK)
-*   `fabrication:westinghouse_columbia -> reactor:smr_pilot`: Curvature = `+0.2500` (BOTTLENECK)
-*   `mine:mcclean_lake -> conversion:metropolis_converdyn`: Curvature = `+0.5000` (STABLE)
-*   `reactor:smr_pilot -> demand:hyperscaler_dc`: Curvature = `+0.5000` (STABLE)
+All curvatures in this small chain graph are positive; *relatively lower* curvature marks the more constrained interior edges. A truly negative curvature would indicate a hard structural bottleneck — none appears here.
+*   `conversion:metropolis_converdyn -> enrichment:urenco_eunice`: Curvature = `+0.2500` (MORE CONSTRAINED (relatively low curvature))
+*   `enrichment:urenco_eunice -> fabrication:westinghouse_columbia`: Curvature = `+0.2500` (MORE CONSTRAINED (relatively low curvature))
+*   `fabrication:westinghouse_columbia -> reactor:smr_pilot`: Curvature = `+0.2500` (MORE CONSTRAINED (relatively low curvature))
+*   `mine:mcclean_lake -> conversion:metropolis_converdyn`: Curvature = `+0.5000` (MORE ROBUST)
+*   `reactor:smr_pilot -> demand:hyperscaler_dc`: Curvature = `+0.5000` (MORE ROBUST)
 
 #### Verdict & Interpretation
 A conversion shutdown drops Metropolis confidence to 0.05. This disconnects the upstream flow, dropping the physical path yield to **0.0200** (representing near total system failure).

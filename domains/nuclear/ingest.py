@@ -29,10 +29,13 @@ class NuclearCategoryBuilder:
     def ingest_synthetic_baseline(self) -> Dict[str, int]:
         """Populates the category with baseline 2026 civilian fuel cycle capacities.
 
-        Data reflects:
-          - McClean Lake (major mill/mine source)
-          - Metropolis ConverDyn (sole domestic conversion facility, known bottleneck)
-          - Urenco Eunice, NM (sole operating commercial enrichment facility, expanding by 50%)
+        Data reflects (facility names real; capacities/confidences are stylized inputs):
+          - McClean Lake (Orano *mill* in Saskatchewan — processes ore from mines such as
+            Cigar Lake; modeled here as the upstream supply node)
+          - Metropolis (Honeywell's IL conversion plant, marketed via the ConverDyn venture —
+            sole domestic conversion facility, known bottleneck)
+          - Urenco Eunice, NM (sole operating commercial LEU enrichment facility in the US,
+            expanding; Centrus Piketon produces demonstration-scale HALEU separately)
           - Westinghouse Columbia (fabrication facility)
           - Projected next-gen civilian SMR pilot units and Hyperscaler compute loads
         """

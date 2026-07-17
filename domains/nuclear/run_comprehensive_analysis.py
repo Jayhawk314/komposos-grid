@@ -147,10 +147,17 @@ async def run_scenario_suite():
             f"### {res['name']}",
             "",
             "#### Edge Curvature Profile",
-            "Negative curvature indicates flow bottlenecks; positive curvature indicates redundant or stable corridors."
+            "All curvatures in this small chain graph are positive; *relatively lower* curvature "
+            "marks the more constrained interior edges. A truly negative curvature would indicate "
+            "a hard structural bottleneck — none appears here.",
         ])
         for u, v, kappa in res["curvatures"]:
-            verdict = "BOTTLENECK" if kappa < 0.35 else "STABLE"
+            if kappa < 0:
+                verdict = "BOTTLENECK (negative curvature)"
+            elif kappa < 0.35:
+                verdict = "MORE CONSTRAINED (relatively low curvature)"
+            else:
+                verdict = "MORE ROBUST"
             report_lines.append(f"*   `{u} -> {v}`: Curvature = `{kappa:+.4f}` ({verdict})")
         
         # Scenario-specific commentary

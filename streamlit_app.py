@@ -7,7 +7,7 @@ import streamlit as st
 
 # --- PAGE CONFIG ---
 st.set_page_config(
-    page_title="Komposos Grid · i2X STITCH",
+    page_title="Komposos Grid — Independent Interconnection Analytics",
     page_icon="⚡",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -121,7 +121,10 @@ def _load_html(path: Path, height: int = 900) -> None:
         st.caption("Run the corresponding generator script to produce this file — see the README.")
 
 def _stitch_badge(text: str) -> None:
-    st.markdown(f'<div class="stitch-badge">⚡ i2X STITCH · {text}</div>', unsafe_allow_html=True)
+    st.markdown(
+        f'<div class="stitch-badge">⚡ Independent analysis · i2X STITCH · {text}</div>',
+        unsafe_allow_html=True,
+    )
 
 _PROV_LABELS = {
     "measured": "📏 Measured",
@@ -147,7 +150,7 @@ def _provenance_badge(kind: str, source: str) -> None:
 
 with st.sidebar:
     st.title("⚡ Komposos Grid")
-    st.caption("ESIG · Berkeley Lab · i2X STITCH")
+    st.caption("Independent analytics · follows the DOE i2X STITCH series")
     st.divider()
 
     # ── STITCH session selector (driven by reports/stitch_sessions/registry.json) ──
@@ -196,8 +199,9 @@ with st.sidebar:
 
     st.divider()
     st.info(
-        "This dashboard supports ESIG / Berkeley Lab **i2X STITCH** — "
-        "exploring interconnection study harmonization across US grid regions."
+        "Independent project prepared to support the **i2X STITCH** conversation on "
+        "interconnection study harmonization. **Not affiliated with or endorsed by "
+        "DOE, ESIG, or Berkeley Lab.**"
     )
     st.caption("Data: LBNL Queued Up · EIA-930 · eGRID")
 
@@ -292,9 +296,12 @@ if selection == "📊 Regional Queue Study":
             
             col_a, col_b, col_c, col_d = st.columns(4)
             col_a.metric("Total Requests (All-Time)", f"{r['total_requests']:,}")
-            col_b.metric("Active Stalled in Queue", f"{r['active_in_queue']:,}")
+            col_b.metric("Active in Queue", f"{r['active_in_queue']:,}")
             col_c.metric("LBNL Completion (2000-2020)", f"{r['completion_lbnl']['rate']:.1%}")
-            col_d.metric("Built after Signing IA", f"{r['post_ia']['rate']:.1%}")
+            if r["post_ia"].get("signed_decided"):
+                col_d.metric("Built after Signing IA", f"{r['post_ia']['rate']:.1%}")
+            else:
+                col_d.metric("Built after Signing IA", "— not tracked")
             
             st.divider()
             
@@ -427,7 +434,13 @@ elif selection == "🗺️ Harmonization Matrix":
     st.title("🗺️ Interconnection Harmonization Matrix")
     st.markdown(
         "Where do regions diverge on study methods, assumptions, and process milestones? "
-        "This is the i2X STITCH core deliverable — input for the technical report on harmonization improvements."
+        "A cross-region comparison grid assembled to support the i2X STITCH harmonization conversation."
+    )
+    st.warning(
+        "**Uncited working hypothesis.** Every cell below was hand-assembled by the author from "
+        "public process documents and session impressions — none has yet been sourced to a specific "
+        "tariff, business practice manual, or RTO presentation. Treat this as a discussion draft, "
+        "not a measured deliverable, and verify any cell before quoting it."
     )
 
     import pandas as pd
@@ -528,13 +541,16 @@ elif selection == "🗺️ Harmonization Matrix":
         # ── Key harmonization finding from STITCH ─────────────────────────
         st.divider()
         st.info(
-            "**Top STITCH finding (June 23):** The 'cluster' study construct "
+            "**Takeaway from the June 23 session (author's notes):** The 'cluster' study construct "
             "(used by MISO, PJM, SPP) does not exist in ERCOT's serial queue model. "
             "This structural asymmetry means direct timeline comparisons are misleading "
             "without normalizing for queue grouping methodology."
         )
 
-        st.markdown("**Additional harmonization findings from the June 23 session:**")
+        st.markdown(
+            "**Additional takeaways (author's notes — verify against the session "
+            "recording before quoting):**"
+        )
         st.markdown("""
 - **IBR modeling** diverges across all regions — no shared standard yet
 - **Cost allocation** is the most contentious axis (CAISO diverges sharply)
@@ -615,6 +631,10 @@ Topics presenters were asked to cover:
 
         st.divider()
         st.subheader("Key Discussion Outputs")
+        st.caption(
+            "Author's takeaways from attending the session — not official minutes. "
+            "Verify against the ESIG recording before quoting or attributing to a presenter."
+        )
         st.markdown("""
 **Identified harmonization opportunities from this session:**
 
@@ -697,7 +717,8 @@ elif selection == "🎯 Seam Opportunity Screen":
     st.title("🎯 Seam Opportunity Screening")
     st.markdown(
         "Surfacing hidden grid value and identifying high-priority transmission and storage upgrades. "
-        "These metrics translate physical flows and market boundaries into clean, actionable investment indicators."
+        "These are screening indicators computed from public flow and price data — "
+        "starting points for further study, not measured congestion costs and not investment advice."
     )
 
     import json
@@ -745,20 +766,30 @@ elif selection == "🎯 Seam Opportunity Screen":
                 y_df.style.format("{:.4f}"),
                 use_container_width=True
             )
-        
-        st.info(
-            "**Key Finding:** MISO and NYIS share a high structural similarity of **0.3011**, "
-            "indicating that their topological coupling profiles (neighborhood dependencies) are highly aligned, "
-            "making NYIS-proven congestion relief methodologies prime candidates for transfer into MISO."
-        )
+
+            # Highest off-diagonal pair, read from the report artifact (never hardcoded)
+            best_pair = None
+            for a in y_df.columns:
+                for b in y_df.columns:
+                    if a < b and pd.notna(y_df.loc[a, b]):
+                        if best_pair is None or y_df.loc[a, b] > best_pair[2]:
+                            best_pair = (a, b, float(y_df.loc[a, b]))
+            if best_pair:
+                st.info(
+                    f"**Highest structural overlap:** {best_pair[0]} and {best_pair[1]} at "
+                    f"**{best_pair[2]:.4f}** (flow-profile Jaccard similarity). This is a moderate "
+                    "overlap — enough to nominate the pair as *screening candidates* for comparing "
+                    "congestion-relief approaches, but it is a starting point for study, not proof "
+                    "that a fix proven in one region will transfer to the other."
+                )
 
     with tab_kan:
         st.subheader("Right Kan Extensions for Unpriced Seams")
         st.markdown(
             r"Interfaces in the Southeast US (SOCO, TVA, DUK, etc.) often operate without transparent "
-            r"LMP markets, leaving analysts without price spreads to value seam constraints. We resolve "
-            r"this by computing a **Right Kan Extension** ($\text{Ran}_K(F)$) over the network's adjacent priced ties, "
-            r"providing a mathematically rigorous lower-bound congestion valuation:"
+            r"LMP markets, leaving analysts without price spreads to value seam constraints. As a "
+            r"**screening proxy**, we transfer the smallest spread among the network's *adjacent priced ties* "
+            r"across the unpriced interface (formally organized as a Right Kan Extension, $\text{Ran}_K(F)$):"
         )
         st.latex(
             r"\text{Ran}_K(F)(u) = \min_{p \in \text{PricedNeighbors}(u)} (\text{Spread}(p))"
@@ -767,18 +798,23 @@ elif selection == "🎯 Seam Opportunity Screen":
         bounds = data.get("right_kan_bounds", [])
         if bounds:
             bounds_df = pd.DataFrame(bounds)
-            bounds_df.columns = ["Tie Interface", "Unpriced BA", "Priced Neighbors", "Bound Spread ($/MWh)", "Gross Flow (MWh)", "Bound Value ($)"]
+            bounds_df.columns = ["Tie Interface", "Unpriced BA", "Priced Neighbors", "Proxy Spread ($/MWh)", "Gross Flow (MWh)", "Screening Value ($)"]
             st.dataframe(
                 bounds_df,
                 use_container_width=True,
                 hide_index=True
             )
-        
-        st.success(
-            "**Top Bounded Seam:** The **AECI - SWPP** unpriced seam carries a lower-bound "
-            "congestion value of **$14.25M/yr** based on adjacent priced market points. This represents "
-            "a massive unmeasured congestion opportunity that is invisible in standard RTO planning data."
-        )
+
+            top = max(bounds, key=lambda b: b.get("bound_value_usd", 0))
+            st.info(
+                f"**Largest screening value:** the **{top['tie']}** unpriced seam screens at "
+                f"**${top['bound_value_usd']/1e6:.1f}M/yr**, obtained by transferring an adjacent "
+                f"priced tie's spread (${top['bound_spread_usd_mwh']:.2f}/MWh) across this interface's "
+                "gross flow. This is an analogy-based screening proxy — **not** a measured congestion "
+                "cost and **not** a mathematical bound; a neighboring tie's spread does not constrain a "
+                "different interface. These seams remain `structural_only` in the waste ledger until "
+                "priced or planning-grade evidence exists on the tie itself."
+            )
 
     with tab_bcr:
         st.subheader("Marginal Upgrade Saturation Curves")
@@ -832,11 +868,15 @@ elif selection == "🎯 Seam Opportunity Screen":
             col_a.metric("Before Source Agreement", f"{metrics['before_rate']:.1%}")
             col_b.metric("After Footprint Correction", f"{metrics['after_rate']:.1%}", f"+{metrics['after_rate']-metrics['before_rate']:.1%} improvement")
             
-        st.info(
-            "**Interpretation:** Footprint crosswalk corrections successfully reduced the global "
-            "sheaf energy leak from **1.899** to **0.818** (a **56.9%** coherence improvement). "
-            "This provides dual-verified verification that accounting adjustments improve macroscopic flow physics."
-        )
+        if metrics:
+            st.info(
+                f"**Interpretation:** footprint crosswalk corrections reduced the global sheaf "
+                f"energy leak from **{metrics['before_leak']:.3f}** to **{metrics['after_leak']:.3f}** "
+                f"(a **{metrics['improvement']}** coherence improvement). Concretely: the two "
+                "independent datasets — plant-level accounting and hourly telemetry — disagree "
+                "substantially less after the corrections. This is a consistency gain between data "
+                "sources, not a physical validation of grid flows."
+            )
 
         # Load plant corrections sub-data
         footprint_report_path = REPORTS_DIR / "ba_footprint_report.json"
@@ -847,8 +887,8 @@ elif selection == "🎯 Seam Opportunity Screen":
             st.divider()
             st.subheader("Calibrated Plant Footprint Adjustments (Sub-Data)")
             st.markdown(
-                "Individual physical generators (at the micro-scale fiber level of the Grothendieck Fibration) "
-                "whose RTO/BA footprint mappings were corrected by the crosswalk engine to reconcile the global sheaf:"
+                "Individual physical generators whose RTO/BA footprint mappings were corrected "
+                "by the crosswalk engine to reconcile the datasets:"
             )
             accepted = fp_data.get("accepted", [])
             if accepted:
@@ -1081,14 +1121,31 @@ elif selection == "⚡ Large Load Siting (ESIG)":
 # ─────────────────────────────────────────────────────────────────────────────
 
 elif selection == "⚛️ Nuclear Enrichment Bottlenecks":
+    import importlib
+    import sys
+    # Force reload of nuclear modules to clear cached versions in Streamlit
+    for mod in list(sys.modules.keys()):
+        if mod.startswith("domains.nuclear"):
+            try:
+                importlib.reload(sys.modules[mod])
+            except Exception:
+                pass
+
     _stitch_badge("Nuclear Enrichment Bottlenecks")
     st.title("⚛️ Civilian Nuclear Enrichment Bottlenecks")
 
     st.markdown(
         "Hyperscalers prioritizing carbon-free compute are funding next-generation Small Modular Reactors (SMRs). "
-        "However, these advanced reactors require **High-Assay Low-Enriched Uranium (HALEU)**. "
-        "The Western supply chain has zero commercial HALEU capacity, leaving reactors constrained by fuel availability. "
-        "This dashboard uses category theory and flow geometry to evaluate supply chain interventions and timelines."
+        "Many advanced designs require **High-Assay Low-Enriched Uranium (HALEU)**. "
+        "Western commercial HALEU capacity is currently far below projected SMR fleet needs — Centrus's Piketon, OH "
+        "plant produces demonstration-scale quantities (on the order of ~900 kg/yr), with larger expansions still "
+        "years out — so advanced reactors remain fuel-constrained. "
+        "This page uses an **illustrative systems model** to reason about supply-chain interventions and timelines."
+    )
+    _provenance_badge(
+        "simulated",
+        "Stylized supply-chain model — facility names are real; capacities, flows, and confidence "
+        "weights are illustrative inputs, not measured data.",
     )
 
     st.divider()
@@ -1240,7 +1297,7 @@ elif selection == "⚛️ Nuclear Enrichment Bottlenecks":
             st.markdown("**Centrifuge Cascade Acceleration**")
             st.caption("Target Node: Urenco Eunice")
             st.markdown(
-                "Centrifuge centrifuge construction queues limit downstream output. "
+                "Centrifuge cascade construction queues limit downstream output. "
                 "**Proposed Action:** Coordinate federal DPA capital to pull construction forward from 2032 to 2029."
             )
 
@@ -1250,6 +1307,9 @@ elif selection == "⚛️ Nuclear Enrichment Bottlenecks":
             st.caption("Target Node: Co-located SMRs")
             st.markdown(
                 "Depleted uranium tails can be re-enriched to supply HALEU. "
-                "**Proposed Action:** Route zero-cost grid curtailment energy to run secondary enrichment cascades."
+                "**Proposed Action:** Contract firm, low-cost power (e.g. co-located generation or "
+                "off-peak supply) for secondary enrichment cascades. *Note: centrifuge plants require "
+                "continuous, high-reliability power — intermittent curtailment energy cannot directly "
+                "run enrichment cascades.*"
             )
 

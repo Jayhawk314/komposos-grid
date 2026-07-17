@@ -10,7 +10,12 @@ The massive surge in large loads—primarily driven by AI hyperscaler data cente
 
 This side experiment simulates a cohort of five large load requests totaling **1,100 MW** attempting to connect to a local grid interface with **800 MW** of available transmission headroom. 
 
-### Key Findings
+### Illustrative Results (assumption-driven)
+
+> **Read this first:** the cohort, headroom, delays, withdrawal triggers, and costs below are *constructed
+> scenario inputs*, not observations. The results illustrate the arithmetic of the ESIG report's
+> coordination argument — they do not measure any real queue, and their outcomes follow directly from
+> the assumptions chosen.
 1.  **Isolated Utility Studies Fail at Scale:** When utilities study loads sequentially without RTO coordination, they fail to detect cumulative transmission overloads. This triggers late-stage **restudy cascades**, pushing average delays to **31.2 months** and forcing **40% of the projects (350 MW) to withdraw** from the queue.
 2.  **Coordinated Cluster Studies Stabilize the Queue:** By running a joint utility-RTO study using a coordinated data sheaf, the $45M upgrade is identified upfront. Siting timelines are shortened to a flat **24 months** for all projects, and **zero projects withdraw**.
 3.  **Flexible (Non-Firm) Interconnection Yields a +$235.5M NPV Gain:** For a 300 MW AI training facility (LD-003), bypassing the transmission upgrade and connecting 12 months earlier in exchange for a non-firm, curtailable service agreement (curtailing 50% of capacity for 120 hours of peak congestion/yr) increases project NPV by **$235.53M** over a 10-year horizon, even when accounting for **$2.16M/yr in lost compute revenue**.
@@ -72,9 +77,11 @@ Option 2: Non-Firm Flexible Interconnection
 
 ### NPV Comparison Results
 *   **Discount Rate:** 10%
-*   **NPV Firm Connection:** **$1,239,115,779.50**
-*   **NPV Non-Firm Connection:** **$1,474,645,167.44**
-*   **Net Present Value Gain:** **+$235,529,387.94**
+*   **NPV Firm Connection:** **≈ $1,239.1M**
+*   **NPV Non-Firm Connection:** **≈ $1,474.6M**
+*   **Net Present Value Gain:** **≈ +$235.5M**
+
+*(Values rounded to $0.1M — precision beyond about three significant figures is not meaningful for a stylized scenario.)*
 
 $$\text{Net Present Value Gain} = \text{NPV}_{\text{Non-Firm}} - \text{NPV}_{\text{Firm}} = \$235.53\text{ Million}$$
 
