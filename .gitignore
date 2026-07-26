@@ -62,3 +62,10 @@ domains/grid/data/
 
 # private outreach drafts stay local
 docs/outreach/*email_draft*
+
+# repo-cleanup audit tool artifacts (see careerz/github-clean tooling)
+_reachability_report.csv
+_baseline_test_results.txt
+_after_quarantine_test_results.txt
+_quarantine/
+archive/
