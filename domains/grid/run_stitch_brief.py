@@ -61,18 +61,26 @@ def _completion(decided: List[QueueProject]) -> float:
 def _cycle_key(p: QueueProject) -> str:
     """Region-adaptive study cycle.
 
-    MISO tags projects with a DPP cluster ("DPP-2022 South"); collapse the
-    sub-region so the *cycle* is the unit. ERCOT runs no cluster study, so
-    fall back to entry-year cohort. This asymmetry is itself a harmonization
-    finding: the 'cluster' construct does not exist on both sides.
+    Regions that run cluster studies tag projects with a cluster name — MISO
+    "DPP-2022 South", SPP "DISIS-2024-001" — so collapse the sub-round and make
+    the *cycle* the unit. ERCOT runs no cluster study, so fall back to entry-year
+    cohort. This asymmetry is itself a harmonization finding: the 'cluster'
+    construct does not exist on both sides.
+
+    The cluster FAMILY NAME is read from the operator's own tag rather than
+    assumed. MISO's "DPP" is MISO's term; stamping it on SPP's DISIS cycles (or
+    on the non-ISO West and Southeast) would misattribute one region's process
+    vocabulary to another.
     """
     if p.cluster:
         # collapse sub-rounds to the cycle YEAR: "DPP-2022 South",
         # "DPP-2018-APR", "DPP-2008-NOV" all map to their DPP-<year>.
         m = re.search(r"(19|20)\d{2}", p.cluster)
         if m:
-            return f"cluster:DPP-{m.group(0)}"
-        # non-DPP / yearless cluster tags fall back to entry year
+            fam = re.search(r"[A-Za-z][A-Za-z0-9]*", p.cluster)
+            name = fam.group(0).upper() if fam else "CLUSTER"
+            return f"cluster:{name}-{m.group(0)}"
+        # yearless cluster tags fall back to entry year
     if p.q_year:
         return f"cycle:{p.q_year}"
     return "cycle:(unknown)"
