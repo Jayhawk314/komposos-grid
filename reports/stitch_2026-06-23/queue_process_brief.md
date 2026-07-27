@@ -176,12 +176,12 @@ Completion by study cycle. MISO is sliced by DPP cluster cycle; ERCOT has no clu
 | cluster:DPP-2008 | 32 | 32 | 18 | 14 | 0 | 56.2% | 100% |  |
 | cluster:DPP-2009 | 52 | 52 | 19 | 33 | 0 | 36.5% | 100% |  |
 | cluster:DPP-2010 | 31 | 31 | 7 | 24 | 0 | 22.6% | 100% |  |
-| cluster:DPP-2011 | 8 | 8 | 0 | 8 | 0 | 0.0% | 100% | _(thin)_ |
-| cluster:DPP-2012 | 52 | 51 | 34 | 17 | 1 | 66.7% | 98% |  |
-| cluster:DPP-2013 | 27 | 27 | 12 | 15 | 0 | 44.4% | 100% | _(thin)_ |
-| cluster:DPP-2014 | 76 | 76 | 22 | 54 | 0 | 28.9% | 100% |  |
-| cluster:DPP-2015 | 93 | 91 | 32 | 59 | 2 | 35.2% | 98% |  |
-| cluster:DPP-2016 | 196 | 179 | 50 | 129 | 17 | 27.9% | 91% |  |
+| cluster:DPP-2011 | 2 | 2 | 0 | 2 | 0 | 0.0% | 100% | _(thin)_ |
+| cluster:DPP-2012 | 46 | 45 | 34 | 11 | 1 | 75.6% | 98% |  |
+| cluster:DPP-2013 | 17 | 17 | 12 | 5 | 0 | 70.6% | 100% | _(thin)_ |
+| cluster:DPP-2014 | 33 | 33 | 22 | 11 | 0 | 66.7% | 100% |  |
+| cluster:DPP-2015 | 58 | 56 | 32 | 24 | 2 | 57.1% | 97% |  |
+| cluster:DPP-2016 | 121 | 104 | 48 | 56 | 17 | 46.2% | 86% |  |
 | cluster:DPP-2017 | 252 | 216 | 45 | 171 | 36 | 20.8% | 86% |  |
 | cluster:DPP-2018 | 239 | 180 | 15 | 165 | 59 | 8.3% | 75% |  |
 | cluster:DPP-2019 | 299 | 173 | 22 | 151 | 126 | 12.7% | 58% |  |
@@ -189,6 +189,18 @@ Completion by study cycle. MISO is sliced by DPP cluster cycle; ERCOT has no clu
 | cluster:DPP-2021 | 465 | 290 | 0 | 290 | 175 | 0.0% | 62% |  |
 | cluster:DPP-2022 | 911 | 522 | 0 | 522 | 389 | 0.0% | 57% |  |
 | cluster:DPP-2023 | 592 | 386 | 0 | 386 | 206 | 0.0% | 65% |  |
+| cluster:FES-2011 | 6 | 6 | 0 | 6 | 0 | 0.0% | 100% | _(thin)_ |
+| cluster:FES-2012 | 2 | 2 | 0 | 2 | 0 | 0.0% | 100% | _(thin)_ |
+| cluster:FES-2013 | 7 | 7 | 0 | 7 | 0 | 0.0% | 100% | _(thin)_ |
+| cluster:FES-2014 | 38 | 38 | 0 | 38 | 0 | 0.0% | 100% |  |
+| cluster:FES-2015 | 26 | 26 | 0 | 26 | 0 | 0.0% | 100% | _(thin)_ |
+| cluster:FES-2016 | 62 | 62 | 0 | 62 | 0 | 0.0% | 100% |  |
+| cluster:MM-2016 | 2 | 2 | 2 | 0 | 0 | 100.0% | 100% | _(thin)_ |
+| cluster:SPA-2012 | 4 | 4 | 0 | 4 | 0 | 0.0% | 100% | _(thin)_ |
+| cluster:SPA-2013 | 3 | 3 | 0 | 3 | 0 | 0.0% | 100% | _(thin)_ |
+| cluster:SPA-2014 | 5 | 5 | 0 | 5 | 0 | 0.0% | 100% | _(thin)_ |
+| cluster:SPA-2015 | 9 | 9 | 0 | 9 | 0 | 0.0% | 100% | _(thin)_ |
+| cluster:SPA-2016 | 11 | 11 | 0 | 11 | 0 | 0.0% | 100% | _(thin)_ |
 | cycle:(unknown) | 6 | 2 | 0 | 2 | 4 | 0.0% | 33% | _(immature, thin)_ |
 | cycle:1995 | 1 | 1 | 0 | 1 | 0 | 0.0% | 100% | _(thin)_ |
 | cycle:1998 | 4 | 2 | 0 | 2 | 2 | 0.0% | 50% | _(thin)_ |
@@ -320,24 +332,26 @@ Completion by study cycle. MISO is sliced by DPP cluster cycle; ERCOT has no clu
 
 | Cycle | Total | Decided | Operational | Withdrawn | Active | Completion | Decided-share | |
 |---|---:|---:|---:|---:|---:|---:|---:|---|
-| cluster:DPP-2008 | 54 | 54 | 53 | 1 | 0 | 98.1% | 100% |  |
-| cluster:DPP-2009 | 11 | 11 | 11 | 0 | 0 | 100.0% | 100% | _(thin)_ |
-| cluster:DPP-2010 | 21 | 21 | 19 | 2 | 0 | 90.5% | 100% | _(thin)_ |
-| cluster:DPP-2011 | 25 | 23 | 21 | 2 | 2 | 91.3% | 92% | _(thin)_ |
-| cluster:DPP-2012 | 14 | 14 | 14 | 0 | 0 | 100.0% | 100% | _(thin)_ |
-| cluster:DPP-2013 | 13 | 11 | 10 | 1 | 2 | 90.9% | 85% | _(thin)_ |
-| cluster:DPP-2014 | 21 | 21 | 19 | 2 | 0 | 90.5% | 100% | _(thin)_ |
-| cluster:DPP-2015 | 43 | 42 | 28 | 14 | 1 | 66.7% | 98% |  |
-| cluster:DPP-2016 | 110 | 87 | 47 | 40 | 23 | 54.0% | 79% |  |
-| cluster:DPP-2017 | 247 | 181 | 12 | 169 | 66 | 6.6% | 73% |  |
-| cluster:DPP-2018 | 131 | 91 | 0 | 91 | 40 | 0.0% | 69% |  |
-| cluster:DPP-2019 | 80 | 57 | 1 | 56 | 23 | 1.8% | 71% |  |
-| cluster:DPP-2020 | 94 | 61 | 7 | 54 | 33 | 11.5% | 65% |  |
-| cluster:DPP-2021 | 108 | 64 | 0 | 64 | 44 | 0.0% | 59% |  |
-| cluster:DPP-2022 | 247 | 207 | 0 | 207 | 40 | 0.0% | 84% |  |
-| cluster:DPP-2023 | 241 | 194 | 0 | 194 | 47 | 0.0% | 80% |  |
-| cluster:DPP-2024 | 381 | 130 | 0 | 130 | 251 | 0.0% | 34% | _(immature)_ |
-| cluster:DPP-2025 | 36 | 0 | 0 | 0 | 36 | 0.0% | 0% | _(immature, thin)_ |
+| cluster:DISIS-2009 | 11 | 11 | 11 | 0 | 0 | 100.0% | 100% | _(thin)_ |
+| cluster:DISIS-2010 | 21 | 21 | 19 | 2 | 0 | 90.5% | 100% | _(thin)_ |
+| cluster:DISIS-2011 | 25 | 23 | 21 | 2 | 2 | 91.3% | 92% | _(thin)_ |
+| cluster:DISIS-2012 | 14 | 14 | 14 | 0 | 0 | 100.0% | 100% | _(thin)_ |
+| cluster:DISIS-2013 | 13 | 11 | 10 | 1 | 2 | 90.9% | 85% | _(thin)_ |
+| cluster:DISIS-2014 | 21 | 21 | 19 | 2 | 0 | 90.5% | 100% | _(thin)_ |
+| cluster:DISIS-2015 | 43 | 42 | 28 | 14 | 1 | 66.7% | 98% |  |
+| cluster:DISIS-2016 | 110 | 87 | 47 | 40 | 23 | 54.0% | 79% |  |
+| cluster:DISIS-2017 | 247 | 181 | 12 | 169 | 66 | 6.6% | 73% |  |
+| cluster:DISIS-2018 | 128 | 88 | 0 | 88 | 40 | 0.0% | 69% |  |
+| cluster:DISIS-2019 | 74 | 51 | 1 | 50 | 23 | 2.0% | 69% |  |
+| cluster:DISIS-2020 | 94 | 61 | 7 | 54 | 33 | 11.5% | 65% |  |
+| cluster:DISIS-2021 | 108 | 64 | 0 | 64 | 44 | 0.0% | 59% |  |
+| cluster:DISIS-2022 | 247 | 207 | 0 | 207 | 40 | 0.0% | 84% |  |
+| cluster:DISIS-2023 | 241 | 194 | 0 | 194 | 47 | 0.0% | 80% |  |
+| cluster:DISIS-2024 | 381 | 130 | 0 | 130 | 251 | 0.0% | 34% | _(immature)_ |
+| cluster:ERAS-2025 | 36 | 0 | 0 | 0 | 36 | 0.0% | 0% | _(immature, thin)_ |
+| cluster:FCS-2018 | 3 | 3 | 0 | 3 | 0 | 0.0% | 100% | _(thin)_ |
+| cluster:FCS-2019 | 6 | 6 | 0 | 6 | 0 | 0.0% | 100% | _(thin)_ |
+| cluster:ICS-2008 | 54 | 54 | 53 | 1 | 0 | 98.1% | 100% |  |
 | cycle:(unknown) | 26 | 26 | 18 | 8 | 0 | 69.2% | 100% | _(thin)_ |
 | cycle:2000 | 7 | 7 | 0 | 7 | 0 | 0.0% | 100% | _(thin)_ |
 | cycle:2001 | 38 | 38 | 5 | 33 | 0 | 13.2% | 100% |  |
@@ -402,10 +416,19 @@ Completion by study cycle. MISO is sliced by DPP cluster cycle; ERCOT has no clu
 
 | Cycle | Total | Decided | Operational | Withdrawn | Active | Completion | Decided-share | |
 |---|---:|---:|---:|---:|---:|---:|---:|---|
-| cluster:DPP-2022 | 100 | 72 | 0 | 72 | 28 | 0.0% | 72% |  |
-| cluster:DPP-2023 | 147 | 96 | 0 | 96 | 51 | 0.0% | 65% |  |
-| cluster:DPP-2024 | 173 | 79 | 0 | 79 | 94 | 0.0% | 46% | _(immature)_ |
-| cluster:DPP-2025 | 122 | 9 | 0 | 9 | 113 | 0.0% | 7% | _(immature, thin)_ |
+| cluster:CLUSTER-2023 | 19 | 0 | 0 | 0 | 19 | 0.0% | 0% | _(immature, thin)_ |
+| cluster:CLUSTER-2024 | 26 | 7 | 0 | 7 | 19 | 0.0% | 27% | _(immature, thin)_ |
+| cluster:CLUSTER-2025 | 46 | 0 | 0 | 0 | 46 | 0.0% | 0% | _(immature, thin)_ |
+| cluster:CS-2025 | 12 | 0 | 0 | 0 | 12 | 0.0% | 0% | _(immature, thin)_ |
+| cluster:DEC-2022 | 7 | 6 | 0 | 6 | 1 | 0.0% | 86% | _(thin)_ |
+| cluster:DISIS-2022 | 92 | 66 | 0 | 66 | 26 | 0.0% | 72% |  |
+| cluster:DISIS-2023 | 51 | 31 | 0 | 31 | 20 | 0.0% | 61% |  |
+| cluster:DISIS-2024 | 93 | 36 | 0 | 36 | 57 | 0.0% | 39% | _(immature)_ |
+| cluster:DISIS-2025 | 64 | 9 | 0 | 9 | 55 | 0.0% | 14% | _(immature, thin)_ |
+| cluster:SOLAR-2023 | 77 | 65 | 0 | 65 | 12 | 0.0% | 84% |  |
+| cluster:SOLAR-2024 | 47 | 36 | 0 | 36 | 11 | 0.0% | 77% |  |
+| cluster:TCS-2024 | 7 | 0 | 0 | 0 | 7 | 0.0% | 0% | _(immature, thin)_ |
+| cluster:TRANS-2022 | 1 | 0 | 0 | 0 | 1 | 0.0% | 0% | _(immature, thin)_ |
 | cycle:(unknown) | 330 | 295 | 83 | 212 | 35 | 28.1% | 89% |  |
 | cycle:1997 | 6 | 6 | 6 | 0 | 0 | 100.0% | 100% | _(thin)_ |
 | cycle:1998 | 42 | 42 | 28 | 14 | 0 | 66.7% | 100% |  |
@@ -441,14 +464,26 @@ Completion by study cycle. MISO is sliced by DPP cluster cycle; ERCOT has no clu
 
 | Cycle | Total | Decided | Operational | Withdrawn | Active | Completion | Decided-share | |
 |---|---:|---:|---:|---:|---:|---:|---:|---|
-| cluster:DPP-2011 | 1 | 0 | 0 | 0 | 1 | 0.0% | 0% | _(immature, thin)_ |
-| cluster:DPP-2014 | 1 | 1 | 0 | 1 | 0 | 0.0% | 100% | _(thin)_ |
-| cluster:DPP-2020 | 17 | 11 | 0 | 11 | 6 | 0.0% | 65% | _(thin)_ |
-| cluster:DPP-2021 | 26 | 22 | 0 | 22 | 4 | 0.0% | 85% | _(thin)_ |
-| cluster:DPP-2022 | 30 | 27 | 0 | 27 | 3 | 0.0% | 90% | _(thin)_ |
-| cluster:DPP-2023 | 34 | 26 | 0 | 26 | 8 | 0.0% | 76% | _(thin)_ |
-| cluster:DPP-2024 | 86 | 17 | 0 | 17 | 69 | 0.0% | 20% | _(immature, thin)_ |
-| cluster:DPP-2025 | 85 | 22 | 0 | 22 | 63 | 0.0% | 26% | _(immature, thin)_ |
+| cluster:CLUSTER-2023 | 13 | 9 | 0 | 9 | 4 | 0.0% | 69% | _(thin)_ |
+| cluster:CLUSTER-2024 | 15 | 10 | 0 | 10 | 5 | 0.0% | 67% | _(thin)_ |
+| cluster:CLUSTER-2025 | 35 | 13 | 0 | 13 | 22 | 0.0% | 37% | _(immature, thin)_ |
+| cluster:DISIS-2020 | 12 | 8 | 0 | 8 | 4 | 0.0% | 67% | _(thin)_ |
+| cluster:DISIS-2021 | 26 | 22 | 0 | 22 | 4 | 0.0% | 85% | _(thin)_ |
+| cluster:DISIS-2022 | 13 | 12 | 0 | 12 | 1 | 0.0% | 92% | _(thin)_ |
+| cluster:DISIS-2023 | 18 | 17 | 0 | 17 | 1 | 0.0% | 94% | _(thin)_ |
+| cluster:DISIS-2024 | 20 | 0 | 0 | 0 | 20 | 0.0% | 0% | _(immature, thin)_ |
+| cluster:DISIS-2025 | 12 | 1 | 0 | 1 | 11 | 0.0% | 8% | _(immature, thin)_ |
+| cluster:GI-2011 | 1 | 0 | 0 | 0 | 1 | 0.0% | 0% | _(immature, thin)_ |
+| cluster:GI-2014 | 1 | 1 | 0 | 1 | 0 | 0.0% | 100% | _(thin)_ |
+| cluster:GI-2025 | 29 | 5 | 0 | 5 | 24 | 0.0% | 17% | _(immature, thin)_ |
+| cluster:RSC-2020 | 5 | 3 | 0 | 3 | 2 | 0.0% | 60% | _(thin)_ |
+| cluster:RSC-2023 | 3 | 0 | 0 | 0 | 3 | 0.0% | 0% | _(immature, thin)_ |
+| cluster:RSC-2024 | 21 | 1 | 0 | 1 | 20 | 0.0% | 5% | _(immature, thin)_ |
+| cluster:RSC-2025 | 3 | 1 | 0 | 1 | 2 | 0.0% | 33% | _(immature, thin)_ |
+| cluster:SURPLUS-2025 | 6 | 2 | 0 | 2 | 4 | 0.0% | 33% | _(immature, thin)_ |
+| cluster:TC-2024 | 26 | 6 | 0 | 6 | 20 | 0.0% | 23% | _(immature, thin)_ |
+| cluster:TRANSITION-2022 | 17 | 15 | 0 | 15 | 2 | 0.0% | 88% | _(thin)_ |
+| cluster:TRANSITIONAL-2024 | 4 | 0 | 0 | 0 | 4 | 0.0% | 0% | _(immature, thin)_ |
 | cycle:(unknown) | 106 | 96 | 86 | 10 | 10 | 89.6% | 91% |  |
 | cycle:2000 | 22 | 22 | 7 | 15 | 0 | 31.8% | 100% | _(thin)_ |
 | cycle:2001 | 196 | 194 | 27 | 167 | 2 | 13.9% | 99% |  |

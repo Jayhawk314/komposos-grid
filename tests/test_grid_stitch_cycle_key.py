@@ -42,6 +42,9 @@ def _proj(cluster: str = "", q_year=None) -> QueueProject:
         ("DISIS 2025", "cluster:DISIS-2025"),
         # Lowercase and mixed-case tags normalize to the same family.
         ("disis-2024", "cluster:DISIS-2024"),
+        # Run-together tags must not spawn a family of their own: the West
+        # slice contains "DISIS2021003", which has to fold into DISIS.
+        ("DISIS2021003", "cluster:DISIS-2021"),
     ],
 )
 def test_cluster_family_comes_from_the_operators_own_tag(cluster, expected):

@@ -77,7 +77,7 @@ def _cycle_key(p: QueueProject) -> str:
         # "DPP-2018-APR", "DPP-2008-NOV" all map to their DPP-<year>.
         m = re.search(r"(19|20)\d{2}", p.cluster)
         if m:
-            fam = re.search(r"[A-Za-z][A-Za-z0-9]*", p.cluster)
+            fam = re.search(r"[A-Za-z]+", p.cluster)
             name = fam.group(0).upper() if fam else "CLUSTER"
             return f"cluster:{name}-{m.group(0)}"
         # yearless cluster tags fall back to entry year
