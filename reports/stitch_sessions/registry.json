@@ -1,16 +1,18 @@
 {
   "series": "i2X STITCH — Studies, Tools, and Interconnection Consistency and Harmonization",
   "facilitators": ["ESIG", "Berkeley Lab", "Elevate Energy Consulting"],
+  "source": "https://www.esig.energy/i2x-initiatives/#i2x-STITCH — schedule transcribed from the ESIG page 2026-07-27. The page returns 403 to automated fetches; these entries were confirmed by James reading it directly.",
   "sessions": [
     {
       "id": "2026-06-23",
-      "title": "Regional Study Processes (MISO vs. ERCOT)",
+      "title": "Regional Study Processes (MISO, ERCOT)",
       "status": "held",
       "presenters": [
-        "Julia Matevosyan (ESIG)",
-        "Alyssa Hickey (MISO)",
-        "Vish Sankaran (ENGIE)",
-        "Jenifer Fernandes (ERCOT)"
+        "Julia Matevosyan (ESIG) — meeting introduction",
+        "Alyssa Hickey (MISO) — MISO interconnection study process",
+        "Vish Sankaran (ENGIE) — developer perspective on MISO",
+        "Jenifer Fernandes (ERCOT) — ERCOT interconnection study process",
+        "Vish Sankaran (ENGIE) — developer perspective on ERCOT"
       ],
       "regions": ["miso", "ercot"],
       "artifacts": [
@@ -23,21 +25,22 @@
         "reports/stitch_sessions/region_packs/ercot.md"
       ],
       "key_claims": [
-        "MISO post-IA completion ~35% (476/1365)",
-        "ERCOT post-IA completion ~80% (486/610)",
-        "DPP-2022 cycle: 171 GW requested; DPP-2025 fell to 78 GW under queue caps"
+        "MISO post-IA completion 34.9% (476/1365)",
+        "ERCOT post-IA completion 79.7% (486/610)",
+        "End-to-end medians nearly tied: MISO 39.1 mo, ERCOT 44.3 mo"
       ]
     },
     {
       "id": "2026-07-28",
-      "title": "Regional Study Processes: CAISO and WECC",
+      "title": "Regional Study Processes: CAISO and WECC Utilities (e.g. BPA)",
       "status": "announced",
       "presenters": [
-        "Julia Matevosyan (ESIG)",
-        "Robert Sparks (CAISO)",
-        "Jorge Chacon (CAISO)",
-        "Eric Heredia (BPA) — interconnectedness",
-        "Rikin Shah (PacifiCorp) — interconnectedness study"
+        "Julia Matevosyan (ESIG) — meeting introduction",
+        "Robert Sparks (CAISO) — CAISO interconnection study process",
+        "Jorge Chacon (EPE) — developer perspective on CAISO",
+        "Eric Heredia (BPA) — BPA interconnection study process",
+        "Rikin Shah (PacifiCorp) — PacifiCorp interconnection study process",
+        "Q&A led by Julia Matevosyan (ESIG) and Sirisha Tanneeru (Elevate Energy Consulting)"
       ],
       "regions": ["caiso", "west"],
       "region_packs": [
@@ -46,70 +49,124 @@
       ],
       "key_claims": [
         "CAISO post-IA completion 90.7% (196/216) — highest of the nine LBNL regions",
-        "CAISO end-to-end 70.5 months median (IR->COD), the longest of the nine",
-        "CAISO LBNL completion 12.1% (232/1,910), the lowest of the nine",
-        "Non-ISO West post-IA 71.9% (440/612) with IR->COD 25.4 months — the inverse profile to CAISO"
+        "CAISO end-to-end 70.5 months median (IR->COD) — the longest of the nine",
+        "CAISO LBNL completion 12.1% (232/1,910) — the lowest of the nine",
+        "Non-ISO West post-IA 71.9% (440/612), IR->COD 25.4 months — the inverse profile to CAISO",
+        "PacifiCorp post-IA 60.4% (224/371) — computable, real",
+        "BPA post-IA NOT computable: 611 withdrawn projects, zero carry an executed-IA date"
       ],
       "prep_checklist": [
-        "CAISO/West region packs are the relevant ones for this session",
-        "BPA (Heredia) and PacifiCorp (Shah) sit inside LBNL's non-ISO 'West' aggregate — do NOT attribute the West figures to either utility individually",
+        "Jorge Chacon is EPE (El Paso Electric) giving the DEVELOPER perspective — not CAISO staff",
+        "BPA and PacifiCorp sit inside LBNL's 36-entity non-ISO 'West' aggregate — do NOT attribute West figures to either utility individually",
+        "Do NOT state BPA's post-IA as 100%. It is an artifact of no IA dates on withdrawals, same gap as SPP",
         "Post-IA per-region is OUR computation; LBNL publishes Sheet 27 nationally only. Say so.",
         "Wake the Streamlit app before sharing the link (free tier sleeps)"
       ]
     },
     {
       "id": "2026-08-18",
-      "title": "Regional Study Processes Cont. — topic UNCONFIRMED",
+      "title": "Automation and Data Harmonization",
       "status": "announced",
-      "topic_confidence": "date confirmed; topic not verified — ESIG page blocks automated reads and search summaries have contradicted each other. Check the registration email.",
-      "presenters": ["TBD — check the ESIG registration email"],
-      "regions": ["TBD"],
-      "candidate_regions_remaining": ["pjm", "nyiso", "iso_ne", "southeast", "spp"],
+      "presenters": [
+        "Vendors: Pearl Street, Nira, Grid Unity, and others",
+        "ISO users: MISO, PJM, ERCOT, and others"
+      ],
+      "regions": ["all"],
+      "priority": "HIGHEST — this is the session this project was built for",
       "prep_checklist": [
-        "Confirm regions from the registration email, then set 'regions' and pull the matching region packs",
-        "Eastern regions (PJM, NYISO, ISO-NE) and SPP/Southeast are the ones not yet covered",
-        "ERCOT Batch Zero inclusion notices expected this month — have the tracker ready",
-        "Run /webinar-prep to refresh figures and diff against baseline"
+        "This project is a data-harmonization tool, not a single-region study. Automation and Data Harmonization is its natural home in the series.",
+        "Lead with the milestone data-coverage finding: post-IA completion is computable in 8 of 9 regions. SPP records no IA date on any withdrawn project; BPA has 611 withdrawals with zero IA dates. That is a harmonization problem in the DATA, which is exactly this session's subject.",
+        "The provenance-tier system (measured / derived / simulated) is itself a harmonization proposal worth showing.",
+        "Pearl Street, Nira and Grid Unity are commercial interconnection-study platforms — this is a vendor-heavy room. An independent, open-source, reproducible benchmark is a different and complementary thing; position it that way, not as a competing product.",
+        "Have REPRODUCE.md ready — it runs on keyless public data, which is the credibility asset in a room full of proprietary tooling.",
+        "Cluster-family naming is a concrete harmonization example: MISO uses DPP, SPP uses DISIS, and the non-ISO West has no shared vocabulary at all (36 entities, families including CLUSTER/TRANSITION/SURPLUS/GI/RSC)."
       ]
     },
     {
       "id": "2026-09-22",
-      "title": "Regional Study Processes Cont. — topic UNCONFIRMED",
+      "title": "Regional Study Processes Cont. (SPP, PJM)",
       "status": "announced",
-      "topic_confidence": "date confirmed; topic not verified",
-      "presenters": ["TBD — check the ESIG registration email"],
-      "regions": ["TBD"],
-      "candidate_regions_remaining": ["pjm", "nyiso", "iso_ne", "southeast", "spp"],
+      "presenters": [
+        "SPP",
+        "PJM",
+        "Developer with regional experience (or consultant)"
+      ],
+      "regions": ["spp", "pjm"],
+      "region_packs": [
+        "reports/stitch_sessions/region_packs/spp.md",
+        "reports/stitch_sessions/region_packs/pjm.md"
+      ],
+      "key_claims": [
+        "SPP post-IA NOT computable — no executed-IA date on any withdrawn project. The clearest single instance of the milestone-coverage gap.",
+        "PJM post-IA 85.9% (195/227)",
+        "SPP cluster families are DISIS/ERAS/FCS/ICS — not MISO's DPP"
+      ],
       "prep_checklist": [
-        "Confirm regions from the registration email",
-        "Run /webinar-prep to refresh figures and diff against baseline"
+        "SPP is the headline coverage gap — this session is the natural place to raise it directly with SPP in the room",
+        "Frame it as a data-availability observation, not a criticism of SPP's reporting"
+      ]
+    },
+    {
+      "id": "2026-10-20",
+      "title": "Regional Study Processes Cont. (NYISO, ISO-NE, Eastern non-market)",
+      "status": "announced",
+      "presenters": [
+        "NYISO",
+        "ISO-NE",
+        "EI non-market entity — Duke, Southern, or similar",
+        "Developer with regional experience (or consultant)"
+      ],
+      "regions": ["nyiso", "iso_ne", "southeast"],
+      "region_packs": [
+        "reports/stitch_sessions/region_packs/nyiso.md",
+        "reports/stitch_sessions/region_packs/iso_ne.md",
+        "reports/stitch_sessions/region_packs/southeast.md"
+      ],
+      "key_claims": [
+        "NYISO post-IA 70.0% (35/50) — thin cohort, flag it",
+        "ISO-NE post-IA 75.2% (97/129)",
+        "Southeast post-IA 55.4% (92/166)"
+      ],
+      "prep_checklist": [
+        "NYISO's post-IA cohort is only 50 decided projects — say 'thin' out loud rather than quoting the rate bare",
+        "The Southeast is an LBNL aggregate of non-market entities (Duke, Southern and others), not a single operator"
       ]
     },
     {
       "id": "2026-11-17",
-      "title": "Automation and Data Harmonization",
+      "title": "Industry Advisor Perspectives and Other Topics",
       "status": "announced",
-      "topic_confidence": "date and topic from public LBNL/ESIG listings; not yet confirmed against a registration email",
-      "presenters": ["TBD"],
+      "presenters": [
+        "Industry advisors — Grid Strategies, Brattle",
+        "Other pertinent topics as they arise"
+      ],
       "regions": ["all"],
       "prep_checklist": [
-        "This is the session this project is built for — it is a data-harmonization tool, not a single-region study",
-        "Lead with the milestone data-coverage finding: post-IA completion is computable in 8 of 9 regions; SPP records no IA date on withdrawn projects, and BPA (inside the West aggregate) has 611 withdrawals with zero IA dates",
-        "The provenance-tier system (measured / derived / simulated) is itself a harmonization proposal — worth showing",
-        "Have the reproducibility path ready: REPRODUCE.md runs on keyless public data"
+        "Analyst/consultancy room rather than an operator room — framing should be economic and policy-facing",
+        "The 'other topics as needed' slot is the realistic opening for outside material, if any is wanted by then"
       ]
     },
     {
-      "id": "2027-03",
-      "title": "Final Whitepaper Presentation — hybrid at ESIG Spring Workshop",
+      "id": "2027-01-26",
+      "title": "Final Paper Presentation",
       "status": "announced",
-      "topic_confidence": "month and format from public listings; exact date not confirmed",
-      "presenters": ["TBD"],
+      "presenters": ["Industry webinar — final paper, findings, results summary, next steps"],
       "regions": ["all"],
       "prep_checklist": [
-        "The series produces a technical report — this is the deliverable the whole effort feeds",
-        "If any of this work is to be cited or contributed, the conversation has to happen well before March",
-        "Hybrid/in-person at the ESIG Spring Workshop"
+        "This is the deliverable the whole series feeds. Anything intended to inform or be cited in the paper must be in the facilitators' hands MONTHS before January.",
+        "Working backwards: contact needs to happen around the July/August sessions, not near the deadline."
+      ]
+    },
+    {
+      "id": "2027-spring",
+      "title": "Interconnection Studies and Harmonization Workshop",
+      "status": "announced",
+      "presenters": ["Stakeholder working meeting — registration not yet open"],
+      "regions": ["all"],
+      "prep_checklist": [
+        "Working meeting on findings and recommendations from the final paper",
+        "Focus is best practices, efficiencies, harmonization and automation approaches proven in some regions that could transfer to others — i.e. cross-region property transfer, which is what the Yoneda-similarity screening is for",
+        "Registration information to be announced"
       ]
     }
   ]
