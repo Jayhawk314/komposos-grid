@@ -59,25 +59,57 @@
     },
     {
       "id": "2026-08-18",
-      "title": "Regional Study Processes Cont.",
+      "title": "Regional Study Processes Cont. — topic UNCONFIRMED",
       "status": "announced",
-      "presenters": ["TBD — check ESIG events page"],
+      "topic_confidence": "date confirmed; topic not verified — ESIG page blocks automated reads and search summaries have contradicted each other. Check the registration email.",
+      "presenters": ["TBD — check the ESIG registration email"],
       "regions": ["TBD"],
+      "candidate_regions_remaining": ["pjm", "nyiso", "iso_ne", "southeast", "spp"],
       "prep_checklist": [
-        "Confirm presenters and regions from the ESIG event page",
+        "Confirm regions from the registration email, then set 'regions' and pull the matching region packs",
+        "Eastern regions (PJM, NYISO, ISO-NE) and SPP/Southeast are the ones not yet covered",
         "ERCOT Batch Zero inclusion notices expected this month — have the tracker ready",
         "Run /webinar-prep to refresh figures and diff against baseline"
       ]
     },
     {
       "id": "2026-09-22",
-      "title": "Regional Study Processes Cont.",
+      "title": "Regional Study Processes Cont. — topic UNCONFIRMED",
       "status": "announced",
-      "presenters": ["TBD — check ESIG events page"],
+      "topic_confidence": "date confirmed; topic not verified",
+      "presenters": ["TBD — check the ESIG registration email"],
       "regions": ["TBD"],
+      "candidate_regions_remaining": ["pjm", "nyiso", "iso_ne", "southeast", "spp"],
       "prep_checklist": [
-        "Confirm presenters and regions from the ESIG event page",
+        "Confirm regions from the registration email",
         "Run /webinar-prep to refresh figures and diff against baseline"
+      ]
+    },
+    {
+      "id": "2026-11-17",
+      "title": "Automation and Data Harmonization",
+      "status": "announced",
+      "topic_confidence": "date and topic from public LBNL/ESIG listings; not yet confirmed against a registration email",
+      "presenters": ["TBD"],
+      "regions": ["all"],
+      "prep_checklist": [
+        "This is the session this project is built for — it is a data-harmonization tool, not a single-region study",
+        "Lead with the milestone data-coverage finding: post-IA completion is computable in 8 of 9 regions; SPP records no IA date on withdrawn projects, and BPA (inside the West aggregate) has 611 withdrawals with zero IA dates",
+        "The provenance-tier system (measured / derived / simulated) is itself a harmonization proposal — worth showing",
+        "Have the reproducibility path ready: REPRODUCE.md runs on keyless public data"
+      ]
+    },
+    {
+      "id": "2027-03",
+      "title": "Final Whitepaper Presentation — hybrid at ESIG Spring Workshop",
+      "status": "announced",
+      "topic_confidence": "month and format from public listings; exact date not confirmed",
+      "presenters": ["TBD"],
+      "regions": ["all"],
+      "prep_checklist": [
+        "The series produces a technical report — this is the deliverable the whole effort feeds",
+        "If any of this work is to be cited or contributed, the conversation has to happen well before March",
+        "Hybrid/in-person at the ESIG Spring Workshop"
       ]
     }
   ]
