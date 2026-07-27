@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: Apache-2.0 OR LicenseRef-KOMPOSOS-IV-Commercial
+# SPDX-License-Identifier: Apache-2.0
 # SPDX-FileCopyrightText: 2026 James Hawkins / Komposos-Labs
 
 """

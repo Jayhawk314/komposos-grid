@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: LicenseRef-Proprietary-Commercial
+# SPDX-License-Identifier: Apache-2.0
 # SPDX-FileCopyrightText: 2026 James Hawkins <jhawk314@gmail.com>
 
 """Forge (Layer 1): the hot-loadable plugin framework that hosts OPERADUM."""

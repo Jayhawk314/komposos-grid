@@ -1,3 +1,9 @@
+# SPDX-License-Identifier: Apache-2.0
+# SPDX-FileCopyrightText: 2026 James Hawkins <jhawk314@gmail.com>
+#
+# Licensed under the Apache License, Version 2.0 (see LICENSE file).
+# No copyright is claimed in the underlying public data — see NOTICE.
+
 from __future__ import annotations
 
 import json
@@ -215,7 +221,7 @@ if selection == "📊 Regional Queue Study":
     st.title("📊 Regional Interconnection Queue Studies")
     _provenance_badge(
         "measured",
-        "LBNL Queued Up (data through 2026) — headline rates reconcile to the published sheets to the integer.",
+        "LBNL Queued Up 2026 Edition (data through year-end 2025) — headline rates reconcile to the published sheets to the integer.",
     )
 
     st.markdown(
@@ -656,16 +662,27 @@ Topics presenters were asked to cover:
         """)
 
         st.divider()
-        st.subheader("Future Sessions (planned)")
-        st.markdown("""
-| Session | Focus | Status |
-|---|---|---|
-| June 23, 2026 | Regional Study Processes (MISO, ERCOT) | ✅ Complete |
-| TBD | Western Interconnect (CAISO, SPP, WECC) | 🗓 Planned |
-| TBD | Eastern Interconnect (PJM, NYISO, ISO-NE) | 🗓 Planned |
-| TBD | Automation & Tooling Deep Dive | 🗓 Planned |
-| TBD | Harmonization Recommendations | 🗓 Planned |
-        """)
+        st.subheader("Series Schedule")
+        _all_sessions = _load_session_registry()
+        if _all_sessions:
+            _status_label = {"held": "✅ Held", "announced": "🗓 Announced"}
+            sched_df = pd.DataFrame([
+                {
+                    "Date": s["id"],
+                    "Focus": s.get("title", "—"),
+                    "Status": _status_label.get(s.get("status"), s.get("status", "—")),
+                }
+                for s in _all_sessions
+            ])
+            st.dataframe(sched_df, use_container_width=True, hide_index=True)
+            st.caption(
+                "Read from `reports/stitch_sessions/registry.json` — the single source of "
+                "truth for this series. Topics and presenters for announced sessions are "
+                "confirmed against the ESIG/Berkeley Lab event page as they are published; "
+                "verify there before relying on a future session's focus."
+            )
+        else:
+            st.caption("No sessions registered yet — see `reports/stitch_sessions/registry.json`.")
 
 
 # ─────────────────────────────────────────────────────────────────────────────

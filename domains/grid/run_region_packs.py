@@ -42,7 +42,7 @@ DISPLAY = {
 
 PROVENANCE = (
     "> 📏 **Measured** — every figure derives from the LBNL *Queued Up* data file "
-    "(through 2026); headline counts reconcile to the published tables. "
+    "(2026 Edition, data through year-end 2025); headline counts reconcile to the published tables. "
     "Regenerate with `python -m domains.grid.run_region_packs`.\n"
 )
 

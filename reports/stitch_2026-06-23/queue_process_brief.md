@@ -1,6 +1,6 @@
 # STITCH 2026-06-23 — MISO vs ERCOT Interconnection Study Process
 
-Dataset: **LBNL Queued Up (thru 2026)** · method: LBNL-definition completion + built-after-signing, per region · national completion (decided): **16.5%**
+Dataset: **LBNL Queued Up, 2026 Edition (data through year-end 2025)** · method: LBNL-definition completion + built-after-signing, per region · national completion (decided): **16.5%**
 
 ## Headline comparison
 

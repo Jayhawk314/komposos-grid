@@ -1,0 +1,97 @@
+Komposos Grid — Independent Interconnection Analytics
+Copyright (c) 2024-2026 James Ray Hawkins
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+this file except in compliance with the License. You may obtain a copy of the
+License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+================================================================================
+SCOPE OF THIS LICENSE
+================================================================================
+
+The Apache 2.0 license in the LICENSE file covers the ORIGINAL SOURCE CODE of
+this repository and nothing else.
+
+It does NOT cover, and no copyright or other proprietary right is claimed in:
+
+  1. THE UNDERLYING PUBLIC DATA. This project analyzes interconnection queue,
+     grid telemetry, emissions, and wholesale market data published by U.S.
+     government agencies, national laboratories, and grid operators. Those
+     datasets belong to their publishers and remain governed by the publishers'
+     own terms of use. Analyzing data creates no ownership of it.
+
+  2. FACTUAL FIGURES DERIVED FROM THAT DATA. Counts, rates, medians, and similar
+     factual results reported here are facts about public datasets. They are
+     stated as accurately as the author can make them and are offered freely for
+     verification, correction, and reuse.
+
+  3. THIRD-PARTY CODE AND MODELS bundled or referenced here, which carry their
+     own licenses (see "Third-party components" below).
+
+  4. THE NAMES, TRADEMARKS, OR PROCESS DOCUMENTATION of any grid operator,
+     agency, laboratory, or industry organization referenced in this repository.
+
+Original written analysis, documentation, and report prose authored for this
+project are additionally offered under Creative Commons Attribution 4.0
+International (CC BY 4.0): https://creativecommons.org/licenses/by/4.0/
+
+================================================================================
+DATA SOURCES AND ATTRIBUTION
+================================================================================
+
+Lawrence Berkeley National Laboratory — "Queued Up" interconnection queue data
+  2026 Edition; data through year-end 2025.  https://emp.lbl.gov/queues
+  Produced under U.S. Department of Energy Contract No. DE-AC02-05CH11231.
+  Published by Berkeley Lab for public use. Please cite Berkeley Lab when
+  reusing these figures. Berkeley Lab has not reviewed or endorsed this project.
+
+U.S. Energy Information Administration — Form EIA-930 hourly interchange data
+  A work of the U.S. Government; not subject to copyright in the United States
+  (17 U.S.C. Sec. 105). Please cite EIA.
+
+U.S. Environmental Protection Agency — eGRID plant-level generation data
+  A work of the U.S. Government; not subject to copyright in the United States.
+  Please cite EPA.
+
+Wholesale market data — MISO, PJM, ERCOT, NYISO, SPP, CAISO
+  Day-ahead LMP, settlement, constraint, and outage data published by each grid
+  operator under that operator's own terms of use. This repository commits
+  derived summaries only; raw operator data is fetched by the user at runtime
+  and is not redistributed here.
+
+No raw third-party dataset is redistributed in this repository. The files under
+reports/ are derived summaries computed by this project's own code.
+
+================================================================================
+THIRD-PARTY COMPONENTS
+================================================================================
+
+data/external/WESyS-Model-master/
+  Waste-to-Energy System Simulation (WESyS) Model
+  Copyright (c) 2020, National Renewable Energy Laboratory. All rights reserved.
+  Licensed under the BSD 2-Clause License — see that directory's LICENSE file.
+  Developed under U.S. DOE Contract No. DE-AC36-08GO28308 with Alliance for
+  Sustainable Energy, LLC. NOT covered by this repository's Apache 2.0 license.
+
+================================================================================
+INDEPENDENCE AND DISCLAIMER
+================================================================================
+
+This is an independent, unfunded project by a private individual. It is NOT
+affiliated with, sponsored by, reviewed by, or endorsed by the U.S. Department
+of Energy, the i2X initiative, the Energy Systems Integration Group (ESIG),
+Lawrence Berkeley National Laboratory, Elevate Energy Consulting, or any
+ISO/RTO, balancing authority, or utility.
+
+References to the i2X STITCH meeting series describe a public forum the author
+follows as a member of the public. Meeting notes in this repository are the
+author's own takeaways from attending, not official minutes, and are not
+attributable to any presenter or facilitator.
+
+Figures labeled "Simulated" are stylized illustrations, not observations, and
+must not be cited as data. Screening indicators are starting points for study,
+not measured costs, and nothing here is investment advice.
+
+THE SOFTWARE AND ANALYSIS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.

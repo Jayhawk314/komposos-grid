@@ -49,7 +49,7 @@ The underlying engine of the repository runs on **applied category theory** (she
 
 ## 3. The Trust Walkthrough: Numerical Proof of Accuracy
 
-To prove the system is accurate, you must show the presenters a series of numbers that reconcile **exactly** to the integer with the published tables from **Berkeley Lab's "Queued Up" (thru 2026)** report. 
+To prove the system is accurate, you must show the presenters a series of numbers that reconcile **exactly** to the integer with the published tables from **Berkeley Lab's "Queued Up" 2026 Edition (data through year-end 2025)** report. 
 
 If they see your system reproduces their trusted ground truth, they will trust the rest of your findings. Walk them through these 4 steps:
 

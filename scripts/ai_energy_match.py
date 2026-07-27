@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: Apache-2.0 OR LicenseRef-KOMPOSOS-IV-Commercial
+# SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2024-2026 James Ray Hawkins
 """
 AI-Energy Matching Engine (KOMPOSOS-WESyS)

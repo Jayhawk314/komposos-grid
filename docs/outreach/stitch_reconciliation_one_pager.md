@@ -7,7 +7,7 @@
 
 ## Why this exists
 
-Cross-region comparisons of interconnection performance are routinely contested because the regions do not share a unit of work — MISO studies cluster batches, ERCOT runs a serial process. This one-pager presents a **neutral, fully reproducible benchmark** built directly from the Berkeley Lab *Queued Up* data file (through 2026). Every count below reconciles with LBNL's published tables **to the integer**, so the starting point is shared ground truth, not a new methodology to argue about.
+Cross-region comparisons of interconnection performance are routinely contested because the regions do not share a unit of work — MISO studies cluster batches, ERCOT runs a serial process. This one-pager presents a **neutral, fully reproducible benchmark** built directly from the Berkeley Lab *Queued Up* data file (2026 Edition, data through year-end 2025). Every count below reconciles with LBNL's published tables **to the integer**, so the starting point is shared ground truth, not a new methodology to argue about.
 
 ## Step 1 — The baseline reconciles exactly (LBNL Sheet 25)
 
@@ -46,4 +46,4 @@ Direct timeline and milestone comparisons between regions are structurally skewe
 
 ---
 
-**Reproducibility.** Source: LBNL *Queued Up* data file through 2026 (public). Pipeline and interactive dashboard: `https://komposos-grid.streamlit.app` (open-source; every figure above is regenerable from the raw workbook with one command). I am glad to walk through the reconciliation step by step.
+**Reproducibility.** Source: LBNL *Queued Up* data file, 2026 Edition (data through year-end 2025; public). Pipeline and interactive dashboard: `https://komposos-grid.streamlit.app` (open-source; every figure above is regenerable from the raw workbook with one command). I am glad to walk through the reconciliation step by step.

@@ -1356,5 +1356,5 @@ And it runs forever — because the space it explores is infinite, and human nee
 
 **Author:** James Ray Hawkins
 **Date:** 2026-04-07
-**License:** Apache-2.0 OR KOMPOSOS-IV-Commercial
+**License:** Apache-2.0
 **Status:** Design Document — Ready for Phase 1 Implementation

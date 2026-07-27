@@ -1,7 +1,7 @@
 # MISO vs. ERCOT: What the Queue Data Actually Shows
 ## An Independent Brief for the i2X STITCH Initiative · June 2026
 
-*Prepared using the komposos-grid codebase (OPTIMUS factorization over LBNL Queued Up thru 2026)
+*Prepared using the komposos-grid codebase (OPTIMUS factorization over LBNL Queued Up, 2026 Edition (data through year-end 2025))
 and current public sources. Numbers that reference LBNL reconcile to their published sheet-level
 tables. All other figures sourced and cited inline.*
 
@@ -231,7 +231,7 @@ That is the finding. Everything else is the evidence.
 
 ---
 
-*Data sources: LBNL Queued Up (thru 2026 edition, May 2026 update); komposos-grid codebase
+*Data sources: LBNL Queued Up (2026 Edition, data through year-end 2025; May 2026 update); komposos-grid codebase
 (`run_stitch_brief.py`, `queue_analysis.py`, `sources/ercot.py`); MISO DPP Study Schedule
 Updates (MISO IPWG, Sept 2024); Modo Energy MISO queue reform analysis (Jan 2026); FERC
 Order 2023 and Order 2023-A; Utility Dive / New Project Media industry reporting cited inline.*

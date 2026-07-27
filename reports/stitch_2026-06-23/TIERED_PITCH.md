@@ -60,7 +60,7 @@ Projects terminate at different study stages. Reaching `ia_executed` is the gate
 - **ERCOT:** ERCOT has **no cluster construct**; study cycles are sliced by entry-year cohort. Completion rates hover steadily between **30%** and **45%** for mature cohorts (2012–2020).
 
 ### Data Sources & Caveats
-- **Dataset:** LBNL *Queued Up* (thru 2026).
+- **Dataset:** LBNL *Queued Up*, 2026 Edition (data through year-end 2025).
 - **Completion Definition:** Operational $\div$ all requests submitted 2000–2020 (LBNL sheet 25).
 - **Built after signing Definition:** Operational $\div$ (operational + withdrawn) among projects with an executed-IA date (LBNL sheet 27).
 - **Caveat:** active/suspended projects in the queue are censored (ignored as outcomes, not counted as failures). Durations are survivor-conditioned (computed only over successful projects that reached COD).

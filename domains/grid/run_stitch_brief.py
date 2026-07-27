@@ -250,7 +250,7 @@ def region_report(projects: List[QueueProject], key: str, min_cohort: int) -> Di
 
 def build(projects: List[QueueProject], regions: List[str], min_cohort: int) -> Dict:
     return {
-        "dataset": "LBNL Queued Up (thru 2026)",
+        "dataset": "LBNL Queued Up, 2026 Edition (data through year-end 2025)",
         "method": "LBNL-definition completion + built-after-signing, per region",
         "national_completion": _completion([p for p in projects if p.decided]),
         "regions": [region_report(projects, r, min_cohort) for r in regions],

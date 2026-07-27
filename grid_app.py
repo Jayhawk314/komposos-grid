@@ -1,3 +1,9 @@
+# SPDX-License-Identifier: Apache-2.0
+# SPDX-FileCopyrightText: 2026 James Hawkins <jhawk314@gmail.com>
+#
+# Licensed under the Apache License, Version 2.0 (see LICENSE file).
+# No copyright is claimed in the underlying public data — see NOTICE.
+
 from __future__ import annotations
 
 import json
@@ -93,7 +99,7 @@ elif selection == "📊 Regional Queue Study":
     st.title("📊 Regional Interconnection Queue Studies")
     st.write(
         "A detailed comparison of regional study processes, milestone funnels, and cycle trends "
-        "across all US grid regions based on LBNL Queued Up data through 2026."
+        "across all US grid regions based on LBNL Queued Up, 2026 Edition (data through year-end 2025)."
     )
     
     # Load queue brief data
