@@ -72,3 +72,6 @@ archive/
 
 # coverage tooling output
 coverage.json
+
+# portfolio-wide outreach strategy — belongs to a different repo, not the grid work
+docs/KOMPOSOS_PORTFOLIO_OUTREACH.md
