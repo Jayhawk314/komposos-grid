@@ -49,9 +49,11 @@ The underlying engine of the repository runs on **applied category theory** (she
 
 ## 3. The Trust Walkthrough: Numerical Proof of Accuracy
 
-To prove the system is accurate, you must show the presenters a series of numbers that reconcile **exactly** to the integer with the published tables from **Berkeley Lab's "Queued Up" 2026 Edition (data through year-end 2025)** report. 
+To prove the system is accurate, show the presenters numbers that reconcile **exactly** to the integer with the published tables in **Berkeley Lab's "Queued Up" 2026 Edition (data through year-end 2025)**.
 
-If they see your system reproduces their trusted ground truth, they will trust the rest of your findings. Walk them through these 4 steps:
+If they see your system reproduces their trusted ground truth, they will trust the rest. Walk them through these 4 steps.
+
+> ⚠️ **Steps 1–2 are reconciliations. Steps 3–4 are our own computation.** Sheet 25 publishes the regional completion table, so Steps 1–2 can be checked against LBNL's document. Sheet 27 publishes post-IA **nationally only**, and LBNL does not publish regional duration splits — so Steps 3–4 apply their methods to slices they never printed. Keep the two claims separate when you present. Overstating the second is the fastest way to lose this audience, because they are the people who can check.
 
 ### Step 1: Count the Raw Decided Cohorts (2000–2020)
 Ask the presenters to verify the baseline project counts for requests submitted between 2000 and 2020 that have reached a final decision (either built or withdrawn):
@@ -85,7 +87,11 @@ Now, isolate the projects that reached the final executed contract milestone (**
   * *Withdrawn after signing:* **124**
   * *Post-Signing Completion Rate:* **79.7%** ($486 \div 610$)
 
-> **Reconciliation Check:** This matches **LBNL Sheet 27** calculations. It shows that in ERCOT, executing an IA is a strong indicator of completion (an ~80% promise), whereas in MISO it is essentially a coin-flip (~35% completion rate).
+> **Provenance — say this out loud, do not skip it.** LBNL publishes post-IA completion on **Sheet 27 at national level only**; there is no regional breakdown on that sheet, and its sample pools LBNL's historical annual datasets rather than this file alone. **These per-region counts are our computation applying LBNL's method, not an LBNL-published figure.** Claiming otherwise is checkable in thirty seconds by anyone who opens the workbook — and this audience will. Framed correctly it is a *stronger* pitch: you read the method closely enough to see where LBNL stopped, and carried it one step further.
+>
+> **What it shows:** in ERCOT, executing an IA is a strong indicator of completion (~80% promise); in MISO it is close to a coin-flip (~35%).
+>
+> **If challenged on definitions**, the gap is not an artifact of the cutoff: LBNL's own IA-year window (2000–2022) gives 34.8% vs 79.9%; mature cohorts only (2000–2019) gives 32.9% vs 75.8%; counting suspended as not-built gives 34.9% vs 77.0%. The spread stays between 42 and 45 points in every variant.
 
 ### Step 4: The Duration Split (Certainty vs. Speed)
 Finally, compare the median durations in months for projects that successfully built. This exposes that ERCOT's edge is not raw speed, but stage-specific certainty:

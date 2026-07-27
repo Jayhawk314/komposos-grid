@@ -277,8 +277,12 @@ def to_markdown(rep: Dict) -> str:
     L.append("## Headline comparison")
     L.append("")
     L.append(
-        "Two headline numbers, both using Berkeley Lab's own definitions so they "
-        "match the published *Queued Up* report (see Definitions at the bottom):"
+        "Two headline numbers, both using Berkeley Lab's own definitions. "
+        "**Completion** reconciles to LBNL's published Sheet 25 regional table to "
+        "the integer. **Built after signing** applies LBNL's Sheet 27 method, which "
+        "LBNL publishes at national level only — the per-region split is this "
+        "project's own computation, not an LBNL-published figure "
+        "(see Definitions at the bottom):"
     )
     L.append("")
     L.append(
@@ -606,8 +610,10 @@ def to_html(rep: Dict) -> str:
 <header>
 <h1>MISO vs ERCOT — Interconnection Study Process</h1>
 <p>i2X STITCH "Regional Study Processes" · 2026-06-23 · source:
-{_esc(rep["dataset"])}. Headline numbers use Berkeley Lab's own definitions
-(see foot) so they match the published <em>Queued Up</em> report.</p>
+{_esc(rep["dataset"])}. Completion reconciles to LBNL's published Sheet 25
+regional table to the integer; built-after-signing applies LBNL's Sheet 27
+method per region, which LBNL publishes nationally only — that split is this
+project's own computation (see foot).</p>
 </header>
 
 <div class="metrics">{"".join(cards)}</div>

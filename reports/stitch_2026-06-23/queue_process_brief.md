@@ -4,7 +4,7 @@ Dataset: **LBNL Queued Up, 2026 Edition (data through year-end 2025)** · method
 
 ## Headline comparison
 
-Two headline numbers, both using Berkeley Lab's own definitions so they match the published *Queued Up* report (see Definitions at the bottom):
+Two headline numbers, both using Berkeley Lab's own definitions. **Completion** reconciles to LBNL's published Sheet 25 regional table to the integer. **Built after signing** applies LBNL's Sheet 27 method, which LBNL publishes at national level only — the per-region split is this project's own computation, not an LBNL-published figure (see Definitions at the bottom):
 
 - **Completion** = share of all 2000–2020 requests now built (LBNL sheet 25).
 - **Built after signing** = of projects that executed an interconnection agreement, the share built rather than withdrawn (LBNL sheet 27 method).

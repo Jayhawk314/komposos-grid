@@ -8,8 +8,11 @@ argument-hint: "<the claim to verify, with region and metric>"
 
 Turn a quantitative claim into a CONFIRMED / CLOSE / MISMATCH / UNVERIFIABLE verdict with
 the exact numbers and definitions shown. This is the repo's core credibility move: every
-headline number must reconcile with Berkeley Lab's *Queued Up* published tables — to the
-integer where possible.
+headline number must be traceable to Berkeley Lab's *Queued Up* file — reconciling to
+their published tables to the integer where such a table exists, and labelled as our own
+computation where it does not.
+
+**Provenance boundary:** LBNL publishes the regional *completion* table (Sheet 25) — those counts reconcile to the integer. LBNL publishes post-IA completion **nationally only** (Sheet 27) and no regional duration split, so post-IA rates and durations here are our computation applying LBNL's methods. Do not present them as LBNL-published figures.
 
 ## Procedure
 

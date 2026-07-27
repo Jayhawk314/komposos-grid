@@ -2,8 +2,9 @@
 ## An Independent Brief for the i2X STITCH Initiative · June 2026
 
 *Prepared using the komposos-grid codebase (OPTIMUS factorization over LBNL Queued Up, 2026 Edition (data through year-end 2025))
-and current public sources. Numbers that reference LBNL reconcile to their published sheet-level
-tables. All other figures sourced and cited inline.*
+and current public sources. Completion counts reconcile to LBNL's published Sheet 25 to the
+integer; post-IA rates and durations are our computation applying LBNL's methods to slices
+LBNL publishes only nationally or not at all. All other figures sourced and cited inline.*
 
 ---
 

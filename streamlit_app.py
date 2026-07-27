@@ -141,8 +141,14 @@ _PROV_LABELS = {
 def _provenance_badge(kind: str, source: str) -> None:
     """Tag a figure or section with its data provenance tier.
 
-    measured  — reconciles to a published external dataset (e.g. LBNL Queued Up)
-    derived   — computed by our models from measured inputs or user parameters
+    measured  — reconciles to a table the external publisher actually printed,
+                and the reconciliation has been checked (e.g. LBNL Queued Up
+                Sheet 25). Reserve this for figures a reader can verify against
+                someone else's document. "Read from their data file" is NOT
+                enough — that is `derived`.
+    derived   — computed by our models from measured inputs or user parameters.
+                Includes our own extensions of a published method to a slice the
+                publisher never published (e.g. post-IA completion per region).
     simulated — stylized/illustrative scenario; numbers are not observations
     """
     label = _PROV_LABELS.get(kind, kind.title())
@@ -221,13 +227,22 @@ if selection == "📊 Regional Queue Study":
     st.title("📊 Regional Interconnection Queue Studies")
     _provenance_badge(
         "measured",
-        "LBNL Queued Up 2026 Edition (data through year-end 2025) — headline rates reconcile to the published sheets to the integer.",
+        "LBNL Completion column only — reconciles to Queued Up 2026 Edition "
+        "(data through year-end 2025) Sheet 25 to the integer, denominators included.",
+    )
+    _provenance_badge(
+        "derived",
+        "Post-IA completion, durations and cohort panels — our computation from the "
+        "same file. LBNL publishes post-IA nationally only (Sheet 27); the per-region "
+        "split is ours, not an LBNL-published figure.",
     )
 
     st.markdown(
         "Prepared for the i2X STITCH collaboration, exploring interconnection study "
         "processes and cycle timelines across all major US grid regions. "
-        "Headline numbers match Berkeley Lab's own *Queued Up* definitions."
+        "The **LBNL Completion** figures use Berkeley Lab's own definitions and match "
+        "their published regional table exactly. Everything else on this page applies "
+        "their methods to slices they did not publish — accurate, but ours to defend."
     )
 
     # ── Context tabs ──────────────────────────────────────────────────────

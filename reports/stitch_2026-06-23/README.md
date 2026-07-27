@@ -31,7 +31,9 @@ python -m domains.grid.run_stitch_brief \
     --out reports/stitch_2026-06-23 --with-peers
 ```
 
-## The headline finding (Berkeley Lab's own definitions — counts verified against their published tables)
+## The headline finding (Berkeley Lab's definitions; see provenance note below)
+
+> **Provenance boundary:** LBNL publishes the regional *completion* table (Sheet 25) — those counts reconcile to the integer. LBNL publishes post-IA completion **nationally only** (Sheet 27) and no regional duration split, so post-IA rates and durations here are our computation applying LBNL's methods. Do not present them as LBNL-published figures.
 
 | | MISO | ERCOT |
 |---|---:|---:|

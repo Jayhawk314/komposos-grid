@@ -19,7 +19,9 @@ It is designed to let you communicate with any audience—from a general policy 
 This tier provides the high-level summary and key metrics from the public data without technical details.
 
 ### Headline Metrics (2000–2020 Requests)
-All metrics use Berkeley Lab's official definitions and match their published tables exactly:
+All metrics use Berkeley Lab's official definitions. The **Overall Completion Rate** column
+matches their published Sheet 25 table exactly; **Built after signing IA** is our own
+computation (LBNL publishes post-IA nationally only, Sheet 27).
 
 | Region | Requests Submitted | Operational (Built) | Overall Completion Rate | Built after signing IA |
 |---|---:|---:|---:|---:|

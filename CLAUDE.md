@@ -46,7 +46,7 @@ python -m domains.grid.mcp_server
 Project-scoped config lives in `.mcp.json`; Claude Code picks it up automatically. Tools: `ba`, `tie`, `path`, `similar`, `bottlenecks`, `seam`, `whatif`, `gaps`, `explain`, `manifest`.
 
 ### Agent Skills (`.claude/skills/`)
-*   **`/verify-claim <claim>`** — fact-check a queue metric against LBNL-reconciled artifacts (recomputes from the raw workbook if needed).
+*   **`/verify-claim <claim>`** — fact-check a queue metric against the repo's artifacts (recomputes from the raw workbook if needed). Note the provenance boundary: LBNL completion reconciles to their Sheet 25; post-IA and durations are our own computation, since LBNL publishes post-IA nationally only.
 *   **`/large-load-scenario`** — re-run the ESIG large-load simulation with new headroom/cost/cohort parameters; the Streamlit page renders the refreshed JSON.
 *   **`/webinar-prep`** — regenerate all pipelines, diff figures against the committed baseline, and draft a pre-read brief for the next STITCH session.
 

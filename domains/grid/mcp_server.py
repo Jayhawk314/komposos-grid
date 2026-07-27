@@ -125,8 +125,11 @@ def _report_json(relative: str) -> str:
 
 @mcp.resource("komposos://reports/queue-process-brief")
 def queue_process_brief() -> str:
-    """9-region interconnection queue study (measured — reconciles to LBNL
-    Queued Up to the integer). Source: run_stitch_brief pipeline."""
+    """9-region interconnection queue study. The LBNL-completion figures are
+    measured (reconcile to Queued Up Sheet 25 to the integer); post-IA
+    completion, durations and cohort panels are our computation applying LBNL's
+    methods to slices LBNL publishes only nationally or not at all.
+    Source: run_stitch_brief pipeline."""
     return _report_json("stitch_2026-06-23/queue_process_brief.json")
 
 

@@ -41,9 +41,15 @@ gap is itself a harmonization finding about milestone data coverage.
 
 ## Verify it yourself
 
-The baseline reconciles to Berkeley Lab's published tables **to the integer**
-before any new analysis is layered on, so the starting point is shared ground
-truth rather than a new methodology to argue about.
+The **baseline** reconciles to Berkeley Lab's published regional table (*Queued
+Up* Sheet 25) **to the integer**, denominators included, before any new analysis
+is layered on — so the starting point is shared ground truth rather than a new
+methodology to argue about.
+
+The **headline finding above is our own computation**, and is labelled that way
+throughout. LBNL publishes post-IA completion at national level only (Sheet 27);
+the per-region split is ours. It is reproducible from the same public workbook,
+but it is not an LBNL-published figure and should never be cited as one.
 
 ```bash
 git clone https://github.com/Jayhawk314/komposos-grid.git

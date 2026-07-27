@@ -41,9 +41,16 @@ DISPLAY = {
 }
 
 PROVENANCE = (
-    "> 📏 **Measured** — every figure derives from the LBNL *Queued Up* data file "
-    "(2026 Edition, data through year-end 2025); headline counts reconcile to the published tables. "
-    "Regenerate with `python -m domains.grid.run_region_packs`.\n"
+    "> 📏 **LBNL Completion — measured.** Reconciles to *Queued Up* 2026 Edition "
+    "(data through year-end 2025) Sheet 25 to the integer, denominators included.\n"
+    ">\n"
+    "> 🧮 **Everything else — derived (our computation).** Post-IA completion, "
+    "durations and cohort panels apply LBNL's methods to slices LBNL does not "
+    "publish: Sheet 27 gives post-IA at national level only, and there is no "
+    "published regional duration split. Accurate, but ours to defend — not "
+    "LBNL-published figures.\n"
+    ">\n"
+    "> Regenerate with `python -m domains.grid.run_region_packs`.\n"
 )
 
 
