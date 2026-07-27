@@ -162,23 +162,7 @@ def _provenance_badge(kind: str, source: str) -> None:
 
 with st.sidebar:
     st.title("⚡ Komposos Grid")
-    st.caption("Independent analytics · follows the DOE i2X STITCH series")
-    st.divider()
-
-    # ── STITCH session selector (driven by reports/stitch_sessions/registry.json) ──
-    st.markdown("**i2X STITCH Sessions**")
-    _sessions = _load_session_registry()
-    _session_labels = [
-        f"{s['id']} · {s['title']}" + (" ✅" if s.get("status") == "held" else " 🔜")
-        for s in _sessions
-    ] or ["2026-06-23 · Regional Study Processes"]
-    stitch_session = st.selectbox(
-        "Meeting",
-        _session_labels,
-        help="DOE i2X STITCH collaboration meeting series — edit "
-             "reports/stitch_sessions/registry.json to add or update sessions",
-    )
-
+    st.caption("Independent interconnection analytics · all nine US grid regions")
     st.divider()
 
     # ── Main nav ──────────────────────────────────────────────────────────
@@ -200,14 +184,43 @@ with st.sidebar:
     st.divider()
 
     # ── Region filter (used by comparison pages) ──────────────────────────
+    # All nine LBNL regions. Southeast and West were previously absent from this
+    # list, which hid 12,431 requests -- a third of the dataset, including West,
+    # the single largest region and the WECC-side of the July 28 session.
     st.markdown("**Region Filter**")
-    regions_all = ["MISO", "ERCOT", "PJM", "CAISO", "SPP", "NYISO", "ISO-NE"]
+    regions_all = [
+        "MISO", "ERCOT", "PJM", "CAISO", "SPP", "NYISO", "ISO-NE",
+        "Southeast (non-market)", "West (non-ISO)",
+    ]
     active_regions = st.multiselect(
         "Compare regions",
         options=regions_all,
-        default=["MISO", "ERCOT"],
-        help="Applied to comparison and harmonization views",
+        default=regions_all,
+        help="All nine LBNL regions. Applied to comparison and harmonization views.",
     )
+    if not active_regions:
+        st.caption("⚠️ No regions selected — comparison views will be empty.")
+
+    st.divider()
+
+    # ── STITCH session lens (optional context, not the organizing principle) ──
+    with st.expander("i2X STITCH session context", expanded=False):
+        st.caption(
+            "This project follows the DOE i2X STITCH meeting series, but the "
+            "analysis covers the whole US queue regardless of which session is "
+            "in view."
+        )
+        _sessions = _load_session_registry()
+        _session_labels = [
+            f"{s['id']} · {s['title']}" + (" ✅" if s.get("status") == "held" else " 🔜")
+            for s in _sessions
+        ] or ["2026-06-23 · Regional Study Processes"]
+        stitch_session = st.selectbox(
+            "Meeting",
+            _session_labels,
+            index=len(_session_labels) - 1 if _session_labels else 0,
+            help="Edit reports/stitch_sessions/registry.json to add or update sessions",
+        )
 
     st.divider()
     st.info(
@@ -238,8 +251,10 @@ if selection == "📊 Regional Queue Study":
     )
 
     st.markdown(
-        "Prepared for the i2X STITCH collaboration, exploring interconnection study "
-        "processes and cycle timelines across all major US grid regions. "
+        "Interconnection study processes, milestone funnels and cycle timelines for "
+        "**all nine LBNL regions** — MISO, ERCOT, PJM, CAISO, SPP, NYISO, ISO-NE, the "
+        "Southeast, and the non-ISO West. Every region carries the full analysis; none "
+        "is a secondary case. "
         "The **LBNL Completion** figures use Berkeley Lab's own definitions and match "
         "their published regional table exactly. Everything else on this page applies "
         "their methods to slices they did not publish — accurate, but ours to defend."
@@ -262,8 +277,8 @@ if selection == "📊 Regional Queue Study":
             st.markdown(
                 "**What is an executed Interconnection Agreement actually worth?** "
                 "The same contract milestone carries very different completion "
-                "information depending on where it is signed — the June 23 "
-                "MISO/ERCOT finding, extended to all nine LBNL regions."
+                "information depending on where it is signed. Sorted by how much "
+                "certainty an executed IA actually buys, across all nine LBNL regions."
             )
 
             def _mo(entry) -> str:
@@ -518,7 +533,15 @@ elif selection == "🗺️ Harmonization Matrix":
         "SPP":   ["⚠️","✅","✅","❌","❌","⚠️","❌","❌","⚠️","⚠️","⚠️","❌","⚠️"],
         "NYISO": ["✅","✅","⚠️","✅","✅","✅","⚠️","✅","✅","✅","✅","⚠️","✅"],
         "ISO-NE":["✅","✅","⚠️","✅","✅","✅","⚠️","✅","✅","✅","⚠️","⚠️","✅"],
+        # Southeast and West are LBNL aggregates of many non-market / non-ISO
+        # balancing authorities, not single operators with one tariff. There is
+        # no honest single cell to write, and inventing one would be worse than
+        # leaving it blank -- so they are explicitly NOT ASSESSED rather than
+        # silently absent, which is how they were hidden before.
+        "Southeast (non-market)": ["—"] * 13,
+        "West (non-ISO)":         ["—"] * 13,
     }
+    NOT_ASSESSED = {"Southeast (non-market)", "West (non-ISO)"}
 
     harm_df = pd.DataFrame(HARM_DATA)
 
@@ -538,12 +561,27 @@ elif selection == "🗺️ Harmonization Matrix":
         st.divider()
 
         # ── Score summary per region ──────────────────────────────────────
-        if len(cols_to_show) > 2:
+        _scored = [r for r in active_regions
+                   if r in harm_df.columns and r not in NOT_ASSESSED]
+        _unscored = [r for r in active_regions if r in NOT_ASSESSED]
+
+        if _unscored:
+            st.info(
+                "**Not assessed: " + ", ".join(_unscored) + ".** These are LBNL "
+                "aggregates of many non-market or non-ISO balancing authorities — "
+                "PacifiCorp, BPA, APS, NV Energy and 30-odd others in the West alone — "
+                "not single operators with one tariff to compare. There is no honest "
+                "single cell to write for them, so they are shown blank rather than "
+                "scored. They are **not** absent from the queue analysis: both carry "
+                "full data on the Regional Queue Study page, and West is the largest "
+                "region in the dataset by request count."
+            )
+
+        if len(_scored) > 1:
             st.subheader("Alignment Score by Region")
-            score_cols = st.columns(len(active_regions))
-            for i, reg in enumerate(active_regions):
-                if reg not in harm_df.columns:
-                    continue
+            st.caption("Assessed regions only — a blank column cannot be scored.")
+            score_cols = st.columns(len(_scored))
+            for i, reg in enumerate(_scored):
                 col_vals = harm_df[reg].tolist()
                 aligned  = col_vals.count("✅")
                 partial  = col_vals.count("⚠️")
