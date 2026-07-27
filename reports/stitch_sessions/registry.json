@@ -30,15 +30,31 @@
     },
     {
       "id": "2026-07-28",
-      "title": "Regional Study Processes Cont.",
+      "title": "Regional Study Processes: CAISO and WECC",
       "status": "announced",
-      "presenters": ["TBD — check ESIG events page"],
-      "regions": ["TBD"],
+      "presenters": [
+        "Julia Matevosyan (ESIG)",
+        "Robert Sparks (CAISO)",
+        "Jorge Chacon (CAISO)",
+        "Eric Heredia (BPA) — interconnectedness",
+        "Rikin Shah (PacifiCorp) — interconnectedness study"
+      ],
+      "regions": ["caiso", "west"],
+      "region_packs": [
+        "reports/stitch_sessions/region_packs/caiso.md",
+        "reports/stitch_sessions/region_packs/west.md"
+      ],
+      "key_claims": [
+        "CAISO post-IA completion 90.7% (196/216) — highest of the nine LBNL regions",
+        "CAISO end-to-end 70.5 months median (IR->COD), the longest of the nine",
+        "CAISO LBNL completion 12.1% (232/1,910), the lowest of the nine",
+        "Non-ISO West post-IA 71.9% (440/612) with IR->COD 25.4 months — the inverse profile to CAISO"
+      ],
       "prep_checklist": [
-        "Confirm presenters and regions from the ESIG event page",
-        "Fill in Session prep notes in the matching region packs",
-        "Run /webinar-prep to refresh figures and diff against baseline",
-        "Send follow-up email to Julia Matevosyan BEFORE this session"
+        "CAISO/West region packs are the relevant ones for this session",
+        "BPA (Heredia) and PacifiCorp (Shah) sit inside LBNL's non-ISO 'West' aggregate — do NOT attribute the West figures to either utility individually",
+        "Post-IA per-region is OUR computation; LBNL publishes Sheet 27 nationally only. Say so.",
+        "Wake the Streamlit app before sharing the link (free tier sleeps)"
       ]
     },
     {
