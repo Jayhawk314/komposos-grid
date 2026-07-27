@@ -69,3 +69,6 @@ _baseline_test_results.txt
 _after_quarantine_test_results.txt
 _quarantine/
 archive/
+
+# coverage tooling output
+coverage.json
