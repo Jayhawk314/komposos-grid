@@ -128,7 +128,12 @@ elif selection == "📊 Regional Queue Study":
         col_a.metric("Total Requests (All-Time)", f"{r['total_requests']:,}")
         col_b.metric("Active Stalled in Queue", f"{r['active_in_queue']:,}")
         col_c.metric("LBNL Completion (2000-2020)", f"{r['completion_lbnl']['rate']:.1%}")
-        col_d.metric("Built after Signing IA", f"{r['post_ia']['rate']:.1%}")
+        # SPP records no executed-IA date on withdrawn projects, so the rate is
+        # undefined there -- showing 0.0% would read as "nothing ever gets built".
+        if r["post_ia"].get("signed_decided"):
+            col_d.metric("Built after Signing IA", f"{r['post_ia']['rate']:.1%}")
+        else:
+            col_d.metric("Built after Signing IA", "— not tracked")
         
         st.divider()
         
@@ -152,12 +157,33 @@ elif selection == "📊 Regional Queue Study":
                 
         with sub_tab_ms:
             st.markdown("**Milestone Completion Funnel**")
-            st.markdown("Percentage of decided projects that went operational, grouped by their furthest milestone:")
-            ms_df = pd.DataFrame(r.get("milestones", []))
+            st.markdown(
+                "Percentage of decided projects that went operational, grouped by their "
+                "furthest recorded milestone:"
+            )
+            _pia = r.get("post_ia") or {}
+            _ms_rows = r.get("milestones", [])
+            _ia_row = next(
+                (m for m in _ms_rows if str(m.get("milestone", "")).lower() == "ia_executed"),
+                None,
+            )
+            if _ia_row and _pia.get("signed_decided"):
+                st.warning(
+                    "**This table answers a different question from the 'Built after Signing IA' "
+                    "metric above, and gives a different answer.** The `ia_executed` row reads "
+                    f"**{_ia_row['completion']:.1%}**; the headline metric reads "
+                    f"**{_pia['rate']:.1%}**.\n\n"
+                    "**Trust the headline.** It keys on the executed-IA *date*, set at signing, so "
+                    "it counts projects that signed and later withdrew — LBNL's method. This table "
+                    "keys on `ia_status`, the *furthest known* milestone, which gets relabelled as "
+                    "projects move on or die, biasing the `ia_executed` rate upward. Read the "
+                    "funnel for its shape — where projects stop — not as success rates."
+                )
+            ms_df = pd.DataFrame(_ms_rows)
             if not ms_df.empty:
-                ms_df.columns = ["Milestone Stage", "Decided Projects", "Operational Projects", "Completion Rate", "Thin Cohort (<30)"]
+                ms_df.columns = ["Milestone Stage", "Decided Projects", "Operational Projects", "Completion Rate (survivorship-affected)", "Thin Cohort (<30)"]
                 st.dataframe(
-                    ms_df.style.format({"Completion Rate": "{:.1%}"}),
+                    ms_df.style.format({"Completion Rate (survivorship-affected)": "{:.1%}"}),
                     use_container_width=True,
                     hide_index=True
                 )
@@ -297,10 +323,15 @@ elif selection == "🎯 Seam Opportunity Screen":
                 hide_index=True
             )
         
-        st.success(
-            "**Top Bounded Seam:** The **AECI - SWPP** unpriced seam carries a lower-bound "
-            "congestion value of **$14.25M/yr** based on adjacent priced market points. This represents "
-            "a massive unmeasured congestion opportunity that is invisible in standard RTO planning data."
+        st.info(
+            "**Largest screening value:** the **AECI - SWPP** unpriced seam screens at "
+            "**$14.25M/yr**, obtained by transferring an adjacent priced tie's spread across "
+            "this interface's gross flow. This is an analogy-based screening proxy — **not** a "
+            "measured congestion cost and **not** a mathematical bound; a neighbouring tie's "
+            "spread does not constrain a different interface. Each row here draws on a single "
+            "priced neighbour, and the value prices *all* gross flow at that spread rather than "
+            "only constrained hours, so treat it as an upper-ish order-of-magnitude flag for "
+            "further study, not a quantity."
         )
 
     with tab_bcr:
@@ -315,13 +346,39 @@ elif selection == "🎯 Seam Opportunity Screen":
         )
         st.write(
             "Where c represents capacity (MW) and eta is the effective MWh throughput factor. "
-            "This curve pinpoints the optimal capacity threshold where Marginal BCR reaches 1.0 (break-even)."
+            "Marginal BCR = 1.0 is break-even — a corridor only justifies a build where the "
+            "curve reaches it."
         )
-        
+
         curves = data.get("marginal_curves", {})
         if curves:
+            # State the screening result up front, computed from the data -- never asserted.
+            _peaks = {
+                name: max((p.get("marginal_bcr") or 0.0) for p in pts)
+                for name, pts in curves.items() if pts
+            }
+            _best = max(_peaks.values()) if _peaks else 0.0
+            if _peaks and _best < 1.0:
+                st.warning(
+                    f"**None of these {len(_peaks)} corridors reaches break-even at any capacity "
+                    f"in the modelled range.** The highest marginal BCR observed is "
+                    f"**{_best:.2f}** ({max(_peaks, key=_peaks.get)}) — benefits fall short of "
+                    f"annualized upgrade cost by roughly {1/_best:.0f}x. That is the screening "
+                    "result: on these assumptions none of these seams justifies a build, and the "
+                    "curves show how far from economic each one is rather than where to size it."
+                )
+            st.caption(
+                "Cost basis is a screening default (transmission $150k/MW-yr, battery "
+                "$187.5k/MW-yr per NREL ATB), not a project estimate. Screening indicator, "
+                "not investment advice."
+            )
+
             curve_options = list(curves.keys())
-            selected_curve = st.selectbox("Corridor Seam", curve_options)
+            selected_curve = st.selectbox(
+                "Corridor Seam",
+                curve_options,
+                format_func=lambda n: f"{n} — peak BCR {_peaks.get(n, 0):.2f}",
+            )
             
             points = curves[selected_curve]
             pts_df = pd.DataFrame(points)

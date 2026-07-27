@@ -346,12 +346,39 @@ if selection == "📊 Regional Queue Study":
                     
             with sub_tab_ms:
                 st.markdown("**Milestone Completion Funnel**")
-                st.markdown("Percentage of decided projects that went operational, grouped by their furthest milestone:")
-                ms_df = pd.DataFrame(r.get("milestones", []))
+                st.markdown(
+                    "Percentage of decided projects that went operational, grouped by their "
+                    "furthest recorded milestone:"
+                )
+                _pia = r.get("post_ia") or {}
+                _ms_rows = r.get("milestones", [])
+                _ia_row = next(
+                    (m for m in _ms_rows if str(m.get("milestone", "")).lower() == "ia_executed"),
+                    None,
+                )
+                if _ia_row and _pia.get("signed_decided"):
+                    st.warning(
+                        "**This table answers a different question from the headline "
+                        "'Built after Signing IA' metric above, and gives a different answer.** "
+                        f"Here the `ia_executed` row reads **{_ia_row['completion']:.1%}** "
+                        f"({_ia_row['n_operational']:,} of {_ia_row['n_decided']:,}); the headline "
+                        f"metric reads **{_pia['rate']:.1%}** "
+                        f"({_pia['built_after_signing']:,} of {_pia['signed_decided']:,}).\n\n"
+                        "**Trust the headline.** It keys on the *executed-IA date*, which is set at "
+                        "signing, so it correctly counts projects that signed and later withdrew — "
+                        "the method LBNL uses. This table keys on `ia_status`, the *furthest known* "
+                        "milestone, which gets relabelled when a project moves on or dies. That "
+                        "makes the `ia_executed` bucket over-represent survivors and biases its "
+                        "rate upward.\n\n"
+                        "The table is kept because the *shape* of the funnel — where projects stop "
+                        "— is the useful part. Read the rows as 'where did decided projects end "
+                        "up', not as milestone success rates."
+                    )
+                ms_df = pd.DataFrame(_ms_rows)
                 if not ms_df.empty:
-                    ms_df.columns = ["Milestone Stage", "Decided Projects", "Operational Projects", "Completion Rate", "Thin Cohort (<30)"]
+                    ms_df.columns = ["Milestone Stage", "Decided Projects", "Operational Projects", "Completion Rate (survivorship-affected)", "Thin Cohort (<30)"]
                     st.dataframe(
-                        ms_df.style.format({"Completion Rate": "{:.1%}"}),
+                        ms_df.style.format({"Completion Rate (survivorship-affected)": "{:.1%}"}),
                         use_container_width=True,
                         hide_index=True
                     )
@@ -860,21 +887,62 @@ elif selection == "🎯 Seam Opportunity Screen":
         )
         st.markdown(
             "Where $c$ represents capacity (MW) and $\eta$ is the effective MWh throughput factor. "
-            "This curve pinpoints the optimal capacity threshold where Marginal BCR reaches **1.0** (break-even)."
+            "**Marginal BCR = 1.0 is break-even** — a corridor only justifies a build where the "
+            "curve reaches it."
         )
-        
+
         curves = data.get("marginal_curves", {})
         if curves:
+            # State the screening result up front, computed from the data — never asserted.
+            _peaks = {
+                name: max((p.get("marginal_bcr") or 0.0) for p in pts)
+                for name, pts in curves.items() if pts
+            }
+            _best = max(_peaks.values()) if _peaks else 0.0
+            if _peaks and _best < 1.0:
+                st.warning(
+                    f"**None of these {len(_peaks)} corridors reaches break-even at any capacity "
+                    f"in the modelled range.** The highest marginal BCR observed is "
+                    f"**{_best:.2f}** ({max(_peaks, key=_peaks.get)}) — benefits fall short of "
+                    f"annualized upgrade cost by roughly {1/_best:.0f}×. That *is* the screening "
+                    "result: on these assumptions, none of these seams justifies a build, and the "
+                    "curves show how far from economic each one is rather than where to size it. "
+                    "Reaching break-even would need materially lower upgrade costs, or spreads "
+                    "several times larger than observed."
+                )
+            elif _peaks:
+                st.success(
+                    f"Highest marginal BCR observed: **{_best:.2f}** "
+                    f"({max(_peaks, key=_peaks.get)}). Capacities where the curve sits above 1.0 "
+                    "are the range that screens as economic."
+                )
+
+            st.caption(
+                "Cost basis is a screening default (transmission $150k/MW-yr, battery "
+                "$187.5k/MW-yr per NREL ATB), not a project estimate — a real study would "
+                "substitute site-specific costs, which can move these curves substantially. "
+                "Screening indicator, not investment advice."
+            )
+
             curve_options = list(curves.keys())
-            selected_curve = st.selectbox("Corridor Seam", curve_options)
-            
+            selected_curve = st.selectbox(
+                "Corridor Seam",
+                curve_options,
+                format_func=lambda n: f"{n} — peak BCR {_peaks.get(n, 0):.2f}",
+            )
+
             points = curves[selected_curve]
             pts_df = pd.DataFrame(points)
             pts_df.columns = ["Upgrade Capacity (MW)", "Marginal BCR", "Residual Seam Spread ($/MWh)"]
-            
+
             col_chart, col_tbl = st.columns([2, 1])
             with col_chart:
-                st.line_chart(pts_df.set_index("Upgrade Capacity (MW)")[["Marginal BCR"]])
+                _chart = pts_df.set_index("Upgrade Capacity (MW)")[["Marginal BCR"]].copy()
+                _chart["Break-even (1.0)"] = 1.0
+                st.line_chart(_chart)
+                st.caption(
+                    "The flat line is break-even. A curve below it never pays back at that capacity."
+                )
             with col_tbl:
                 st.dataframe(pts_df, use_container_width=True, hide_index=True)
 

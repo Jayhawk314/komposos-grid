@@ -50,6 +50,8 @@ This tier provides the rigorous data science backing, definitions, durations, an
 ### 2. Milestone funnel (where decided projects ended up)
 Projects terminate at different study stages. Reaching `ia_executed` is the gate to commercial operation.
 
+> ⚠️ **The `ia_executed` percentages below are NOT the headline post-IA numbers, and they disagree.** The funnel keys on `ia_status` (the *furthest recorded* milestone), which gets relabelled as a project moves on or dies — so the `ia_executed` bucket over-represents survivors and reads high. The headline figures in Tier 1 (**79.7% ERCOT / 34.9% MISO**) key on the *executed-IA date*, set at signing, which correctly counts projects that signed and then withdrew. That is LBNL's method and the one to quote. Use the funnel for its *shape* — where projects stop — not for milestone success rates.
+
 - **ERCOT Funnel:** 
   - `ia_executed`: **93.7%** completion (613 operational out of 654 decided)
   - `facility_study` / `ia_pending` / `unknown_study`: **0.0%** completion (all 1,100 decided projects withdrew)
