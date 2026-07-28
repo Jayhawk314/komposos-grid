@@ -40,6 +40,10 @@ ALIASES = {
     "q_date": ["q_date", "queue_date", "ir_date", "request_date"],
     "ia_date": ["ia_date", "ia_executed_date"],
     "on_date": ["on_date", "cod_date", "online_date", "operational_date"],
+    "wd_date": ["wd_date", "withdrawal_date", "wd_date_clean"],
+    "entity": ["entity"],
+    "mw2": ["mw_2", "mw2"],
+    "mw3": ["mw_3", "mw3"],
 }
 
 OPERATIONAL = "operational"
@@ -62,6 +66,10 @@ class QueueProject:
     q_date: str = ""      # ISO date of interconnection request (IR)
     ia_date: str = ""     # ISO date IA executed
     on_date: str = ""     # ISO date of commercial operation (COD)
+    wd_date: str = ""     # ISO date of withdrawal, when reported
+    entity: str = ""      # reporting utility/BA, distinct from the region grouping
+    mw2: Optional[float] = None  # secondary co-located capacity (hybrid projects)
+    mw3: Optional[float] = None  # tertiary co-located capacity (hybrid projects)
 
     @property
     def decided(self) -> bool:
@@ -139,6 +147,21 @@ class LBNLQueueSource:
         if c_status is None:
             raise ValueError(f"q_status column not found in {list(cols)[:15]}")
 
+        # Guard against "region" silently resolving to the "entity" column.
+        # If a future vintage drops a dedicated region column, every regional
+        # figure downstream would quietly become an entity-level figure with
+        # no error -- and a caller relying on entity as a distinct field (the
+        # coverage audit does) would then see spuriously perfect "entity"
+        # coverage that is really just the region label duplicated.
+        c_region = col("region")
+        c_entity = col("entity")
+        if c_region is not None and c_region == c_entity:
+            raise ValueError(
+                f"'region' resolved to the same column as 'entity' ({c_region!r}) "
+                f"in {self.workbook_path} -- this vintage has no dedicated region "
+                "column, so region and entity are not independent fields."
+            )
+
         projects: List[QueueProject] = []
         for idx, row in df.iterrows():
             def get(field, default=""):
@@ -148,6 +171,8 @@ class LBNLQueueSource:
 
             year = get("q_year", None)
             mw = get("mw", None)
+            mw2 = get("mw2", None)
+            mw3 = get("mw3", None)
             projects.append(
                 QueueProject(
                     q_id=str(get("q_id", idx)),
@@ -162,6 +187,10 @@ class LBNLQueueSource:
                     q_date=_iso(get("q_date", "")),
                     ia_date=_iso(get("ia_date", "")),
                     on_date=_iso(get("on_date", "")),
+                    wd_date=_iso(get("wd_date", "")),
+                    entity=str(get("entity", "")).strip(),
+                    mw2=float(mw2) if mw2 not in (None, "") else None,
+                    mw3=float(mw3) if mw3 not in (None, "") else None,
                 )
             )
         return projects

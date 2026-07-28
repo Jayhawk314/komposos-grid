@@ -1,0 +1,2190 @@
+{
+  "provenance": {
+    "source_workbook": "LBNL_Ix_Queue_Data_File_thru2026.xlsx",
+    "generator": "domains.grid.run_coverage_audit",
+    "audited_fields": [
+      "q_date",
+      "ia_date",
+      "wd_date",
+      "on_date",
+      "cluster",
+      "mw",
+      "entity"
+    ],
+    "hybrid_capacity_fields": [
+      "mw2",
+      "mw3"
+    ],
+    "populated_definitions": {
+      "q_date": "non-empty interconnection-request (IR) date.",
+      "ia_date": "non-empty executed interconnection-agreement date.",
+      "wd_date": "non-empty withdrawal date. Only meaningful for withdrawn projects; operational/active/suspended projects are not expected to carry one.",
+      "on_date": "non-empty commercial-operation (COD) date.",
+      "cluster": "non-empty cluster/cycle tag. ERCOT runs no cluster study, so near-zero cluster coverage there reflects an absent process, not missing data -- see run_stitch_brief.py's _cycle_key.",
+      "mw": "mw_1 (the primary reported capacity column) is non-null. This does NOT include mw_2 or mw_3, which are co-located/hybrid secondary capacity columns reported separately below as hybrid_capacity, because mw_1 is ~100% populated nationally while mw_2/mw_3 are populated only for the small share of projects that are hybrid -- collapsing them into one 'mw populated' percentage would misrepresent both.",
+      "entity": "non-empty reporting utility/BA name. Distinct from the 'region' field: region is LBNL's multi-entity grouping (e.g. 'west' spans dozens of utilities), entity is the individual reporting utility within it."
+    },
+    "regions": [
+      "caiso",
+      "ercot",
+      "iso_ne",
+      "miso",
+      "nyiso",
+      "pjm",
+      "southeast",
+      "spp",
+      "west"
+    ],
+    "region_definition": "Each project's `region` field (an LBNL-assigned BA/RTO grouping) substring-matched against these 9 keys. 'west' and 'southeast' are LBNL's own multi-entity groupings, not single BAs -- see each status block's entity coverage for how many distinct reporting utilities that implies. Scope note: this audit reports at the region level only; it does not attempt entity-level breakdowns (e.g. isolating a single utility within 'west').",
+    "statuses": [
+      "operational",
+      "withdrawn",
+      "active",
+      "suspended"
+    ],
+    "status_definition": "operational | withdrawn | active | suspended, as classified from the raw q_status column by lbnl_queue._norm_status.",
+    "min_cohort": 30,
+    "post_ia_observability_note": "Post-IA completion (LBNL Sheet 27's method) requires knowing, for each withdrawn project, whether it withdrew before or after executing an interconnection agreement -- which this dataset can only tell from a populated ia_date on that withdrawn record. This audit reports, per region, how many withdrawn projects carry that date. A count of zero means the rate cannot be computed for that region; it does NOT mean no project in that region ever signed an IA and later withdrew. The public data does not record the date for those cases, so their IA history is unobservable, not absent. Classification: 'absent' = zero withdrawn projects carry an ia_date, so no post-IA rate can be computed at all. 'partial' = at least one but fewer than min_cohort, so a rate could technically be computed but rests on very few cases. 'complete' = at least min_cohort withdrawn projects carry an ia_date -- enough decided, observed cases to support a stable rate. 'complete' describes whether the SAMPLE is large enough, not whether the field is 100% populated: MISO classifies 'complete' with only 27% of its withdrawn cohort dated, because 27% of a large region is still hundreds of cases."
+  },
+  "regions": [
+    {
+      "region": "caiso",
+      "total": 2868,
+      "statuses": [
+        {
+          "status": "operational",
+          "n": 235,
+          "fields": {
+            "q_date": {
+              "populated": 235,
+              "total": 235,
+              "pct": 1.0
+            },
+            "ia_date": {
+              "populated": 196,
+              "total": 235,
+              "pct": 0.8340425531914893
+            },
+            "wd_date": {
+              "populated": 0,
+              "total": 235,
+              "pct": 0.0
+            },
+            "on_date": {
+              "populated": 227,
+              "total": 235,
+              "pct": 0.9659574468085106
+            },
+            "cluster": {
+              "populated": 150,
+              "total": 235,
+              "pct": 0.6382978723404256
+            },
+            "mw": {
+              "populated": 235,
+              "total": 235,
+              "pct": 1.0
+            },
+            "entity": {
+              "populated": 235,
+              "total": 235,
+              "pct": 1.0
+            }
+          },
+          "hybrid_capacity": {
+            "mw2": {
+              "populated": 39,
+              "total": 235,
+              "pct": 0.16595744680851063
+            },
+            "mw3": {
+              "populated": 0,
+              "total": 235,
+              "pct": 0.0
+            }
+          }
+        },
+        {
+          "status": "withdrawn",
+          "n": 2200,
+          "fields": {
+            "q_date": {
+              "populated": 2200,
+              "total": 2200,
+              "pct": 1.0
+            },
+            "ia_date": {
+              "populated": 20,
+              "total": 2200,
+              "pct": 0.00909090909090909
+            },
+            "wd_date": {
+              "populated": 2161,
+              "total": 2200,
+              "pct": 0.9822727272727273
+            },
+            "on_date": {
+              "populated": 0,
+              "total": 2200,
+              "pct": 0.0
+            },
+            "cluster": {
+              "populated": 1746,
+              "total": 2200,
+              "pct": 0.7936363636363636
+            },
+            "mw": {
+              "populated": 2200,
+              "total": 2200,
+              "pct": 1.0
+            },
+            "entity": {
+              "populated": 2200,
+              "total": 2200,
+              "pct": 1.0
+            }
+          },
+          "hybrid_capacity": {
+            "mw2": {
+              "populated": 483,
+              "total": 2200,
+              "pct": 0.21954545454545454
+            },
+            "mw3": {
+              "populated": 15,
+              "total": 2200,
+              "pct": 0.006818181818181818
+            }
+          },
+          "post_ia_observability": {
+            "with_ia_date": 20,
+            "total_withdrawn": 2200,
+            "pct": 0.00909090909090909,
+            "classification": "partial"
+          }
+        },
+        {
+          "status": "active",
+          "n": 432,
+          "fields": {
+            "q_date": {
+              "populated": 432,
+              "total": 432,
+              "pct": 1.0
+            },
+            "ia_date": {
+              "populated": 228,
+              "total": 432,
+              "pct": 0.5277777777777778
+            },
+            "wd_date": {
+              "populated": 0,
+              "total": 432,
+              "pct": 0.0
+            },
+            "on_date": {
+              "populated": 23,
+              "total": 432,
+              "pct": 0.05324074074074074
+            },
+            "cluster": {
+              "populated": 416,
+              "total": 432,
+              "pct": 0.9629629629629629
+            },
+            "mw": {
+              "populated": 432,
+              "total": 432,
+              "pct": 1.0
+            },
+            "entity": {
+              "populated": 432,
+              "total": 432,
+              "pct": 1.0
+            }
+          },
+          "hybrid_capacity": {
+            "mw2": {
+              "populated": 214,
+              "total": 432,
+              "pct": 0.49537037037037035
+            },
+            "mw3": {
+              "populated": 2,
+              "total": 432,
+              "pct": 0.004629629629629629
+            }
+          }
+        },
+        {
+          "status": "suspended",
+          "n": 1,
+          "fields": {
+            "q_date": {
+              "populated": 1,
+              "total": 1,
+              "pct": 1.0
+            },
+            "ia_date": {
+              "populated": 1,
+              "total": 1,
+              "pct": 1.0
+            },
+            "wd_date": {
+              "populated": 0,
+              "total": 1,
+              "pct": 0.0
+            },
+            "on_date": {
+              "populated": 0,
+              "total": 1,
+              "pct": 0.0
+            },
+            "cluster": {
+              "populated": 1,
+              "total": 1,
+              "pct": 1.0
+            },
+            "mw": {
+              "populated": 1,
+              "total": 1,
+              "pct": 1.0
+            },
+            "entity": {
+              "populated": 1,
+              "total": 1,
+              "pct": 1.0
+            }
+          },
+          "hybrid_capacity": {
+            "mw2": {
+              "populated": 0,
+              "total": 1,
+              "pct": 0.0
+            },
+            "mw3": {
+              "populated": 0,
+              "total": 1,
+              "pct": 0.0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "region": "ercot",
+      "total": 3757,
+      "statuses": [
+        {
+          "status": "operational",
+          "n": 613,
+          "fields": {
+            "q_date": {
+              "populated": 564,
+              "total": 613,
+              "pct": 0.9200652528548124
+            },
+            "ia_date": {
+              "populated": 486,
+              "total": 613,
+              "pct": 0.7928221859706363
+            },
+            "wd_date": {
+              "populated": 0,
+              "total": 613,
+              "pct": 0.0
+            },
+            "on_date": {
+              "populated": 519,
+              "total": 613,
+              "pct": 0.8466557911908646
+            },
+            "cluster": {
+              "populated": 0,
+              "total": 613,
+              "pct": 0.0
+            },
+            "mw": {
+              "populated": 613,
+              "total": 613,
+              "pct": 1.0
+            },
+            "entity": {
+              "populated": 613,
+              "total": 613,
+              "pct": 1.0
+            }
+          },
+          "hybrid_capacity": {
+            "mw2": {
+              "populated": 0,
+              "total": 613,
+              "pct": 0.0
+            },
+            "mw3": {
+              "populated": 0,
+              "total": 613,
+              "pct": 0.0
+            }
+          }
+        },
+        {
+          "status": "withdrawn",
+          "n": 1158,
+          "fields": {
+            "q_date": {
+              "populated": 1100,
+              "total": 1158,
+              "pct": 0.9499136442141624
+            },
+            "ia_date": {
+              "populated": 124,
+              "total": 1158,
+              "pct": 0.1070811744386874
+            },
+            "wd_date": {
+              "populated": 564,
+              "total": 1158,
+              "pct": 0.48704663212435234
+            },
+            "on_date": {
+              "populated": 0,
+              "total": 1158,
+              "pct": 0.0
+            },
+            "cluster": {
+              "populated": 0,
+              "total": 1158,
+              "pct": 0.0
+            },
+            "mw": {
+              "populated": 1158,
+              "total": 1158,
+              "pct": 1.0
+            },
+            "entity": {
+              "populated": 1158,
+              "total": 1158,
+              "pct": 1.0
+            }
+          },
+          "hybrid_capacity": {
+            "mw2": {
+              "populated": 0,
+              "total": 1158,
+              "pct": 0.0
+            },
+            "mw3": {
+              "populated": 0,
+              "total": 1158,
+              "pct": 0.0
+            }
+          },
+          "post_ia_observability": {
+            "with_ia_date": 124,
+            "total_withdrawn": 1158,
+            "pct": 0.1070811744386874,
+            "classification": "complete"
+          }
+        },
+        {
+          "status": "active",
+          "n": 1796,
+          "fields": {
+            "q_date": {
+              "populated": 1764,
+              "total": 1796,
+              "pct": 0.9821826280623608
+            },
+            "ia_date": {
+              "populated": 576,
+              "total": 1796,
+              "pct": 0.3207126948775056
+            },
+            "wd_date": {
+              "populated": 1,
+              "total": 1796,
+              "pct": 0.0005567928730512249
+            },
+            "on_date": {
+              "populated": 6,
+              "total": 1796,
+              "pct": 0.0033407572383073497
+            },
+            "cluster": {
+              "populated": 0,
+              "total": 1796,
+              "pct": 0.0
+            },
+            "mw": {
+              "populated": 1796,
+              "total": 1796,
+              "pct": 1.0
+            },
+            "entity": {
+              "populated": 1796,
+              "total": 1796,
+              "pct": 1.0
+            }
+          },
+          "hybrid_capacity": {
+            "mw2": {
+              "populated": 0,
+              "total": 1796,
+              "pct": 0.0
+            },
+            "mw3": {
+              "populated": 0,
+              "total": 1796,
+              "pct": 0.0
+            }
+          }
+        },
+        {
+          "status": "suspended",
+          "n": 190,
+          "fields": {
+            "q_date": {
+              "populated": 180,
+              "total": 190,
+              "pct": 0.9473684210526315
+            },
+            "ia_date": {
+              "populated": 21,
+              "total": 190,
+              "pct": 0.11052631578947368
+            },
+            "wd_date": {
+              "populated": 6,
+              "total": 190,
+              "pct": 0.031578947368421054
+            },
+            "on_date": {
+              "populated": 4,
+              "total": 190,
+              "pct": 0.021052631578947368
+            },
+            "cluster": {
+              "populated": 0,
+              "total": 190,
+              "pct": 0.0
+            },
+            "mw": {
+              "populated": 190,
+              "total": 190,
+              "pct": 1.0
+            },
+            "entity": {
+              "populated": 190,
+              "total": 190,
+              "pct": 1.0
+            }
+          },
+          "hybrid_capacity": {
+            "mw2": {
+              "populated": 0,
+              "total": 190,
+              "pct": 0.0
+            },
+            "mw3": {
+              "populated": 0,
+              "total": 190,
+              "pct": 0.0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "region": "iso_ne",
+      "total": 1282,
+      "statuses": [
+        {
+          "status": "operational",
+          "n": 228,
+          "fields": {
+            "q_date": {
+              "populated": 228,
+              "total": 228,
+              "pct": 1.0
+            },
+            "ia_date": {
+              "populated": 97,
+              "total": 228,
+              "pct": 0.42543859649122806
+            },
+            "wd_date": {
+              "populated": 4,
+              "total": 228,
+              "pct": 0.017543859649122806
+            },
+            "on_date": {
+              "populated": 0,
+              "total": 228,
+              "pct": 0.0
+            },
+            "cluster": {
+              "populated": 12,
+              "total": 228,
+              "pct": 0.05263157894736842
+            },
+            "mw": {
+              "populated": 228,
+              "total": 228,
+              "pct": 1.0
+            },
+            "entity": {
+              "populated": 228,
+              "total": 228,
+              "pct": 1.0
+            }
+          },
+          "hybrid_capacity": {
+            "mw2": {
+              "populated": 0,
+              "total": 228,
+              "pct": 0.0
+            },
+            "mw3": {
+              "populated": 0,
+              "total": 228,
+              "pct": 0.0
+            }
+          }
+        },
+        {
+          "status": "withdrawn",
+          "n": 982,
+          "fields": {
+            "q_date": {
+              "populated": 982,
+              "total": 982,
+              "pct": 1.0
+            },
+            "ia_date": {
+              "populated": 32,
+              "total": 982,
+              "pct": 0.032586558044806514
+            },
+            "wd_date": {
+              "populated": 970,
+              "total": 982,
+              "pct": 0.9877800407331976
+            },
+            "on_date": {
+              "populated": 0,
+              "total": 982,
+              "pct": 0.0
+            },
+            "cluster": {
+              "populated": 34,
+              "total": 982,
+              "pct": 0.034623217922606926
+            },
+            "mw": {
+              "populated": 982,
+              "total": 982,
+              "pct": 1.0
+            },
+            "entity": {
+              "populated": 982,
+              "total": 982,
+              "pct": 1.0
+            }
+          },
+          "hybrid_capacity": {
+            "mw2": {
+              "populated": 0,
+              "total": 982,
+              "pct": 0.0
+            },
+            "mw3": {
+              "populated": 0,
+              "total": 982,
+              "pct": 0.0
+            }
+          },
+          "post_ia_observability": {
+            "with_ia_date": 32,
+            "total_withdrawn": 982,
+            "pct": 0.032586558044806514,
+            "classification": "complete"
+          }
+        },
+        {
+          "status": "active",
+          "n": 72,
+          "fields": {
+            "q_date": {
+              "populated": 72,
+              "total": 72,
+              "pct": 1.0
+            },
+            "ia_date": {
+              "populated": 41,
+              "total": 72,
+              "pct": 0.5694444444444444
+            },
+            "wd_date": {
+              "populated": 0,
+              "total": 72,
+              "pct": 0.0
+            },
+            "on_date": {
+              "populated": 0,
+              "total": 72,
+              "pct": 0.0
+            },
+            "cluster": {
+              "populated": 0,
+              "total": 72,
+              "pct": 0.0
+            },
+            "mw": {
+              "populated": 72,
+              "total": 72,
+              "pct": 1.0
+            },
+            "entity": {
+              "populated": 72,
+              "total": 72,
+              "pct": 1.0
+            }
+          },
+          "hybrid_capacity": {
+            "mw2": {
+              "populated": 0,
+              "total": 72,
+              "pct": 0.0
+            },
+            "mw3": {
+              "populated": 0,
+              "total": 72,
+              "pct": 0.0
+            }
+          }
+        },
+        {
+          "status": "suspended",
+          "n": 0,
+          "fields": {
+            "q_date": {
+              "populated": 0,
+              "total": 0,
+              "pct": null
+            },
+            "ia_date": {
+              "populated": 0,
+              "total": 0,
+              "pct": null
+            },
+            "wd_date": {
+              "populated": 0,
+              "total": 0,
+              "pct": null
+            },
+            "on_date": {
+              "populated": 0,
+              "total": 0,
+              "pct": null
+            },
+            "cluster": {
+              "populated": 0,
+              "total": 0,
+              "pct": null
+            },
+            "mw": {
+              "populated": 0,
+              "total": 0,
+              "pct": null
+            },
+            "entity": {
+              "populated": 0,
+              "total": 0,
+              "pct": null
+            }
+          },
+          "hybrid_capacity": {
+            "mw2": {
+              "populated": 0,
+              "total": 0,
+              "pct": null
+            },
+            "mw3": {
+              "populated": 0,
+              "total": 0,
+              "pct": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "region": "miso",
+      "total": 5424,
+      "statuses": [
+        {
+          "status": "operational",
+          "n": 515,
+          "fields": {
+            "q_date": {
+              "populated": 515,
+              "total": 515,
+              "pct": 1.0
+            },
+            "ia_date": {
+              "populated": 476,
+              "total": 515,
+              "pct": 0.9242718446601942
+            },
+            "wd_date": {
+              "populated": 3,
+              "total": 515,
+              "pct": 0.005825242718446602
+            },
+            "on_date": {
+              "populated": 497,
+              "total": 515,
+              "pct": 0.9650485436893204
+            },
+            "cluster": {
+              "populated": 389,
+              "total": 515,
+              "pct": 0.7553398058252427
+            },
+            "mw": {
+              "populated": 515,
+              "total": 515,
+              "pct": 1.0
+            },
+            "entity": {
+              "populated": 515,
+              "total": 515,
+              "pct": 1.0
+            }
+          },
+          "hybrid_capacity": {
+            "mw2": {
+              "populated": 0,
+              "total": 515,
+              "pct": 0.0
+            },
+            "mw3": {
+              "populated": 0,
+              "total": 515,
+              "pct": 0.0
+            }
+          }
+        },
+        {
+          "status": "withdrawn",
+          "n": 3263,
+          "fields": {
+            "q_date": {
+              "populated": 3261,
+              "total": 3263,
+              "pct": 0.9993870671161508
+            },
+            "ia_date": {
+              "populated": 889,
+              "total": 3263,
+              "pct": 0.27244866687097763
+            },
+            "wd_date": {
+              "populated": 3061,
+              "total": 3263,
+              "pct": 0.9380937787312289
+            },
+            "on_date": {
+              "populated": 3,
+              "total": 3263,
+              "pct": 0.0009193993257738277
+            },
+            "cluster": {
+              "populated": 2414,
+              "total": 3263,
+              "pct": 0.7398099908060067
+            },
+            "mw": {
+              "populated": 3263,
+              "total": 3263,
+              "pct": 1.0
+            },
+            "entity": {
+              "populated": 3263,
+              "total": 3263,
+              "pct": 1.0
+            }
+          },
+          "hybrid_capacity": {
+            "mw2": {
+              "populated": 0,
+              "total": 3263,
+              "pct": 0.0
+            },
+            "mw3": {
+              "populated": 0,
+              "total": 3263,
+              "pct": 0.0
+            }
+          },
+          "post_ia_observability": {
+            "with_ia_date": 889,
+            "total_withdrawn": 3263,
+            "pct": 0.27244866687097763,
+            "classification": "complete"
+          }
+        },
+        {
+          "status": "active",
+          "n": 1646,
+          "fields": {
+            "q_date": {
+              "populated": 1642,
+              "total": 1646,
+              "pct": 0.9975698663426489
+            },
+            "ia_date": {
+              "populated": 395,
+              "total": 1646,
+              "pct": 0.2399756986634265
+            },
+            "wd_date": {
+              "populated": 18,
+              "total": 1646,
+              "pct": 0.010935601458080195
+            },
+            "on_date": {
+              "populated": 60,
+              "total": 1646,
+              "pct": 0.03645200486026731
+            },
+            "cluster": {
+              "populated": 1458,
+              "total": 1646,
+              "pct": 0.8857837181044957
+            },
+            "mw": {
+              "populated": 1646,
+              "total": 1646,
+              "pct": 1.0
+            },
+            "entity": {
+              "populated": 1646,
+              "total": 1646,
+              "pct": 1.0
+            }
+          },
+          "hybrid_capacity": {
+            "mw2": {
+              "populated": 0,
+              "total": 1646,
+              "pct": 0.0
+            },
+            "mw3": {
+              "populated": 0,
+              "total": 1646,
+              "pct": 0.0
+            }
+          }
+        },
+        {
+          "status": "suspended",
+          "n": 0,
+          "fields": {
+            "q_date": {
+              "populated": 0,
+              "total": 0,
+              "pct": null
+            },
+            "ia_date": {
+              "populated": 0,
+              "total": 0,
+              "pct": null
+            },
+            "wd_date": {
+              "populated": 0,
+              "total": 0,
+              "pct": null
+            },
+            "on_date": {
+              "populated": 0,
+              "total": 0,
+              "pct": null
+            },
+            "cluster": {
+              "populated": 0,
+              "total": 0,
+              "pct": null
+            },
+            "mw": {
+              "populated": 0,
+              "total": 0,
+              "pct": null
+            },
+            "entity": {
+              "populated": 0,
+              "total": 0,
+              "pct": null
+            }
+          },
+          "hybrid_capacity": {
+            "mw2": {
+              "populated": 0,
+              "total": 0,
+              "pct": null
+            },
+            "mw3": {
+              "populated": 0,
+              "total": 0,
+              "pct": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "region": "nyiso",
+      "total": 1936,
+      "statuses": [
+        {
+          "status": "operational",
+          "n": 215,
+          "fields": {
+            "q_date": {
+              "populated": 215,
+              "total": 215,
+              "pct": 1.0
+            },
+            "ia_date": {
+              "populated": 35,
+              "total": 215,
+              "pct": 0.16279069767441862
+            },
+            "wd_date": {
+              "populated": 2,
+              "total": 215,
+              "pct": 0.009302325581395349
+            },
+            "on_date": {
+              "populated": 83,
+              "total": 215,
+              "pct": 0.386046511627907
+            },
+            "cluster": {
+              "populated": 0,
+              "total": 215,
+              "pct": 0.0
+            },
+            "mw": {
+              "populated": 215,
+              "total": 215,
+              "pct": 1.0
+            },
+            "entity": {
+              "populated": 215,
+              "total": 215,
+              "pct": 1.0
+            }
+          },
+          "hybrid_capacity": {
+            "mw2": {
+              "populated": 0,
+              "total": 215,
+              "pct": 0.0
+            },
+            "mw3": {
+              "populated": 0,
+              "total": 215,
+              "pct": 0.0
+            }
+          }
+        },
+        {
+          "status": "withdrawn",
+          "n": 1531,
+          "fields": {
+            "q_date": {
+              "populated": 1531,
+              "total": 1531,
+              "pct": 1.0
+            },
+            "ia_date": {
+              "populated": 15,
+              "total": 1531,
+              "pct": 0.009797517962116264
+            },
+            "wd_date": {
+              "populated": 745,
+              "total": 1531,
+              "pct": 0.48661005878510777
+            },
+            "on_date": {
+              "populated": 0,
+              "total": 1531,
+              "pct": 0.0
+            },
+            "cluster": {
+              "populated": 282,
+              "total": 1531,
+              "pct": 0.18419333768778576
+            },
+            "mw": {
+              "populated": 1531,
+              "total": 1531,
+              "pct": 1.0
+            },
+            "entity": {
+              "populated": 1531,
+              "total": 1531,
+              "pct": 1.0
+            }
+          },
+          "hybrid_capacity": {
+            "mw2": {
+              "populated": 0,
+              "total": 1531,
+              "pct": 0.0
+            },
+            "mw3": {
+              "populated": 0,
+              "total": 1531,
+              "pct": 0.0
+            }
+          },
+          "post_ia_observability": {
+            "with_ia_date": 15,
+            "total_withdrawn": 1531,
+            "pct": 0.009797517962116264,
+            "classification": "partial"
+          }
+        },
+        {
+          "status": "active",
+          "n": 190,
+          "fields": {
+            "q_date": {
+              "populated": 190,
+              "total": 190,
+              "pct": 1.0
+            },
+            "ia_date": {
+              "populated": 59,
+              "total": 190,
+              "pct": 0.3105263157894737
+            },
+            "wd_date": {
+              "populated": 0,
+              "total": 190,
+              "pct": 0.0
+            },
+            "on_date": {
+              "populated": 0,
+              "total": 190,
+              "pct": 0.0
+            },
+            "cluster": {
+              "populated": 89,
+              "total": 190,
+              "pct": 0.46842105263157896
+            },
+            "mw": {
+              "populated": 190,
+              "total": 190,
+              "pct": 1.0
+            },
+            "entity": {
+              "populated": 190,
+              "total": 190,
+              "pct": 1.0
+            }
+          },
+          "hybrid_capacity": {
+            "mw2": {
+              "populated": 0,
+              "total": 190,
+              "pct": 0.0
+            },
+            "mw3": {
+              "populated": 0,
+              "total": 190,
+              "pct": 0.0
+            }
+          }
+        },
+        {
+          "status": "suspended",
+          "n": 0,
+          "fields": {
+            "q_date": {
+              "populated": 0,
+              "total": 0,
+              "pct": null
+            },
+            "ia_date": {
+              "populated": 0,
+              "total": 0,
+              "pct": null
+            },
+            "wd_date": {
+              "populated": 0,
+              "total": 0,
+              "pct": null
+            },
+            "on_date": {
+              "populated": 0,
+              "total": 0,
+              "pct": null
+            },
+            "cluster": {
+              "populated": 0,
+              "total": 0,
+              "pct": null
+            },
+            "mw": {
+              "populated": 0,
+              "total": 0,
+              "pct": null
+            },
+            "entity": {
+              "populated": 0,
+              "total": 0,
+              "pct": null
+            }
+          },
+          "hybrid_capacity": {
+            "mw2": {
+              "populated": 0,
+              "total": 0,
+              "pct": null
+            },
+            "mw3": {
+              "populated": 0,
+              "total": 0,
+              "pct": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "region": "pjm",
+      "total": 7666,
+      "statuses": [
+        {
+          "status": "operational",
+          "n": 1192,
+          "fields": {
+            "q_date": {
+              "populated": 1192,
+              "total": 1192,
+              "pct": 1.0
+            },
+            "ia_date": {
+              "populated": 195,
+              "total": 1192,
+              "pct": 0.16359060402684564
+            },
+            "wd_date": {
+              "populated": 5,
+              "total": 1192,
+              "pct": 0.0041946308724832215
+            },
+            "on_date": {
+              "populated": 1185,
+              "total": 1192,
+              "pct": 0.9941275167785235
+            },
+            "cluster": {
+              "populated": 0,
+              "total": 1192,
+              "pct": 0.0
+            },
+            "mw": {
+              "populated": 1192,
+              "total": 1192,
+              "pct": 1.0
+            },
+            "entity": {
+              "populated": 1192,
+              "total": 1192,
+              "pct": 1.0
+            }
+          },
+          "hybrid_capacity": {
+            "mw2": {
+              "populated": 0,
+              "total": 1192,
+              "pct": 0.0
+            },
+            "mw3": {
+              "populated": 0,
+              "total": 1192,
+              "pct": 0.0
+            }
+          }
+        },
+        {
+          "status": "withdrawn",
+          "n": 5226,
+          "fields": {
+            "q_date": {
+              "populated": 5178,
+              "total": 5226,
+              "pct": 0.9908151549942594
+            },
+            "ia_date": {
+              "populated": 32,
+              "total": 5226,
+              "pct": 0.006123230003827019
+            },
+            "wd_date": {
+              "populated": 5140,
+              "total": 5226,
+              "pct": 0.9835438193647149
+            },
+            "on_date": {
+              "populated": 8,
+              "total": 5226,
+              "pct": 0.0015308075009567547
+            },
+            "cluster": {
+              "populated": 580,
+              "total": 5226,
+              "pct": 0.11098354381936472
+            },
+            "mw": {
+              "populated": 5226,
+              "total": 5226,
+              "pct": 1.0
+            },
+            "entity": {
+              "populated": 5226,
+              "total": 5226,
+              "pct": 1.0
+            }
+          },
+          "hybrid_capacity": {
+            "mw2": {
+              "populated": 0,
+              "total": 5226,
+              "pct": 0.0
+            },
+            "mw3": {
+              "populated": 0,
+              "total": 5226,
+              "pct": 0.0
+            }
+          },
+          "post_ia_observability": {
+            "with_ia_date": 32,
+            "total_withdrawn": 5226,
+            "pct": 0.006123230003827019,
+            "classification": "complete"
+          }
+        },
+        {
+          "status": "active",
+          "n": 1134,
+          "fields": {
+            "q_date": {
+              "populated": 1134,
+              "total": 1134,
+              "pct": 1.0
+            },
+            "ia_date": {
+              "populated": 15,
+              "total": 1134,
+              "pct": 0.013227513227513227
+            },
+            "wd_date": {
+              "populated": 1,
+              "total": 1134,
+              "pct": 0.0008818342151675485
+            },
+            "on_date": {
+              "populated": 5,
+              "total": 1134,
+              "pct": 0.004409171075837742
+            },
+            "cluster": {
+              "populated": 313,
+              "total": 1134,
+              "pct": 0.2760141093474427
+            },
+            "mw": {
+              "populated": 1134,
+              "total": 1134,
+              "pct": 1.0
+            },
+            "entity": {
+              "populated": 1134,
+              "total": 1134,
+              "pct": 1.0
+            }
+          },
+          "hybrid_capacity": {
+            "mw2": {
+              "populated": 0,
+              "total": 1134,
+              "pct": 0.0
+            },
+            "mw3": {
+              "populated": 0,
+              "total": 1134,
+              "pct": 0.0
+            }
+          }
+        },
+        {
+          "status": "suspended",
+          "n": 114,
+          "fields": {
+            "q_date": {
+              "populated": 114,
+              "total": 114,
+              "pct": 1.0
+            },
+            "ia_date": {
+              "populated": 5,
+              "total": 114,
+              "pct": 0.043859649122807015
+            },
+            "wd_date": {
+              "populated": 0,
+              "total": 114,
+              "pct": 0.0
+            },
+            "on_date": {
+              "populated": 1,
+              "total": 114,
+              "pct": 0.008771929824561403
+            },
+            "cluster": {
+              "populated": 0,
+              "total": 114,
+              "pct": 0.0
+            },
+            "mw": {
+              "populated": 114,
+              "total": 114,
+              "pct": 1.0
+            },
+            "entity": {
+              "populated": 114,
+              "total": 114,
+              "pct": 1.0
+            }
+          },
+          "hybrid_capacity": {
+            "mw2": {
+              "populated": 0,
+              "total": 114,
+              "pct": 0.0
+            },
+            "mw3": {
+              "populated": 0,
+              "total": 114,
+              "pct": 0.0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "region": "southeast",
+      "total": 4334,
+      "statuses": [
+        {
+          "status": "operational",
+          "n": 529,
+          "fields": {
+            "q_date": {
+              "populated": 446,
+              "total": 529,
+              "pct": 0.8431001890359168
+            },
+            "ia_date": {
+              "populated": 92,
+              "total": 529,
+              "pct": 0.17391304347826086
+            },
+            "wd_date": {
+              "populated": 0,
+              "total": 529,
+              "pct": 0.0
+            },
+            "on_date": {
+              "populated": 313,
+              "total": 529,
+              "pct": 0.5916824196597353
+            },
+            "cluster": {
+              "populated": 10,
+              "total": 529,
+              "pct": 0.01890359168241966
+            },
+            "mw": {
+              "populated": 529,
+              "total": 529,
+              "pct": 1.0
+            },
+            "entity": {
+              "populated": 529,
+              "total": 529,
+              "pct": 1.0
+            }
+          },
+          "hybrid_capacity": {
+            "mw2": {
+              "populated": 0,
+              "total": 529,
+              "pct": 0.0
+            },
+            "mw3": {
+              "populated": 0,
+              "total": 529,
+              "pct": 0.0
+            }
+          }
+        },
+        {
+          "status": "withdrawn",
+          "n": 2738,
+          "fields": {
+            "q_date": {
+              "populated": 2526,
+              "total": 2738,
+              "pct": 0.9225712198685172
+            },
+            "ia_date": {
+              "populated": 74,
+              "total": 2738,
+              "pct": 0.02702702702702703
+            },
+            "wd_date": {
+              "populated": 957,
+              "total": 2738,
+              "pct": 0.34952520087655226
+            },
+            "on_date": {
+              "populated": 5,
+              "total": 2738,
+              "pct": 0.0018261504747991235
+            },
+            "cluster": {
+              "populated": 444,
+              "total": 2738,
+              "pct": 0.16216216216216217
+            },
+            "mw": {
+              "populated": 2738,
+              "total": 2738,
+              "pct": 1.0
+            },
+            "entity": {
+              "populated": 2738,
+              "total": 2738,
+              "pct": 1.0
+            }
+          },
+          "hybrid_capacity": {
+            "mw2": {
+              "populated": 0,
+              "total": 2738,
+              "pct": 0.0
+            },
+            "mw3": {
+              "populated": 0,
+              "total": 2738,
+              "pct": 0.0
+            }
+          },
+          "post_ia_observability": {
+            "with_ia_date": 74,
+            "total_withdrawn": 2738,
+            "pct": 0.02702702702702703,
+            "classification": "complete"
+          }
+        },
+        {
+          "status": "active",
+          "n": 957,
+          "fields": {
+            "q_date": {
+              "populated": 922,
+              "total": 957,
+              "pct": 0.9634273772204807
+            },
+            "ia_date": {
+              "populated": 1,
+              "total": 957,
+              "pct": 0.0010449320794148381
+            },
+            "wd_date": {
+              "populated": 0,
+              "total": 957,
+              "pct": 0.0
+            },
+            "on_date": {
+              "populated": 14,
+              "total": 957,
+              "pct": 0.014629049111807733
+            },
+            "cluster": {
+              "populated": 345,
+              "total": 957,
+              "pct": 0.3605015673981191
+            },
+            "mw": {
+              "populated": 957,
+              "total": 957,
+              "pct": 1.0
+            },
+            "entity": {
+              "populated": 957,
+              "total": 957,
+              "pct": 1.0
+            }
+          },
+          "hybrid_capacity": {
+            "mw2": {
+              "populated": 0,
+              "total": 957,
+              "pct": 0.0
+            },
+            "mw3": {
+              "populated": 0,
+              "total": 957,
+              "pct": 0.0
+            }
+          }
+        },
+        {
+          "status": "suspended",
+          "n": 110,
+          "fields": {
+            "q_date": {
+              "populated": 110,
+              "total": 110,
+              "pct": 1.0
+            },
+            "ia_date": {
+              "populated": 0,
+              "total": 110,
+              "pct": 0.0
+            },
+            "wd_date": {
+              "populated": 0,
+              "total": 110,
+              "pct": 0.0
+            },
+            "on_date": {
+              "populated": 0,
+              "total": 110,
+              "pct": 0.0
+            },
+            "cluster": {
+              "populated": 0,
+              "total": 110,
+              "pct": 0.0
+            },
+            "mw": {
+              "populated": 110,
+              "total": 110,
+              "pct": 1.0
+            },
+            "entity": {
+              "populated": 110,
+              "total": 110,
+              "pct": 1.0
+            }
+          },
+          "hybrid_capacity": {
+            "mw2": {
+              "populated": 0,
+              "total": 110,
+              "pct": 0.0
+            },
+            "mw3": {
+              "populated": 0,
+              "total": 110,
+              "pct": 0.0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "region": "spp",
+      "total": 2837,
+      "statuses": [
+        {
+          "status": "operational",
+          "n": 299,
+          "fields": {
+            "q_date": {
+              "populated": 281,
+              "total": 299,
+              "pct": 0.939799331103679
+            },
+            "ia_date": {
+              "populated": 0,
+              "total": 299,
+              "pct": 0.0
+            },
+            "wd_date": {
+              "populated": 0,
+              "total": 299,
+              "pct": 0.0
+            },
+            "on_date": {
+              "populated": 288,
+              "total": 299,
+              "pct": 0.9632107023411371
+            },
+            "cluster": {
+              "populated": 254,
+              "total": 299,
+              "pct": 0.8494983277591973
+            },
+            "mw": {
+              "populated": 299,
+              "total": 299,
+              "pct": 1.0
+            },
+            "entity": {
+              "populated": 299,
+              "total": 299,
+              "pct": 1.0
+            }
+          },
+          "hybrid_capacity": {
+            "mw2": {
+              "populated": 0,
+              "total": 299,
+              "pct": 0.0
+            },
+            "mw3": {
+              "populated": 0,
+              "total": 299,
+              "pct": 0.0
+            }
+          }
+        },
+        {
+          "status": "withdrawn",
+          "n": 1846,
+          "fields": {
+            "q_date": {
+              "populated": 1838,
+              "total": 1846,
+              "pct": 0.9956663055254604
+            },
+            "ia_date": {
+              "populated": 0,
+              "total": 1846,
+              "pct": 0.0
+            },
+            "wd_date": {
+              "populated": 1343,
+              "total": 1846,
+              "pct": 0.7275189599133262
+            },
+            "on_date": {
+              "populated": 241,
+              "total": 1846,
+              "pct": 0.1305525460455038
+            },
+            "cluster": {
+              "populated": 1062,
+              "total": 1846,
+              "pct": 0.5752979414951246
+            },
+            "mw": {
+              "populated": 1846,
+              "total": 1846,
+              "pct": 1.0
+            },
+            "entity": {
+              "populated": 1846,
+              "total": 1846,
+              "pct": 1.0
+            }
+          },
+          "hybrid_capacity": {
+            "mw2": {
+              "populated": 0,
+              "total": 1846,
+              "pct": 0.0
+            },
+            "mw3": {
+              "populated": 0,
+              "total": 1846,
+              "pct": 0.0
+            }
+          },
+          "post_ia_observability": {
+            "with_ia_date": 0,
+            "total_withdrawn": 1846,
+            "pct": 0.0,
+            "classification": "absent"
+          }
+        },
+        {
+          "status": "active",
+          "n": 683,
+          "fields": {
+            "q_date": {
+              "populated": 683,
+              "total": 683,
+              "pct": 1.0
+            },
+            "ia_date": {
+              "populated": 0,
+              "total": 683,
+              "pct": 0.0
+            },
+            "wd_date": {
+              "populated": 0,
+              "total": 683,
+              "pct": 0.0
+            },
+            "on_date": {
+              "populated": 43,
+              "total": 683,
+              "pct": 0.0629575402635432
+            },
+            "cluster": {
+              "populated": 683,
+              "total": 683,
+              "pct": 1.0
+            },
+            "mw": {
+              "populated": 683,
+              "total": 683,
+              "pct": 1.0
+            },
+            "entity": {
+              "populated": 683,
+              "total": 683,
+              "pct": 1.0
+            }
+          },
+          "hybrid_capacity": {
+            "mw2": {
+              "populated": 0,
+              "total": 683,
+              "pct": 0.0
+            },
+            "mw3": {
+              "populated": 0,
+              "total": 683,
+              "pct": 0.0
+            }
+          }
+        },
+        {
+          "status": "suspended",
+          "n": 9,
+          "fields": {
+            "q_date": {
+              "populated": 9,
+              "total": 9,
+              "pct": 1.0
+            },
+            "ia_date": {
+              "populated": 0,
+              "total": 9,
+              "pct": 0.0
+            },
+            "wd_date": {
+              "populated": 0,
+              "total": 9,
+              "pct": 0.0
+            },
+            "on_date": {
+              "populated": 0,
+              "total": 9,
+              "pct": 0.0
+            },
+            "cluster": {
+              "populated": 9,
+              "total": 9,
+              "pct": 1.0
+            },
+            "mw": {
+              "populated": 9,
+              "total": 9,
+              "pct": 1.0
+            },
+            "entity": {
+              "populated": 9,
+              "total": 9,
+              "pct": 1.0
+            }
+          },
+          "hybrid_capacity": {
+            "mw2": {
+              "populated": 0,
+              "total": 9,
+              "pct": 0.0
+            },
+            "mw3": {
+              "populated": 0,
+              "total": 9,
+              "pct": 0.0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "region": "west",
+      "total": 8097,
+      "statuses": [
+        {
+          "status": "operational",
+          "n": 963,
+          "fields": {
+            "q_date": {
+              "populated": 877,
+              "total": 963,
+              "pct": 0.9106957424714434
+            },
+            "ia_date": {
+              "populated": 440,
+              "total": 963,
+              "pct": 0.4569055036344756
+            },
+            "wd_date": {
+              "populated": 0,
+              "total": 963,
+              "pct": 0.0
+            },
+            "on_date": {
+              "populated": 177,
+              "total": 963,
+              "pct": 0.1838006230529595
+            },
+            "cluster": {
+              "populated": 55,
+              "total": 963,
+              "pct": 0.05711318795430945
+            },
+            "mw": {
+              "populated": 963,
+              "total": 963,
+              "pct": 1.0
+            },
+            "entity": {
+              "populated": 963,
+              "total": 963,
+              "pct": 1.0
+            }
+          },
+          "hybrid_capacity": {
+            "mw2": {
+              "populated": 9,
+              "total": 963,
+              "pct": 0.009345794392523364
+            },
+            "mw3": {
+              "populated": 0,
+              "total": 963,
+              "pct": 0.0
+            }
+          }
+        },
+        {
+          "status": "withdrawn",
+          "n": 5277,
+          "fields": {
+            "q_date": {
+              "populated": 5267,
+              "total": 5277,
+              "pct": 0.9981049838923631
+            },
+            "ia_date": {
+              "populated": 172,
+              "total": 5277,
+              "pct": 0.03259427705135494
+            },
+            "wd_date": {
+              "populated": 641,
+              "total": 5277,
+              "pct": 0.12147053249952625
+            },
+            "on_date": {
+              "populated": 0,
+              "total": 5277,
+              "pct": 0.0
+            },
+            "cluster": {
+              "populated": 966,
+              "total": 5277,
+              "pct": 0.18305855599772597
+            },
+            "mw": {
+              "populated": 5277,
+              "total": 5277,
+              "pct": 1.0
+            },
+            "entity": {
+              "populated": 5277,
+              "total": 5277,
+              "pct": 1.0
+            }
+          },
+          "hybrid_capacity": {
+            "mw2": {
+              "populated": 173,
+              "total": 5277,
+              "pct": 0.03278377866211863
+            },
+            "mw3": {
+              "populated": 15,
+              "total": 5277,
+              "pct": 0.0028425241614553724
+            }
+          },
+          "post_ia_observability": {
+            "with_ia_date": 172,
+            "total_withdrawn": 5277,
+            "pct": 0.03259427705135494,
+            "classification": "complete"
+          }
+        },
+        {
+          "status": "active",
+          "n": 1613,
+          "fields": {
+            "q_date": {
+              "populated": 1608,
+              "total": 1613,
+              "pct": 0.9969001859888407
+            },
+            "ia_date": {
+              "populated": 76,
+              "total": 1613,
+              "pct": 0.047117172969621826
+            },
+            "wd_date": {
+              "populated": 0,
+              "total": 1613,
+              "pct": 0.0
+            },
+            "on_date": {
+              "populated": 7,
+              "total": 1613,
+              "pct": 0.0043397396156230625
+            },
+            "cluster": {
+              "populated": 654,
+              "total": 1613,
+              "pct": 0.40545567265964044
+            },
+            "mw": {
+              "populated": 1613,
+              "total": 1613,
+              "pct": 1.0
+            },
+            "entity": {
+              "populated": 1613,
+              "total": 1613,
+              "pct": 1.0
+            }
+          },
+          "hybrid_capacity": {
+            "mw2": {
+              "populated": 170,
+              "total": 1613,
+              "pct": 0.10539367637941724
+            },
+            "mw3": {
+              "populated": 13,
+              "total": 1613,
+              "pct": 0.008059516429014259
+            }
+          }
+        },
+        {
+          "status": "suspended",
+          "n": 244,
+          "fields": {
+            "q_date": {
+              "populated": 239,
+              "total": 244,
+              "pct": 0.9795081967213115
+            },
+            "ia_date": {
+              "populated": 40,
+              "total": 244,
+              "pct": 0.16393442622950818
+            },
+            "wd_date": {
+              "populated": 1,
+              "total": 244,
+              "pct": 0.004098360655737705
+            },
+            "on_date": {
+              "populated": 0,
+              "total": 244,
+              "pct": 0.0
+            },
+            "cluster": {
+              "populated": 29,
+              "total": 244,
+              "pct": 0.11885245901639344
+            },
+            "mw": {
+              "populated": 244,
+              "total": 244,
+              "pct": 1.0
+            },
+            "entity": {
+              "populated": 244,
+              "total": 244,
+              "pct": 1.0
+            }
+          },
+          "hybrid_capacity": {
+            "mw2": {
+              "populated": 8,
+              "total": 244,
+              "pct": 0.03278688524590164
+            },
+            "mw3": {
+              "populated": 0,
+              "total": 244,
+              "pct": 0.0
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "national": {
+    "wd_date_coverage_by_region_withdrawn": [
+      {
+        "region": "west",
+        "populated": 641,
+        "total": 5277,
+        "pct": 0.12147053249952625
+      },
+      {
+        "region": "southeast",
+        "populated": 957,
+        "total": 2738,
+        "pct": 0.34952520087655226
+      },
+      {
+        "region": "nyiso",
+        "populated": 745,
+        "total": 1531,
+        "pct": 0.48661005878510777
+      },
+      {
+        "region": "ercot",
+        "populated": 564,
+        "total": 1158,
+        "pct": 0.48704663212435234
+      },
+      {
+        "region": "spp",
+        "populated": 1343,
+        "total": 1846,
+        "pct": 0.7275189599133262
+      },
+      {
+        "region": "miso",
+        "populated": 3061,
+        "total": 3263,
+        "pct": 0.9380937787312289
+      },
+      {
+        "region": "caiso",
+        "populated": 2161,
+        "total": 2200,
+        "pct": 0.9822727272727273
+      },
+      {
+        "region": "pjm",
+        "populated": 5140,
+        "total": 5226,
+        "pct": 0.9835438193647149
+      },
+      {
+        "region": "iso_ne",
+        "populated": 970,
+        "total": 982,
+        "pct": 0.9877800407331976
+      }
+    ],
+    "post_ia_observability_by_region": [
+      {
+        "region": "spp",
+        "with_ia_date": 0,
+        "total_withdrawn": 1846,
+        "pct": 0.0,
+        "classification": "absent"
+      },
+      {
+        "region": "pjm",
+        "with_ia_date": 32,
+        "total_withdrawn": 5226,
+        "pct": 0.006123230003827019,
+        "classification": "complete"
+      },
+      {
+        "region": "caiso",
+        "with_ia_date": 20,
+        "total_withdrawn": 2200,
+        "pct": 0.00909090909090909,
+        "classification": "partial"
+      },
+      {
+        "region": "nyiso",
+        "with_ia_date": 15,
+        "total_withdrawn": 1531,
+        "pct": 0.009797517962116264,
+        "classification": "partial"
+      },
+      {
+        "region": "southeast",
+        "with_ia_date": 74,
+        "total_withdrawn": 2738,
+        "pct": 0.02702702702702703,
+        "classification": "complete"
+      },
+      {
+        "region": "iso_ne",
+        "with_ia_date": 32,
+        "total_withdrawn": 982,
+        "pct": 0.032586558044806514,
+        "classification": "complete"
+      },
+      {
+        "region": "west",
+        "with_ia_date": 172,
+        "total_withdrawn": 5277,
+        "pct": 0.03259427705135494,
+        "classification": "complete"
+      },
+      {
+        "region": "ercot",
+        "with_ia_date": 124,
+        "total_withdrawn": 1158,
+        "pct": 0.1070811744386874,
+        "classification": "complete"
+      },
+      {
+        "region": "miso",
+        "with_ia_date": 889,
+        "total_withdrawn": 3263,
+        "pct": 0.27244866687097763,
+        "classification": "complete"
+      }
+    ]
+  }
+}
