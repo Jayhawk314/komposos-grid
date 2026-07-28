@@ -163,53 +163,78 @@ def calculate_right_kan_bounds() -> list:
                 # Find priced neighbors
                 neighbors = priced_spreads.get(a, []) + priced_spreads.get(b, [])
                 if neighbors:
-                    bound_spread = min(neighbors)
-                    bound_value = bound_spread * gross
+                    proxy_spread = min(neighbors)
+                    screening_value = proxy_spread * gross
                     bounds.append({
                         "tie": f"{a} - {b}",
-                        "unpriced_ba": a if a in se_bas else b,
+                        # The Southeast-side BA of this UNPRICED TIE. The BA
+                        # itself may well have priced ties elsewhere -- the old
+                        # name "unpriced_ba" wrongly implied otherwise.
+                        "se_side_ba": a if a in se_bas else b,
                         "priced_neighbors_count": len(neighbors),
-                        "bound_spread_usd_mwh": round(bound_spread, 2),
+                        # NOT a bound. A single adjacent tie's spread carried
+                        # across a different interface by analogy. Renamed from
+                        # bound_spread_usd_mwh / bound_value_usd, which asserted
+                        # a mathematical bound the method does not establish.
+                        "proxy_spread_usd_mwh": round(proxy_spread, 2),
                         "gross_mwh": gross,
-                        "bound_value_usd": round(bound_value, 2)
+                        # Prices ALL gross flow at the proxy spread. Real
+                        # congestion value accrues only in constrained hours, so
+                        # this overstates by the unconstrained share.
+                        "screening_value_usd": round(screening_value, 2),
+                        "method_limits": (
+                            f"analogy from {len(neighbors)} adjacent priced tie(s); "
+                            "all gross flow priced at the proxy spread; "
+                            "not a measured cost and not a bound"
+                        ),
                     })
-                    
-    return sorted(bounds, key=lambda x: x["bound_value_usd"], reverse=True)
 
-def load_sheaf_metrics() -> dict:
-    """Load sheaf metrics from the footprint correction report."""
+    return sorted(bounds, key=lambda x: x["screening_value_usd"], reverse=True)
+
+def load_sheaf_metrics() -> dict | None:
+    """Load sheaf metrics from the footprint correction report.
+
+    Returns None when the report is missing or lacks the required fields.
+
+    This function previously fell back to hardcoded constants (1.899, 0.818,
+    0.452, 0.629, 59.3) copied from a past real run. Those were
+    indistinguishable from computed output, so a missing input would render six
+    plausible numbers on the dashboard with nothing marking them as
+    placeholders. A page that shows "not available" is safer than one that
+    quietly shows last year's answer as though it were current.
+    """
     report_path = REPORTS_DIR / "ba_footprint_report.json"
     if not report_path.exists():
-        return {
-            "before_leak": 1.899,
-            "after_leak": 0.818,
-            "improvement": "56.9%",
-            "before_rate": 0.452,
-            "after_rate": 0.629,
-            "error_reduction_twh": 59.3
-        }
-        
+        return None
+
     with open(report_path, encoding="utf-8") as f:
         data = json.load(f)
-        
+
     before = data.get("before", {})
     after = data.get("after", {})
-    
-    before_leak = before.get("sheaf_energy_leak", 1.899)
-    after_leak = after.get("sheaf_energy_leak", 0.818)
+
+    # Every field must be genuinely present -- no substituted defaults.
+    required = ("sheaf_energy_leak", "agreement_rate", "abs_error_mwh")
+    if not all(k in before and k in after for k in required):
+        return None
+
+    before_leak = before["sheaf_energy_leak"]
+    after_leak = after["sheaf_energy_leak"]
     improvement = (before_leak - after_leak) / before_leak if before_leak else 0.0
-    
-    before_err = before.get("abs_error_mwh", 0.0)
-    after_err = after.get("abs_error_mwh", 0.0)
-    err_reduction_twh = (before_err - after_err) / 1e6
-    
+    err_reduction_twh = (before["abs_error_mwh"] - after["abs_error_mwh"]) / 1e6
+
     return {
         "before_leak": round(before_leak, 4),
         "after_leak": round(after_leak, 4),
         "improvement": f"{improvement:.1%}",
-        "before_rate": round(before.get("agreement_rate", 0.452), 3),
-        "after_rate": round(after.get("agreement_rate", 0.629), 3),
-        "error_reduction_twh": round(err_reduction_twh, 1)
+        "before_rate": round(before["agreement_rate"], 3),
+        "after_rate": round(after["agreement_rate"], 3),
+        # Residual disagreement, not just the delta -- see §7 of the audit.
+        # Reporting only the improvement hid that ~37% of entities still
+        # disagree and 231 TWh remains unreconciled after correction.
+        "residual_disagreement_rate": round(1.0 - after["agreement_rate"], 3),
+        "residual_abs_error_twh": round(after["abs_error_mwh"] / 1e6, 1),
+        "error_reduction_twh": round(err_reduction_twh, 1),
     }
 
 def main():

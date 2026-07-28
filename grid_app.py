@@ -315,13 +315,28 @@ elif selection == "🎯 Seam Opportunity Screen":
         
         bounds = data.get("right_kan_bounds", [])
         if bounds:
+            # Explicit mapping, and the same labels streamlit_app.py uses.
+            # These two apps previously called the identical number a "Bound"
+            # here and a "Proxy"/"Screening Value" there.
+            _COLS = {
+                "tie": "Tie Interface",
+                "se_side_ba": "Southeast-side BA",
+                "priced_neighbors_count": "Priced Neighbors Used",
+                "proxy_spread_usd_mwh": "Proxy Spread ($/MWh)",
+                "gross_mwh": "Gross Flow (MWh)",
+                "screening_value_usd": "Screening Value ($)",
+            }
             bounds_df = pd.DataFrame(bounds)
-            bounds_df.columns = ["Tie Interface", "Unpriced BA", "Priced Neighbors", "Bound Spread ($/MWh)", "Gross Flow (MWh)", "Bound Value ($)"]
-            st.dataframe(
-                bounds_df,
-                use_container_width=True,
-                hide_index=True
-            )
+            bounds_df = bounds_df[[c for c in _COLS if c in bounds_df.columns]].rename(columns=_COLS)
+            st.dataframe(bounds_df, use_container_width=True, hide_index=True)
+
+            _n_single = sum(1 for b in bounds if b.get("priced_neighbors_count", 0) <= 1)
+            if _n_single:
+                st.warning(
+                    f"**{_n_single} of {len(bounds)} rows draw on a single priced neighbour**, so "
+                    "the minimum in the formula above is not actually being taken — the figure is "
+                    "one adjacent tie's spread carried across a different interface by analogy."
+                )
         
         st.info(
             "**Largest screening value:** the **AECI - SWPP** unpriced seam screens at "
@@ -399,24 +414,51 @@ elif selection == "🎯 Seam Opportunity Screen":
             "the global coherence gap—which is exactly zero if all reports reconcile perfectly."
         )
         
-        metrics = data.get("sheaf_metrics", {})
-        if metrics:
+        metrics = data.get("sheaf_metrics") or None
+        if not metrics:
+            st.warning(
+                "**Sheaf metrics not available.** `reports/ba_footprint_report.json` is missing "
+                "or incomplete. Regenerate with `python -m domains.grid.ba_footprint_report`. "
+                "Shown blank rather than falling back to stored constants."
+            )
+        else:
             col1, col2, col3 = st.columns(3)
             col1.metric("Before Sheaf Leak (H^1)", f"{metrics['before_leak']:.4f}")
             col2.metric("After Sheaf Leak (H^1)", f"{metrics['after_leak']:.4f}", f"-{metrics['improvement']} leak")
             col3.metric("Accounting Error Reduction", f"{metrics['error_reduction_twh']:.1f} TWh")
-            
+
             st.divider()
-            
-            col_a, col_b = st.columns(2)
+
+            col_a, col_b, col_c = st.columns(3)
             col_a.metric("Before Source Agreement", f"{metrics['before_rate']:.1%}")
             col_b.metric("After Footprint Correction", f"{metrics['after_rate']:.1%}", f"+{metrics['after_rate']-metrics['before_rate']:.1%} improvement")
-            
-        st.info(
-            "**Interpretation:** Footprint crosswalk corrections successfully reduced the global "
-            "sheaf energy leak from 1.899 to 0.818 (a 56.9% coherence improvement). "
-            "This provides dual-verified verification that accounting adjustments improve macroscopic flow physics."
-        )
+            _resid = metrics.get("residual_disagreement_rate")
+            _resid_twh = metrics.get("residual_abs_error_twh")
+            if _resid is not None:
+                col_c.metric(
+                    "Still Disagreeing",
+                    f"{_resid:.1%}",
+                    f"{_resid_twh:,.0f} TWh unreconciled" if _resid_twh is not None else None,
+                    delta_color="inverse",
+                )
+
+            # Read from the artifact, never hardcoded. This block previously
+            # printed "from 1.899 to 0.818 (a 56.9% ...)" as literal prose,
+            # outside the metrics check, so it rendered even with no data -- and
+            # claimed physics validation, which this measurement cannot support.
+            st.info(
+                f"**Interpretation:** footprint crosswalk corrections reduced the global sheaf "
+                f"energy leak from **{metrics['before_leak']:.3f}** to **{metrics['after_leak']:.3f}** "
+                f"(a **{metrics['improvement']}** coherence improvement). Two independent datasets — "
+                "plant-level accounting and hourly telemetry — disagree less after the corrections. "
+                "This is a consistency gain **between data sources, not a physical validation of "
+                "grid flows**."
+                + (
+                    f"\n\n**What remains:** {_resid:.1%} of entities still disagree and "
+                    f"**{_resid_twh:,.0f} TWh** is still unreconciled."
+                    if _resid is not None and _resid_twh is not None else ""
+                )
+            )
 
         # Load plant corrections sub-data
         footprint_report_path = REPORTS_DIR / "ba_footprint_report.json"

@@ -429,6 +429,19 @@ if selection == "📊 Regional Queue Study":
                         {"Stage Pipeline": "Total End-to-End (IR ➔ COD)", "Median (Months)": dur["ir_to_cod"]["median_months"], "IQR Range (Months)": f"{dur['ir_to_cod']['p25_months']} – {dur['ir_to_cod']['p75_months']}"},
                     ]
                     st.dataframe(pd.DataFrame(dur_rows), use_container_width=True, hide_index=True)
+                    st.caption(
+                        "**Reconciliation status (checked 2026-07-27).** Our IR→IA durations were "
+                        "compared against LBNL's own Sheet 30 (*IR to IA — region*), which reports "
+                        "by IA-year cohort rather than all-time. **ERCOT matches exactly** on all "
+                        "five cohorts — same n, same medians. MISO and CAISO medians agree to "
+                        "within 0.6 months, but our samples run slightly larger, because LBNL "
+                        "restricts that analysis to 14 named entities and states that *\"not all "
+                        "data used in this analysis are publicly available\"* (their notes 1 and 4). "
+                        "So these reconcile closely rather than exactly, for reasons LBNL "
+                        "documents. Durations are survivor-conditioned: they cover only projects "
+                        "that reached each milestone, so they describe how long success took, not "
+                        "the experience of the average request."
+                    )
                 else:
                     st.write("No duration data available.")
         else:
@@ -894,22 +907,40 @@ elif selection == "🎯 Seam Opportunity Screen":
         
         bounds = data.get("right_kan_bounds", [])
         if bounds:
+            # Explicit column mapping -- positional renaming silently mislabels
+            # every column the moment a field is added to the generator.
+            _COLS = {
+                "tie": "Tie Interface",
+                "se_side_ba": "Southeast-side BA",
+                "priced_neighbors_count": "Priced Neighbors Used",
+                "proxy_spread_usd_mwh": "Proxy Spread ($/MWh)",
+                "gross_mwh": "Gross Flow (MWh)",
+                "screening_value_usd": "Screening Value ($)",
+            }
             bounds_df = pd.DataFrame(bounds)
-            bounds_df.columns = ["Tie Interface", "Unpriced BA", "Priced Neighbors", "Proxy Spread ($/MWh)", "Gross Flow (MWh)", "Screening Value ($)"]
-            st.dataframe(
-                bounds_df,
-                use_container_width=True,
-                hide_index=True
-            )
+            bounds_df = bounds_df[[c for c in _COLS if c in bounds_df.columns]].rename(columns=_COLS)
+            st.dataframe(bounds_df, use_container_width=True, hide_index=True)
 
-            top = max(bounds, key=lambda b: b.get("bound_value_usd", 0))
+            _n_single = sum(1 for b in bounds if b.get("priced_neighbors_count", 0) <= 1)
+            if _n_single:
+                st.warning(
+                    f"**{_n_single} of {len(bounds)} rows draw on a single priced neighbour.** "
+                    "The formula above takes a minimum over a *set* of priced neighbours; where "
+                    "the count is 1 there is no minimum being taken — the figure is one adjacent "
+                    "tie's spread carried across a different interface by analogy, nothing more."
+                )
+
+            top = max(bounds, key=lambda b: b.get("screening_value_usd", 0))
             st.info(
                 f"**Largest screening value:** the **{top['tie']}** unpriced seam screens at "
-                f"**${top['bound_value_usd']/1e6:.1f}M/yr**, obtained by transferring an adjacent "
-                f"priced tie's spread (${top['bound_spread_usd_mwh']:.2f}/MWh) across this interface's "
-                "gross flow. This is an analogy-based screening proxy — **not** a measured congestion "
-                "cost and **not** a mathematical bound; a neighboring tie's spread does not constrain a "
-                "different interface. These seams remain `structural_only` in the waste ledger until "
+                f"**${top['screening_value_usd']/1e6:.1f}M/yr**, obtained by transferring an adjacent "
+                f"priced tie's spread (${top['proxy_spread_usd_mwh']:.2f}/MWh) across this interface's "
+                f"gross flow ({top.get('priced_neighbors_count', 0)} priced neighbour(s) available). "
+                "This is an analogy-based screening proxy — **not** a measured congestion cost and "
+                "**not** a mathematical bound; a neighbouring tie's spread does not constrain a "
+                "different interface. It also prices *all* gross flow at that spread, whereas real "
+                "congestion value accrues only in constrained hours, so it overstates by the "
+                "unconstrained share. These seams remain `structural_only` in the waste ledger until "
                 "priced or planning-grade evidence exists on the tie itself."
             )
 
@@ -993,20 +1024,41 @@ elif selection == "🎯 Seam Opportunity Screen":
             r"the global coherence gap—which is exactly zero if all reports reconcile perfectly."
         )
         
-        metrics = data.get("sheaf_metrics", {})
-        if metrics:
+        metrics = data.get("sheaf_metrics") or None
+        if not metrics:
+            st.warning(
+                "**Sheaf metrics not available.** `reports/ba_footprint_report.json` is missing "
+                "or incomplete. Regenerate with `python -m domains.grid.ba_footprint_report`. "
+                "This panel deliberately shows nothing rather than falling back to stored "
+                "constants — a placeholder that looks like a result is worse than a blank."
+            )
+        else:
             col1, col2, col3 = st.columns(3)
             col1.metric("Before Sheaf Leak ($H^1$)", f"{metrics['before_leak']:.4f}")
             col2.metric("After Sheaf Leak ($H^1$)", f"{metrics['after_leak']:.4f}", f"-{metrics['improvement']} leak")
             col3.metric("Accounting Error Reduction", f"{metrics['error_reduction_twh']:.1f} TWh")
-            
+
             st.divider()
-            
-            col_a, col_b = st.columns(2)
+
+            # Improvement AND what is still unreconciled. Showing only the delta
+            # made a 62.9% agreement rate read as success.
+            col_a, col_b, col_c = st.columns(3)
             col_a.metric("Before Source Agreement", f"{metrics['before_rate']:.1%}")
-            col_b.metric("After Footprint Correction", f"{metrics['after_rate']:.1%}", f"+{metrics['after_rate']-metrics['before_rate']:.1%} improvement")
-            
-        if metrics:
+            col_b.metric(
+                "After Footprint Correction",
+                f"{metrics['after_rate']:.1%}",
+                f"+{metrics['after_rate']-metrics['before_rate']:.1%} improvement",
+            )
+            _resid = metrics.get("residual_disagreement_rate")
+            _resid_twh = metrics.get("residual_abs_error_twh")
+            if _resid is not None:
+                col_c.metric(
+                    "Still Disagreeing",
+                    f"{_resid:.1%}",
+                    f"{_resid_twh:,.0f} TWh unreconciled" if _resid_twh is not None else None,
+                    delta_color="inverse",
+                )
+
             st.info(
                 f"**Interpretation:** footprint crosswalk corrections reduced the global sheaf "
                 f"energy leak from **{metrics['before_leak']:.3f}** to **{metrics['after_leak']:.3f}** "
@@ -1014,6 +1066,14 @@ elif selection == "🎯 Seam Opportunity Screen":
                 "independent datasets — plant-level accounting and hourly telemetry — disagree "
                 "substantially less after the corrections. This is a consistency gain between data "
                 "sources, not a physical validation of grid flows."
+                + (
+                    f"\n\n**What remains:** {_resid:.1%} of entities still disagree and "
+                    f"**{_resid_twh:,.0f} TWh** is still unreconciled between the two sources — "
+                    "roughly 6% of annual US generation. The corrections close part of the gap, "
+                    "not most of it, and the residual is shown here so the improvement figure "
+                    "cannot be read as completion."
+                    if _resid is not None and _resid_twh is not None else ""
+                )
             )
 
         # Load plant corrections sub-data

@@ -54,7 +54,7 @@ Direct timeline and milestone comparisons between regions are structurally skewe
 
 ---
 
-**Step 3 provenance.** Durations are my computation from the data file's `q_date` / `ia_date` / `on_date` fields, survivor-conditioned on projects that reached each milestone. LBNL publishes duration distributions on Sheets 29–40; I have not line-by-line reconciled against those, so treat Step 3 as mine rather than as a reconciliation.
+**Step 3 provenance.** Durations are my computation from the data file's `q_date` / `ia_date` / `on_date` fields, survivor-conditioned on projects that reached each milestone. I have since checked the IR→IA figures against LBNL's Sheet 30 (*IR to IA — region*), which reports by IA-year cohort: **ERCOT matches exactly on all five cohorts** (same n, same medians), and MISO and CAISO agree to within 0.6 months on a slightly larger sample — LBNL restricts that analysis to 14 named entities and notes that "not all data used in this analysis are publicly available." So Step 3 reconciles closely rather than exactly, for reasons LBNL documents.
 
 **Independence.** Unfunded personal project. Not affiliated with, reviewed by, or endorsed by DOE, ESIG, or Berkeley Lab.
 

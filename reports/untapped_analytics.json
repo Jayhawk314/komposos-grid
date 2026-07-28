@@ -1,109 +1,114 @@
 {
   "yoneda_matrix": {
-    "SPP": {
-      "SPP": 1.0,
-      "ERCOT": 0.0,
-      "ISNE": 0.0,
-      "PJM": 0.0542,
-      "CISO": 0.0,
-      "MISO": 0.0714,
-      "NYIS": 0.0
-    },
     "ERCOT": {
-      "SPP": 0.0,
       "ERCOT": 1.0,
       "ISNE": 0.0,
       "PJM": 0.0,
-      "CISO": 0.004,
+      "NYIS": 0.0,
       "MISO": 0.0218,
-      "NYIS": 0.0
+      "CISO": 0.004,
+      "SPP": 0.0
     },
     "ISNE": {
-      "SPP": 0.0,
       "ERCOT": 0.0,
       "ISNE": 1.0,
       "PJM": 0.0976,
-      "CISO": 0.0,
+      "NYIS": 0.0591,
       "MISO": 0.0,
-      "NYIS": 0.0591
+      "CISO": 0.0,
+      "SPP": 0.0
     },
     "PJM": {
-      "SPP": 0.0542,
       "ERCOT": 0.0,
       "ISNE": 0.0976,
       "PJM": 1.0,
-      "CISO": 0.0,
+      "NYIS": 0.0,
       "MISO": 0.0685,
-      "NYIS": 0.0
-    },
-    "CISO": {
-      "SPP": 0.0,
-      "ERCOT": 0.004,
-      "ISNE": 0.0,
-      "PJM": 0.0,
-      "CISO": 1.0,
-      "MISO": 0.0,
-      "NYIS": 0.0
-    },
-    "MISO": {
-      "SPP": 0.0714,
-      "ERCOT": 0.0218,
-      "ISNE": 0.0,
-      "PJM": 0.0685,
       "CISO": 0.0,
-      "MISO": 1.0,
-      "NYIS": 0.3011
+      "SPP": 0.0542
     },
     "NYIS": {
-      "SPP": 0.0,
       "ERCOT": 0.0,
       "ISNE": 0.0591,
       "PJM": 0.0,
-      "CISO": 0.0,
+      "NYIS": 1.0,
       "MISO": 0.3011,
-      "NYIS": 1.0
+      "CISO": 0.0,
+      "SPP": 0.0
+    },
+    "MISO": {
+      "ERCOT": 0.0218,
+      "ISNE": 0.0,
+      "PJM": 0.0685,
+      "NYIS": 0.3011,
+      "MISO": 1.0,
+      "CISO": 0.0,
+      "SPP": 0.0714
+    },
+    "CISO": {
+      "ERCOT": 0.004,
+      "ISNE": 0.0,
+      "PJM": 0.0,
+      "NYIS": 0.0,
+      "MISO": 0.0,
+      "CISO": 1.0,
+      "SPP": 0.0
+    },
+    "SPP": {
+      "ERCOT": 0.0,
+      "ISNE": 0.0,
+      "PJM": 0.0542,
+      "NYIS": 0.0,
+      "MISO": 0.0714,
+      "CISO": 0.0,
+      "SPP": 1.0
     }
   },
   "right_kan_bounds": [
     {
       "tie": "AECI - SWPP",
-      "unpriced_ba": "AECI",
+      "se_side_ba": "AECI",
       "priced_neighbors_count": 1,
-      "bound_spread_usd_mwh": 5.09,
+      "proxy_spread_usd_mwh": 5.09,
       "gross_mwh": 2800533.0,
-      "bound_value_usd": 14254712.97
+      "screening_value_usd": 14254712.97,
+      "method_limits": "analogy from 1 adjacent priced tie(s); all gross flow priced at the proxy spread; not a measured cost and not a bound"
     },
     {
       "tie": "TVA - SOCO",
-      "unpriced_ba": "TVA",
+      "se_side_ba": "TVA",
       "priced_neighbors_count": 1,
-      "bound_spread_usd_mwh": 1.58,
+      "proxy_spread_usd_mwh": 1.58,
       "gross_mwh": 5660484.0,
-      "bound_value_usd": 8943564.72
+      "screening_value_usd": 8943564.72,
+      "method_limits": "analogy from 1 adjacent priced tie(s); all gross flow priced at the proxy spread; not a measured cost and not a bound"
     },
     {
       "tie": "CPLE - PJM",
-      "unpriced_ba": "CPLE",
+      "se_side_ba": "CPLE",
       "priced_neighbors_count": 1,
-      "bound_spread_usd_mwh": 2.01,
+      "proxy_spread_usd_mwh": 2.01,
       "gross_mwh": 4242136.0,
-      "bound_value_usd": 8542871.76
+      "screening_value_usd": 8542871.76,
+      "method_limits": "analogy from 1 adjacent priced tie(s); all gross flow priced at the proxy spread; not a measured cost and not a bound"
     },
     {
       "tie": "SOCO - FPL",
-      "unpriced_ba": "SOCO",
+      "se_side_ba": "SOCO",
       "priced_neighbors_count": 1,
-      "bound_spread_usd_mwh": 1.58,
+      "proxy_spread_usd_mwh": 1.58,
       "gross_mwh": 3527415.0,
-      "bound_value_usd": 5573315.7
+      "screening_value_usd": 5573315.7,
+      "method_limits": "analogy from 1 adjacent priced tie(s); all gross flow priced at the proxy spread; not a measured cost and not a bound"
     },
     {
       "tie": "SOCO - FPC",
-      "unpriced_ba": "SOCO",
+      "se_side_ba": "SOCO",
       "priced_neighbors_count": 1,
-      "bound_spread_usd_mwh": 1.58,
+      "proxy_spread_usd_mwh": 1.58,
       "gross_mwh": 419575.0,
-      "bound_value_usd": 662928.5
+      "screening_value_usd": 662928.5,
+      "method_limits": "analogy from 1 adjacent priced tie(s); all gross flow priced at the proxy spread; not a measured cost and not a bound"
     }
   ],
   "sheaf_metrics": {
@@ -112,6 +117,8 @@
     "improvement": "56.9%",
     "before_rate": 0.452,
     "after_rate": 0.629,
+    "residual_disagreement_rate": 0.371,
+    "residual_abs_error_twh": 231.2,
     "error_reduction_twh": 59.4
   },
   "marginal_curves": {
