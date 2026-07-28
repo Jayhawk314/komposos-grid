@@ -473,11 +473,32 @@ def claims_from_curtailment(
             quantity=total,
             unit="MWh curtailed renewable energy",
             value_usd=value,
-            confidence="value is upper bound at annual average price" if value else "",
-            source="CAISO production and curtailments workbook",
+            confidence=(
+                f"LOOSE upper bound. Priced at ${avg_price_usd_mwh}/MWh "
+                "(SP15 2023 peak day-ahead LMP average, EIA ICE) -- but energy "
+                "is curtailed precisely when it is worth least, so realised "
+                "value in those hours is far lower and often zero or negative. "
+                "Treat as a ceiling on what perfect mitigation could recover, "
+                "not an estimate of value lost."
+            ) if value else "",
+            # The MWh come from the CAISO workbook; the price does not. Naming
+            # only the workbook let the single largest 'measured' claim in the
+            # ledger carry an unsourced price assumption.
+            source=(
+                "CAISO production and curtailments workbook (MWh); "
+                f"price ${avg_price_usd_mwh}/MWh from SP15 2023 peak day-ahead "
+                "LMP average (EIA ICE daily wholesale prices)"
+            ) if value else "CAISO production and curtailments workbook",
             source_report=str(workbook_path),
             recommended_action="Target storage, flexible load, and transmission for curtailment windows.",
             notes=(
+                f"Solar share {report.share('solar'):.1%}; "
+                f"wind share {report.share('wind'):.1%}. "
+                f"{local / total:.1%} of this curtailment is LOCAL "
+                "(transmission-constrained), where the relevant price is the "
+                "constrained local node rather than SP15, so the hub price "
+                "overstates it further."
+            ) if total else (
                 f"Solar share {report.share('solar'):.1%}; "
                 f"wind share {report.share('wind'):.1%}."
             ),
