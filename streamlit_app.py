@@ -1302,20 +1302,68 @@ elif selection == "⚡ Large Load Siting (ESIG)":
             st.metric("10-Year Project NPV", f"${npv_nonfirm/1e6:,.2f}M")
             
         st.divider()
+
+        # Solve for the curtailment level that flips the answer, rather than
+        # asserting a winner from one parameter set. On the defaults the result
+        # is barely sensitive to curtailment at all -- it is driven by the CapEx
+        # saving and the earlier start -- and that is the honest headline.
+        def _npv_gap(curt_hours: float) -> float:
+            lost = flex_mw * curt_hours * p_rev
+            rev_nf = annual_rev_firm - lost
+            npv_nf = sum(
+                (0.0 if y <= years_delay_nonfirm else rev_nf) / ((1 + p_discount / 100.0) ** y)
+                for y in range(1, 11)
+            )
+            return npv_nf - npv_firm
+
+        _breakeven = None
+        if flex_mw > 0 and p_rev > 0:
+            lo, hi = 0.0, 8760.0
+            if _npv_gap(lo) > 0 >= _npv_gap(hi):
+                for _ in range(60):
+                    mid = (lo + hi) / 2
+                    if _npv_gap(mid) > 0:
+                        lo = mid
+                    else:
+                        hi = mid
+                _breakeven = lo
+
         if npv_delta > 0:
             st.success(
-                f"💡 **Non-Firm Service is the Optimal Siting Choice!** \n\n"
-                f"Bypassing the grid upgrade and connecting **{p_delay_firm - p_delay_nonfirm} months earlier** "
-                f"offsets the annual operational curtailment cost of **${lost_rev_curt/1e6:.2f}M/yr**, "
-                f"resulting in a Net Present Value gain of **${npv_delta/1e6:,.2f}M**."
+                f"**On these inputs, non-firm service comes out ahead by "
+                f"${npv_delta/1e6:,.2f}M over 10 years.** Connecting "
+                f"**{p_delay_firm - p_delay_nonfirm} months earlier** and avoiding "
+                f"**${p_upgrade/1e6:.2f}M** of upfront CapEx outweighs the "
+                f"**${lost_rev_curt/1e6:.2f}M/yr** curtailment cost."
             )
         else:
             st.warning(
-                f"⚠️ **Firm Connection is the Optimal Siting Choice!** \n\n"
-                f"The annual operational curtailment cost of **${lost_rev_curt/1e6:.2f}M/yr** "
-                f"is too severe, wiping out the speed-to-market advantage. Waiting for firm service yields "
-                f"a Net Present Value gain of **${abs(npv_delta)/1e6:,.2f}M** over non-firm service."
+                f"**On these inputs, firm service comes out ahead by "
+                f"${abs(npv_delta)/1e6:,.2f}M over 10 years.** The "
+                f"**${lost_rev_curt/1e6:.2f}M/yr** curtailment cost outweighs the "
+                f"speed-to-market and CapEx advantages."
             )
+
+        if _breakeven is not None:
+            st.info(
+                f"**What would change the answer:** curtailment would have to reach "
+                f"**~{_breakeven:,.0f} hours/year ({_breakeven/8760:.0%} of all hours)** "
+                f"before firm service wins — against the {p_curt_hrs:,} hours "
+                f"({p_curt_hrs/8760:.1%}) set above. The conclusion is therefore driven "
+                "far more by the avoided CapEx and the earlier revenue start than by "
+                "curtailment risk, which is worth knowing before treating it as a "
+                "verdict on non-firm service."
+            )
+
+        st.caption(
+            "**Model limits — read before quoting.** Non-firm is credited with the "
+            "same revenue stream as firm, minus curtailment, at **zero** capital cost "
+            "for all 10 years; real non-firm arrangements often carry later upgrade "
+            "obligations or escalating curtailment as the area fills. The 10-year "
+            "horizon also charges firm its full CapEx while counting only a decade of "
+            "benefit from an asset that lasts longer. Both choices favour non-firm. "
+            "This is a stylised teaching model, not a siting recommendation."
+        )
 
 # ─────────────────────────────────────────────────────────────────────────────
 # PAGE: Nuclear Enrichment Bottlenecks
@@ -1425,11 +1473,51 @@ elif selection == "⚛️ Nuclear Enrichment Bottlenecks":
             else:
                 path_weight = 0.0
 
+            # Reference case computed here, not hardcoded. The delta was
+            # measured against a literal 0.038 that matched neither the
+            # baseline scenario (0.180) nor this simulator's own default path
+            # (~0.016), so it was wrong in both directions. The meaningful
+            # comparison is the same supply chain with the timelines aligned --
+            # it isolates what the schedule mismatch alone costs.
+            _aligned = Category(name="web_simulator_aligned", db_path=":memory:")
+            for _n, _t in [("mine:mcclean", "mine"),
+                           ("conversion:metropolis", "conversion_facility"),
+                           ("urenco:eunice", "enrichment_facility"),
+                           ("fabrication:columbia", "fabrication_facility"),
+                           ("reactor:smr", "reactor"),
+                           ("demand:hyperscaler_dc", "demand")]:
+                _aligned.add(_n, type_name=_t)
+            _aligned.connect("mine:mcclean", "conversion:metropolis", name="processes_to", confidence=0.95)
+            _aligned.connect("conversion:metropolis", "urenco:eunice", name="processes_to", confidence=conversion_stability)
+            _aligned.connect("urenco:eunice", "fabrication:columbia", name="processes_to", confidence=0.90)
+            _aligned.connect("fabrication:columbia", "reactor:smr", name="powers", confidence=fabrication_stability)
+            _aligned.connect("reactor:smr", "demand:hyperscaler_dc", name="powers", confidence=0.85)
+            _ap = _aligned.optimal_path("mine:mcclean", "demand:hyperscaler_dc")
+            reference_weight = _ap[1] if _ap else 0.0
+
             # Display metrics
-            st.metric("System-Wide Fuel Confidence", f"{result.confidence:.3f}", help="Topological score based on graph path length and count.")
-            st.metric("Physical Path Throughput Yield", f"{path_weight:.3f}", delta=f"{path_weight - 0.038:+.3f} vs baseline", help="The multiplicative product of all connection confidences along the path (Quantale weight).")
+            st.metric(
+                "System-Wide Fuel Confidence", f"{result.confidence:.3f}",
+                help="Topological score based on graph path length and count. "
+                     "Derived from the hand-set confidences below, not measured.",
+            )
+            st.metric(
+                "Modelled Path Throughput Yield", f"{path_weight:.3f}",
+                delta=f"{path_weight - reference_weight:+.3f} vs timeline-aligned "
+                      f"({reference_weight:.3f})",
+                help="Multiplicative product of the connection confidences along the "
+                     "path (Quantale weight). Compared against the same chain with "
+                     "cascade completion aligned to SMR startup, so the delta shows "
+                     "the cost of the schedule mismatch alone.",
+            )
             st.info(f"**Cognitive Verdict:** {result.status.value.upper()}")
             st.caption(f"**Compositional Proof Path:** {result.supporting_paths}")
+            st.caption(
+                "⚠️ These are **not physical throughputs**. Every confidence feeding "
+                "them is a slider value or a hand-set constant in this page — the "
+                "yield is the product of those assumptions, so it moves with what you "
+                "choose, not with anything measured about these facilities."
+            )
 
     with tab_scenarios:
         st.subheader("5-Part Scenario Incoherence Matrix")
