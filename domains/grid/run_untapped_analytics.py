@@ -27,12 +27,11 @@ REPORTS_DIR = ROOT_DIR / "reports"
 def calculate_yoneda_similarities(csv_paths) -> dict:
     """Compute Jaccard-like Yoneda similarities between the 7 major RTOs/ISOs."""
     # Major BAs to analyze
-    # Ordered tuple, NOT a set. Python randomizes set iteration order per
-    # process (PYTHONHASHSEED), so a set literal here made the emitted matrix
-    # row order differ between identical runs, and made the float summation
-    # below order-dependent. Regenerating produced a different file every time,
-    # which quietly broke the reproducibility claim in REPRODUCE.md.
-    target_bas = ("CISO", "ERCOT", "ISNE", "MISO", "NYIS", "PJM", "SPP")
+    # Membership is what matters here, so this stays a set. Determinism is
+    # handled where it belongs -- at the point of iteration, via sorted() below.
+    # Hardcoding an ordered tuple instead would assert an order rather than
+    # derive one, and would silently regress the moment someone appended a BA.
+    target_bas = {"MISO", "ERCOT", "PJM", "CISO", "SPP", "NYIS", "ISNE"}
     ba_aliases = {
         "ERCO": "ERCOT",
         "ERCOT": "ERCOT",
@@ -78,11 +77,15 @@ def calculate_yoneda_similarities(csv_paths) -> dict:
         flows[a_canon][b_canon] = flows[a_canon].get(b_canon, 0.0) + gross
         flows[b_canon][a_canon] = flows[b_canon].get(a_canon, 0.0) + gross
 
-    # Compute pairwise Yoneda similarity
+    # Compute pairwise Yoneda similarity.
+    # sorted() at every iteration point: Python randomizes set iteration order
+    # per process (PYTHONHASHSEED), which made both the emitted row order and
+    # the float accumulation below differ between identical runs. Deriving the
+    # order here keeps it correct however target_bas is later edited.
     matrix = {}
-    for ba_a in target_bas:
+    for ba_a in sorted(target_bas):
         matrix[ba_a] = {}
-        for ba_b in target_bas:
+        for ba_b in sorted(target_bas):
             if ba_a == ba_b:
                 matrix[ba_a][ba_b] = 1.0
                 continue

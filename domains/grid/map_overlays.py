@@ -104,7 +104,9 @@ def ba_balance_facts(balance_csvs) -> Dict[str, Dict]:
             interchange[ba] = interchange.get(ba, 0.0) + float(v)
 
     out: Dict[str, Dict] = {}
-    for ba in set(demand) | set(netgen) | set(interchange):
+    # sorted(): set iteration order varies per process, which would reorder the
+    # emitted overlay dict between identical runs.
+    for ba in sorted(set(demand) | set(netgen) | set(interchange)):
         out[ba] = {
             "demand_twh": demand.get(ba, 0.0) / 1e6,
             "netgen_twh": netgen.get(ba, 0.0) / 1e6,
@@ -249,7 +251,9 @@ def node_overlays(
         for ba, states in ba_states.items():
             if ba not in facts:
                 continue
-            total = sum(abbr_value.get(s, 0.0) for s in set(states))
+            # sorted(): float addition is not associative, so an unordered set
+            # could shift this total's low-order digits between runs.
+            total = sum(abbr_value.get(s, 0.0) for s in sorted(set(states)))
             if total > 0:
                 facts[ba]["reliability_value_usd"] = total
 
