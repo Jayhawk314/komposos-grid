@@ -1,0 +1,534 @@
+{
+  "provenance": {
+    "source_workbook": "LBNL_Ix_Queue_Data_File_thru2026.xlsx",
+    "generator": "domains.grid.run_post_ia_horizon",
+    "vintage_cutoff": "2025-12-31",
+    "vintage_cutoff_note": "Fixed to match the dataset's documented vintage (run_stitch_brief.py: 'data through year-end 2025'), not computed from the current date.",
+    "horizons_months": [
+      24,
+      36,
+      60
+    ],
+    "min_cohort": 30,
+    "regions": [
+      "caiso",
+      "ercot",
+      "iso_ne",
+      "miso",
+      "nyiso",
+      "pjm",
+      "southeast",
+      "spp",
+      "west"
+    ],
+    "method_note": "For each region, the signed cohort is every project with an executed-IA date. At each horizon H (2, 3, 5 years), the MATURE subset is signed projects at least H months old as of the fixed vintage cutoff -- i.e. old enough to have had a fair chance to resolve by H, regardless of whether they actually did. Within that mature subset, the rate is operational / (operational + withdrawn) using CURRENT status, same definition as the raw post-IA rate, just restricted to older-than-H signings. Still-active and suspended projects within the mature cohort are reported as 'censored' -- old enough to expect resolution, not yet resolved -- and are never counted as failures or dropped from the report. This does not pin exactly WHEN within the horizon an outcome occurred (see module docstring on wd_date coverage); it controls for cohort age, not for event timing precision."
+  },
+  "miso_ercot_gap_by_horizon": [
+    {
+      "horizon_months": 0,
+      "label": "raw (unadjusted)",
+      "miso_rate": 0.3487179487179487,
+      "miso_n_decided": 1365,
+      "ercot_rate": 0.7967213114754098,
+      "ercot_n_decided": 610,
+      "gap": 0.4480033627574611
+    },
+    {
+      "horizon_months": 24,
+      "label": "2-year",
+      "miso_rate": 0.3487858719646799,
+      "miso_n_decided": 1359,
+      "ercot_rate": 0.802065404475043,
+      "ercot_n_decided": 581,
+      "gap": 0.4532795325103631
+    },
+    {
+      "horizon_months": 36,
+      "label": "3-year",
+      "miso_rate": 0.34843982169390786,
+      "miso_n_decided": 1346,
+      "ercot_rate": 0.7985347985347986,
+      "ercot_n_decided": 546,
+      "gap": 0.4500949768408907
+    },
+    {
+      "horizon_months": 60,
+      "label": "5-year",
+      "miso_rate": 0.3402457757296467,
+      "miso_n_decided": 1302,
+      "ercot_rate": 0.7751196172248804,
+      "ercot_n_decided": 418,
+      "gap": 0.4348738414952337
+    }
+  ],
+  "regions": [
+    {
+      "region": "caiso",
+      "raw_post_ia": {
+        "signed_decided": 216,
+        "built_after_signing": 196,
+        "rate": 0.9074074074074074
+      },
+      "cohort_age_months": {
+        "n": 445,
+        "median_months": 59.5,
+        "p25_months": 21.9,
+        "p75_months": 143.2
+      },
+      "horizons": [
+        {
+          "horizon_months": 24,
+          "n_signed": 445,
+          "n_mature": 327,
+          "operational": 186,
+          "withdrawn": 20,
+          "censored_active_or_suspended": 121,
+          "decided": 206,
+          "rate": 0.9029126213592233,
+          "classification": "complete",
+          "delta_from_raw_rate": -0.004494786048184096
+        },
+        {
+          "horizon_months": 36,
+          "n_signed": 445,
+          "n_mature": 291,
+          "operational": 176,
+          "withdrawn": 16,
+          "censored_active_or_suspended": 99,
+          "decided": 192,
+          "rate": 0.9166666666666666,
+          "classification": "complete",
+          "delta_from_raw_rate": 0.00925925925925919
+        },
+        {
+          "horizon_months": 60,
+          "n_signed": 445,
+          "n_mature": 221,
+          "operational": 152,
+          "withdrawn": 15,
+          "censored_active_or_suspended": 54,
+          "decided": 167,
+          "rate": 0.9101796407185628,
+          "classification": "complete",
+          "delta_from_raw_rate": 0.002772233311155392
+        }
+      ]
+    },
+    {
+      "region": "ercot",
+      "raw_post_ia": {
+        "signed_decided": 610,
+        "built_after_signing": 486,
+        "rate": 0.7967213114754098
+      },
+      "cohort_age_months": {
+        "n": 1207,
+        "median_months": 44.3,
+        "p25_months": 18.1,
+        "p75_months": 89.5
+      },
+      "horizons": [
+        {
+          "horizon_months": 24,
+          "n_signed": 1207,
+          "n_mature": 829,
+          "operational": 466,
+          "withdrawn": 115,
+          "censored_active_or_suspended": 248,
+          "decided": 581,
+          "rate": 0.802065404475043,
+          "classification": "complete",
+          "delta_from_raw_rate": 0.005344092999633232
+        },
+        {
+          "horizon_months": 36,
+          "n_signed": 1207,
+          "n_mature": 681,
+          "operational": 436,
+          "withdrawn": 110,
+          "censored_active_or_suspended": 135,
+          "decided": 546,
+          "rate": 0.7985347985347986,
+          "classification": "complete",
+          "delta_from_raw_rate": 0.0018134870593887742
+        },
+        {
+          "horizon_months": 60,
+          "n_signed": 1207,
+          "n_mature": 482,
+          "operational": 324,
+          "withdrawn": 94,
+          "censored_active_or_suspended": 64,
+          "decided": 418,
+          "rate": 0.7751196172248804,
+          "classification": "complete",
+          "delta_from_raw_rate": -0.02160169425052938
+        }
+      ]
+    },
+    {
+      "region": "iso_ne",
+      "raw_post_ia": {
+        "signed_decided": 129,
+        "built_after_signing": 97,
+        "rate": 0.751937984496124
+      },
+      "cohort_age_months": {
+        "n": 170,
+        "median_months": 66.6,
+        "p25_months": 35.2,
+        "p75_months": 116.6
+      },
+      "horizons": [
+        {
+          "horizon_months": 24,
+          "n_signed": 170,
+          "n_mature": 141,
+          "operational": 95,
+          "withdrawn": 30,
+          "censored_active_or_suspended": 16,
+          "decided": 125,
+          "rate": 0.76,
+          "classification": "complete",
+          "delta_from_raw_rate": 0.008062015503875974
+        },
+        {
+          "horizon_months": 36,
+          "n_signed": 170,
+          "n_mature": 122,
+          "operational": 84,
+          "withdrawn": 30,
+          "censored_active_or_suspended": 8,
+          "decided": 114,
+          "rate": 0.7368421052631579,
+          "classification": "complete",
+          "delta_from_raw_rate": -0.01509587923296618
+        },
+        {
+          "horizon_months": 60,
+          "n_signed": 170,
+          "n_mature": 98,
+          "operational": 70,
+          "withdrawn": 23,
+          "censored_active_or_suspended": 5,
+          "decided": 93,
+          "rate": 0.7526881720430108,
+          "classification": "complete",
+          "delta_from_raw_rate": 0.0007501875468867159
+        }
+      ]
+    },
+    {
+      "region": "miso",
+      "raw_post_ia": {
+        "signed_decided": 1365,
+        "built_after_signing": 476,
+        "rate": 0.3487179487179487
+      },
+      "cohort_age_months": {
+        "n": 1760,
+        "median_months": 164.4,
+        "p25_months": 69.9,
+        "p75_months": 209.0
+      },
+      "horizons": [
+        {
+          "horizon_months": 24,
+          "n_signed": 1760,
+          "n_mature": 1592,
+          "operational": 474,
+          "withdrawn": 885,
+          "censored_active_or_suspended": 233,
+          "decided": 1359,
+          "rate": 0.3487858719646799,
+          "classification": "complete",
+          "delta_from_raw_rate": 6.79232467312163e-05
+        },
+        {
+          "horizon_months": 36,
+          "n_signed": 1760,
+          "n_mature": 1516,
+          "operational": 469,
+          "withdrawn": 877,
+          "censored_active_or_suspended": 170,
+          "decided": 1346,
+          "rate": 0.34843982169390786,
+          "classification": "complete",
+          "delta_from_raw_rate": -0.0002781270240408418
+        },
+        {
+          "horizon_months": 60,
+          "n_signed": 1760,
+          "n_mature": 1368,
+          "operational": 443,
+          "withdrawn": 859,
+          "censored_active_or_suspended": 66,
+          "decided": 1302,
+          "rate": 0.3402457757296467,
+          "classification": "complete",
+          "delta_from_raw_rate": -0.008472172988301996
+        }
+      ]
+    },
+    {
+      "region": "nyiso",
+      "raw_post_ia": {
+        "signed_decided": 50,
+        "built_after_signing": 35,
+        "rate": 0.7
+      },
+      "cohort_age_months": {
+        "n": 109,
+        "median_months": 58.7,
+        "p25_months": 39.5,
+        "p75_months": 69.5
+      },
+      "horizons": [
+        {
+          "horizon_months": 24,
+          "n_signed": 109,
+          "n_mature": 109,
+          "operational": 35,
+          "withdrawn": 15,
+          "censored_active_or_suspended": 59,
+          "decided": 50,
+          "rate": 0.7,
+          "classification": "complete",
+          "delta_from_raw_rate": 0.0
+        },
+        {
+          "horizon_months": 36,
+          "n_signed": 109,
+          "n_mature": 86,
+          "operational": 33,
+          "withdrawn": 12,
+          "censored_active_or_suspended": 41,
+          "decided": 45,
+          "rate": 0.7333333333333333,
+          "classification": "complete",
+          "delta_from_raw_rate": 0.033333333333333326
+        },
+        {
+          "horizon_months": 60,
+          "n_signed": 109,
+          "n_mature": 43,
+          "operational": 24,
+          "withdrawn": 8,
+          "censored_active_or_suspended": 11,
+          "decided": 32,
+          "rate": 0.75,
+          "classification": "complete",
+          "delta_from_raw_rate": 0.050000000000000044
+        }
+      ]
+    },
+    {
+      "region": "pjm",
+      "raw_post_ia": {
+        "signed_decided": 227,
+        "built_after_signing": 195,
+        "rate": 0.8590308370044053
+      },
+      "cohort_age_months": {
+        "n": 247,
+        "median_months": 106.3,
+        "p25_months": 68.4,
+        "p75_months": 187.6
+      },
+      "horizons": [
+        {
+          "horizon_months": 24,
+          "n_signed": 247,
+          "n_mature": 247,
+          "operational": 195,
+          "withdrawn": 32,
+          "censored_active_or_suspended": 20,
+          "decided": 227,
+          "rate": 0.8590308370044053,
+          "classification": "complete",
+          "delta_from_raw_rate": 0.0
+        },
+        {
+          "horizon_months": 36,
+          "n_signed": 247,
+          "n_mature": 247,
+          "operational": 195,
+          "withdrawn": 32,
+          "censored_active_or_suspended": 20,
+          "decided": 227,
+          "rate": 0.8590308370044053,
+          "classification": "complete",
+          "delta_from_raw_rate": 0.0
+        },
+        {
+          "horizon_months": 60,
+          "n_signed": 247,
+          "n_mature": 202,
+          "operational": 175,
+          "withdrawn": 17,
+          "censored_active_or_suspended": 10,
+          "decided": 192,
+          "rate": 0.9114583333333334,
+          "classification": "complete",
+          "delta_from_raw_rate": 0.05242749632892807
+        }
+      ]
+    },
+    {
+      "region": "southeast",
+      "raw_post_ia": {
+        "signed_decided": 166,
+        "built_after_signing": 92,
+        "rate": 0.5542168674698795
+      },
+      "cohort_age_months": {
+        "n": 167,
+        "median_months": 95.9,
+        "p25_months": 81.9,
+        "p75_months": 129.5
+      },
+      "horizons": [
+        {
+          "horizon_months": 24,
+          "n_signed": 167,
+          "n_mature": 167,
+          "operational": 92,
+          "withdrawn": 74,
+          "censored_active_or_suspended": 1,
+          "decided": 166,
+          "rate": 0.5542168674698795,
+          "classification": "complete",
+          "delta_from_raw_rate": 0.0
+        },
+        {
+          "horizon_months": 36,
+          "n_signed": 167,
+          "n_mature": 166,
+          "operational": 91,
+          "withdrawn": 74,
+          "censored_active_or_suspended": 1,
+          "decided": 165,
+          "rate": 0.5515151515151515,
+          "classification": "complete",
+          "delta_from_raw_rate": -0.0027017159547280123
+        },
+        {
+          "horizon_months": 60,
+          "n_signed": 167,
+          "n_mature": 153,
+          "operational": 81,
+          "withdrawn": 71,
+          "censored_active_or_suspended": 1,
+          "decided": 152,
+          "rate": 0.5328947368421053,
+          "classification": "complete",
+          "delta_from_raw_rate": -0.021322130627774216
+        }
+      ]
+    },
+    {
+      "region": "spp",
+      "raw_post_ia": {
+        "signed_decided": 0,
+        "built_after_signing": 0,
+        "rate": 0.0
+      },
+      "cohort_age_months": {
+        "n": 0,
+        "median_months": null,
+        "p25_months": null,
+        "p75_months": null
+      },
+      "horizons": [
+        {
+          "horizon_months": 24,
+          "n_signed": 0,
+          "n_mature": 0,
+          "operational": 0,
+          "withdrawn": 0,
+          "censored_active_or_suspended": 0,
+          "decided": 0,
+          "rate": null,
+          "classification": "absent",
+          "delta_from_raw_rate": null
+        },
+        {
+          "horizon_months": 36,
+          "n_signed": 0,
+          "n_mature": 0,
+          "operational": 0,
+          "withdrawn": 0,
+          "censored_active_or_suspended": 0,
+          "decided": 0,
+          "rate": null,
+          "classification": "absent",
+          "delta_from_raw_rate": null
+        },
+        {
+          "horizon_months": 60,
+          "n_signed": 0,
+          "n_mature": 0,
+          "operational": 0,
+          "withdrawn": 0,
+          "censored_active_or_suspended": 0,
+          "decided": 0,
+          "rate": null,
+          "classification": "absent",
+          "delta_from_raw_rate": null
+        }
+      ]
+    },
+    {
+      "region": "west",
+      "raw_post_ia": {
+        "signed_decided": 612,
+        "built_after_signing": 440,
+        "rate": 0.7189542483660131
+      },
+      "cohort_age_months": {
+        "n": 728,
+        "median_months": 121.0,
+        "p25_months": 69.3,
+        "p75_months": 186.9
+      },
+      "horizons": [
+        {
+          "horizon_months": 24,
+          "n_signed": 728,
+          "n_mature": 705,
+          "operational": 432,
+          "withdrawn": 170,
+          "censored_active_or_suspended": 103,
+          "decided": 602,
+          "rate": 0.717607973421927,
+          "classification": "complete",
+          "delta_from_raw_rate": -0.0013462749440861232
+        },
+        {
+          "horizon_months": 36,
+          "n_signed": 728,
+          "n_mature": 645,
+          "operational": 423,
+          "withdrawn": 166,
+          "censored_active_or_suspended": 56,
+          "decided": 589,
+          "rate": 0.7181663837011885,
+          "classification": "complete",
+          "delta_from_raw_rate": -0.0007878646648246113
+        },
+        {
+          "horizon_months": 60,
+          "n_signed": 728,
+          "n_mature": 584,
+          "operational": 392,
+          "withdrawn": 152,
+          "censored_active_or_suspended": 40,
+          "decided": 544,
+          "rate": 0.7205882352941176,
+          "classification": "complete",
+          "delta_from_raw_rate": 0.0016339869281045694
+        }
+      ]
+    }
+  ]
+}
