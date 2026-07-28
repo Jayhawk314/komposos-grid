@@ -256,6 +256,21 @@ def node_overlays(
         # so. Allocating properly needs BA load by state, which this project
         # does not have.
         national_total = sum(abbr_value.values())
+        # Carry the valuation range, not just the point estimate. The blended
+        # rate is 33x the all-residential floor ($134.18 vs $4.125 per
+        # customer-hour) and 97% of it comes from C&I classes that are 13.4% of
+        # meters -- so the figure is dominated by an assumption about WHICH
+        # meters were interrupted, not by the measured customer-hours. Showing
+        # only the blended number hides that.
+        _rates = reliability.get("rates_usd_per_customer_hour", {}) or {}
+        _floor_ratio = (
+            float(_rates["floor"]) / float(_rates["blended"])
+            if _rates.get("floor") and _rates.get("blended") else None
+        )
+        _high_ratio = (
+            float(_rates["high"]) / float(_rates["blended"])
+            if _rates.get("high") and _rates.get("blended") else None
+        )
         for ba, states in ba_states.items():
             if ba not in facts:
                 continue
@@ -268,6 +283,10 @@ def node_overlays(
                 facts[ba]["reliability_value_states"] = covered
                 facts[ba]["reliability_value_allocated"] = False
                 facts[ba]["reliability_value_national_usd"] = national_total
+                if _floor_ratio is not None:
+                    facts[ba]["reliability_value_floor_usd"] = total * _floor_ratio
+                if _high_ratio is not None:
+                    facts[ba]["reliability_value_high_usd"] = total * _high_ratio
 
     return facts
 

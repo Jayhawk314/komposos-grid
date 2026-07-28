@@ -721,12 +721,22 @@ function nodeFacts(f){
       h += row('Reliability value in states served',
         usd(f.reliability_value_states_usd)+'/yr'
         + (nStates ? ` across ${nStates} state${nStates>1?'s':''}` : ''));
+      if (f.reliability_value_floor_usd!=null)
+        h += row('&nbsp;&nbsp;range',
+          usd(f.reliability_value_floor_usd)+' – '
+          + usd(f.reliability_value_high_usd||0)+'/yr');
       h += row('&nbsp;',
-        '<em>Not allocated to this BA. Each state's full value is counted for '
-        + 'every BA operating there, so shared states appear in several BAs. '
-        + 'Summed across BAs this exceeds the national total of '
+        '<em>Not allocated to this BA. Each state’s full value is counted '
+        + 'for every BA operating there, so shared states appear in several '
+        + 'BAs. Summed across BAs this exceeds the national total of '
         + usd(f.reliability_value_national_usd||0) + '/yr. Read as footprint '
-        + 'exposure, not this BA's share.</em>');
+        + 'exposure, not this BA’s share.<br>Screening valuation, not '
+        + 'damage accounting: EAGLE-I customer-hours priced with LBNL/Sullivan '
+        + '2015 interruption costs. The low end values every interrupted meter '
+        + 'as residential; the headline blends in commercial and industrial and '
+        + 'is 33x larger, because 97% of it comes from C&amp;I meters that are '
+        + '13% of the population. It also assumes cost scales linearly with '
+        + 'outage duration, which overstates long outages.</em>');
     }
     (f.waste_claims||[]).filter(c=>c.value_usd>0).forEach(c =>
       h += row(c.title||'Waste claim', usd(c.value_usd)+` · ${c.evidence||''}`));
