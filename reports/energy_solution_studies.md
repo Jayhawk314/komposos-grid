@@ -83,7 +83,7 @@ A project clears on congestion value alone only if its real annual cost is below
 - Current congestion spread: **$7.31/MWh**
 - Annual value at current spread: **$31,062,639/yr**
 - Gross flow basis: **4,249,335 MWh** (2025; same_year_flow)
-- Trend: 2023 $4.74/MWh -> 2025 $7.31/MWh (1.5x over observed window).
+- Trend: 2023 $4.74/MWh -> 2024 $6.31/MWh -> 2025 $7.31/MWh (1.5x over observed window).
 - Recommended path: Start with targeted transfer relief around the wind-belt constraints, then test storage only where it also captures local energy or capacity value.
 - Next action: Map CHAWATCHAPAT and Charlie Creek-Watford to upgrade candidates and price a 50-100 MW relief package.
 - Caveat: MISO-side and SPP-side seam evidence corroborate the problem; do not double-count them as separate benefits.

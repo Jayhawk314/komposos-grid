@@ -341,7 +341,18 @@ def _card_for_tie(
         bool(trend_rows),
     )
     title = _title_for(key)
-    evidence_basis = str((base or {}).get("evidence_source", latest.source))
+    # Cite the source of the spread actually used in the headline value, which
+    # is `latest` -- not the baseline row. Preferring base.evidence_source meant
+    # PJM-NYIS advertised "NYISO DAM zonal LBMP 2023" while the number on the
+    # page was the 2025 congestion component (1.53 vs 7.38): anyone checking the
+    # cited file would find a different figure and conclude it was wrong.
+    evidence_basis = str(latest.source or (base or {}).get("evidence_source", ""))
+    base_source = str((base or {}).get("evidence_source", ""))
+    if base_source and base_source != evidence_basis:
+        evidence_basis = (
+            f"{evidence_basis} [headline {latest.year} spread]; "
+            f"baseline for trend: {base_source}"
+        )
     trend_summary = _trend_summary(key, base_spread, trend_rows)
 
     return EnergySolutionCard(

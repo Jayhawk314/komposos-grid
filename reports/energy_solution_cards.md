@@ -20,7 +20,7 @@
 ### NYIS-PJM
 
 - Status: **priority_solution_study**
-- Evidence: NYISO DAM zonal LBMP 2023 (mis.nyiso.com; hourly NYCA internal-zone mean vs NYISO PJM proxy bus); NYISO DAM zonal LBMP 2023 settlement components (mis.nyiso.com; NYCA internal-zone mean vs PJM proxy bus)
+- Evidence: reports\nyiso_seam_2024_2025.txt [headline 2025 spread]; baseline for trend: NYISO DAM zonal LBMP 2023 (mis.nyiso.com; hourly NYCA internal-zone mean vs NYISO PJM proxy bus); NYISO DAM zonal LBMP 2023 settlement components (mis.nyiso.com; NYCA internal-zone mean vs PJM proxy bus)
 - Trend: 2023 $1.53/MWh -> 2024 $2.02/MWh -> 2025 $7.38/MWh (4.8x over observed window).
 - Constraints: PJM:NOTTINGH230 KV  2-3 (6,025 h, severity 353,557); PJM:LENOX-NMESHOPP NML 1090     B  115 KV (1,847 h, severity 227,804); PJM:GRACETON230 KV  GRA-SAF (3,339 h, severity 130,754); PJM:Chicago-Praxair3 138 kV l/o Wilton Center-Dumont 765 kV (661 h, severity 120,695); PJM:Turkey Hill-Hilgard 138 kV l/o Prairie State-Mt Vernon 345 kV (1,065 h, severity 118,169)
 - Best generic intervention: transmission_capacity at 50 MW, B/C 0.43
@@ -31,8 +31,8 @@
 ### MISO-SWPP
 
 - Status: **priority_solution_study**
-- Evidence: MISO DA ex-post LMP (docs.misoenergy.org; ARKANSAS.HUB vs SWPP interface, 2023-01-01..2023-12-31)
-- Trend: 2023 $4.74/MWh -> 2025 $7.31/MWh (1.5x over observed window).
+- Evidence: MISO DA ex-post LMP (docs.misoenergy.org; ARKANSAS.HUB vs SWPP interface, 2025-01-01..2025-12-31) [headline 2025 spread]; baseline for trend: MISO DA ex-post LMP (docs.misoenergy.org; ARKANSAS.HUB vs SWPP interface, 2023-01-01..2023-12-31)
+- Trend: 2023 $4.74/MWh -> 2024 $6.31/MWh -> 2025 $7.31/MWh (1.5x over observed window).
 - Constraints: MISO:CHAR_CK-WATFORD FLO PATINGATE-CHARLIE CK (5,138 h, severity 1,069,182); SPP:CHAWATCHAPAT (5,951 h, severity 895,951); MISO:MORRISOT-GRANTCO FLO HANK-WAP+WAP TR2 (2,453 h, severity 654,610); MISO:FORMAN TR12 FLO WAHPETON-HANKINSON (1,607 h, severity 389,783); SPP:OSAWEBCLESOO (2,078 h, severity 360,524); SPP:TMP499_26328 (2,074 h, severity 316,737)
 - Best generic intervention: transmission_capacity at 50 MW, B/C 0.40
 - Recommended solution: Target wind-belt transfer relief: transmission upgrades, storage on the export side, and queue rescue on the import side.
@@ -64,8 +64,8 @@
 ### MISO-SOCO
 
 - Status: **bounded_solution_screen**
-- Evidence: MISO DA ex-post LMP (docs.misoenergy.org; MS.HUB vs SOCO interface, 2023-01-01..2023-12-31)
-- Trend: 2023 $1.35/MWh -> 2025 $2.08/MWh (1.5x over observed window).
+- Evidence: MISO DA ex-post LMP (docs.misoenergy.org; MS.HUB vs SOCO interface, 2025-01-01..2025-12-31) [headline 2025 spread]; baseline for trend: MISO DA ex-post LMP (docs.misoenergy.org; MS.HUB vs SOCO interface, 2023-01-01..2023-12-31)
+- Trend: 2023 $1.35/MWh -> 2024 $1.53/MWh -> 2025 $2.08/MWh (1.5x over observed window).
 - Constraints: MISO:CHAR_CK-WATFORD FLO PATINGATE-CHARLIE CK (5,138 h, severity 1,069,182); MISO:MORRISOT-GRANTCO FLO HANK-WAP+WAP TR2 (2,453 h, severity 654,610); MISO:FORMAN TR12 FLO WAHPETON-HANKINSON (1,607 h, severity 389,783); MISO:SWAN LK-WILMARTH FLO HELENAMN-SHEASLK (1,924 h, severity 218,268); MISO:CREE-CRES2 FLO CRESTON-SUMMITLK N (829 h, severity 207,932)
 - Best generic intervention: transmission_capacity at 50 MW, B/C 0.12
 - Recommended solution: Keep as a Southeast import-boundary screen; use targeted price/constraint evidence before spending design effort.

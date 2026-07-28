@@ -23,7 +23,7 @@
       "next_action": "Price the top PJM-side active projects and a small transfer upgrade against the break-even capex envelope.",
       "caveat": "Value uses same-year gross flow. CHPE (1,250 MW HVDC into NYC) entered commercial operation 2026-05-13 and should compress this seam's spread going forward, so the 2025 spread-based value is an upper bound for post-2026 cases; rerun seam evidence on post-CHPE months before committing.",
       "trend_summary": "2023 $1.53/MWh -> 2024 $2.02/MWh -> 2025 $7.38/MWh (4.8x over observed window).",
-      "evidence_basis": "NYISO DAM zonal LBMP 2023 (mis.nyiso.com; hourly NYCA internal-zone mean vs NYISO PJM proxy bus); NYISO DAM zonal LBMP 2023 settlement components (mis.nyiso.com; NYCA internal-zone mean vs PJM proxy bus)",
+      "evidence_basis": "reports\\nyiso_seam_2024_2025.txt [headline 2025 spread]; baseline for trend: NYISO DAM zonal LBMP 2023 (mis.nyiso.com; hourly NYCA internal-zone mean vs NYISO PJM proxy bus); NYISO DAM zonal LBMP 2023 settlement components (mis.nyiso.com; NYCA internal-zone mean vs PJM proxy bus)",
       "constraints": [
         "PJM:NOTTINGH230 KV  2-3 (6,025 h, severity 353,557)",
         "PJM:LENOX-NMESHOPP NML 1090     B  115 KV (1,847 h, severity 227,804)",
@@ -272,8 +272,8 @@
       "recommended_path": "Start with targeted transfer relief around the wind-belt constraints, then test storage only where it also captures local energy or capacity value.",
       "next_action": "Map CHAWATCHAPAT and Charlie Creek-Watford to upgrade candidates and price a 50-100 MW relief package.",
       "caveat": "MISO-side and SPP-side seam evidence corroborate the problem; do not double-count them as separate benefits.",
-      "trend_summary": "2023 $4.74/MWh -> 2025 $7.31/MWh (1.5x over observed window).",
-      "evidence_basis": "MISO DA ex-post LMP (docs.misoenergy.org; ARKANSAS.HUB vs SWPP interface, 2023-01-01..2023-12-31)",
+      "trend_summary": "2023 $4.74/MWh -> 2024 $6.31/MWh -> 2025 $7.31/MWh (1.5x over observed window).",
+      "evidence_basis": "MISO DA ex-post LMP (docs.misoenergy.org; ARKANSAS.HUB vs SWPP interface, 2025-01-01..2025-12-31) [headline 2025 spread]; baseline for trend: MISO DA ex-post LMP (docs.misoenergy.org; ARKANSAS.HUB vs SWPP interface, 2023-01-01..2023-12-31)",
       "constraints": [
         "MISO:CHAR_CK-WATFORD FLO PATINGATE-CHARLIE CK (5,138 h, severity 1,069,182)",
         "SPP:CHAWATCHAPAT (5,951 h, severity 895,951)",
