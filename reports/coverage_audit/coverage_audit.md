@@ -20,7 +20,7 @@ Post-IA completion (LBNL Sheet 27's method) requires knowing, for each withdrawn
 
 | Region | Withdrawn w/ ia_date | Total withdrawn | % | Classification |
 |---|---:|---:|---:|---|
-| **SPP** | 0 | 1,846 | 0.0% | absent |
+| **SPP** | 0 | 1,846 | absent — not computable | absent |
 | **PJM** | 32 | 5,226 | 0.6% | complete |
 | **CAISO** | 20 | 2,200 | 0.9% | partial |
 | **NYISO** | 15 | 1,531 | 1.0% | partial |

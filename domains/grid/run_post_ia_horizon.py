@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # SPDX-FileCopyrightText: 2026 James Hawkins / Komposos-Labs
 
-"""Time-since-IA control for the post-IA completion finding.
+"""Minimum-follow-up sensitivity check for the post-IA completion finding.
 
 run_stitch_brief.py's post_ia_completion() pools every signed project
 regardless of how long ago it signed. That mixes mature and recent IA
@@ -10,19 +10,19 @@ time for either outcome (operational or withdrawn) to occur, which can bias
 a raw pooled rate in either direction without saying anything about process
 quality.
 
-This module controls for that by restricting the post-IA cohort to projects
-old enough, as of a fixed data vintage, to have had a fair chance to resolve
-by 2, 3, and 5 years after IA execution -- then recomputing the same
-operational / (operational + withdrawn) rate on that maturity-filtered
-cohort. Still-active or suspended projects within the mature cohort are
-reported explicitly as censored, never dropped silently.
+This module tests sensitivity to that imbalance by removing signings younger
+than 2, 3, and 5 years as of a fixed data vintage, then recomputing the same
+operational / (operational + withdrawn) rate. These are common minimum-
+follow-up thresholds, not matched-age cohorts: the regions' age distributions
+can still differ after each cutoff. Still-active or suspended projects within
+the mature cohort are reported explicitly as censored, never dropped silently.
 
 Why status-based, not event-date-based: a stricter design would classify
 each project's outcome AT exactly the horizon (operational by ia_date+H vs
 withdrawn by ia_date+H) using on_date/wd_date. run_coverage_audit.py found
 wd_date populated on only 12-35% of withdrawn projects in West and
 Southeast, so that precision is not available nationally. This module uses
-current (data-vintage) status among a maturity-filtered cohort instead --
+current (data-vintage) status among a minimum-follow-up-filtered cohort instead --
 answerable for every region, at the cost of not knowing exactly how long
 after signing an eventual withdrawal happened.
 
@@ -56,7 +56,7 @@ from domains.grid.sources.lbnl_queue import (
     WITHDRAWN,
 )
 
-# 2, 3, and 5 years after IA execution, per the maturity-control design in
+# 2, 3, and 5 years after IA execution, per the minimum-follow-up design in
 # WORKING_NOTES.md's "HIGHEST-VALUE RESEARCH UPGRADES" section.
 HORIZONS_MONTHS = [24, 36, 60]
 
@@ -81,8 +81,10 @@ METHOD_NOTE = (
     "are reported as 'censored' -- old enough to expect resolution, not yet "
     "resolved -- and are never counted as failures or dropped from the "
     "report. This does not pin exactly WHEN within the horizon an outcome "
-    "occurred (see module docstring on wd_date coverage); it controls for "
-    "cohort age, not for event timing precision."
+    "occurred (see module docstring on wd_date coverage). This is a "
+    "minimum-follow-up sensitivity check, not age matching: it applies the "
+    "same age floor to each region, but their remaining age distributions "
+    "can still differ."
 )
 
 
@@ -224,7 +226,7 @@ def _raw_rate_label(raw: Dict) -> str:
 def to_markdown(rep: Dict) -> str:
     prov = rep["provenance"]
     L: List[str] = []
-    L.append("# Post-IA completion — time-since-IA (maturity) control")
+    L.append("# Post-IA completion — minimum-follow-up sensitivity check")
     L.append("")
     L.append(
         f"Source: **{prov['source_workbook']}** · vintage cutoff: "
@@ -237,7 +239,7 @@ def to_markdown(rep: Dict) -> str:
     L.append("")
 
     if rep["miso_ercot_gap_by_horizon"]:
-        L.append("## Headline: does the MISO/ERCOT gap survive maturity control?")
+        L.append("## Headline: does the MISO/ERCOT gap survive minimum-follow-up cutoffs?")
         L.append("")
         L.append("| Cohort | MISO rate (n decided) | ERCOT rate (n decided) | Gap (ERCOT − MISO) |")
         L.append("|---|---:|---:|---:|")
@@ -249,13 +251,13 @@ def to_markdown(rep: Dict) -> str:
             )
         L.append("")
 
-    L.append("## IA-cohort age — why maturity control matters here")
+    L.append("## IA-cohort age — why this sensitivity check matters")
     L.append("")
     L.append(
         "Median months since IA execution (as of the vintage cutoff), among "
         "signed projects. A region whose signed cohort is younger has had "
         "less time for outcomes to resolve; this is the raw-rate bias the "
-        "horizon control above tests for."
+        "minimum-follow-up check above probes."
     )
     L.append("")
     L.append("| Region | n signed | Median age (mo) | p25 | p75 |")
@@ -303,9 +305,9 @@ def to_markdown(rep: Dict) -> str:
     L.append("")
     L.append(
         "_Scope: region level only, same 9 regions as the coverage audit. "
-        "Not a survival/Kaplan-Meier estimate -- a fixed-horizon maturity "
-        "filter on current status; see method note above for what that "
-        "does and does not control for._"
+        "Not a survival/Kaplan-Meier estimate and not matched-age cohorts -- "
+        "a minimum-follow-up filter on current status; see the method note "
+        "above for what the check does and does not establish._"
     )
     L.append("")
     return "\n".join(L)
@@ -315,7 +317,7 @@ def to_markdown(rep: Dict) -> str:
 
 
 def main(argv=None) -> int:
-    ap = argparse.ArgumentParser(description="Time-since-IA control for post-IA completion")
+    ap = argparse.ArgumentParser(description="Minimum-follow-up check for post-IA completion")
     ap.add_argument("--queue", required=True, help="LBNL queue workbook (.xlsx)")
     ap.add_argument("--out", default="reports/post_ia_horizon")
     ap.add_argument("--min-cohort", type=int, default=30)

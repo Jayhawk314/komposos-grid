@@ -233,6 +233,13 @@ def _pct(v: Optional[float]) -> str:
     return f"{v:.1%}" if v is not None else "— (n=0)"
 
 
+def _post_ia_pct(row: Dict) -> str:
+    """Render zero observed IA dates as unavailable, never as a rate."""
+    if row["with_ia_date"] == 0:
+        return "absent — not computable"
+    return _pct(row["pct"])
+
+
 def _cell(cov: Dict) -> str:
     return f"{cov['populated']:,}/{cov['total']:,} ({_pct(cov['pct'])})"
 
@@ -270,7 +277,7 @@ def to_markdown(rep: Dict) -> str:
     for row in rep["national"]["post_ia_observability_by_region"]:
         L.append(
             f"| **{row['region'].upper()}** | {row['with_ia_date']:,} | "
-            f"{row['total_withdrawn']:,} | {_pct(row['pct'])} | "
+            f"{row['total_withdrawn']:,} | {_post_ia_pct(row)} | "
             f"{row['classification']} |"
         )
     L.append("")

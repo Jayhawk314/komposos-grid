@@ -24,9 +24,11 @@ import pytest
 from domains.grid.run_coverage_audit import (
     FIELDS,
     _classify,
+    _post_ia_pct,
     field_coverage,
     hybrid_capacity_coverage,
     post_ia_observability,
+    to_markdown,
 )
 from domains.grid.sources.lbnl_queue import ACTIVE, OPERATIONAL, WITHDRAWN, QueueProject
 
@@ -91,6 +93,18 @@ def test_zero_ia_dated_withdrawals_classifies_absent_not_zero_percent():
     assert got["with_ia_date"] == 0
     assert got["total_withdrawn"] == 50
     assert got["classification"] == "absent"
+
+
+def test_zero_ia_dated_withdrawals_render_absent_not_zero_percent():
+    """Exercise the actual Markdown renderer, not only the data object."""
+    if not AUDIT.exists():
+        pytest.skip("coverage_audit artifact not generated in this checkout")
+    report = json.loads(AUDIT.read_text(encoding="utf-8"))
+    markdown = to_markdown(report)
+    spp_row = next(line for line in markdown.splitlines() if "**SPP**" in line)
+    assert _post_ia_pct({"with_ia_date": 0, "pct": 0.0}) == "absent — not computable"
+    assert "absent — not computable" in spp_row
+    assert "0.0%" not in spp_row
 
 
 def test_thin_but_nonzero_ia_dated_withdrawals_classifies_partial():

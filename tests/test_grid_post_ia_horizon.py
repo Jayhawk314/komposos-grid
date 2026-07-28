@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: Apache-2.0
 # SPDX-FileCopyrightText: 2026 James Hawkins <jhawk314@gmail.com>
 
-"""Coverage for the time-since-IA (maturity) control (run_post_ia_horizon.py).
+"""Coverage for the minimum-follow-up check (run_post_ia_horizon.py).
 
 The question this module exists to answer: does the MISO/ERCOT post-IA gap
-survive once both regions are compared on signed cohorts of matched age,
+survive when the youngest signings are removed at common age thresholds,
 instead of pooling everything regardless of how recently it signed? The tests
 pin the mechanics (who counts as mature, who is censored, who is excluded)
 and then pin that the answer -- on the committed artifact -- is "yes, it
@@ -20,6 +20,7 @@ import pytest
 
 from domains.grid.run_post_ia_horizon import (
     HORIZONS_MONTHS,
+    METHOD_NOTE,
     VINTAGE_CUTOFF,
     _age_months,
     cohort_age_report,
@@ -60,7 +61,7 @@ def test_maturity_boundary_is_inclusive_not_exclusive():
 
 
 def test_mature_active_projects_are_censored_not_dropped_and_not_failures():
-    """The whole point of the maturity control: an old-enough project that
+    """The whole point of the follow-up check: an old-enough project that
     still hasn't resolved must be visible and must not lower the rate."""
     old_active = _p(ACTIVE, ia_date="2015-01-01")
     old_ops = _p(OPERATIONAL, ia_date="2015-01-01")
@@ -124,6 +125,13 @@ def test_horizons_are_two_three_and_five_years():
     assert HORIZONS_MONTHS == [24, 36, 60]
 
 
+def test_method_note_calls_this_a_sensitivity_check_not_age_matching():
+    note = METHOD_NOTE.lower()
+    assert "minimum-follow-up sensitivity check" in note
+    assert "not age matching" in note
+    assert "controls for cohort age" not in note
+
+
 def test_vintage_cutoff_is_a_fixed_date_string_not_derived_at_import():
     """Regression guard against someone 'helpfully' swapping this for
     datetime.date.today() -- which would break byte-identical regeneration."""
@@ -142,9 +150,9 @@ def _region(name: str) -> dict:
 
 
 def test_the_miso_ercot_gap_survives_every_horizon():
-    """The headline result: restricting to matched-age cohorts does not
-    close the gap. Guards direction and rough size at all three horizons,
-    not just the raw pooled rate."""
+    """The headline result: common minimum-age cutoffs do not close the gap.
+    Guards direction and rough size at all three horizons, not just the raw
+    pooled rate; it does not claim that remaining ages are matched."""
     if not ARTIFACT.exists():
         pytest.skip("post_ia_horizon artifact not generated in this checkout")
     data = json.loads(ARTIFACT.read_text(encoding="utf-8"))

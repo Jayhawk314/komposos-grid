@@ -1,10 +1,10 @@
-# Post-IA completion — time-since-IA (maturity) control
+# Post-IA completion — minimum-follow-up sensitivity check
 
 Source: **LBNL_Ix_Queue_Data_File_thru2026.xlsx** · vintage cutoff: **2025-12-31** · horizons: 24mo, 36mo, 60mo · min_cohort: **30**
 
-For each region, the signed cohort is every project with an executed-IA date. At each horizon H (2, 3, 5 years), the MATURE subset is signed projects at least H months old as of the fixed vintage cutoff -- i.e. old enough to have had a fair chance to resolve by H, regardless of whether they actually did. Within that mature subset, the rate is operational / (operational + withdrawn) using CURRENT status, same definition as the raw post-IA rate, just restricted to older-than-H signings. Still-active and suspended projects within the mature cohort are reported as 'censored' -- old enough to expect resolution, not yet resolved -- and are never counted as failures or dropped from the report. This does not pin exactly WHEN within the horizon an outcome occurred (see module docstring on wd_date coverage); it controls for cohort age, not for event timing precision.
+For each region, the signed cohort is every project with an executed-IA date. At each horizon H (2, 3, 5 years), the MATURE subset is signed projects at least H months old as of the fixed vintage cutoff -- i.e. old enough to have had a fair chance to resolve by H, regardless of whether they actually did. Within that mature subset, the rate is operational / (operational + withdrawn) using CURRENT status, same definition as the raw post-IA rate, just restricted to older-than-H signings. Still-active and suspended projects within the mature cohort are reported as 'censored' -- old enough to expect resolution, not yet resolved -- and are never counted as failures or dropped from the report. This does not pin exactly WHEN within the horizon an outcome occurred (see module docstring on wd_date coverage). This is a minimum-follow-up sensitivity check, not age matching: it applies the same age floor to each region, but their remaining age distributions can still differ.
 
-## Headline: does the MISO/ERCOT gap survive maturity control?
+## Headline: does the MISO/ERCOT gap survive minimum-follow-up cutoffs?
 
 | Cohort | MISO rate (n decided) | ERCOT rate (n decided) | Gap (ERCOT − MISO) |
 |---|---:|---:|---:|
@@ -13,9 +13,9 @@ For each region, the signed cohort is every project with an executed-IA date. At
 | 3-year | 34.8% (1,346) | 79.9% (546) | +45.0 pp |
 | 5-year | 34.0% (1,302) | 77.5% (418) | +43.5 pp |
 
-## IA-cohort age — why maturity control matters here
+## IA-cohort age — why this sensitivity check matters
 
-Median months since IA execution (as of the vintage cutoff), among signed projects. A region whose signed cohort is younger has had less time for outcomes to resolve; this is the raw-rate bias the horizon control above tests for.
+Median months since IA execution (as of the vintage cutoff), among signed projects. A region whose signed cohort is younger has had less time for outcomes to resolve; this is the raw-rate bias the minimum-follow-up check above probes.
 
 | Region | n signed | Median age (mo) | p25 | p75 |
 |---|---:|---:|---:|---:|
@@ -105,4 +105,4 @@ Median months since IA execution (as of the vintage cutoff), among signed projec
 | 3y | 645 | 423 | 166 | 56 | 589 | 71.8% | -0.1 pp | complete |
 | 5y | 584 | 392 | 152 | 40 | 544 | 72.1% | +0.2 pp | complete |
 
-_Scope: region level only, same 9 regions as the coverage audit. Not a survival/Kaplan-Meier estimate -- a fixed-horizon maturity filter on current status; see method note above for what that does and does not control for._
+_Scope: region level only, same 9 regions as the coverage audit. Not a survival/Kaplan-Meier estimate and not matched-age cohorts -- a minimum-follow-up filter on current status; see the method note above for what the check does and does not establish._
