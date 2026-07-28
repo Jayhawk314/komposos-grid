@@ -497,7 +497,7 @@ class CheegerConstant:
         return math.sqrt(lower * upper) if lower > 0 and upper > 0 else 0.0
 
     def find_sparse_cut(self) -> Tuple[Set[int], Set[int]]:
-        """
+        r"""
         Find approximate sparse cut using Fiedler vector.
 
         Algorithm:
@@ -539,7 +539,7 @@ class CheegerConstant:
         return (S, T)
 
     def compute_conductance(self, S: Set[int]) -> float:
-        """
+        r"""
         Compute conductance of set S.
 
         φ(S) = |∂S| / min(vol(S), vol(V\S))

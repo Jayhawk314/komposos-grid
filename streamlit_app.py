@@ -955,7 +955,10 @@ elif selection == "🎯 Seam Opportunity Screen":
             r"\text{Marginal BCR}(c) = \frac{\text{Spread} \cdot \eta \cdot e^{-\frac{\eta \cdot c}{\text{Gross}}}}{\text{Annualized Upgrade Cost}}"
         )
         st.markdown(
-            "Where $c$ represents capacity (MW) and $\eta$ is the effective MWh throughput factor. "
+            # Raw string: "$\eta$" in a normal literal is an invalid escape
+            # sequence, which Python currently tolerates with a warning and
+            # will reject outright in a future version.
+            r"Where $c$ represents capacity (MW) and $\eta$ is the effective MWh throughput factor. "
             "**Marginal BCR = 1.0 is break-even** — a corridor only justifies a build where the "
             "curve reaches it."
         )

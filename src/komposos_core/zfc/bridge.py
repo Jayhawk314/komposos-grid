@@ -3,7 +3,7 @@
 #
 # Licensed under the Apache License, Version 2.0 (see LICENSE file).
 
-"""
+r"""
 Dual Engine Bridge -- CAT-over-ZFC Architecture.
 
 ZFC proposes claims (logical entailments, transitive chains).

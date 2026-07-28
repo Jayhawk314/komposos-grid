@@ -3,7 +3,7 @@
 #
 # Licensed under the Apache License, Version 2.0 (see LICENSE file).
 
-"""
+r"""
 Proof Bridge -- Connects ProofGraph to the Dual-Engine System.
 
 Loads a proof graph (propositions and proof steps) into the
