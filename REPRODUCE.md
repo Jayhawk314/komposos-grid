@@ -3,8 +3,16 @@
 This walks you from a fresh clone to independently confirming the
 project's wind-belt headline:
 
-> **MISO-SWPP seam, 2025: congestion-component spread 7.33 $/MWh,
-> corridor value ≈ $31.1M/yr.**
+> **MISO-SWPP seam, 2025: congestion-component spread 7.31 $/MWh,
+> corridor value ≈ $31.06M/yr.**
+
+**Expect small drift, and check the chain not the constant.** Grid operators
+backfill late files, so a re-download months from now can move the last decimal.
+This walkthrough was last run end to end on **2026-07-27**, when MISO had
+backfilled a day that was missing earlier — the spread moved 7.33 → 7.31 and the
+corridor value $31.15M → $31.06M. Nothing was wrong; the data got more complete.
+**The test that matters is internal consistency: your Step 3 should equal your
+own Step 1 × your own Step 2, not the constants printed here.**
 
 This number was chosen as the reproduction target because every input
 is **keyless public data** (no accounts, no API keys) and the
@@ -44,17 +52,20 @@ ARKANSAS.HUB reference and the SWPP interface node:
 python -m domains.grid.run_miso_seam_evidence --start 2025-01-01 --end 2026-01-01 --out my_miso_2025.csv
 ```
 
-Expected output (yours should match to the cent):
+Output as of 2026-07-27:
 
 ```
-MISO seam ARKANSAS.HUB vs SWPP [2025-01-01..2025-12-31, 1 days missing]: 8736 hours,
-mean LMP $33.46 vs $32.99, mean |spread| $7.85/MWh (max $124.15),
+MISO seam ARKANSAS.HUB vs SWPP [2025-01-01..2025-12-31, 0 days missing]: 8760 hours,
+mean LMP $33.44 vs $32.98, mean |spread| $7.83/MWh (max $124.15),
 congestion component 93.4%, hub above 50.1% of hours
 ```
 
-The headline component is **7.85 × 93.4% = 7.33 $/MWh**. Compare your
-`my_miso_2025.csv` against the committed
-`reports/miso_seam_evidence_2025.csv`.
+The headline component is **7.83 × 93.4% = 7.31 $/MWh**. Write down whatever
+*your* run prints — Step 3 has to reproduce your number, not this one.
+
+Compare `my_miso_2025.csv` against the committed
+`reports/miso_seam_evidence_2025.csv`. If they differ, check the "days missing"
+count first: a backfilled day changes the hour count and nudges the means.
 
 ## Step 2 — Measure how much energy actually crossed that border
 
@@ -78,18 +89,28 @@ MISO-SWPP 2025: gross 4,249,335 MWh, net 733,389 MWh
 The corridor value is spread × flow. The full pipeline also rebuilds
 the ranked corridor cards and applies the same-year gating logic:
 
+**Pass your own Step 1 file in.** Without `--miso-evidence`, `run_solution_cards`
+reads the committed `reports/miso_seam_evidence_2025.csv` instead of the file you
+just measured — so it would print this repo's number no matter what your Step 1
+produced, and the walkthrough could not fail:
+
 ```bash
-python -m domains.grid.run_solution_cards
+python -m domains.grid.run_solution_cards --miso-evidence my_miso_2025.csv
 python -m domains.grid.run_solution_studies --same-year-flow reports/same_year_flows.csv --project-costs reports/project_costs.csv
 ```
 
-Expected line in the output:
+Output as of 2026-07-27:
 
 ```
-MISO-SWPP: $31,147,626/yr, ...
+MISO-SWPP: $31,062,639/yr, ...
 ```
 
-Cross-check by hand: 7.33 $/MWh × 4,249,335 MWh = $31.1M/yr.
+Cross-check by hand, using **your** numbers from Steps 1 and 2:
+7.31 $/MWh × 4,249,335 MWh = $31.06M/yr.
+
+**This is the real test.** If your hand multiplication matches the pipeline's
+output, the chain is sound — even if your figures differ from the ones printed
+here because operators have since backfilled data.
 
 ## Step 4 — (Optional) check the verdict on the named fix
 
