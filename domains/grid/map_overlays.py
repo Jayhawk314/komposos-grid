@@ -248,14 +248,26 @@ def node_overlays(
             _STATE_ABBR.get(name, name): float(v)
             for name, v in state_values.items()
         }
+        # NOT ALLOCATED. Each state's entire value is credited to every BA that
+        # operates in it, so a state shared by several BAs is counted in full
+        # for each. Summed across BAs this reaches ~$499B against a national
+        # total of ~$142B -- a 3.5x overcount. It is a footprint-exposure
+        # figure, not this BA's share, and the field name and tooltip now say
+        # so. Allocating properly needs BA load by state, which this project
+        # does not have.
+        national_total = sum(abbr_value.values())
         for ba, states in ba_states.items():
             if ba not in facts:
                 continue
             # sorted(): float addition is not associative, so an unordered set
             # could shift this total's low-order digits between runs.
-            total = sum(abbr_value.get(s, 0.0) for s in sorted(set(states)))
+            covered = sorted(set(states))
+            total = sum(abbr_value.get(s, 0.0) for s in covered)
             if total > 0:
-                facts[ba]["reliability_value_usd"] = total
+                facts[ba]["reliability_value_states_usd"] = total
+                facts[ba]["reliability_value_states"] = covered
+                facts[ba]["reliability_value_allocated"] = False
+                facts[ba]["reliability_value_national_usd"] = national_total
 
     return facts
 

@@ -140,9 +140,14 @@ def tool_ba(code: str, year: str | None = None) -> Dict:
         "tool": "ba", "year": label, "ba": code,
         "summary": f"{code}: {facts.get('demand_twh', 0):.0f} TWh demand, "
                    f"{node.degree} ties, "
-                   f"{facts.get('reliability_value_usd', 0)/1e9:.0f}B reliability value.",
+                   f"${facts.get('reliability_value_states_usd', 0)/1e9:.0f}B reliability "
+                   f"value in the states it serves (not allocated to this BA).",
         "provenance": "flows EIA-930 (measured); placement eGRID; "
-                      "curvature/seam are screening lenses; daily pulse is fresh.",
+                      "curvature/seam are screening lenses; daily pulse is fresh. "
+                      "reliability_value_states_usd sums each served state's FULL "
+                      "value, so states shared between BAs are counted more than "
+                      "once -- across all BAs it exceeds the national total by "
+                      "~3.5x. It is footprint exposure, not a per-BA share.",
         "result": {"degree": node.degree, "total_tie_twh": node.gross_mwh / 1e6,
                     "seam_side": node.side, "facts": facts},
     }

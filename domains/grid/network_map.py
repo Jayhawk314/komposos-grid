@@ -339,14 +339,34 @@ def build_map_html(
         f"{shown.geo_coverage}/{len(shown.nodes)} BAs placed geographically"
         if shown.geo_coverage else "geographic placement unavailable (no eGRID)"
     )
+
+    def _daily_note(daily_date: str | None) -> str:
+        """Caption for the daily pulse, stating its age.
+
+        "Daily pulse through <date>" reads as current. The underlying artifacts
+        stop whenever the daily job last ran -- 45 days before this was written
+        -- so the age is spelled out rather than left for the reader to compute
+        from a date they have no reason to check.
+        """
+        if not daily_date:
+            return ""
+        try:
+            then = date.fromisoformat(str(daily_date))
+        except ValueError:
+            return f" Daily pulse through {daily_date} on covered seams."
+        age = (date.today() - then).days
+        if age <= 2:
+            return f" Daily pulse through {daily_date} on covered seams."
+        return (
+            f" Daily pulse on covered seams is from {daily_date}"
+            f" — {age} days old, not live."
+            " Re-run `python -m domains.grid.run_daily_update` to refresh."
+        )
     year_note = (
         f" Years {years[0]}–{years[-1]} selectable; showing {default}."
         if len(years) > 1 and "latest" not in networks else ""
     )
-    daily_note = (
-        f" Daily pulse through {shown.daily_date} on covered seams."
-        if shown.daily_date else ""
-    )
+    daily_note = _daily_note(shown.daily_date)
     return _TEMPLATE.format(
         title=escape(title), css=_CSS, js=_JS, data=data,
         n_bas=len(shown.nodes), n_ties=len(shown.edges),
@@ -690,13 +710,24 @@ function nodeFacts(f){
     if ((f.fuel_mix||[]).length) h += row('Top fuels',
       f.fuel_mix.map(x=>`${x.fuel} ${pct(x.share)}`).join(' · '));
   }
-  if (f.curtailment_twh!=null || f.n_constraints!=null || f.reliability_value_usd!=null ||
+  if (f.curtailment_twh!=null || f.n_constraints!=null || f.reliability_value_states_usd!=null ||
       (f.waste_claims||[]).some(c=>c.value_usd>0)){
     h += head('Congestion & reliability');
     if (f.curtailment_twh!=null) h += row('Renewable curtailment', twh(f.curtailment_twh*1e6));
     if (f.n_constraints!=null) h += row('Congestion constraints',
       f.n_constraints.toLocaleString()+(f.top10_share!=null?` (top 10 carry ${pct(f.top10_share)})`:''));
-    if (f.reliability_value_usd!=null) h += row('Reliability value at stake', usd(f.reliability_value_usd)+'/yr');
+    if (f.reliability_value_states_usd!=null) {
+      const nStates = (f.reliability_value_states||[]).length;
+      h += row('Reliability value in states served',
+        usd(f.reliability_value_states_usd)+'/yr'
+        + (nStates ? ` across ${nStates} state${nStates>1?'s':''}` : ''));
+      h += row('&nbsp;',
+        '<em>Not allocated to this BA. Each state's full value is counted for '
+        + 'every BA operating there, so shared states appear in several BAs. '
+        + 'Summed across BAs this exceeds the national total of '
+        + usd(f.reliability_value_national_usd||0) + '/yr. Read as footprint '
+        + 'exposure, not this BA's share.</em>');
+    }
     (f.waste_claims||[]).filter(c=>c.value_usd>0).forEach(c =>
       h += row(c.title||'Waste claim', usd(c.value_usd)+` · ${c.evidence||''}`));
   }
