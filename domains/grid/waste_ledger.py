@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import csv
 import json
+import re
 from dataclasses import dataclass
 from html import escape
 from pathlib import Path
@@ -103,6 +104,22 @@ class WasteLedger:
     def to_rows(self) -> List[Dict[str, Any]]:
         return [claim.to_row() for claim in self.ranked()]
 
+    def source_years(self) -> List[str]:
+        """Data years appearing in the claims' own source strings.
+
+        The ledger totals are only meaningful next to their vintage. Seam
+        values here are built from the congestion evidence report, which is a
+        2023 basis, while the seam pages and solution studies run on 2025 --
+        so the same corridor legitimately carries different values in the two
+        places. Emitting the vintage is what stops that reading as a
+        contradiction.
+        """
+        years: set[str] = set()
+        for claim in self.claims:
+            blob = f"{claim.source} {claim.source_report} {claim.notes}"
+            years.update(re.findall(r"\b20[12]\d\b", blob))
+        return sorted(years)
+
     def to_dict(self) -> Dict[str, Any]:
         return {
             "n_claims": len(self.claims),
@@ -112,6 +129,15 @@ class WasteLedger:
                 "measured",
                 "measured_proxy",
             ]),
+            "source_years": self.source_years(),
+            "vintage_note": (
+                "Dollar totals reflect the vintage of each claim's own source, "
+                "not a single year. Seam congestion claims derive from the "
+                "congestion evidence report (2023 basis); the seam pages and "
+                "solution studies use 2025 evidence, so the same corridor shows "
+                "a different value there. Neither is wrong -- check the year in "
+                "each claim's source before comparing across pages."
+            ),
             "claims": self.to_rows(),
         }
 
@@ -127,6 +153,17 @@ class WasteLedger:
             f"**${self.total_value_usd(['measured']):,.0f}**",
             f"- Reported/proxy dollar total: "
             f"**${self.total_value_usd(['measured', 'measured_proxy']):,.0f}**",
+            f"- Source data years: **{', '.join(self.source_years()) or 'n/a'}**",
+            "",
+            "> **Read the vintage before comparing across pages.** These totals "
+            "reflect the year of each claim's own source, not one year. Seam "
+            "congestion claims here are on a **2023** basis (congestion evidence "
+            "report), while the seam pages and solution studies use **2025** "
+            "evidence — so the same corridor legitimately carries a different "
+            "value in the two places. PJM-NYIS, for example, is $29.5M here on "
+            "2023 data and $159.7M on the seam page on 2025 data, because that "
+            "seam's congestion component moved from $1.53 to $7.38/MWh. Neither "
+            "figure is wrong; they are different years.",
             "",
             "## Claims",
             "",

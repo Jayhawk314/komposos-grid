@@ -78,6 +78,20 @@ class SeamComponentSpread:
     mean_abs_loss_spread_usd_mwh: float
     max_abs_loss_spread_usd_mwh: float
     share_loss_internal_above: float
+    # Data years actually observed in the loaded files. Carried so the emitted
+    # evidence row cites the year it measured rather than a literal: the source
+    # string used to hardcode "2023", so regenerating against 2025 data produced
+    # a 2025 measurement labelled 2023. Defaulted and placed last so existing
+    # positional construction keeps working.
+    years: tuple[int, ...] = ()
+
+    @property
+    def year_label(self) -> str:
+        if not self.years:
+            return "year unknown"
+        if len(self.years) == 1:
+            return str(self.years[0])
+        return f"{min(self.years)}-{max(self.years)}"
 
     @property
     def congestion_to_lbmp_ratio(self) -> float:
@@ -103,7 +117,7 @@ class SeamComponentSpread:
             "ba_a": ba_a,
             "ba_b": ba_b,
             "evidence_source": (
-                "NYISO DAM zonal LBMP 2023 settlement components "
+                f"NYISO DAM zonal LBMP {self.year_label} settlement components "
                 "(mis.nyiso.com; NYCA internal-zone mean vs PJM proxy bus)"
             ),
             "evidence_method": "lmp_component_proxy",
@@ -188,7 +202,22 @@ def seam_component_spread(
         mean_abs_loss_spread_usd_mwh=losses["mean_abs_spread"],
         max_abs_loss_spread_usd_mwh=losses["max_abs_spread"],
         share_loss_internal_above=losses["share_internal_above"],
+        years=_observed_years(df),
     )
+
+
+def _observed_years(df) -> tuple[int, ...]:
+    """Distinct calendar years present in the loaded NYISO frames.
+
+    Read from the data rather than assumed, so the emitted evidence row cites
+    the period it actually measured.
+    """
+    import pandas as pd
+
+    if "Time Stamp" not in df.columns:
+        return ()
+    stamps = pd.to_datetime(df["Time Stamp"], errors="coerce")
+    return tuple(sorted(int(y) for y in stamps.dt.year.dropna().unique()))
 
 
 def _component_stats(df, column: str, proxy: str, internal_zones: Sequence[str]) -> dict:

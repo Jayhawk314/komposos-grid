@@ -434,6 +434,24 @@ def _as_paths(
     return [Path(p) for p in evidence]
 
 
+def _year_from_evidence(source: str, row: Mapping[str, Any]) -> int:
+    """Data year for a congestion-evidence row, read rather than assumed.
+
+    Prefers an explicit `year` field; otherwise takes the latest 4-digit year
+    appearing in the evidence source string, which the seam pipelines now
+    self-label (e.g. "NYISO DAM zonal LBMP 2025 settlement components",
+    "... ARKANSAS.HUB vs SWPP interface, 2025-01-01..2025-12-31").
+    """
+    explicit = row.get("year")
+    if explicit:
+        try:
+            return int(explicit)
+        except (TypeError, ValueError):
+            pass
+    years = [int(y) for y in re.findall(r"\b20[12]\d\b", f"{source} {row.get('notes', '')}")]
+    return max(years) if years else 2023
+
+
 def _collect_trends(
     congestion: Mapping[tuple[str, str], Mapping[str, Any]],
     miso_evidence: Sequence[Path],
@@ -445,15 +463,22 @@ def _collect_trends(
         component = _float(row.get("mean_congestion_component_spread_usd_mwh"))
         if component <= 0 and spread <= 0:
             continue
+        source = str(row.get("evidence_source", ""))
         trends.setdefault(key, []).append(
             SeamTrend(
                 ba_a=key[0],
                 ba_b=key[1],
-                year=2023,
+                # Read the year from the evidence itself. This was hardcoded to
+                # 2023, which was true only while the congestion report happened
+                # to hold 2023 data. Refreshing that report to 2025 silently
+                # relabelled the new figures as 2023 and produced nonsense trend
+                # lines like "2023 $7.38 -> 2024 $2.02 -> 2025 $7.38 (1.0x)",
+                # when 2023 was actually $1.53.
+                year=_year_from_evidence(source, row),
                 spread_usd_mwh=spread,
                 component_spread_usd_mwh=component or spread,
                 hours_observed=_float(row.get("hours_observed")),
-                source=str(row.get("evidence_source", "")),
+                source=source,
                 notes=str(row.get("notes", "")),
             )
         )

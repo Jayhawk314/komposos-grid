@@ -66,48 +66,39 @@
   },
   "right_kan_bounds": [
     {
-      "tie": "AECI - SWPP",
-      "se_side_ba": "AECI",
+      "tie": "CPLE - PJM",
+      "se_side_ba": "CPLE",
       "priced_neighbors_count": 1,
-      "proxy_spread_usd_mwh": 5.09,
-      "gross_mwh": 2800533.0,
-      "screening_value_usd": 14254712.97,
+      "proxy_spread_usd_mwh": 9.03,
+      "gross_mwh": 6175589.0,
+      "screening_value_usd": 55786470.71,
       "method_limits": "analogy from 1 adjacent priced tie(s); all gross flow priced at the proxy spread; not a measured cost and not a bound"
     },
     {
       "tie": "TVA - SOCO",
       "se_side_ba": "TVA",
       "priced_neighbors_count": 1,
-      "proxy_spread_usd_mwh": 1.58,
-      "gross_mwh": 5660484.0,
-      "screening_value_usd": 8943564.72,
-      "method_limits": "analogy from 1 adjacent priced tie(s); all gross flow priced at the proxy spread; not a measured cost and not a bound"
-    },
-    {
-      "tie": "CPLE - PJM",
-      "se_side_ba": "CPLE",
-      "priced_neighbors_count": 1,
-      "proxy_spread_usd_mwh": 2.01,
-      "gross_mwh": 4242136.0,
-      "screening_value_usd": 8542871.76,
+      "proxy_spread_usd_mwh": 2.44,
+      "gross_mwh": 5254930.0,
+      "screening_value_usd": 12822029.2,
       "method_limits": "analogy from 1 adjacent priced tie(s); all gross flow priced at the proxy spread; not a measured cost and not a bound"
     },
     {
       "tie": "SOCO - FPL",
       "se_side_ba": "SOCO",
       "priced_neighbors_count": 1,
-      "proxy_spread_usd_mwh": 1.58,
-      "gross_mwh": 3527415.0,
-      "screening_value_usd": 5573315.7,
+      "proxy_spread_usd_mwh": 2.44,
+      "gross_mwh": 3392644.0,
+      "screening_value_usd": 8278051.36,
       "method_limits": "analogy from 1 adjacent priced tie(s); all gross flow priced at the proxy spread; not a measured cost and not a bound"
     },
     {
       "tie": "SOCO - FPC",
       "se_side_ba": "SOCO",
       "priced_neighbors_count": 1,
-      "proxy_spread_usd_mwh": 1.58,
-      "gross_mwh": 419575.0,
-      "screening_value_usd": 662928.5,
+      "proxy_spread_usd_mwh": 2.44,
+      "gross_mwh": 635810.0,
+      "screening_value_usd": 1551376.4,
       "method_limits": "analogy from 1 adjacent priced tie(s); all gross flow priced at the proxy spread; not a measured cost and not a bound"
     }
   ],

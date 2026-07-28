@@ -7,7 +7,7 @@
 - Current congestion spread: **$7.38/MWh**
 - Annual value at current spread: **$159,672,256/yr**
 - Gross flow basis: **21,635,807 MWh** (2025; same_year_flow)
-- Trend: 2023 $1.53/MWh -> 2024 $2.02/MWh -> 2025 $7.38/MWh (4.8x over observed window).
+- Trend: 2024 $2.02/MWh -> 2025 $7.38/MWh (3.7x over observed window).
 - Recommended path: Start with a 50-100 MW transfer-relief or queue-rescue package; storage clears only if it is paid for by more than seam congestion.
 - Next action: Price the top PJM-side active projects and a small transfer upgrade against the break-even capex envelope.
 - Caveat: Value uses same-year gross flow. CHPE (1,250 MW HVDC into NYC) entered commercial operation 2026-05-13 and should compress this seam's spread going forward, so the 2025 spread-based value is an upper bound for post-2026 cases; rerun seam evidence on post-CHPE months before committing.

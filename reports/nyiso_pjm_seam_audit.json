@@ -16,7 +16,10 @@
     "proxy_loss_mean_usd_mwh": 0.5113683068843475,
     "mean_abs_loss_spread_usd_mwh": 0.5193124993513165,
     "max_abs_loss_spread_usd_mwh": 12.704545454545453,
-    "share_loss_internal_above": 0.9821897476880922
+    "share_loss_internal_above": 0.9821897476880922,
+    "years": [
+      2023
+    ]
   },
   "evidence_row": {
     "ba_a": "PJM",

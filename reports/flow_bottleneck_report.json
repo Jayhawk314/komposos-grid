@@ -1,21 +1,21 @@
 {
   "n_bas": 63,
-  "n_ties": 144,
-  "total_gross_mwh": 499719924.0,
+  "n_ties": 147,
+  "total_gross_mwh": 493662162.0,
   "curvature": {
-    "mean": 0.14038290084552338,
-    "std": 0.15570947713876213,
-    "min": -0.2279411764705881,
-    "max": 0.5999999999999999,
-    "median": 0.14285714285714268,
-    "num_edges": 144,
+    "mean": 0.14588502067493656,
+    "std": 0.16267314918055303,
+    "min": -0.2279411764705883,
+    "max": 0.625,
+    "median": 0.14583333333333326,
+    "num_edges": 147,
     "num_nodes": 63,
-    "n_hyperbolic": 2.0,
-    "hyperbolic_edges": 25,
-    "hyperbolic_rate": 0.1736111111111111
+    "n_hyperbolic": 27.0,
+    "hyperbolic_edges": 27,
+    "hyperbolic_rate": 0.1836734693877551
   },
   "spectral": {
-    "algebraic_connectivity": 0.0033439410881190737,
+    "algebraic_connectivity": 0.0033116471389100905,
     "coupling": "very weak",
     "fiedler_partition": {
       "small": [
@@ -40,6 +40,7 @@
         "SCEG",
         "SEC",
         "SEPA",
+        "SIKE",
         "SOCO",
         "SPA",
         "SWPP",
@@ -61,7 +62,6 @@
         "EPE",
         "GCPD",
         "GRID",
-        "GRIF",
         "GWA",
         "HGMA",
         "IID",
@@ -87,265 +87,275 @@
       ]
     }
   },
-  "top_bottleneck_gross_mwh": 62835492.0,
-  "top_bottleneck_gross_share": 0.12574141830694746,
+  "top_bottleneck_gross_mwh": 74304896.0,
+  "top_bottleneck_gross_share": 0.15051770566932776,
   "bottlenecks": [
     {
       "ba_a": "PJM",
       "ba_b": "NYIS",
       "curvature": -0.10714285714285743,
-      "gross_mwh": 19294263.0,
-      "net_mwh": -19294263.0,
+      "gross_mwh": 21635807.0,
+      "net_mwh": -21635807.0,
       "net_direction": "NYIS -> PJM",
-      "gross_share": 0.03861015355473399,
-      "priority_score": 2067242.46428572
+      "gross_share": 0.043827152788752724,
+      "priority_score": 2318122.1785714347
     },
     {
       "ba_a": "BPAT",
-      "ba_b": "NWMT",
-      "curvature": -0.12184873949579811,
-      "gross_mwh": 7221314.0,
-      "net_mwh": -6997762.0,
-      "net_direction": "NWMT -> BPAT",
-      "gross_share": 0.014450722601166489,
-      "priority_score": 879908.0084033598
+      "ba_b": "GRID",
+      "curvature": -0.2279411764705883,
+      "gross_mwh": 5729835.0,
+      "net_mwh": -5725569.0,
+      "net_direction": "GRID -> BPAT",
+      "gross_share": 0.01160679395963104,
+      "priority_score": 1306065.3308823535
     },
     {
       "ba_a": "MISO",
       "ba_b": "SOCO",
-      "curvature": -0.15079365079365092,
-      "gross_mwh": 5355783.0,
-      "net_mwh": -5239233.0,
+      "curvature": -0.15972222222222232,
+      "gross_mwh": 5909762.0,
+      "net_mwh": -5823982.0,
       "net_direction": "SOCO -> MISO",
-      "gross_share": 0.010717569467972624,
-      "priority_score": 807618.0714285722
+      "gross_share": 0.01197126791337919,
+      "priority_score": 943920.3194444451
     },
     {
-      "ba_a": "SOCO",
-      "ba_b": "FPL",
-      "curvature": -0.20833333333333304,
-      "gross_mwh": 3527415.0,
-      "net_mwh": -2810915.0,
-      "net_direction": "FPL -> SOCO",
-      "gross_share": 0.00705878399197067,
-      "priority_score": 734878.124999999
+      "ba_a": "BPAT",
+      "ba_b": "NWMT",
+      "curvature": -0.12184873949579833,
+      "gross_mwh": 7588975.0,
+      "net_mwh": -7457605.0,
+      "net_direction": "NWMT -> BPAT",
+      "gross_share": 0.015372810768510955,
+      "priority_score": 924707.0378151261
     },
     {
       "ba_a": "BPAT",
       "ba_b": "LDWP",
-      "curvature": -0.0980392156862746,
-      "gross_mwh": 6773556.0,
-      "net_mwh": 6138562.0,
+      "curvature": -0.09803921568627483,
+      "gross_mwh": 7952644.0,
+      "net_mwh": 6189738.0,
       "net_direction": "BPAT -> LDWP",
-      "gross_share": 0.013554704694944282,
-      "priority_score": 664074.1176470595
+      "gross_share": 0.016109486633087346,
+      "priority_score": 779670.9803921594
+    },
+    {
+      "ba_a": "SOCO",
+      "ba_b": "FPL",
+      "curvature": -0.20833333333333326,
+      "gross_mwh": 3392644.0,
+      "net_mwh": -2867528.0,
+      "net_direction": "FPL -> SOCO",
+      "gross_share": 0.006872400319796031,
+      "priority_score": 706800.8333333331
     },
     {
       "ba_a": "BPAT",
       "ba_b": "BANC",
       "curvature": -0.12745098039215685,
-      "gross_mwh": 3927078.0,
-      "net_mwh": -1156038.0,
+      "gross_mwh": 4587718.0,
+      "net_mwh": -2728726.0,
       "net_direction": "BANC -> BPAT",
-      "gross_share": 0.007858557986973519,
-      "priority_score": 500509.94117647054
+      "gross_share": 0.009293234023473729,
+      "priority_score": 584709.1568627451
+    },
+    {
+      "ba_a": "CPLE",
+      "ba_b": "PJM",
+      "curvature": -0.08571428571428585,
+      "gross_mwh": 6175589.0,
+      "net_mwh": 3713473.0,
+      "net_direction": "CPLE -> PJM",
+      "gross_share": 0.01250974750623079,
+      "priority_score": 529336.2000000009
     },
     {
       "ba_a": "BPAT",
       "ba_b": "CISO",
-      "curvature": -0.08529411764705874,
-      "gross_mwh": 5458963.0,
-      "net_mwh": 1141151.0,
+      "curvature": -0.08529411764705919,
+      "gross_mwh": 6076992.0,
+      "net_mwh": 3026688.0,
       "net_direction": "BPAT -> CISO",
-      "gross_share": 0.010924045125725266,
-      "priority_score": 465617.4323529407
+      "gross_share": 0.012310021848504564,
+      "priority_score": 518331.6705882375
     },
     {
       "ba_a": "TVA",
       "ba_b": "SOCO",
       "curvature": -0.07936507936507953,
-      "gross_mwh": 5660484.0,
-      "net_mwh": -3456874.0,
+      "gross_mwh": 5254930.0,
+      "net_mwh": -2878036.0,
       "net_direction": "SOCO -> TVA",
-      "gross_share": 0.011327313017041122,
-      "priority_score": 449244.7619047628
-    },
-    {
-      "ba_a": "MISO",
-      "ba_b": "SWPP",
-      "curvature": -0.09523809523809534,
-      "gross_mwh": 3989884.0,
-      "net_mwh": 849274.0,
-      "net_direction": "MISO -> SWPP",
-      "gross_share": 0.007984240388221943,
-      "priority_score": 379988.9523809528
-    },
-    {
-      "ba_a": "BPAT",
-      "ba_b": "GRID",
-      "curvature": -0.2279411764705881,
-      "gross_mwh": 1626752.0,
-      "net_mwh": -1617598.0,
-      "net_direction": "GRID -> BPAT",
-      "gross_share": 0.003255327478197567,
-      "priority_score": 370803.7647058821
-    },
-    {
-      "ba_a": "CPLE",
-      "ba_b": "PJM",
-      "curvature": -0.08571428571428563,
-      "gross_mwh": 4242136.0,
-      "net_mwh": 3029290.0,
-      "net_direction": "CPLE -> PJM",
-      "gross_share": 0.008489027145533625,
-      "priority_score": 363611.6571428568
+      "gross_share": 0.010644789907961388,
+      "priority_score": 417057.9365079374
     },
     {
       "ba_a": "CISO",
       "ba_b": "SRP",
-      "curvature": -0.035714285714285365,
-      "gross_mwh": 10099478.0,
-      "net_mwh": -9717954.0,
+      "curvature": -0.03571428571428603,
+      "gross_mwh": 9041327.0,
+      "net_mwh": -8886855.0,
       "net_direction": "SRP -> CISO",
-      "gross_share": 0.020210276826985188,
-      "priority_score": 360695.64285713935
+      "gross_share": 0.018314806553879653,
+      "priority_score": 322904.5357142886
+    },
+    {
+      "ba_a": "BPAT",
+      "ba_b": "PSEI",
+      "curvature": -0.01764705882352957,
+      "gross_mwh": 15655223.0,
+      "net_mwh": 15655223.0,
+      "net_direction": "BPAT -> PSEI",
+      "gross_share": 0.03171242239140864,
+      "priority_score": 276268.64117647306
     },
     {
       "ba_a": "BPAT",
       "ba_b": "SCL",
       "curvature": -0.044117647058823595,
-      "gross_mwh": 7798197.0,
-      "net_mwh": 7798197.0,
+      "gross_mwh": 5418456.0,
+      "net_mwh": 5319386.0,
       "net_direction": "BPAT -> SCL",
-      "gross_share": 0.01560513524771928,
-      "priority_score": 344038.10294117697
-    },
-    {
-      "ba_a": "BPAT",
-      "ba_b": "PSEI",
-      "curvature": -0.01764705882352935,
-      "gross_mwh": 16049993.0,
-      "net_mwh": 16049993.0,
-      "net_direction": "BPAT -> PSEI",
-      "gross_share": 0.03211797694902395,
-      "priority_score": 283235.17058823426
+      "gross_share": 0.010976040736134037,
+      "priority_score": 239049.52941176505
     },
     {
       "ba_a": "BPAT",
       "ba_b": "DOPD",
-      "curvature": -0.07352941176470607,
-      "gross_mwh": 2370212.0,
-      "net_mwh": -2052144.0,
+      "curvature": -0.07352941176470584,
+      "gross_mwh": 2240220.0,
+      "net_mwh": -1847724.0,
       "net_direction": "DOPD -> BPAT",
-      "gross_share": 0.004743080846222173,
-      "priority_score": 174280.29411764749
+      "gross_share": 0.00453796173262313,
+      "priority_score": 164722.0588235293
+    },
+    {
+      "ba_a": "MISO",
+      "ba_b": "SWPP",
+      "curvature": -0.037499999999999645,
+      "gross_mwh": 4249335.0,
+      "net_mwh": 733389.0,
+      "net_direction": "MISO -> SWPP",
+      "gross_share": 0.008607779423045999,
+      "priority_score": 159350.0624999985
+    },
+    {
+      "ba_a": "AECI",
+      "ba_b": "TVA",
+      "curvature": -0.08571428571428608,
+      "gross_mwh": 1598393.0,
+      "net_mwh": 1598361.0,
+      "net_direction": "AECI -> TVA",
+      "gross_share": 0.003237827654289615,
+      "priority_score": 137005.11428571487
     },
     {
       "ba_a": "BPAT",
       "ba_b": "TPWR",
       "curvature": -0.044117647058823595,
-      "gross_mwh": 3599272.0,
-      "net_mwh": 3599272.0,
+      "gross_mwh": 2997868.0,
+      "net_mwh": 2962540.0,
       "net_direction": "BPAT -> TPWR",
-      "gross_share": 0.007202578538773651,
-      "priority_score": 158791.4117647061
+      "gross_share": 0.006072711726283774,
+      "priority_score": 132258.88235294138
     },
     {
       "ba_a": "WACM",
       "ba_b": "WALC",
-      "curvature": -0.0642857142857145,
-      "gross_mwh": 2222314.0,
-      "net_mwh": 2207738.0,
+      "curvature": -0.04761904761904767,
+      "gross_mwh": 2551141.0,
+      "net_mwh": 2551015.0,
       "net_direction": "WACM -> WALC",
-      "gross_share": 0.004447119062637174,
-      "priority_score": 142863.04285714333
+      "gross_share": 0.005167787196135158,
+      "priority_score": 121482.9047619049
     },
     {
-      "ba_a": "AECI",
-      "ba_b": "SWPP",
-      "curvature": -0.04166666666666674,
-      "gross_mwh": 2800533.0,
-      "net_mwh": -2095465.0,
-      "net_direction": "SWPP -> AECI",
-      "gross_share": 0.005604205206754974,
-      "priority_score": 116688.8750000002
+      "ba_a": "SOCO",
+      "ba_b": "FPC",
+      "curvature": -0.09523809523809512,
+      "gross_mwh": 635810.0,
+      "net_mwh": 418308.0,
+      "net_direction": "SOCO -> FPC",
+      "gross_share": 0.0012879455808889806,
+      "priority_score": 60553.33333333326
     },
     {
       "ba_a": "NWMT",
       "ba_b": "WAUW",
       "curvature": -0.11904761904761907,
-      "gross_mwh": 494475.0,
-      "net_mwh": -92659.0,
-      "net_direction": "WAUW -> NWMT",
-      "gross_share": 0.000989504272797416,
-      "priority_score": 58866.07142857144
-    },
-    {
-      "ba_a": "AECI",
-      "ba_b": "TVA",
-      "curvature": -0.03571428571428603,
-      "gross_mwh": 1198856.0,
-      "net_mwh": 1198716.0,
-      "net_direction": "AECI -> TVA",
-      "gross_share": 0.002399055835924605,
-      "priority_score": 42816.285714286096
-    },
-    {
-      "ba_a": "SOCO",
-      "ba_b": "FPC",
-      "curvature": -0.0952380952380949,
-      "gross_mwh": 419575.0,
-      "net_mwh": -81651.0,
-      "net_direction": "FPC -> SOCO",
-      "gross_share": 0.0008396203149986872,
-      "priority_score": 39959.52380952367
+      "gross_mwh": 419600.0,
+      "net_mwh": 146974.0,
+      "net_direction": "NWMT -> WAUW",
+      "gross_share": 0.0008499739949686482,
+      "priority_score": 49952.38095238096
     },
     {
       "ba_a": "PNM",
       "ba_b": "GRID",
       "curvature": -0.017857142857143016,
-      "gross_mwh": 2078483.0,
-      "net_mwh": 2073871.0,
+      "gross_mwh": 2005411.0,
+      "net_mwh": 2001709.0,
       "net_direction": "PNM -> GRID",
-      "gross_share": 0.0041592958378821815,
-      "priority_score": 37115.76785714319
+      "gross_share": 0.004062314583470143,
+      "priority_score": 35810.91071428603
     },
     {
       "ba_a": "BPAT",
       "ba_b": "NEVP",
-      "curvature": -0.03431372549019618,
-      "gross_mwh": 569040.0,
-      "net_mwh": 248586.0,
+      "curvature": -0.034313725490195957,
+      "gross_mwh": 416580.0,
+      "net_mwh": 189450.0,
       "net_direction": "BPAT -> NEVP",
-      "gross_share": 0.001138717855083961,
-      "priority_score": 19525.882352941233
+      "gross_share": 0.0008438564509629158,
+      "priority_score": 14294.411764705832
     },
     {
-      "ba_a": "PACW",
-      "ba_b": "CISO",
-      "curvature": -0.15714285714285725,
-      "gross_mwh": 74572.0,
-      "net_mwh": 8458.0,
-      "net_direction": "PACW -> CISO",
-      "gross_share": 0.0001492275901330682,
-      "priority_score": 11718.45714285715
+      "ba_a": "SWPP",
+      "ba_b": "WAUW",
+      "curvature": -0.033333333333333215,
+      "gross_mwh": 407026.0,
+      "net_mwh": 203258.0,
+      "net_direction": "SWPP -> WAUW",
+      "gross_share": 0.000824503134595112,
+      "priority_score": 13567.533333333286
     },
     {
-      "ba_a": "SPA",
-      "ba_b": "SWPP",
-      "curvature": -2.220446049250313e-16,
-      "gross_mwh": 1512521.0,
-      "net_mwh": 595421.0,
-      "net_direction": "SPA -> SWPP",
-      "gross_share": 0.003026737433026585,
-      "priority_score": 3.358471278858133e-10
+      "ba_a": "SWPP",
+      "ba_b": "WACM",
+      "curvature": -0.0071428571428571175,
+      "gross_mwh": 1198564.0,
+      "net_mwh": 1047538.0,
+      "net_direction": "SWPP -> WACM",
+      "gross_share": 0.002427903315790283,
+      "priority_score": 8561.171428571399
+    },
+    {
+      "ba_a": "SWPP",
+      "ba_b": "EPE",
+      "curvature": -0.03333333333333344,
+      "gross_mwh": 195217.0,
+      "net_mwh": -192905.0,
+      "net_direction": "EPE -> SWPP",
+      "gross_share": 0.00039544655237319973,
+      "priority_score": 6507.233333333354
     }
   ],
   "meshed_edges": [
     {
+      "ba_a": "SIKE",
+      "ba_b": "SPA",
+      "curvature": 0.625
+    },
+    {
       "ba_a": "SC",
       "ba_b": "SCEG",
       "curvature": 0.5999999999999999
+    },
+    {
+      "ba_a": "BANC",
+      "ba_b": "TIDC",
+      "curvature": 0.5
     },
     {
       "ba_a": "FMPP",
@@ -356,16 +366,6 @@
       "ba_a": "TEC",
       "ba_b": "SEC",
       "curvature": 0.5
-    },
-    {
-      "ba_a": "NBSO",
-      "ba_b": "ISNE",
-      "curvature": 0.5
-    },
-    {
-      "ba_a": "BANC",
-      "ba_b": "TIDC",
-      "curvature": 0.4999999999999998
     }
   ]
 }
