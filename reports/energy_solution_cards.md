@@ -8,7 +8,7 @@
 
 | Status | Geography | Value | Spread | Queue | Generic B/C | Recommended Solution | Next Action | Caveat |
 |---|---|---:|---:|---:|---:|---|---|---|
-| priority_solution_study | NYIS-PJM | $159,672,256/yr | $7.38/MWh | 85.5 GW active / 524.3 GW withdrawn | 0.09 | Use 2025 congestion economics to scope NY import/export relief, storage, and queue-rescue packages. | Rebuild congestion evidence and relief curves on the 2025 NYISO component spread, then price named projects. | Generic costs still do not clear B/C > 1; the value is now high enough for project-specific costing. |
+| priority_solution_study | NYIS-PJM | $159,584,663/yr | $7.38/MWh | 85.5 GW active / 524.3 GW withdrawn | 0.09 | Use 2025 congestion economics to scope NY import/export relief, storage, and queue-rescue packages. | Rebuild congestion evidence and relief curves on the 2025 NYISO component spread, then price named projects. | Generic costs still do not clear B/C > 1; the value is now high enough for project-specific costing. |
 | priority_solution_study | MISO-SWPP | $31,062,639/yr | $7.31/MWh | 156.5 GW active / 344.7 GW withdrawn | 0.26 | Target wind-belt transfer relief: transmission upgrades, storage on the export side, and queue rescue on the import side. | Tie CHAWATCHAPAT/Charlie Creek-Watford constraints to candidate upgrades and rerun relief curves on 2024 spread. | Screening uses MISO-side settlement evidence; SPP-side evidence corroborates but should not be double-counted. |
 | methodology_validated_screen | CISO-SRP | $12,567,445/yr | $1.39/MWh | 68.0 GW active / 389.8 GW withdrawn | 0.08 | Use OASIS-corrected spreads for Western storage/transmission siting screens, not old ICE hub levels. | Replace generic benchmark costs with project-specific storage, flexible-load, or transmission estimates. | OASIS correction made this defensible but much smaller than the old hub-proxy headline. |
 | methodology_validated_screen | BPAT-CISO | $6,745,461/yr | $1.11/MWh | 85.6 GW active / 393.6 GW withdrawn | 0.06 | Use OASIS-corrected spreads for Western storage/transmission siting screens, not old ICE hub levels. | Replace generic benchmark costs with project-specific storage, flexible-load, or transmission estimates. | OASIS correction made this defensible but much smaller than the old hub-proxy headline. |
@@ -20,8 +20,8 @@
 ### NYIS-PJM
 
 - Status: **priority_solution_study**
-- Evidence: reports\nyiso_seam_2024_2025.txt [headline 2025 spread]; baseline for trend: NYISO DAM zonal LBMP 2025 settlement components (mis.nyiso.com; NYCA internal-zone mean vs PJM proxy bus)
-- Trend: 2024 $2.02/MWh -> 2025 $7.38/MWh (3.7x over observed window).
+- Evidence: NYISO DAM zonal LBMP 2025 settlement components (mis.nyiso.com; NYCA internal-zone mean vs PJM proxy bus)
+- Trend: 2023 $1.53/MWh -> 2024 $2.02/MWh -> 2025 $7.38/MWh (4.8x over observed window).
 - Constraints: PJM:NOTTINGH230 KV  2-3 (6,025 h, severity 353,557); PJM:LENOX-NMESHOPP NML 1090     B  115 KV (1,847 h, severity 227,804); PJM:GRACETON230 KV  GRA-SAF (3,339 h, severity 130,754); PJM:Chicago-Praxair3 138 kV l/o Wilton Center-Dumont 765 kV (661 h, severity 120,695); PJM:Turkey Hill-Hilgard 138 kV l/o Prairie State-Mt Vernon 345 kV (1,065 h, severity 118,169)
 - Best generic intervention: transmission_capacity at 50 MW, B/C 0.09
 - Recommended solution: Use 2025 congestion economics to scope NY import/export relief, storage, and queue-rescue packages.

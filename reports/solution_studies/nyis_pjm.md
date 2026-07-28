@@ -5,9 +5,9 @@
 - Corridor: **NYIS-PJM**
 - Current evidence year: **2025**
 - Current congestion spread: **$7.38/MWh**
-- Annual value at current spread: **$159,672,256/yr**
+- Annual value at current spread: **$159,584,663/yr**
 - Gross flow basis: **21,635,807 MWh** (2025; same_year_flow)
-- Trend: 2024 $2.02/MWh -> 2025 $7.38/MWh (3.7x over observed window).
+- Trend: 2023 $1.53/MWh -> 2024 $2.02/MWh -> 2025 $7.38/MWh (4.8x over observed window).
 - Recommended path: Start with a 50-100 MW transfer-relief or queue-rescue package; storage clears only if it is paid for by more than seam congestion.
 - Next action: Price the top PJM-side active projects and a small transfer upgrade against the break-even capex envelope.
 - Caveat: Value uses same-year gross flow. CHPE (1,250 MW HVDC into NYC) entered commercial operation 2026-05-13 and should compress this seam's spread going forward, so the 2025 spread-based value is an upper bound for post-2026 cases; rerun seam evidence on post-CHPE months before committing.
@@ -26,34 +26,34 @@ A project clears on congestion value alone only if its real annual cost is below
 
 | Intervention | Capacity | Relief Value | Break-Even Annual Cost | Break-Even Capex | Capex $/kW |
 |---|---:|---:|---:|---:|---:|
-| 50 MW targeted transfer upgrade | 50 MW | $3,232,440/yr | $3,232,440/yr | $32,324,400 | $646/kW |
-| 100 MW targeted transfer upgrade | 100 MW | $6,464,880/yr | $6,464,880/yr | $64,648,800 | $646/kW |
-| 250 MW targeted transfer upgrade | 250 MW | $16,162,200/yr | $16,162,200/yr | $161,622,000 | $646/kW |
-| 100 MW / 4-hour storage siting screen | 100 MW | $885,600/yr | $885,600/yr | $8,856,000 | $89/kW |
-| 100 MW flexible-load program | 100 MW | $442,800/yr | $442,800/yr | $4,428,000 | $44/kW |
+| 50 MW targeted transfer upgrade | 50 MW | $3,230,667/yr | $3,230,667/yr | $32,306,668 | $646/kW |
+| 100 MW targeted transfer upgrade | 100 MW | $6,461,334/yr | $6,461,334/yr | $64,613,335 | $646/kW |
+| 250 MW targeted transfer upgrade | 250 MW | $16,153,334/yr | $16,153,334/yr | $161,533,338 | $646/kW |
+| 100 MW / 4-hour storage siting screen | 100 MW | $885,114/yr | $885,114/yr | $8,851,142 | $89/kW |
+| 100 MW flexible-load program | 100 MW | $442,557/yr | $442,557/yr | $4,425,571 | $44/kW |
 
 ## Quoted Project Costs
 
 | Project | Type | Capacity | Annual Cost | Relief Value | B/C | Net Value |
 |---|---|---:|---:|---:|---:|---:|
-| Champlain Hudson Power Express 1250 MW HVDC (context screen) | transmission_or_grid_enhancing_transfer | 1,250 MW | $690,000,000/yr | $80,811,000/yr | 0.12 | $-609,189,000/yr |
+| Champlain Hudson Power Express 1250 MW HVDC (context screen) | transmission_or_grid_enhancing_transfer | 1,250 MW | $690,000,000/yr | $80,766,669/yr | 0.12 | $-609,233,331/yr |
 
 ## Active Queue Candidates
 
 | Queue ID | Fuel | MW | State | Role | Side | Relief Value |
 |---|---|---:|---|---|---|---:|
-| AG2-582 | gas | 2,100 | WV | generation | PJM | $74,669,364/yr |
-| AI2-431 | offshore_wind | 2,139 | NJ | generation | PJM | $62,223,339/yr |
-| AI1-001 | offshore_wind | 2,100 | NJ | generation | PJM | $61,093,116/yr |
-| AH1-695 | nuclear | 859 | PA | generation | PJM | $49,979,987/yr |
-| AH1-680 | gas | 1,300 | OH | generation | PJM | $46,223,892/yr |
+| AG2-582 | gas | 2,100 | WV | generation | PJM | $74,628,402/yr |
+| AI2-431 | offshore_wind | 2,139 | NJ | generation | PJM | $62,189,204/yr |
+| AI1-001 | offshore_wind | 2,100 | NJ | generation | PJM | $61,059,602/yr |
+| AH1-695 | nuclear | 859 | PA | generation | PJM | $49,952,569/yr |
+| AH1-680 | gas | 1,300 | OH | generation | PJM | $46,198,535/yr |
 
 ## Withdrawn Opportunity
 
 | Queue ID | Fuel | MW | State | Role | Side | Lost Relief Value |
 |---|---|---:|---|---|---|---:|
-| Q65 | nuclear | 1,594 | VA | generation | PJM | $92,745,168/yr |
-| R67 | coal | 2,510 | PA | generation | PJM | $89,247,668/yr |
-| AH1-675 | gas | 2,175 | PA | generation | PJM | $77,336,127/yr |
-| R68 | coal | 1,940 | OH | generation | PJM | $68,980,270/yr |
-| AE1-222 | gas | 2,563 | IL | generation | PJM | $67,728,699/yr |
+| Q65 | nuclear | 1,594 | VA | generation | PJM | $92,694,290/yr |
+| R67 | coal | 2,510 | PA | generation | PJM | $89,198,709/yr |
+| AH1-675 | gas | 2,175 | PA | generation | PJM | $77,293,702/yr |
+| R68 | coal | 1,940 | OH | generation | PJM | $68,942,428/yr |
+| AE1-222 | gas | 2,563 | IL | generation | PJM | $67,691,545/yr |

@@ -6,8 +6,8 @@
       "title": "PJM-NYIS 2025 Solution Memo",
       "geography": "NYIS-PJM",
       "current_year": 2025,
-      "current_spread_usd_mwh": 7.38,
-      "annual_value_usd": 159672255.66,
+      "current_spread_usd_mwh": 7.375951488858213,
+      "annual_value_usd": 159584662.85429895,
       "gross_flow_mwh": 21635807.0,
       "flow_year": 2025,
       "same_year_flow_status": "same_year_flow",
@@ -16,14 +16,14 @@
       "active_queue_gw": 85.45703240000006,
       "withdrawn_queue_gw": 524.2561670000003,
       "best_intervention": "250 MW targeted transfer upgrade",
-      "best_relief_value_usd": 16162200.0,
-      "best_break_even_capex_usd": 161622000.0,
-      "best_break_even_capex_usd_per_kw": 646.488,
+      "best_relief_value_usd": 16153333.760599487,
+      "best_break_even_capex_usd": 161533337.60599485,
+      "best_break_even_capex_usd_per_kw": 646.1333504239794,
       "recommended_path": "Start with a 50-100 MW transfer-relief or queue-rescue package; storage clears only if it is paid for by more than seam congestion.",
       "next_action": "Price the top PJM-side active projects and a small transfer upgrade against the break-even capex envelope.",
       "caveat": "Value uses same-year gross flow. CHPE (1,250 MW HVDC into NYC) entered commercial operation 2026-05-13 and should compress this seam's spread going forward, so the 2025 spread-based value is an upper bound for post-2026 cases; rerun seam evidence on post-CHPE months before committing.",
-      "trend_summary": "2024 $2.02/MWh -> 2025 $7.38/MWh (3.7x over observed window).",
-      "evidence_basis": "reports\\nyiso_seam_2024_2025.txt [headline 2025 spread]; baseline for trend: NYISO DAM zonal LBMP 2025 settlement components (mis.nyiso.com; NYCA internal-zone mean vs PJM proxy bus)",
+      "trend_summary": "2023 $1.53/MWh -> 2024 $2.02/MWh -> 2025 $7.38/MWh (4.8x over observed window).",
+      "evidence_basis": "NYISO DAM zonal LBMP 2025 settlement components (mis.nyiso.com; NYCA internal-zone mean vs PJM proxy bus)",
       "constraints": [
         "PJM:NOTTINGH230 KV  2-3 (6,025 h, severity 353,557)",
         "PJM:LENOX-NMESHOPP NML 1090     B  115 KV (1,847 h, severity 227,804)",
@@ -42,7 +42,7 @@
           "role": "generation",
           "side": "PJM",
           "relief_mwh": 10117800.0,
-          "relief_value_usd": 74669364.0
+          "relief_value_usd": 74628401.97396962
         },
         {
           "q_id": "AI2-431",
@@ -54,7 +54,7 @@
           "role": "generation",
           "side": "PJM",
           "relief_mwh": 8431346.7,
-          "relief_value_usd": 62223338.64599999
+          "relief_value_usd": 62189204.24494477
         },
         {
           "q_id": "AI1-001",
@@ -66,7 +66,7 @@
           "role": "generation",
           "side": "PJM",
           "relief_mwh": 8278200.0,
-          "relief_value_usd": 61093116.0
+          "relief_value_usd": 61059601.61506606
         },
         {
           "q_id": "AH1-695",
@@ -78,7 +78,7 @@
           "role": "generation",
           "side": "PJM",
           "relief_mwh": 6772356.0,
-          "relief_value_usd": 49979987.28
+          "relief_value_usd": 49952569.32127785
         },
         {
           "q_id": "AH1-680",
@@ -90,7 +90,7 @@
           "role": "generation",
           "side": "PJM",
           "relief_mwh": 6263400.000000001,
-          "relief_value_usd": 46223892.00000001
+          "relief_value_usd": 46198534.55531454
         }
       ],
       "top_withdrawn": [
@@ -104,7 +104,7 @@
           "role": "generation",
           "side": "PJM",
           "relief_mwh": 12567096.000000002,
-          "relief_value_usd": 92745168.48000002
+          "relief_value_usd": 92694290.45182411
         },
         {
           "q_id": "R67",
@@ -116,7 +116,7 @@
           "role": "generation",
           "side": "PJM",
           "relief_mwh": 12093180.0,
-          "relief_value_usd": 89247668.4
+          "relief_value_usd": 89198709.02603036
         },
         {
           "q_id": "AH1-675",
@@ -128,7 +128,7 @@
           "role": "generation",
           "side": "PJM",
           "relief_mwh": 10479150.0,
-          "relief_value_usd": 77336127.0
+          "relief_value_usd": 77293702.04446855
         },
         {
           "q_id": "R68",
@@ -140,7 +140,7 @@
           "role": "generation",
           "side": "PJM",
           "relief_mwh": 9346920.0,
-          "relief_value_usd": 68980269.6
+          "relief_value_usd": 68942428.4902386
         },
         {
           "q_id": "AE1-222",
@@ -152,7 +152,7 @@
           "role": "generation",
           "side": "PJM",
           "relief_mwh": 9177330.555029046,
-          "relief_value_usd": 67728699.49611436
+          "relief_value_usd": 67691544.97111046
         }
       ],
       "interventions": [
@@ -162,10 +162,10 @@
           "solution_type": "transmission_or_grid_enhancing_transfer",
           "capacity_mw": 50.0,
           "relief_mwh": 438000.0,
-          "relief_value_usd": 3232440.0,
-          "break_even_annual_cost_usd": 3232440.0,
-          "break_even_capex_usd": 32324400.0,
-          "break_even_capex_usd_per_kw": 646.488,
+          "relief_value_usd": 3230666.7521198974,
+          "break_even_annual_cost_usd": 3230666.7521198974,
+          "break_even_capex_usd": 32306667.521198973,
+          "break_even_capex_usd_per_kw": 646.1333504239794,
           "fixed_charge_rate": 0.1,
           "source": "cost-gate envelope; compare against developer/utility estimate",
           "notes": "Use for reconductoring, ratings, phase-angle control, or small transfer upgrades."
@@ -176,10 +176,10 @@
           "solution_type": "transmission_or_grid_enhancing_transfer",
           "capacity_mw": 100.0,
           "relief_mwh": 876000.0,
-          "relief_value_usd": 6464880.0,
-          "break_even_annual_cost_usd": 6464880.0,
-          "break_even_capex_usd": 64648800.0,
-          "break_even_capex_usd_per_kw": 646.488,
+          "relief_value_usd": 6461333.504239795,
+          "break_even_annual_cost_usd": 6461333.504239795,
+          "break_even_capex_usd": 64613335.042397946,
+          "break_even_capex_usd_per_kw": 646.1333504239794,
           "fixed_charge_rate": 0.1,
           "source": "cost-gate envelope; compare against developer/utility estimate",
           "notes": "Firm-transfer case; assumes relief is usable across the year."
@@ -190,10 +190,10 @@
           "solution_type": "transmission_or_grid_enhancing_transfer",
           "capacity_mw": 250.0,
           "relief_mwh": 2190000.0,
-          "relief_value_usd": 16162200.0,
-          "break_even_annual_cost_usd": 16162200.0,
-          "break_even_capex_usd": 161622000.0,
-          "break_even_capex_usd_per_kw": 646.488,
+          "relief_value_usd": 16153333.760599487,
+          "break_even_annual_cost_usd": 16153333.760599487,
+          "break_even_capex_usd": 161533337.60599485,
+          "break_even_capex_usd_per_kw": 646.1333504239794,
           "fixed_charge_rate": 0.1,
           "source": "cost-gate envelope; compare against developer/utility estimate",
           "notes": "Larger transfer case; capped by the current annual seam value."
@@ -204,10 +204,10 @@
           "solution_type": "storage",
           "capacity_mw": 100.0,
           "relief_mwh": 120000.0,
-          "relief_value_usd": 885600.0,
-          "break_even_annual_cost_usd": 885600.0,
-          "break_even_capex_usd": 8856000.0,
-          "break_even_capex_usd_per_kw": 88.56,
+          "relief_value_usd": 885114.1786629856,
+          "break_even_annual_cost_usd": 885114.1786629856,
+          "break_even_capex_usd": 8851141.786629856,
+          "break_even_capex_usd_per_kw": 88.51141786629856,
           "fixed_charge_rate": 0.1,
           "source": "NREL ATB utility-scale battery storage methodology (https://atb.nrel.gov/electricity/2024/utility-scale_battery_storage); cost-gate envelope here is derived from local seam value",
           "notes": "Throughput proxy matches queue matching: 4h duration and about 300 cycles/year."
@@ -218,10 +218,10 @@
           "solution_type": "flexible_load",
           "capacity_mw": 100.0,
           "relief_mwh": 60000.0,
-          "relief_value_usd": 442800.0,
-          "break_even_annual_cost_usd": 442800.0,
-          "break_even_capex_usd": 4428000.0,
-          "break_even_capex_usd_per_kw": 44.28,
+          "relief_value_usd": 442557.0893314928,
+          "break_even_annual_cost_usd": 442557.0893314928,
+          "break_even_capex_usd": 4425570.893314928,
+          "break_even_capex_usd_per_kw": 44.25570893314928,
           "fixed_charge_rate": 0.1,
           "source": "cost-gate envelope; compare against program bids",
           "notes": "Critical-window dispatch proxy, not firm transfer capability."
@@ -241,9 +241,9 @@
           "annual_cost_usd": 690000000.0,
           "fixed_charge_rate": 0.1,
           "relief_mwh": 10950000.0,
-          "relief_value_usd": 80811000.0,
-          "benefit_cost_ratio": 0.11711739130434783,
-          "net_annual_value_usd": -609189000.0,
+          "relief_value_usd": 80766668.80299744,
+          "benefit_cost_ratio": 0.11705314319274991,
+          "net_annual_value_usd": -609233331.1970025,
           "clears_congestion_value": false,
           "cost_method": "capex_fixed_charge_plus_om",
           "source": "S&P Global 2026-05-13 COD report; chpexpress.com; $6B widely reported",

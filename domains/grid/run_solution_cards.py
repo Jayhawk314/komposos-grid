@@ -24,6 +24,12 @@ def main(argv=None) -> int:
         help="MISO seam evidence CSVs (any years; latest year becomes current)",
     )
     parser.add_argument("--nyiso-2024-2025", default="reports/nyiso_seam_2024_2025.txt")
+    parser.add_argument(
+        "--nyiso-evidence", nargs="+",
+        default=["reports/nyiso_pjm_seam_evidence.csv",
+                 "reports/nyiso_pjm_seam_evidence_2025.csv"],
+        help="NYISO seam evidence CSVs; full precision, supersedes the text summary",
+    )
     parser.add_argument("--ercot-spreads", default="reports/ercot_hub_spreads.json")
     parser.add_argument("--report-csv", default="reports/energy_solution_cards.csv")
     parser.add_argument("--report-json", default="reports/energy_solution_cards.json")
@@ -41,6 +47,7 @@ def main(argv=None) -> int:
         relief_curves=args.relief_curves,
         miso_evidence=[p for p in (_existing(f) for f in args.miso_evidence) if p],
         nyiso_2024_2025=_existing(args.nyiso_2024_2025),
+        nyiso_evidence=[p for p in (_existing(f) for f in args.nyiso_evidence) if p],
         ercot_spreads=_existing(args.ercot_spreads),
     )
     print(report.summary())

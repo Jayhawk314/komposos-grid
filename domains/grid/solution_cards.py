@@ -193,6 +193,7 @@ def build_energy_solution_report(
     relief_curves: str | Path,
     miso_evidence: str | Path | Sequence[str | Path] | None = None,
     nyiso_2024_2025: str | Path | None = None,
+    nyiso_evidence: str | Path | Sequence[str | Path] | None = None,
     ercot_spreads: str | Path | None = None,
 ) -> EnergySolutionReport:
     congestion_path = Path(congestion_report)
@@ -202,7 +203,8 @@ def build_energy_solution_report(
     queue = _load_queue(queue_path)
     relief = _load_relief(relief_path)
     miso_paths = _as_paths(miso_evidence)
-    trends = _collect_trends(congestion, miso_paths, nyiso_2024_2025)
+    nyiso_paths = _as_paths(nyiso_evidence)
+    trends = _collect_trends(congestion, miso_paths, nyiso_2024_2025, nyiso_paths)
 
     cards: List[EnergySolutionCard] = []
     priority_ties = [
@@ -237,7 +239,15 @@ def build_energy_solution_report(
     return EnergySolutionReport(cards=cards)
 
 
-def load_miso_trends(path: str | Path) -> List[SeamTrend]:
+def load_seam_evidence_trends(path: str | Path) -> List[SeamTrend]:
+    """Seam trends from an evidence CSV, at the precision the file stores.
+
+    Schema-generic: any seam evidence CSV keyed by ba_a/ba_b with a
+    self-labelling `evidence_source` works, not just MISO's. Preferred over
+    parsing a text summary, which carries only the 2 decimal places used for
+    display -- multiplying a rounded 7.38 instead of 7.375951488858213 across
+    21.6M MWh of PJM-NYIS flow moved the corridor value by $87,593.
+    """
     rows = _read_csv(path)
     trends: List[SeamTrend] = []
     for row in rows:
@@ -259,6 +269,10 @@ def load_miso_trends(path: str | Path) -> List[SeamTrend]:
             )
         )
     return trends
+
+
+# Back-compat alias: this loader was MISO-specific by name only.
+load_miso_trends = load_seam_evidence_trends
 
 
 def load_nyiso_trends(path: str | Path) -> List[SeamTrend]:
@@ -456,6 +470,7 @@ def _collect_trends(
     congestion: Mapping[tuple[str, str], Mapping[str, Any]],
     miso_evidence: Sequence[Path],
     nyiso_2024_2025: str | Path | None,
+    nyiso_evidence: Sequence[Path] = (),
 ) -> Dict[tuple[str, str], List[SeamTrend]]:
     trends: Dict[tuple[str, str], List[SeamTrend]] = {}
     for key, row in congestion.items():
@@ -489,6 +504,14 @@ def _collect_trends(
             trends.setdefault(_tie_key(trend.ba_a, trend.ba_b), []).append(trend)
     if nyiso_2024_2025 and Path(nyiso_2024_2025).exists():
         for trend in load_nyiso_trends(nyiso_2024_2025):
+            trends.setdefault(_tie_key(trend.ba_a, trend.ba_b), []).append(trend)
+    # Appended LAST on purpose: dedup below is last-wins per year, so a
+    # full-precision evidence CSV supersedes the same year parsed from a
+    # rounded text summary.
+    for evidence_path in nyiso_evidence:
+        if not evidence_path.exists():
+            continue
+        for trend in load_seam_evidence_trends(evidence_path):
             trends.setdefault(_tie_key(trend.ba_a, trend.ba_b), []).append(trend)
     for key in list(trends):
         dedup: Dict[int, SeamTrend] = {}
@@ -635,8 +658,19 @@ def _clean_ba(value: Any) -> str:
 
 
 def _year_from_text(text: str) -> int | None:
+    """Data year from an evidence source string.
+
+    Prefers an ISO date range (MISO writes "...2025-01-01..2025-12-31"), then
+    falls back to a bare four-digit year (NYISO writes "NYISO DAM zonal LBMP
+    2025 settlement components"). Without the fallback every NYISO evidence row
+    parsed to None and was silently dropped, so the full-precision CSV never
+    superseded the 2-decimal text summary.
+    """
     match = re.search(r"(20\d{2})-\d{2}-\d{2}", text)
-    return int(match.group(1)) if match else None
+    if match:
+        return int(match.group(1))
+    years = [int(y) for y in re.findall(r"\b(20[12]\d)\b", text)]
+    return max(years) if years else None
 
 
 def _status_rank(status: str) -> int:
