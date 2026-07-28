@@ -1,0 +1,76 @@
+
+Events
+Integrating Economic and Reliability Models for Power Systems Planning Workshop
+June 15, 2026 @ 8:00 am – 5:00 pm
+This event has passed.
+see session recordings on youtube
+Workshop Opening
+What’s Broken, What’s Getting Better, and What Might Not Really Matter: A Perspective on Power Systems Modeling
+Paul Denholm, Senior Research Fellow, National Laboratory of the Rockies (NLR)
+
+Session 1M: Weather-to-Grid Linkages
+Session Chair: Justin Sharp, Senior Technical Leader, Electric Power Research Institute (EPRI)
+
+Weather-related factors–such as resource availability, demand profiles, and outages–are increasingly influential to grid planning. How are such factors considered in current planning models that need to consider both economics and reliability?
+
+Enhancing Weather-Informed Transmission Planning: Weather-to-Grid Linkages at EPRI
+Caroline Draxl, Principal Technical Leader, Electric Power Research Institute (EPRI)
+Enhancing Weather-Informed Transmission Planning: Augmenting Workflows with Multiple Hazardous Events
+Neal Mann, Principal Energy Systems Engineer, Argonne National Laboratory (ANL)
+Building the Load Forecasting Foundation for a Structurally Uncertain Grid
+Ilya Chernyakhovskiy, Group Manager, National Laboratory of the Rockies (NLR)
+Leveraging Weather Datasets for Resource Planning in India
+Priya Sreedharen, Senior Program Director, GridLab
+Load, Weather, and Renewables in Probabilistic Modeling
+Ryan Kelley, Manager of Resource Adequacy Planning, Midcontinent Independent System Operator (MISO)
+Session 2M: Geospatial Techniques in Grid Planning
+Session Chair: Anthony Lopez, Senior Manager, NextEra Energy
+
+Energy development is fundamentally a geospatial challenge. Optimizing the power system portfolio requires understanding how resource availability, transmission corridors, permitting constraints, land use, and load growth interact across the grid. This panel explores how geospatial science is transforming the way utilities and developers plan, site, and deploy energy infrastructure.
+
+Geospatial Data in Capacity Expansion Planning: Grounding Inputs, Communicating Results
+Greg Schivley, Senior Software Engineer, Princeton University
+From Least-cost to Low-conflict: Using Geospatial Analysis to Improve Clean Energy Planning
+Grace Wu, Assistant Professor, Environmental Studies Program, UC Santa Barbara
+Accessing, Interpreting, and Applying Credible and Reliable Information for Renewable Energy Siting
+Keith Benes, Senior Advisor, Co-Founder, Siting Resource Center
+Applying Geospatial Asset Data to Grid Planning
+Stephanie Corey, Director, Geospatial Asset Data, Xcel Energy
+Applying Frontier AI to Planning and Permitting
+Hannes Boehning, CEO, Blumen Systems (virtual)
+Session 3M: Linkages and Data Translations between Economic Models
+Session Chair: Bethany Frew, Group Manager, National Laboratory of the Rockies (NLR)
+
+Today’s resource options, including thermal plants, weather-dependent resources, energy-limited storage, and advanced transmission, have diverse operational characteristics and contributions to reliability. How do economic models–capacity expansion, production cost, and resource adequacy–represent these variations and how can they be used jointly to inform an economically optimal but resource adequate system?
+
+Interoperability Between Models: The Next Bottleneck in Energy Planning
+Hazem Abdel-Khalek, Co-Founder and Head of Tools & Data, OET
+Workflows for Developing Reliable Least-cost Expansion Plans
+Norm Richardson, VP, Modeling, Yes Energy
+How to Simulate Variability and Deliverability in High-Fidelity Models
+Russ Philbrick, CEO/CTO, Polaris System Optimizations
+Using ELCC Surfaces in Long-term Planning Models
+Tarek Ibrahim, Head of Advanced Analytics, Energy Exemplar
+Multi-model Linkage to Assess Power System Reliability Against Unforeseen Weather Futures
+Vincent Carag, Researcher, National Laboratory of the Rockies (NLR)
+Session 4M: Integrating Economic and Reliability Modeling
+Session Chair: Carlo Brancucci, CEO, encoord
+
+Power flow modeling and stability analysis are needed to more-comprehensively assess system reliability but the development of the system portfolios and conditions require use of economic models (e.g., production cost). What are the state of art methods for efficiently linking economic and reliability models to enable examination of multiple snapshots and perform detailed nodal analyses?
+
+ERCOT Integrated Reliability and Economic Analysis Tool
+Priya Ramasubbu, Lead Planning Engineer, Electric Reliability Council of Texas (ERCOT) and Bishnu Bhattarai, Grid Transformation Lead, Electric Reliability Council of Texas (ERCOT)
+Driving Needs and Challenges to Integrating Economic and Reliability Modeling
+Jacob Johnson, Transmission Planning Engineer, Xcel Energy
+Integrated Reliability and Economic Modeling for Transmission Across Large Regions: A Space Odyssey
+Jarrad Wright, Researcher, National Laboratory of the Rockies (NLR)
+AC Convergence for Future Interconnect Wide Planning Cases: PNNL’s Experience with WECC and C-PAGE
+Eran Schweitzer, Electrical Engineer, Pacific Northwest National Laboratory (PNNL)
+Add to calendar 
+Details
+Date:
+June 15, 2026
+Time:
+8:00 am – 5:00 pm
+Event Category:
+ESIG Workshops

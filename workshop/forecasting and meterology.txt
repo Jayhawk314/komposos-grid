@@ -1,0 +1,94 @@
+
+Events
+Forecasting and Meteorology in Power Systems Workshop
+June 15, 2026 @ 1:00 pm – June 16, 2026 @ 5:00 pm
+This event has passed.
+see all session recordings on youtube
+Opening Plenary: Latest Advancements in Renewables Forecasting
+Session Chair: Justin Sharp, Senior Technical Leader, Electric Power Research Institute (EPRI)
+
+The opening session will share some of the  major updates from both weather prediction source data and individual forecast providers with a focus on how both meteorology and AI are working together to ultimately produce the forecasts that are used by system operators and renewable suppliers.
+
+Update on NOAA’s High Resolution Rapid Refresh Forecasting Model
+Dave Turner, Senior Scientist, NOAA Global Systems Laboratory
+Blending Observations, Physical Models, and AI and Machine Learning Techniques to Produce Accurate Weather Models
+Sue Haupt, Senior Scientist, NSF National Center for Atmospheric Research (NCAR)
+AI for Operational Forecast Production
+Lars Rohwer, Senior Meteorologist, Energy & Meteo Systems (Germany)
+Using Ensemble AI Models to Better Predict Ramping Events
+Craig Collier, Chief Meteorologist, Head of Operations, Energy Forecasting Solutions
+Session 2F: Damage Prediction from Extreme Weather Events
+Session Chair: Erik Smith, Technical Leader, Electric Power Research Institute (EPRI)
+
+Extreme weather such as ice storms, hurricanes, and other events can damage grid infrastructure. How do we predict these events and the damage that they may inflict?
+
+Connecting Climate to Weather Extremes to Damages: Lessons from Large Power Transformers to the Utility-Scale
+Adam Schlosser, Deputy Director and Senior Research Scientist, MIT Center for Sustainability Science and Strategy
+Numerical Weather Prediction Skill in Predicting Damaging Extreme Compound Weather Events
+Jeff Freedman, Senior Research Faculty, Atmospheric Sciences Research Center, University at Albany, State University of New York
+Power Outage Prediction and Grid Resilience: Scaling from Utility-Specific Forecasts to Regional and National Models
+Diego Cerrai, Assistant Professor, Department of Civil & Environmental Engineering, University of Connecticut
+Machine Learning and Outage Prediction Modeling at PG&E
+Scott Strenfel, Senior Director, Meteorology Operations and Fire Science, Pacific Gas & Electric (PG&E)
+Session 3F: Emerging Issues in Solar Forecasting
+Session Chair: Sue Haupt, Senior Scientist, NSF National Center for Atmospheric Research (NCAR)
+
+This session examines emerging issues that can affect solar output including smoke, hail, snow, storms, and solar droughts.
+
+Specific Applications of Near-Term (0 to 48 hours ahead) Probabilistic Forecasting
+Thomas Haley, Lead Data Scientist, Clean Power Research
+Bigger, Fewer, and Farther North: How Climate Change is Redrawing the Solar Hail Risk Map
+Daran Rife, Principal Scientist, Energy Systems, DNV
+Extreme Event Solar Forecasting – Wildfires, Storms, Snow
+Peter Zadow, Senior Meteorologist, Energy & Meteo Systems (Germany)
+Probabilistic Forecasting of Winter Weather Impacts on Solar Power Production
+Leigh Munchak, Senior Meteorological Data Engineer, Vaisala
+Dunkelflaute and Solar Drought Potential in North America
+Jared Lee, Scientist, NSF National Center for Atmospheric Research (NCAR)
+Session 4F: Wildfire Risk and PSPS Forecasting
+Session Chair: Alison Silverstein, Consultant, Alison Silverstein Consulting
+
+Dry and drought conditions combined with high winds can lead to wildfire risk. How do we forecast for high wildfire risk and potential public safety power shutoff events?
+
+Predicting Risk, Preventing Impact: Fire Potential & PSPS Forecasting at PG&E
+Scott Strenfel, Senior Director, Meteorology Operations and Fire Science, Pacific Gas & Electric (PG&E)
+Xcel Energy Wildfire Forecasting and Tools
+Zach Tolby, Director of Wildfire Meteorology & Fire Science, Xcel Energy
+Federal Wildfire Research
+Nick Dawson, Project Scientist, NSF National Center for Atmospheric Research (NCAR)
+Data-Driven Analysis of Wildfire Drivers Across Past and Future Conditions
+Grant Buster, Data Scientist, National Laboratory of the Rockies (NLR)
+Session 5F: Probabilistic Applications by Operators
+Session Chair: Nitika Mago, Director, Electric Grid Operations, Electric Reliability Council of Texas (ERCOT)
+
+This session will share some of the key new and evolving applications by utilities and system operators in how they use probabilistic forecasts in their operational procedures, and potentially include discussion of how long-term probabilistic forecasts may be  used in planning processes as well.
+
+Operationalizing Uncertainty through MISO’s Uncertainty Platform
+Matt Campbell, Manager, Operations Risk Assessment, Midcontinent Independent System Operator (MISO)
+Probabilistic Applications in New England Operations
+Jaren Lutenegger, Director, Operational Performance, Training and Integration, Independent System Operator New England (ISO-NE)
+Communicating Forecast Uncertainty in Actionable Ways
+Matt Cote, Director of Forecasting, UL Solutions
+Developing Probabilistic Renewable Generation Forecasts for IPPs
+Karin Gerbi, Director of Product, Amperon
+Session 6F: Large Load Operational Forecasting & Flexibility
+Session Chair: David Larson, Senior Data Scientist, Tapestry
+
+Large loads can ramp up and down quickly and can oscillate. How do grid operators forecast for large load behavior?
+
+Large Load Forecasting for Operational Outage Scheduling
+Shiuli Subhra Ghosh, Engineer, Dominion
+Predicting the Unpredictable: Forecasting Flexible Large Loads in ERCOT
+Sienna Shi, Operations Engineer, Electric Reliability Council of Texas (ERCOT)
+Emerging Large Loads in CAISO: Bridging Market Design, Operations, and Data Requirements
+Amber Motley, Director, Short Term Forecasting, California Independent System Operator (CAISO)
+Flexible Loads: From Interconnection Commitments to Grid Operations
+Gabe Tabak, Head of Energy Policy, Verrus
+Add to calendar 
+Details
+Start:
+June 15, 2026 @ 1:00 pm
+End:
+June 16, 2026 @ 5:00 pm
+Event Category:
+ESIG Workshops

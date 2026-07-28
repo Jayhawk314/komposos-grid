@@ -69,11 +69,11 @@ $$\text{Shadow Spread} = \min_{p \in \text{PricedNeighbors}} (\text{Spread}_p)$$
    ```json
    {
      "tie": "AECI - SWPP",
-     "unpriced_ba": "AECI",
+     "se_side_ba": "AECI",
      "priced_neighbors_count": 4,
-     "bound_spread_usd_mwh": 5.09,
+     "proxy_spread_usd_mwh": 5.09,
      "gross_mwh": 2800000.0,
-     "bound_value_usd": 14252000.0
+     "screening_value_usd": 14252000.0
    }
    ```
 

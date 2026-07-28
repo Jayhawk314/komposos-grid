@@ -19,7 +19,7 @@
 
 Bounds use the minimum adjacent priced spread as the limit/meet. They are upper-screening bounds for unpriced structural ties, not measured cost.
 
-| Tie | Status | Bound $/MWh | Bound Value | Adjacent Measurements |
+| Tie | Status | Proxy $/MWh | Screening Value | Adjacent Measurements |
 |---|---|---:|---:|---|
 | AECI-SWPP | bounded | 4.74 | $13,274,526 | MISO-SWPP $4.74/MWh |
 | SOCO-TVA | bounded | 1.35 | $7,641,653 | MISO-SOCO $1.35/MWh |

@@ -1,66 +1,66 @@
 {
   "yoneda_matrix": {
+    "CISO": {
+      "CISO": 1.0,
+      "ERCOT": 0.004,
+      "ISNE": 0.0,
+      "MISO": 0.0,
+      "NYIS": 0.0,
+      "PJM": 0.0,
+      "SPP": 0.0
+    },
     "ERCOT": {
+      "CISO": 0.004,
       "ERCOT": 1.0,
       "ISNE": 0.0,
-      "PJM": 0.0,
-      "NYIS": 0.0,
       "MISO": 0.0218,
-      "CISO": 0.004,
+      "NYIS": 0.0,
+      "PJM": 0.0,
       "SPP": 0.0
     },
     "ISNE": {
+      "CISO": 0.0,
       "ERCOT": 0.0,
       "ISNE": 1.0,
-      "PJM": 0.0976,
-      "NYIS": 0.0591,
       "MISO": 0.0,
-      "CISO": 0.0,
-      "SPP": 0.0
-    },
-    "PJM": {
-      "ERCOT": 0.0,
-      "ISNE": 0.0976,
-      "PJM": 1.0,
-      "NYIS": 0.0,
-      "MISO": 0.0685,
-      "CISO": 0.0,
-      "SPP": 0.0542
-    },
-    "NYIS": {
-      "ERCOT": 0.0,
-      "ISNE": 0.0591,
-      "PJM": 0.0,
-      "NYIS": 1.0,
-      "MISO": 0.3011,
-      "CISO": 0.0,
+      "NYIS": 0.0591,
+      "PJM": 0.0976,
       "SPP": 0.0
     },
     "MISO": {
+      "CISO": 0.0,
       "ERCOT": 0.0218,
       "ISNE": 0.0,
-      "PJM": 0.0685,
-      "NYIS": 0.3011,
       "MISO": 1.0,
-      "CISO": 0.0,
+      "NYIS": 0.3011,
+      "PJM": 0.0685,
       "SPP": 0.0714
     },
-    "CISO": {
-      "ERCOT": 0.004,
-      "ISNE": 0.0,
+    "NYIS": {
+      "CISO": 0.0,
+      "ERCOT": 0.0,
+      "ISNE": 0.0591,
+      "MISO": 0.3011,
+      "NYIS": 1.0,
       "PJM": 0.0,
-      "NYIS": 0.0,
-      "MISO": 0.0,
-      "CISO": 1.0,
       "SPP": 0.0
     },
+    "PJM": {
+      "CISO": 0.0,
+      "ERCOT": 0.0,
+      "ISNE": 0.0976,
+      "MISO": 0.0685,
+      "NYIS": 0.0,
+      "PJM": 1.0,
+      "SPP": 0.0542
+    },
     "SPP": {
+      "CISO": 0.0,
       "ERCOT": 0.0,
       "ISNE": 0.0,
-      "PJM": 0.0542,
-      "NYIS": 0.0,
       "MISO": 0.0714,
-      "CISO": 0.0,
+      "NYIS": 0.0,
+      "PJM": 0.0542,
       "SPP": 1.0
     }
   },

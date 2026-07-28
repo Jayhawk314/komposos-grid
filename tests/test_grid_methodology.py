@@ -119,8 +119,8 @@ def test_methodology_report_builds_corrections_bounds_and_axioms(tmp_path):
 
     soco_fpl = next(b for b in report.right_kan_bounds if b.ba_a == "FPL" and b.ba_b == "SOCO")
     assert soco_fpl.status == "bounded"
-    assert soco_fpl.bound_spread_usd_mwh == pytest.approx(1.35)
-    assert soco_fpl.bound_value_usd == pytest.approx(4_050_000.0)
+    assert soco_fpl.proxy_spread_usd_mwh == pytest.approx(1.35)
+    assert soco_fpl.screening_value_usd == pytest.approx(4_050_000.0)
 
 
 def test_evidence_two_category_has_correction_cells(tmp_path):
@@ -161,5 +161,5 @@ def test_methodology_report_exports(tmp_path):
     assert payload["correction_2cells"]
     assert "Right Kan Bounds" in md_path.read_text(encoding="utf-8")
     assert "overstatement_ratio" in corrections_path.read_text(encoding="utf-8")
-    assert "bound_spread_usd_mwh" in bounds_path.read_text(encoding="utf-8")
+    assert "proxy_spread_usd_mwh" in bounds_path.read_text(encoding="utf-8")
     assert "screening_only" in warnings_path.read_text(encoding="utf-8")

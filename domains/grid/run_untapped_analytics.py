@@ -27,7 +27,12 @@ REPORTS_DIR = ROOT_DIR / "reports"
 def calculate_yoneda_similarities(csv_paths) -> dict:
     """Compute Jaccard-like Yoneda similarities between the 7 major RTOs/ISOs."""
     # Major BAs to analyze
-    target_bas = {"MISO", "ERCOT", "PJM", "CISO", "SPP", "NYIS", "ISNE"}
+    # Ordered tuple, NOT a set. Python randomizes set iteration order per
+    # process (PYTHONHASHSEED), so a set literal here made the emitted matrix
+    # row order differ between identical runs, and made the float summation
+    # below order-dependent. Regenerating produced a different file every time,
+    # which quietly broke the reproducibility claim in REPRODUCE.md.
+    target_bas = ("CISO", "ERCOT", "ISNE", "MISO", "NYIS", "PJM", "SPP")
     ba_aliases = {
         "ERCO": "ERCOT",
         "ERCOT": "ERCOT",
@@ -82,8 +87,11 @@ def calculate_yoneda_similarities(csv_paths) -> dict:
                 matrix[ba_a][ba_b] = 1.0
                 continue
                 
-            # Get union of all neighbors of a and b
-            neighbors = set(flows.get(ba_a, {}).keys()) | set(flows.get(ba_b, {}).keys())
+            # Sorted, so the float accumulation below is summed in a fixed
+            # order. Set iteration order varies per process, and float addition
+            # is not associative, so an unsorted union could shift the 4th
+            # decimal between runs.
+            neighbors = sorted(set(flows.get(ba_a, {}).keys()) | set(flows.get(ba_b, {}).keys()))
             if not neighbors:
                 matrix[ba_a][ba_b] = 0.0
                 continue

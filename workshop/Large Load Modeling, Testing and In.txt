@@ -1,0 +1,72 @@
+Large Load Modeling, Testing and Interconnection Requirements Workshop 
+June 16, 2026 @ 8:00 am – 5:00 pm
+This event has passed.
+Joint with National Laboratory of the Rockies
+
+view session recordings on youtube
+Opening Session: Setting the Scene – Growing Loads, Why This Matters
+Session Chair: Beibei (BeiLi) Li, Manager of Strategic Assessment, Midcontinent Independent System Operator (MISO)
+
+Power systems around the world are experiencing growing interest for large load interconnection. This session will set the scene and cover the importance of modeling, performance requirements and ongoing U.S. DOE initiatives in this area.
+
+Integrating Data Centers and Grid Technologies At Scale
+Murali Baggu, Laboratory Program Manager – Grid Integration, National Laboratory of the Rockies (NLR)
+The Challenges of Ensuring Grid Reliability in the Era of Large Computational Loads
+Eric Meier, Supervisor of Planning Model Administration, Electric Reliability Council of Texas (ERCOT)
+ESIG Large Load Task Force: Overview and Recommendations
+Julia Matevosyan, Associate Director, Chief Engineer, ESIG
+Developer Perspective: Challenges with Modeling Requirements and Validation
+Khundmir Syed, Director, Power and Grid Strategy, Diode Ventures
+Session 2L: Large Load Modeling – PSPD and EMT
+Session Chair: Ashok Sunder Rajan, Principal Technologist, ZeroNode
+
+Large load PSPD and EMT modeling is of paramount importance for the reliable integration of large loads. This session will cover perspectives from labs, transmission owners/operators, and OEMs/developers on large load modeling.
+
+Data Center Power Systems: EMT Modeling for Evaluating Converter-Driven Stability Problems and Oscillations
+Shahil Shah, Principal Engineer, National Laboratory of the Rockies (NLR)
+Using EMT Modeling to Understand Data Center Fault Response and Impacts to Electromechanical Generation
+Brett Ross, Electrical Engineer, Pacific Northwest National Laboratory (PNNL)
+Generic Phasor-model Development for Data Centers
+Jin Tan, Principal Engineer, National Laboratory of the Rockies (NLR)
+Modeling Needs for Bulk System Planning Studies and State-of-the-Art Models
+Parag Mitra, Senior Principal Technical Leader, Electric Power Research Institute (EPRI)
+Data Center Modeling to Support Large Load Interconnection Requirements
+Rahul AnilKumar, Vice President, Integrated System Planning at Danovo Energy Solutions
+Session 3L: Hardware Testing / Model Quality Assessment and Validation
+Session Chair: Jing Wang, Principal Engineer, National Laboratory of the Rockies (NLR)
+
+While the industry heavily relies on simulation studies for grid reliability assessments, it is important to understand what is being done to test equipment capabilities for large load facilities as well as explore emerging requirements for large load model validation.
+
+Fingrid’s Perspective on Data Center Modelling Requirements and Model Quality
+Pauli Partinen, Manager, Grid Models, Fingrid (virtual)
+Data Center Power Systems: Megawatt-Scale Hardware Testing for Evaluating Grid-Side and Load-Side Performance
+Shahil Shah, Principal Engineer, National Laboratory of the Rockies (NLR) and Robb Wallen, Senior Engineer, National Laboratory of the Rockies (NLR)
+Hardware in the Loop Testing for Data Centers with Energy Storage for AI Load Smoothing and Onsite Generators
+Arman Ghasaei, CTO, EdgeTune Power
+Large Load Interconnection Process: Current and Future Large Load Modeling Requirements
+Sun Wook Kang, Senior Manager of Grid Planning, Electric Reliability Council of Texas (ERCOT)
+EMT Testing of Large Load Power Fluctuation Mitigation
+Kasun Samarawickrama, Power System Studies Engineer, Electranix
+Session 4L: Emerging Performance Requirements for Large Loads
+Session Chair: Andy Hoke, Principal Engineer, National Laboratory of the Rockies (NLR)
+
+Industry is rapidly developing performance requirements for large loads. What are the reliability criteria that the requirements are based on? What capabilities of the equipment are needed to comply with emerging requirements? This session will offer perspectives from large load developers, OEMs, and ISOs/utilities performance requirements for large loads.
+
+NERC Large Load Action Plan
+Hasala Dharmawardena, Senior Engineer, Power System Modeling Studies, North American Electric Reliability Corporation (NERC)
+Emerging Performance Requirements from Utility Perspective
+Doug Fuller, Transmission Planning Supervisor, Southern Company (virtual)
+Now you tell us…
+Scott Heath, Principal Engineer, Microsoft
+Making Data Centers Grid Friendly
+Flemming Johansen, Senior Principal Architect, Schneider Electric (virtual)
+Enabling Large Load Interconnection Today: At-scale Validated Performance under Extreme Scenarios
+Mike Simpson, SVP of R&D, On.Energy
+Add to calendar 
+Details
+Date:
+June 16, 2026
+Time:
+8:00 am – 5:00 pm
+Event Category:
+ESIG Workshops

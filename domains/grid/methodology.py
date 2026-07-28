@@ -107,8 +107,8 @@ class RightKanBound:
     gross_mwh: float
     net_direction: str
     curvature: float
-    bound_spread_usd_mwh: float
-    bound_value_usd: float
+    proxy_spread_usd_mwh: float
+    screening_value_usd: float
     adjacent_measurements: List[str]
     status: str
     note: str = ""
@@ -124,8 +124,8 @@ class RightKanBound:
             "gross_mwh": self.gross_mwh,
             "net_direction": self.net_direction,
             "curvature": self.curvature,
-            "bound_spread_usd_mwh": self.bound_spread_usd_mwh,
-            "bound_value_usd": self.bound_value_usd,
+            "proxy_spread_usd_mwh": self.proxy_spread_usd_mwh,
+            "screening_value_usd": self.screening_value_usd,
             "adjacent_measurements": "; ".join(self.adjacent_measurements),
             "status": self.status,
             "note": self.note,
@@ -237,7 +237,7 @@ class GridMethodologyReport:
             "Bounds use the minimum adjacent priced spread as the limit/meet. "
             "They are upper-screening bounds for unpriced structural ties, not measured cost.",
             "",
-            "| Tie | Status | Bound $/MWh | Bound Value | Adjacent Measurements |",
+            "| Tie | Status | Proxy $/MWh | Screening Value | Adjacent Measurements |",
             "|---|---|---:|---:|---|",
         ])
         if not self.right_kan_bounds:
@@ -246,7 +246,7 @@ class GridMethodologyReport:
             adjacent = "; ".join(bound.adjacent_measurements)
             lines.append(
                 f"| {bound.tie} | {bound.status} | "
-                f"{bound.bound_spread_usd_mwh:.2f} | ${bound.bound_value_usd:,.0f} | "
+                f"{bound.proxy_spread_usd_mwh:.2f} | ${bound.screening_value_usd:,.0f} | "
                 f"{adjacent} |"
             )
 
@@ -473,8 +473,8 @@ def build_right_kan_bounds(
                 gross_mwh=gross_mwh,
                 net_direction=str(row.get("net_direction", "")),
                 curvature=_float(row.get("curvature")),
-                bound_spread_usd_mwh=bound_spread,
-                bound_value_usd=bound_spread * gross_mwh,
+                proxy_spread_usd_mwh=bound_spread,
+                screening_value_usd=bound_spread * gross_mwh,
                 adjacent_measurements=labels,
                 status=status,
                 note=note,
@@ -482,7 +482,7 @@ def build_right_kan_bounds(
         )
     return sorted(
         bounds,
-        key=lambda b: (b.status == "bounded", b.bound_value_usd, b.gross_mwh),
+        key=lambda b: (b.status == "bounded", b.screening_value_usd, b.gross_mwh),
         reverse=True,
     )
 
@@ -673,8 +673,8 @@ def _fieldnames(rows: List[Dict[str, Any]]) -> List[str]:
         "target_component_spread_usd_mwh",
         "overstatement_ratio",
         "gross_mwh",
-        "bound_spread_usd_mwh",
-        "bound_value_usd",
+        "proxy_spread_usd_mwh",
+        "screening_value_usd",
         "source_value_usd",
         "target_value_usd",
         "avoided_overclaim_usd",
