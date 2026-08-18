@@ -157,6 +157,7 @@ beyond it — support, custom work, or a different arrangement — just email me
 ## Contact
 
 James Hawkins · jhawk314@gmail.com
+https://www.linkedin.com/in/james-hawkins-065a951b3
 
 Corrections are genuinely welcome. If a number here disagrees with your own, that
 is the most useful message you can send me.
