@@ -66,8 +66,13 @@ a node that "saw-tooths" never phase-locks.
 | Scale | Runs free (desynchronized) | Locks |
 |---|---|---|
 | ×1 | **PJM, NYIS, CPLE** | everything else |
-| ×0.3 | PJM, NYIS, CPLE + **MISO, SOCO, TVA, FPL** | SWPP, SPA, AECI, FPC, ISNE, NBSO |
-| ×0.1 | every bus with non-trivial injection | ISNE, NBSO, FPC (≈ zero injection) |
+| ×0.3 | PJM, NYIS, CPLE + **MISO, SOCO, TVA, FPL** | SWPP, AECI, ISNE, NBSO — and SPA/FPC *appeared* to hold |
+| ×0.1 | every bus with non-trivial injection | ISNE, NBSO — and FPC *appeared* to hold |
+
+*Hedge on SPA and FPC:* by the lock bound (|injection| ≤ live coupling), SPA at ×0.3
+(0.595 vs 0.454) and FPC at ×0.1 (0.082 vs 0.042) formally cannot phase-lock; their
+flat curves over the 10-unit run are most likely drift too slow to see at that
+duration, not true locking. The desync sets above are what the plots showed.
 
 **Reading it.** A Kuramoto node can lock only if its forcing is no larger than
 the coupling it can lean on. NYIS has +19.29 of forcing and exactly one tie of
